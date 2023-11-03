@@ -1,0 +1,1834 @@
+{
+  "acm0001": {
+    "category": "landfill",
+    "known-strings": [
+      "ACM0001 Flaring or use of landfill gas",
+      "ACM0001; ACM0022",
+      "ACM0001 - Flaring or use of Landfill Gas version 19.0",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0",
+      "ACM0001 Version 19.0",
+      "ACM0001 version 19.0",
+      "ACM0001: Flaring or use of landfill gas ( Version19.0)",
+      "ACM0001 v19.0",
+      "Flaring or use of landfill gas (ACM0001 v19.0)",
+      "ACM0001: Flaring or use of landfill gas --- Version 19.0",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0; ACM0022: Alternative waste treatment processes - Version 3.0",
+      "ACM0022: Alternative waste treatment process Version 03.0 and ACM0001: Flaring or use of landfill gas Version 19.0",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0 ; ACM0022: Alternative waste treatment processes - Version 3.0",
+      "ACM0001",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0 ;  ACM0022: Alternative waste treatment processes - Version 3.0",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0;  ACM0022: Alternative waste treatment processes - Version 3.0",
+      "ACM0001; ACM0002",
+      "ACM0001; AMS-I.D.",
+      "ACM0001; AMS-III.B."
+    ],
+    "program": "cdm"
+  },
+  "acm0002": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "ACM0002 Grid-connected electricity generation from renewable sources",
+      "AMS  I.D Version 18 & ACM0002 , version 20.0",
+      "ACM0002 V21",
+      "ACM0002 – Grid-connected electricity generation from renewable  sources, version 20.0",
+      "ACM0002&20.0",
+      "ACM0002 ver 21.0",
+      "ACM0002 ver 21.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources ; Version 21.0",
+      "ACM0002 ,Version 21",
+      "ACM0002: Grid-connected electricity generation from renewable sources  (Version 20.0);",
+      "ACM0002--Grid-connected electricity generation from renewable sources- Version 21.0",
+      "ACM0002 version21.0",
+      "Large-scale Consolidated Methodology for Grid-connected electricity generation from renewable sources (ACM0002 v21.0)",
+      "ACM0002: ―Grid-connected electricity generation from renewable sources‖ (Version 20.0)",
+      "ACM0002: Grid-connected electricity generation from renewable  sources --- Version 20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources, version 20.0",
+      "ACM0002 (Version 21.0) - Grid-connected electricity generation from renewable sources.",
+      "ACM0002 “Grid-connected electricity generation from renewable sources”, Version 21.0",
+      "ACM0002 “Consolidated methodology for grid-connected electricity generation from renewable sources”, Version - 21",
+      "ACM0002: Grid-connected electricity generation from renewable  sources, Version 20.0",
+      "ACM0002- Grid-connected electricity generation from renewable sources, Version -21",
+      "ACM0002 version 21.0",
+      "ACM0002 Methodology for Grid-connected electricity generation  from renewable sources, version 20.0",
+      "ACM0002 – Grid-connected electricity generation from renewable sources/ Version 21.0.",
+      "ACM0002 \"Grid-connected electricity generation from renewable sources\", Version 21.0",
+      "ACM0002: Grid-connected electricity generation from renewable  sources” (Version 20.0)",
+      "ACM0002, Version-21",
+      "ACM0002 – Grid-connected electricity generation from renewable sources, version 21.0",
+      "ACM0002 – Grid-connected electricity generation from renewable  sources, version 20.0'",
+      "GCCM001 Version 2.0 /ACM0002 Version 20.0",
+      "GCCM001 (Version 3.0) and ACM0002 (Version 20.0)",
+      "Large-scale Consolidated Methodology for Grid-connected electricity generation from renewable sources (ACM0002 v20.0)",
+      "CDM methodology ACM0002 “Grid-connected electricity generation from renewable sources” version 20.0",
+      "CDM Approved ACM0002 Grid-connected electricity generation from renewable sources, version 20.0",
+      "ACM 0002, Version 20",
+      "CDM approved consolidated Methodology ACM0002, version 21.0",
+      "Applied methodologies (Shall be approved by the GCC or the CDM) ACM0002: “Grid-connected electricity generation from renewable sources” (Version 20.0)",
+      "CDM approved consolidated Methodology ACM0002 (Version 20.0)",
+      "Large Scale Consolidated Methodology ACM0002: Grid-connected electricity generation from renewable sources, version 20.0.",
+      "CDM approved consolidated Methodology- ACM0002 (Version 20.0)",
+      "ACM 0002: Grid-connected electricity generation from renewable sources - Version 20.0",
+      "ACM 0002, Version 21",
+      "CDM approved consolidated Methodology ACM0002 (Version 21.0)",
+      "Version 20.0 of ACM0002 “Large-scale Consolidated Methodology: Grid-connected electricity generation from renewable sources’",
+      "ACM 0002 ver 20.0",
+      "ACM0002: Consolidated baseline methodology for grid-connected electricity generation from renewable sources",
+      "ACM0002 Grid-connected electricity generation from renewable sources, Version 20.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources --- Version 20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources, Version-21.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources - Version 20.0",
+      "ACM0002 Version 20.0",
+      "ACM0002 – Grid-connected electricity generation from renewable sources V21.0",
+      "ACM0002, Version 20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources --- Version 21.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources, Version 20.0",
+      "ACM0002 version20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources - Version 20.0",
+      "ACM0002 V20",
+      "ACM0002 – Grid-connected electricity generation from renewable sources V20.0",
+      "ACM0002 Methodology for Grid-connected electricity generation from renewable sources, version 20.0",
+      "ACM0002: “Grid-connected electricity generation from renewable sources” (Version 20.0)",
+      "ACM0002.: Grid-connected electricity generation from renewable sources, Version 20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources (Version 20.0)",
+      "ACM0002 Grid-connected electricity generation from renewable sources, Version 21.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources --- Version 20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources, ver 20.0",
+      "ACM0002,Version 20.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources --- Version 21.0",
+      "ACM0002,Version 20",
+      "ACM0002- Grid-connected electricity generation from renewable sources, Version -20",
+      "ACM0002 Grid-connected electricity generation from renewable sources --- Version 20.0 (Approved CDM methodology)",
+      "ACM0002 – Grid-connected electricity generation from renewable sources, version 20.0",
+      "ACM0002 (Version 21.0)",
+      "ACM0002: Grid-connected electricity generation from renewable sources (Version 20.0)",
+      "ACM0002 “Consolidated methodology for grid-connected electricity generation from renewable sources”, Version - 20",
+      "ACM0002 Grid-connected electricity generation from renewable sources - Version 21.0",
+      "ACM0002 Grid-connected electricity generation from renewable  sources, Version-20.0",
+      "ACM0002 Grid-connected electricity generation from renewable  sources, Version-21.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources– Version 20.02",
+      "ACM0002 v20.0",
+      "ACM0002 version 20.0, Grid-connected electricity generation from renewable sources",
+      "ACM0002, Version-20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources, ver: 20.0",
+      "ACM0002,Version 21.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources, ver 21.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources - Version 21",
+      "ACM0002 ver.20",
+      "ACM0002: “Grid-connected electricity generation from renewable sources” (Version 20.0);",
+      "ACM0002, Version 20",
+      "ACM0002 (Version 20)",
+      "ACM0002 version 20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources --- Version 20.0.",
+      "ACM0002: “Grid-connected electricity generation from renewable sources” (Version 21.0)",
+      "ACM0002 Grid-connected electricity generation from renewable sources --- Version 20.03",
+      "ACM0002: Grid-connected electricity generation from renewable sources( Version 20.0)",
+      "ACM0002 Grid-connected electricity generation from renewable sources ---Version 20.02",
+      "ACM0002 Grid-connected electricity generation from renewable sources, Version-20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources Version 20",
+      "ACM0002: Grid-connected electricity generation from renewable sources– Version 20.0",
+      "ACM0002 – Grid-connected electricity generation from renewable sources – Version 20.0",
+      "ACM0002 Version 20",
+      "ACM0002. - Grid-connected electricity generation from renewable sources (Version 21.0)",
+      "ACM0002: Grid-connected electricity generation from renewable sources– Version 21.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources” (Version 20.0)",
+      "ACM0002: Grid-connected electricity generation from renewable sources ; Version 20.0",
+      "ACM0002 & v20.0",
+      "ACM0002--Grid-connected electricity generation from renewable sources- Version 20.0",
+      "ACM0002 (Version 20.0)",
+      "ACM0002 ,Version 20",
+      "ACM0002 Grid-connected electricity generation from renewable sources ver 20",
+      "ACM0002 (Version20.0)",
+      "ACM0002 “Grid-connected electricity generation from renewable sources”, Version – 20.0",
+      "ACM0002 – Grid-connected electricity generation from renewable sources V21.0.",
+      "ACM0002",
+      "ACM0002: Grid connected electricity generation from renewable sources - Version 20.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources --- Version 20.",
+      "ACM0002: Grid-connected electricity generation from renewable sources (Version 20.0);",
+      "ACM0002: Grid-connected electricity generation from renewable sources --- Version 21.02",
+      "ACM0002: Grid-connected electricity generation from renewable sources; Version 20.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources --- Version 20.02",
+      "ACM0001; ACM0002",
+      "ACM0002; AMS-I.D.",
+      "ACM0002; ACM0006",
+      "ACM0002; AM0029",
+      "ACM0002; ACM0012",
+      "ACM0002; AMS-I.D.; AMS-II.D.",
+      "ACM0002; ACM0022",
+      "ACM0002; AMS-I.D.; AMS-I.F.",
+      "VM0018; ACM0022",
+      "ACM0022; Methodology Under Development"
+    ],
+    "program": "cdm"
+  },
+  "acm0003": {
+    "category": "industrial-processes",
+    "known-strings": ["ACM0003"],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0003"
+  },
+  "acm0005": {
+    "known-strings": ["ACM0005"],
+    "program": "cdm"
+  },
+  "acm0006": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "ACM0006 Electricity and heat generation from biomass residues",
+      "ACM0006",
+      "ACM0002; ACM0006",
+      "ACM0006 Large-Scale Consolidated Methodology Electricity and heat generation from biomass [Version: 16.0]"
+    ],
+    "program": "cdm",
+    "sub-category": "biomass",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0006"
+  },
+  "acm0007": {
+    "known-strings": ["ACM0007"],
+    "program": "cdm"
+  },
+  "acm0008": {
+    "category": "mine-methane",
+    "known-strings": [
+      "ACM0008 version8.0",
+      "ACM0008 v08.0",
+      "ACM0008 Version 08.0",
+      "ACM0008",
+      "ACM0008; VMR0002"
+    ],
+    "program": "cdm"
+  },
+  "acm0009": {
+    "known-strings": ["ACM0009"],
+    "program": "cdm"
+  },
+  "acm0010": {
+    "category": "waste-management",
+    "known-strings": [
+      "ACM0010 GHG emission reductions from manure management systems",
+      "ACM0010: Consolidated baseline methodology for GHG emission reductions from manure management systems",
+      "ACM0010 Version 8.0",
+      "ACM0010"
+    ],
+    "program": "cdm",
+    "sub-category": "livestock",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0010"
+  },
+  "acm0011": {
+    "known-strings": [
+      "ACM0011",
+      "Fuel switching from coal and/or petroleum fuels to natural gas in existing Power Plant for electricity generation"
+    ],
+    "program": "cdm"
+  },
+  "acm0012": {
+    "category": "industrial-processes",
+    "known-strings": [
+      "ACM0012 Waste energy recovery",
+      "ACM0012: Waste Energy Recovery-Version 6",
+      "ACM0012: Waste energy recovery --- Version 6.0",
+      "ACM0012 Version 06.0",
+      "ACM0012- Waste energy recovery, Version-06.0",
+      "ACM0012- Waste energy recovery, Version-06.0, EB87, Annex-7",
+      "ACM0012:Waste Heat Recovery, Version 6.0",
+      "ACM0012 Version 6.0",
+      "ACM0012",
+      "ACM0002; ACM0012",
+      "ACM0012; AMS-I.C."
+    ],
+    "program": "cdm",
+    "sub-category": "energy-efficiency",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0012"
+  },
+  "acm0013": {
+    "known-strings": ["ACM0013"],
+    "program": "cdm"
+  },
+  "acm0014": {
+    "known-strings": [
+      "ACM0014 Treatment of wastewater",
+      "Emission reductions through wastewater treatment",
+      "ACM0014"
+    ],
+    "program": "cdm"
+  },
+  "acm0016": {
+    "known-strings": [
+      "ACM0016",
+      "ACM0016 V5.0 - Mass rapid transit projects",
+      "ACM0016: Mass Rapid Transit Projects --- Version 5.0"
+    ],
+    "program": "cdm"
+  },
+  "acm0017": {
+    "known-strings": [
+      "ACM0017: Production of biofuel – Version 4.0",
+      "ACM0017",
+      "ACM0017 Version 03.1",
+      "ACM0017: Production of biofuel – Version 4.0",
+      "ACM0017; VM0017",
+      "ACM0017: Production of biofuel – Version 4.0  "
+    ],
+    "program": "cdm"
+  },
+  "acm0018": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "ACM0018 Electricity generation from biomass residues in power-only plants",
+      "ACM0018: Electricity generation from biomass in power-only plants --- Version 6.0",
+      "ACM0018, Version - 5.0",
+      "ACM0018 “Large-scale Consolidated Methodology: Electricity generation from biomass in power-only plants”, Version 5.0",
+      "ACM0018",
+      "ACM0018 – Electricity generation from biomass in power-only plants version 06.0",
+      "GCCM003 v1.0 /ACM0018 ver 5.0"
+    ],
+    "program": "cdm"
+  },
+  "acm0019": {
+    "known-strings": ["AM0028; AM0034; ACM0019", "AM0034; ACM0019"],
+    "program": "cdm"
+  },
+  "acm0022": {
+    "category": "waste-management",
+    "known-strings": [
+      "ACM0022 Alternative waste treatment processes",
+      "ACM0001; ACM0022",
+      "ACM0022: Alternative waste treatment processes --- Version 3.0",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0 ;  ACM0022: Alternative waste treatment processes - Version 3.0'",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0;  ACM0022: Alternative waste treatment processes - Version 3.0'",
+      "ACM0022",
+      "AMS-III.D.; ACM0022",
+      "AMS-III.AO.; ACM0022",
+      "ACM0002; ACM0022",
+      "ACM0022 Version03.0",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0; ACM0022: Alternative waste treatment processes - Version 3.0",
+      "ACM0022: Alternative waste treatment process Version 03.0 and ACM0001: Flaring or use of landfill gas Version 19.0",
+      "ACM0001: Flaring or use of landfill gas - Version 19.0 ; ACM0022: Alternative waste treatment processes - Version 3.0",
+      "ACM0022: “Alternative waste treatment processes”(Version 3.0)",
+      "ACM0022, Version 03.0",
+      "ACM0022: Alternative Waste Treatment Processes-Version 3.0",
+      "ACM0022:Large-scale Consolidated Methodology Alternative waste treatment processes(Version 03.0",
+      "ACM0022:“Alternative waste treatment processes” (Version 3.0)",
+      "ACM0022:Large-scale Consolidated Methodology Alternative waste treatment processes(Version 03.0 )"
+    ],
+    "program": "cdm"
+  },
+  "acm0025": {
+    "known-strings": ["ACM0025 version 2.0"],
+    "program": "cdm"
+  },
+  "acr-abandoned-wells": {
+    "category": "oil-and-gas",
+    "is_methane": true,
+    "known-strings": [
+      "Plugging Orphan Oil and Gas Wells in the U.S. and Canada"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/plugging-orphaned-oil-and-gas-wells"
+  },
+  "acr-affor-refor": {
+    "category": "forest",
+    "known-strings": ["Afforestation and Reforestation of Degraded Lands"],
+    "program": "acr"
+  },
+  "acr-cali-wetlands": {
+    "category": "land-use",
+    "known-strings": ["Restoration of California Deltaic and Coastal Wetlands"],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/restoration-of-california-deltaic-and-coastal-wetlands"
+  },
+  "acr-ccs": {
+    "category": "oil-and-gas",
+    "known-strings": ["Emission Reductions from Enhanced Oil Recovery"],
+    "program": "acr"
+  },
+  "acr-cogen": {
+    "known-strings": [
+      "Monitoring, Reporting and Verification Protocol for Cogeneration"
+    ],
+    "program": "acr"
+  },
+  "acr-compost-graze": {
+    "category": "agriculture",
+    "known-strings": [
+      "Emission Reductions from Compost Additions to Grazed Grasslands"
+    ],
+    "program": "acr",
+    "sub-category": "livestock",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/INACTIVE-Compost%20Additions%20to%20Grazed%20Grasslands"
+  },
+  "acr-foam": {
+    "category": "industrial-processes",
+    "known-strings": [
+      "Transition to Advanced Formulation Blowing Agents in Foam Manufacturing and Use"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/conversion-of-foam-blowing-agents-from-high-gwp-to-low-gwp-materials"
+  },
+  "acr-grasslands": {
+    "category": "land-use",
+    "known-strings": [
+      "Avoided Conversion of Grasslands and Shrublands to Crop Production"
+    ],
+    "program": "acr",
+    "sub-category": "grassland"
+  },
+  "acr-grazing": {
+    "category": "agriculture",
+    "known-strings": ["Grazing Land and Livestock Management"],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/INACTIVE-grazing-land-and-livestock-management-gllm-ghg-methodology"
+  },
+  "acr-hfc": {
+    "category": "industrial-gases",
+    "known-strings": [
+      "Certified Reclaimed HFC Refrigerants, Propellants, and Fire Suppressants"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/certified-reclaimed-hfc-refrigerants"
+  },
+  "acr-idling": {
+    "category": "transportation",
+    "known-strings": [
+      "Truck Stop Electrification",
+      "Emissions Reductions though Anti-Idling Technologies"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/emission-reductions-through-truck-stop-electrification"
+  },
+  "acr-ifm-nonfed": {
+    "category": "forest",
+    "known-strings": [
+      "Improved Forest Management (IFM) on Non-Federal U.S. Forestlands"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/improved-forest-management-ifm-methodology-for-non-federal-u-s-forestlands"
+  },
+  "acr-ifm-timber": {
+    "category": "forest",
+    "known-strings": ["Improved Forest Management (IFM) on U.S. Timberlands"],
+    "program": "acr"
+  },
+  "acr-international-ods": {
+    "category": "industrial-gases",
+    "known-strings": [
+      "Destruction of Ozone Depleting Substances (ODS) from International Sources"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/destruction-of-ozone-depleting-substances-ods-and-high-global-warming-potential-gwp-foam-from-international-sources"
+  },
+  "acr-landfill": {
+    "category": "landfill",
+    "known-strings": [
+      "Monitoring, Reporting and Verification Protocol for Landfill Gas Combustion",
+      "Landfill Gas Destruction and Beneficial Use Projects"
+    ],
+    "program": "acr"
+  },
+  "acr-lubricating-oil": {
+    "known-strings": ["Re-refining Used Lubricating Oils"],
+    "program": "acr"
+  },
+  "acr-mine-methane": {
+    "category": "mine-methane",
+    "known-strings": [
+      "Capturing and Destroying Methane from Coal and Trona Mines in North America"
+    ],
+    "program": "acr"
+  },
+  "acr-ms-wetlands": {
+    "known-strings": [
+      "Restoration of Degraded Deltaic Wetlands of the Mississippi Delta"
+    ],
+    "program": "acr"
+  },
+  "acr-n2o": {
+    "category": "agriculture",
+    "known-strings": [
+      "N2O Emission Reductions through Reduced Use of Fertilizer on Agricultural Crops"
+    ],
+    "program": "acr"
+  },
+  "acr-ods": {
+    "category": "industrial-processes",
+    "known-strings": [
+      "Destruction of Ozone Depleting Substances (ODS) and High-Global Warming Potential (GWP) Foam"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/destruction-of-ozone-depleting-substances-and-high-gwp-foam"
+  },
+  "acr-pneumatic": {
+    "known-strings": [
+      "Conversion of High-Bleed Pneumatic Controllers in Oil and Natural Gas Systems"
+    ],
+    "program": "acr"
+  },
+  "acr-pocosin": {
+    "known-strings": ["Restoration of Pocosin Wetlands"],
+    "program": "acr"
+  },
+  "acr-refrige": {
+    "category": "industrial-gases",
+    "known-strings": ["Advanced Refrigeration Systems"],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/use-of-reclaimed-hfc-refrigerants-and-advanced-refrigeration-systems"
+  },
+  "acr-rice": {
+    "category": "agriculture",
+    "known-strings": ["Emission Reductions in Rice Management Systems"],
+    "program": "acr"
+  },
+  "acr-transformer-oil": {
+    "category": "industrial-processes",
+    "known-strings": [
+      "Reduction in Emissions from the Recycling of Transformer Oil"
+    ],
+    "program": "acr",
+    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/methodology-for-reduction-in-emissions-from-the-recycling-of-transformer-oil"
+  },
+  "am0001": {
+    "category": "industrial-gases",
+    "known-strings": ["AM0001"],
+    "program": "cdm"
+  },
+  "am0009": {
+    "category": "oil-and-gas",
+    "known-strings": ["AM0009"],
+    "program": "cdm"
+  },
+  "am0010": {
+    "category": "landfill",
+    "known-strings": ["AM0010"],
+    "program": "cdm"
+  },
+  "am0014": {
+    "category": "forest",
+    "known-strings": ["AM0014; VM0007; AR-ACM0003", "AM0014"],
+    "program": "cdm"
+  },
+  "am0023": {
+    "category": "industrial-processes",
+    "known-strings": ["AM0023"],
+    "program": "cdm"
+  },
+  "am0024": {
+    "category": "industrial-processes",
+    "known-strings": ["AM0024"],
+    "program": "cdm"
+  },
+  "am0025": {
+    "category": "waste-management",
+    "known-strings": ["AM0025"],
+    "program": "cdm"
+  },
+  "am0026": {
+    "known-strings": ["AM0026"],
+    "program": "cdm"
+  },
+  "am0028": {
+    "known-strings": ["AM0028", "AM0028; AM0034; ACM0019", "AM0028; AM0034"],
+    "program": "cdm"
+  },
+  "am0029": {
+    "known-strings": ["AM0029", "ACM0002; AM0029"],
+    "program": "cdm"
+  },
+  "am0030": {
+    "known-strings": ["AM0030"],
+    "program": "cdm"
+  },
+  "am0031": {
+    "known-strings": ["AM0031"],
+    "program": "cdm"
+  },
+  "am0034": {
+    "known-strings": [
+      "AM0034",
+      "AM0028; AM0034; ACM0019",
+      "AM0034; ACM0019",
+      "AM0028; AM0034"
+    ],
+    "program": "cdm"
+  },
+  "am0036": {
+    "known-strings": [
+      "AM0036 Fuel switch from fossil fuels to biomass residues in heat generation equipment",
+      "AM0036",
+      "AM0036 - Use of biomass in heat generation equipment version 07.0"
+    ],
+    "program": "cdm"
+  },
+  "am0046": {
+    "known-strings": ["AM0046"],
+    "program": "cdm"
+  },
+  "am0059": {
+    "known-strings": ["AM0059"],
+    "program": "cdm"
+  },
+  "am0061": {
+    "known-strings": [
+      "AM0061 - Methodology for rehabilitation and/or energy efficiency improvement in existing power plants - Version 2.1"
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/DB/U5APNKUZPGKRON461OMSR9PZU613GA"
+  },
+  "am0064": {
+    "known-strings": ["AM0064"],
+    "program": "cdm"
+  },
+  "am0065": {
+    "category": "industrial-gases",
+    "known-strings": [
+      "AM0065",
+      "AM0065: Replacement of SF6 with Alternate Cover Gas in the Magnesium Industry"
+    ],
+    "program": "cdm"
+  },
+  "am0070": {
+    "known-strings": ["AM0070"],
+    "program": "cdm"
+  },
+  "am0072": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "AM0072",
+      "CDM Methodology AM0072: Fossil Fuel Displacement by Geothermal Resources for Space Heating (Version 03.0)"
+    ],
+    "program": "cdm"
+  },
+  "am0073": {
+    "category": "waste-management",
+    "known-strings": [
+      "AM0073; AMS-III.AQ",
+      "AM0073",
+      "AM0073: GHG emission reductions through multi-site manure collection and treatment in a central plant - Version 1.0",
+      "AM0073 “GHG emission reductions through multi-site manure collection and treatment in a central plant” -- V1.0"
+    ],
+    "program": "cdm",
+    "sub-category": "livestock",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0073"
+  },
+  "am0080": {
+    "known-strings": ["AM0080"],
+    "program": "cdm"
+  },
+  "am0107": {
+    "known-strings": [
+      "AM0107 - New natural gas based cogeneration plant. Version 04 methodologies from UNFCCC"
+    ],
+    "program": "cdm"
+  },
+  "am0110": {
+    "known-strings": ["AM0110"],
+    "program": "cdm"
+  },
+  "ams-i-a": {
+    "known-strings": [
+      "AMS-I.A. Electricity generation by the user",
+      "Electricity generation by the user",
+      "AMS-I.A."
+    ],
+    "program": "cdm"
+  },
+  "ams-i-b": {
+    "known-strings": [
+      "AMS-I.B. Mechanical energy for the user with or without electrical energy",
+      "AMS-I.B Mechanical energy for the user with  or without electrical energy version 12.0.",
+      "AMS-I.B Mechanical energy for the user with or without  electrical energy version 12.0.",
+      "AMS-I.B Mechanical energy for the user with or without electrical energy version 12.0.",
+      "AMS-I.B."
+    ],
+    "program": "cdm"
+  },
+  "ams-i-c": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "AMS-I.C. Thermal energy production with or without electricity",
+      "AMS-I.C.: Thermal energy production with or without electricity",
+      "AMS-I.C.; AMS-III.D.; AMS-III.R.",
+      "AMS-I.C.; AMS-III.G.",
+      "AMS-III.E.: --- Version 17.0,  AMS-I.C.: --- Version 22.0",
+      "AMS-I.C.; AMS-III.D.; AMS-III.H.",
+      "AMS-I.C.; AMS-III.R.",
+      "AMS-I.C.; AMS-I.D.; AMS-III.H.",
+      "AMS-I.C.",
+      "AMS-I.C.; AMS-III.B.",
+      "AMS-I.C.; AMS-III.AO.; VM0042",
+      "AMS-I.C.; AMS-III.D.",
+      "AMS-I.C.; AMS-III.E.",
+      "AMS-I.C.; AMS-III.H.",
+      "ACM0012; AMS-I.C.",
+      "AMS-I.C.; AMS-I.D.",
+      "AMS-I.C: Thermal energy production with or without electricity- Version 22.0",
+      "AMS I C- Thermal Energy generation with or without electricity",
+      "AMS.I.C. Thermal energy production with or without electricity - Version 22",
+      "AMS.I.C.: Thermal energy production with or without electricity - Version 22.0",
+      "AMS-I.C. Version-22.0",
+      "AMS-I.C.: Thermal energy production with or without electricity --- Version 22.0.",
+      "AMS I.C. version 22",
+      "AMS-I.C.: Thermal energy production with or without electricity (Version 22.0)",
+      "AMS-III.D - Version 21.0, AMS-I.C. - Version 22.0",
+      "AMS-I.C. Version-22.0 Thermal energy production with or without electricity",
+      "AMS I.C: Thermal Energy Production with or without electricity -version 22.0"
+    ],
+    "program": "cdm"
+  },
+  "ams-i-d": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "AMS-I.D. Grid connected renewable electricity generation",
+      "AMS-I.D.; AMS-II.E.",
+      "AMS-I.D.; AMS-III.E.",
+      "AMS-III.G.: Landfill methane recovery --- Version 10.0 & AMS-I.D.: Grid connected renewable electricity generation --- Version 18.0",
+      "AMS-III.E, Version 17.0 & AMS-I.D, Version 18.0",
+      "AMS-I.D., Version 18.0 and AMS-I.F., Version 4.0",
+      "AMS-I.D., Version 20.0 and AMS-I.F., Version 4.0",
+      "AMS  I.D Version 18 & ACM0002 , version 20.0",
+      "CDM Methodology: AMS – 1.D  Grid connected renewable electricity generation (ver - 18)",
+      "AMS-I.D: Grid connected renewable electricity generation--- Version 18.0",
+      "AMS-I.D: Grid connected renewable electricity generation -Version  18.0",
+      "AMS-I.D “Grid-connected  renewable electricity generation”, Version – 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation  ver 18.0",
+      "AMS-1.D,Version 18.0",
+      "AMS-I.D.: - Grid Connected renewable electricity generation – V18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation Version 18.03",
+      "AMS-I.D. Grid Connected Renewable Electricity Generation; Version 18.0",
+      "AMS-I.D.; AMS-III.D.",
+      "AMS-I.D.",
+      "AMS-I.D.; AMS-III.H.",
+      "AMS-I.D.; AMS-III.G.",
+      "AMS-I.D.; AMS-I.F.; AMS-III.H.",
+      "AMS-I.D.; AMS-III.G.; AMS-III.AO.",
+      "AMS-I.D.; AMS-I.F.; AMS-III.D.",
+      "AMS-I.C.; AMS-I.D.; AMS-III.H.",
+      "ACM0001; AMS-I.D.",
+      "ACM0002; AMS-I.D.",
+      "ACM0002; AMS-I.D.; AMS-II.D.",
+      "AMS-I.D.; AMS-III.Y",
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.",
+      "ACM0002; AMS-I.D.; AMS-I.F.",
+      "AMS-I.C.; AMS-I.D.",
+      "AMS.I.D-Grid Connected Renewable Electricity Generation – Version 18",
+      "AMS.I.D.: Grid Connected Renewable Electricity Generation – Version 18.0",
+      "AMS.I.D Grid connected renewable electricity generation Version 18.0",
+      "AMS I.D Version 18 & ACM0002 , version 20.0",
+      "AMS-I D Small Scale Methodology: Grid connected renewable electricity generation V.18.0",
+      "AMS-1 D, v18.0",
+      "AMS-1.D, Version 18.0",
+      "AMS-1. D- Grid connected renewable electricity Generation, Version -18",
+      "ASM-I.D: Grid connected renewable electricity generation, Version 18.0",
+      "AMS-I D Small Scale Methodology: Grid connected renewable electricity generation V.18",
+      "AMS I D, Version 18.0",
+      "AMS I D: Grid Connected renewable electricity generation -Version 18.0",
+      "AMS – 1.D Grid connected renewable electricity generation (Version 18)",
+      "AMS-1.D- Grid connected renewable electricity Generation, Version -18",
+      "AMS- I.D:Grid connected renewable electricity generation”- Version 18.0",
+      "AMD ID (Version-18)",
+      "CDM Methodology: AMS – 1.D Grid connected renewable electricity generation (ver - 18)",
+      "AMS-III.G Version 10 & AMS-I.D Version 18",
+      "AMS-III.G: “Landfill methane recovery” --- Version 10.0, AMS-I.D: “Grid connected renewable electricity generation” ---Version 18.0",
+      "AMS-III.G: “Landfill methane recovery” Version 10.0 ; AMS-I.D: “Grid connected renewable electricity generation” Version 18.0",
+      "AMS-III.G: Landfill Methane Recovery – Version 10.0; AMS-I. D: Grid connected renewable electricity generation – Version 18.0",
+      "AMS-III.G. Landfill methane recovery --- Version 10.0 AMS-I.D. Grid connected renewable electricity generation---Version 18.0",
+      "AMS-III.G (Version 10.0) and AMS-I.D (Version 18.0)",
+      "AMS-III.G: “Landfill methane recovery” --- Version 10.0 & AMS-I.D: “Grid connected renewable electricity generation” ---Version 18.0",
+      "AMS-III.G: “Landfill methane recovery” - Version 10.0, AMS-I.D: “Grid connected renewable electricity generation” - Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation - Version 18.0, AMS-III.G.: Landfill methane recovery – Version 10.0",
+      "AMS-III.G: “Landfill methane recovery” - Version 10.0; AMS-I.D: “Grid connected renewable electricity generation” - Version 18.0",
+      "Grid connected renewable electricity generation, AMS-I.D (Version 18.0)",
+      "CDM Approved AMS-I.D. Grid-connected renewable electricity generation, version 18.0",
+      "CDM Methodology- AMS-I.D.: Grid connected renewable electricity generation -Version 18.0",
+      "AMS I.D- Grid Connected Renewable electricity Generation-Version 18.0",
+      "AMS I.D, Version 18",
+      "AMS I.D. version 18.0",
+      "AMS I.D.",
+      "AMS I.D. Grid connected renewable electricity generation--- Version 18.0",
+      "AMS I.D. - Grid connected renewable electricity generation - Version 18.0",
+      "AMS I.D. Version 18",
+      "AMS I.D Version 18 (Grid connected renewable electricity generation)2.",
+      "AMS I.D Grid-connected renewable electricity generation, Version 18.0",
+      "AMS.I-D (version 18.0)",
+      "AMS-I.D: Grid connected renewable electricity generation – Version 18.0",
+      "AMS-I.D : Grid connected renewable electricity generation---Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation --- Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation - Version 18.0",
+      "AMS-I.D.: Grid Connected Renewable Electricity Generation---Version 18.0",
+      "AMS-I.D.: - Grid connected renewable electricity generation - Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation - v18.0",
+      "AMS-I.D.: Grid Connected Renewable Electricity Generation --- Version 18.0",
+      "AMS-I.D Small-scale Methodology: Grid connected renewable electricity generation Version 18.0",
+      "AMS-I.D Small-scale Methodology: Grid-connected renewable electricity generation from, ver 18.0",
+      "AMS-I.D. Version 18.0",
+      "AMS-I.D., Version 18.0",
+      "AMS-I.D: “Grid connected renewable electricity generation” (Version 18.0)",
+      "AMS-I.D. , version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation --- Version 18.0.",
+      "AMS-I.D.: - Grid Connected renewable electricity generation – Version 18.0.",
+      "AMS-I.D: Grid connected renewable electricity generation, Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation -Version 18.0",
+      "AMS-I.D. Grid connected renewable electricity generation --- Version 18.0",
+      "AMS-I.D.: - Grid Connected renewable electricity generation – Version 18.0",
+      "AMS-I.D “Grid-connected renewable electricity generation”, Version – 18.0",
+      "AMS-I.D.: - Grid connected renewable electricity generation – Version 18",
+      "AMS-I.D.: - Grid connected renewable electricity generation - Version 18",
+      "AMS-I.D.: Grid connected renewable electricity generation --- Version 18.00",
+      "AMS-I.D: Grid connected renewable electricity generation -Version 18.0",
+      "AMS-I.D. Grid connected renewable electricity generation ; Version 18.0",
+      "AMS-I.D, V18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation ver 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation – Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation---Version 18.0",
+      "AMS-I.D. Grid connected renewable electricity generation; Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation- Version 18.0",
+      "AMS-I.D.: \"Grid connected renewable electricity generation\" (Version 18.0)",
+      "AMS-I.D : Grid connected renewable electricity generation - version 18.0",
+      "AMS-I.D.: Grid-connected electricity generation from renewable sources --- Version 18.0"
+    ],
+    "program": "cdm"
+  },
+  "ams-i-e": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "AMS-I.E. Switch from Non-Renewable Biomass for Thermal Applications by the User",
+      "AMS-I.E.; AMS-III.R.",
+      "AMS-I.E.: Switch from non-renewable biomass for thermal applications by the user",
+      "AMS I.E: Switch from non-renewable biomass for thermal applications by the user - Version 12.0",
+      "AMS-I.E.",
+      "AMS-I.E.: Switch from non-renewable biomass for thermal applications by the user --- Version 13.0"
+    ],
+    "program": "cdm"
+  },
+  "ams-i-f": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "AMS-I.F. Renewable electricity generation for captive use and mini-grid",
+      "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
+      "AMS-I.F.; AMS-III.S.",
+      "AMS-I.F.; AMS-III.H.",
+      "AMS-I.F.; AMS-III.D.",
+      "AMS-I.F.; AMS-III.C.",
+      "AMS-I.D., Version 18.0 and AMS-I.F., Version 4.0",
+      "AMS-I.D., Version 20.0 and AMS-I.F., Version 4.0",
+      "AMS-I.F. “Renewable electricity generation for captive use and mini-grid” (Version 5.0)",
+      "AMS-I.F - Renewable electricity generation for captive use and mini-grid--- Version 05.0",
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid - Version 4.0",
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid --- Version 5.0.",
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid --- Version 5.0",
+      "AMS I F, Version 3.0",
+      "AMS-I.F. - Renewable electricity generation for captive use and mini-grid (version 05.0)",
+      "AMS-I.D.; AMS-I.F.; AMS-III.H.",
+      "AMS-I.F.",
+      "AMS-I.D.; AMS-I.F.; AMS-III.D.",
+      "ACM0002; AMS-I.D.; AMS-I.F.",
+      "AMS III.D version 21.0, AMS I.F version 03.0",
+      "AMS-I.F. “Renewable electricity generation for captive use and mini-grid” (Version 4.0)",
+      "AMS I.F- Grid Connected Renewable electricity Generation-Version 04.0",
+      "AMS-I.F.: Renewable energy generation for captive use and mini-gird, version 5.0",
+      "AMS-I.F. - Renewable electricity generation for captive use and mini-grid (version 04.0)",
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid Version 04.0",
+      "AMS-I.F- Renewable electricity generation for captive use and mini-grid Version-4.0",
+      "AMS I.F Renewable Electricity Generation for Captive use and mini grid version 4.0",
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid – Version 4"
+    ],
+    "program": "cdm"
+  },
+  "ams-i-i": {
+    "category": "unknown",
+    "known-strings": [
+      "AMS-I.I. Biogas/biomass thermal applications for households/small users"
+    ],
+    "program": "cdm"
+  },
+  "ams-i-j": {
+    "known-strings": [
+      "AMS-I.J; AMS-II.F.",
+      "AMS-I.J. Solar water heating systems (SWH)"
+    ],
+    "program": "cdm"
+  },
+  "ams-i-j1": {
+    "known-strings": ["AMS.I.J1; AMS-I.L.", "AMS.I.J1"],
+    "program": "cdm"
+  },
+  "ams-i-l": {
+    "known-strings": [
+      "AMS.I.J1; AMS-I.L.",
+      "AMS-I.L.",
+      "AMS-I.L. Electrification of rural communities using renewable energy"
+    ],
+    "program": "cdm"
+  },
+  "ams-ii-b": {
+    "known-strings": ["AMS-II.B."],
+    "program": "cdm"
+  },
+  "ams-ii-c": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "AMS-II.C. Demand-side energy efficiency activities for specific technologies",
+      "AMS-II.C.",
+      "AMS-II.C.; AMS-II.G.",
+      "AMS-II.C. - Demand-side energy efficiency activities for specific technologies --- Version 15.0"
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_II_C"
+  },
+  "ams-ii-d": {
+    "known-strings": ["AMS-II.D.", "ACM0002; AMS-I.D.; AMS-II.D."],
+    "program": "cdm"
+  },
+  "ams-ii-e": {
+    "known-strings": [
+      "AMS-I.D.; AMS-II.E.",
+      "AMS-II.E.",
+      "AMS-II.E. Energy efficiency and fuel switching measures for buildings"
+    ],
+    "program": "cdm"
+  },
+  "ams-ii-f": {
+    "known-strings": ["AMS-II.F.", "AMS-I.J; AMS-II.F."],
+    "program": "cdm"
+  },
+  "ams-ii-g": {
+    "category": "cookstoves",
+    "known-strings": [
+      "AMS-II.G. Energy Efficiency Measures in Thermal Applications of Non-Renewable Biomass",
+      "AMS-II.G.; VMR0006",
+      "AMS-II.G.",
+      "AMS-II.G.; AMS-III.AR",
+      "AMS-II.C.; AMS-II.G."
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_II_G"
+  },
+  "ams-ii-h": {
+    "known-strings": ["AMS-II.H."],
+    "program": "cdm"
+  },
+  "ams-ii-j": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "AMS-II.J.",
+      "AMS-II.J. Demand-side activities for efficient lighting technologies",
+      "AMS-II.J. Demand-side activities for efficient lighting technologies"
+    ],
+    "program": "cdm",
+    "sub-category": "lighting",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_II_J"
+  },
+  "ams-ii-l": {
+    "known-strings": [
+      "AMS-II.L Demand-side activities for efficient outdoor and street lighting technologies",
+      "AMS II.L",
+      "AMS-II.L.",
+      "AMS-II. L \"Demand-side activities for efficient outdoor and street lighting technologies\" Version 2.0"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-af": {
+    "known-strings": ["AMS-III.AF."],
+    "program": "cdm"
+  },
+  "ams-iii-aj": {
+    "known-strings": [
+      "AMS-III.AJ.; AMS-III.AJ1",
+      "AMS-III.AJ.",
+      "AMS-III.AJ. Recovery and recycling of materials from solid wastes"
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/DB/LOWIXM9S6DVO7DGXB21DPVLE8N3VB9"
+  },
+  "ams-iii-aj1": {
+    "known-strings": ["AMS-III.AJ1", "AMS-III.AJ.; AMS-III.AJ1"],
+    "program": "cdm"
+  },
+  "ams-iii-ao": {
+    "known-strings": [
+      "AMS-III.AO. Methane recovery through controlled anaerobic digestion",
+      "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
+      "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
+      "AMS-III.AO.",
+      "AMS-I.C.; AMS-III.AO.; VM0042",
+      "AMS-I.D.; AMS-III.G.; AMS-III.AO.",
+      "AMS-III.AO.; ACM0022",
+      "AMS-III.D.; AMS-III.H.; AMS-III.AO."
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-aq": {
+    "known-strings": [
+      "AM0073; AMS-III.AQ",
+      "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
+      "GCCM003, AMS-III.AQ",
+      "AMS-III.D - Version 21.0, AMS-III.AQ. - Version 2.0"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-ar": {
+    "known-strings": [
+      "AMS-III.AO. Methane recovery through controlled anaerobic digestion",
+      "AMS-III.AR. Substituting fossil fuel based lighting with LED lighting systems",
+      "AMS-III.AR",
+      "AMS-II.G.; AMS-III.AR",
+      "VMR0006; AMS-III.AR"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-as": {
+    "known-strings": [
+      "AMS-III.AS.",
+      "AMS-III.AS. Switch from fossil fuel to biomass in existing manufacturing facilities for non-energy applications"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-au": {
+    "category": "agriculture",
+    "known-strings": [
+      "AMS-III.AU; VM0042",
+      "AMS-III.AU",
+      "CDM METHODOLOGY - AMS-III.AU “METHANE EMISSION REDUCTION BY ADJUSTED WATER MANAGEMENT PRACTICE IN RICE CULTIVATION"
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_AU"
+  },
+  "ams-iii-av": {
+    "known-strings": [
+      "VMR0006; AMS-III.AV.",
+      "AMS-III.AV.",
+      "AMS-III.AV. Low greenhouse gas emitting water purification systems"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-b": {
+    "known-strings": [
+      "AMS-I.C.; AMS-III.B.",
+      "AMS-III.B.",
+      "ACM0001; AMS-III.B."
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-ba": {
+    "known-strings": [
+      "AMS-III.BA",
+      "AMS-III.BA Recovery and recycling of materials from E-waste"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-bb": {
+    "known-strings": ["AMS-III.BB."],
+    "program": "cdm"
+  },
+  "ams-iii-bc": {
+    "category": "transportation",
+    "known-strings": [
+      "AMS-III.BC.",
+      "AMS-III.BC.: Emissions Reductions through Improved Efficiency of Vehicle Fleet"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-bd": {
+    "category": "industrial-processes",
+    "known-strings": ["AMS III BD – Version 01.0"],
+    "program": "cdm"
+  },
+  "ams-iii-bg": {
+    "category": "industrial-processes",
+    "known-strings": [
+      "VMR0006; AMS-III.BG",
+      "AMS-III.BG Emission reduction through sustainable charcoal production and consumption"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-bm": {
+    "known-strings": [
+      "AMS-III.BM",
+      "AMS-III.BM: Lightweight two and three wheeled personal transportation version 1.0"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-c": {
+    "known-strings": [
+      "AMS-III.C. Emission reductions by electric and hybrid vehicles",
+      "AMS-I.F.; AMS-III.C.",
+      "AMS-III.C.; VM0038",
+      "AMS-III.C."
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-d": {
+    "category": "waste-management",
+    "known-strings": [
+      "AMS-III.D. Methane recovery in animal manure management systems",
+      "AMS-I.C.; AMS-III.D.; AMS-III.R.",
+      "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
+      "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
+      "AMS-I.F.; AMS-III.D.",
+      "AMS-I.C.; AMS-III.D.; AMS-III.H.",
+      "AMS-I.D.; AMS-I.F.; AMS-III.D.",
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.",
+      "AMS-I.D.; AMS-III.D.",
+      "AMS-III.D.; ACM0022",
+      "AMS-III.D.",
+      "AMS-III.D.; AMS-III.F.",
+      "AMS-I.D.; AMS-I.F.; AMS-III.D.",
+      "AMS-III.D.; AMS-III.H.; AMS-III.AO.",
+      "AMS-I.C.; AMS-III.D.",
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.",
+      "AMS-III.D - Version 21.0, AMS-I.C. - Version 22.0",
+      "AMS III.D version 21.0, AMS I.F version 03.0",
+      "AMS-III.D. Methane recovery in animal manure management systems, version 21",
+      "AMS-III.D - Version 21.0, AMS-III.AQ. - Version 2.0",
+      "AMS-III.D - Version 21.0, AMS-I.C. - Version 22.0",
+      "AMS-III.F.: Avoidance of methane emissions through composting - Ver12.0; AMS-III.D: Methane recovery in animal manure management systems Ver 21.0"
+    ],
+    "program": "cdm",
+    "sub-category": "livestock",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_D"
+  },
+  "ams-iii-e": {
+    "known-strings": [
+      "AMS-I.D.; AMS-III.E.",
+      "AMS-III.E.: --- Version 17.0,  AMS-I.C.: --- Version 22.0",
+      "AMS-III.E, Version 17.0 & AMS-I.D, Version 18.0",
+      "AMS-III.E.; AMS-III.F.",
+      "AMS-I.C.; AMS-III.E.",
+      "AMS-III.E."
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-f": {
+    "category": "waste-management",
+    "is_methane": true,
+    "known-strings": [
+      "AMS-III.F. Avoidance of methane emissions through controlled biological treatment of biomass",
+      "AMS-III.F.; VM0021",
+      "AMS-III.F.: Avoidance of methane emissions through composting - Ver12.0; AMS-III.D: Methane recovery in animal manure management systems Ver 21.0",
+      "AMS III.F.: Avoidance of methane emissions through composting - Version 12.0",
+      "AMS-III.E.; AMS-III.F.",
+      "AMS-III.D.; AMS-III.F.",
+      "AMS-III.F.; VM0042",
+      "AMS-III.F."
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_F"
+  },
+  "ams-iii-g": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "AMS-III.G. Landfill methane recovery",
+      "AMS-I.C.; AMS-III.G.",
+      "AMS-III.G.: Landfill methane recovery --- Version 10.0 & AMS-I.D.: Grid connected renewable electricity generation --- Version 18.0",
+      "AMS-III.G.",
+      "AMS-I.D.; AMS-III.G.",
+      "AMS-III.G.; VMR0006",
+      "AMS-I.D.; AMS-III.G.; AMS-III.AO.",
+      "AMS-III.G Version 10 & AMS-I.D Version 18",
+      "AMS-III.G: “Landfill methane recovery” --- Version 10.0, AMS-I.D: “Grid connected renewable electricity generation” ---Version 18.0",
+      "AMS-III.G: “Landfill methane recovery” Version 10.0 ; AMS-I.D: “Grid connected renewable electricity generation” Version 18.0",
+      "AMS-III.G: Landfill Methane Recovery – Version 10.0; AMS-I. D: Grid connected renewable electricity generation – Version 18.0",
+      "AMS-III.G. Landfill methane recovery --- Version 10.0 AMS-I.D. Grid connected renewable electricity generation---Version 18.0",
+      "AMS-III.G (Version 10.0) and AMS-I.D (Version 18.0)",
+      "AMS-III.G: “Landfill methane recovery” --- Version 10.0 & AMS-I.D: “Grid connected renewable electricity generation” ---Version 18.0",
+      "AMS-III.G: “Landfill methane recovery” - Version 10.0, AMS-I.D: “Grid connected renewable electricity generation” - Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation - Version 18.0, AMS-III.G.: Landfill methane recovery – Version 10.0",
+      "AMS-III.G: “Landfill methane recovery” - Version 10.0; AMS-I.D: “Grid connected renewable electricity generation” - Version 18.0"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-h": {
+    "category": "waste-management",
+    "is_methane": true,
+    "known-strings": [
+      "AMS-III.H. Methane recovery in wastewater treatment",
+      "AMS-I.F.; AMS-III.H.",
+      "AMS-I.D.; AMS-III.H.",
+      "AMS-I.C.; AMS-III.D.; AMS-III.H.",
+      "AMS-I.D.; AMS-I.F.; AMS-III.H.",
+      "AMS-I.C.; AMS-I.D.; AMS-III.H.",
+      "AMS-III.D.; AMS-III.H.; AMS-III.AO.",
+      "AMS-III.H.",
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.",
+      "AMS-I.C.; AMS-III.H.",
+      "AMS-I.D.; AMS-III.H"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-i": {
+    "known-strings": [
+      "AMS-III.I",
+      "AMS-III.I.",
+      "AMS-III.I. Avoidance of methane production in wastewater treatment through replacement of anaerobic systems by aerobic systems"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-iv": {
+    "known-strings": [
+      "AMS-III.AV. Low greenhouse gas-emitting safe drinking water production systems, Version 08.0"
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/DB/DKCLAOGT0S146VR70ZADDFGOVD61JK"
+  },
+  "ams-iii-m": {
+    "known-strings": ["AMS-III.M."],
+    "program": "cdm"
+  },
+  "ams-iii-q": {
+    "known-strings": [
+      "AMS-III.Q",
+      "AMS-III.Q. Waste Energy Recovery (gas/heat/pressure) Projects"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-r": {
+    "known-strings": [
+      "AMS-III.R. Methane recovery in agricultural activities at household/small farm level",
+      "AMS-I.C.; AMS-III.D.; AMS-III.R.",
+      "AMS-I.E.; AMS-III.R.",
+      "AMS-III.R.",
+      "AMS-I.C.; AMS-III.R."
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-s": {
+    "known-strings": [
+      "AMS-I.F.; AMS-III.S.",
+      "AMS-III.S.",
+      "AMS-III.S. Introduction of low-emission vehicles/technologies to commercial vehicle fleets"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-y": {
+    "known-strings": [
+      "AMS-III.Y; VMR0003",
+      "AMS-III.Y",
+      "AMS-I.D.; AMS-III.Y",
+      "AMS-III.Y: Methane avoidance through separation of solids from wastewater or manure treatment systems"
+    ],
+    "program": "cdm"
+  },
+  "ams-iii-z": {
+    "category": "industrial-processes",
+    "known-strings": [
+      "AMS-III.Z. Fuel Switch = 159, process improvement and energy efficiency in brick manufacture",
+      "AMS-III.Z. Fuel Switch, process improvement and energy efficiency in brick manufacture",
+      "AMS-III.Z",
+      "AMS-III.Z. “Fuel Switch, process improvement and energy efficiency in brick manufacture -Version 6.0"
+    ],
+    "program": "cdm",
+    "sub-category": "energy-efficiency",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_Z"
+  },
+  "ar-acm0001": {
+    "category": "forest",
+    "known-strings": [
+      "AR-ACM0001",
+      "AR-ACM0001 Afforestation and Reforestation of Degraded Land"
+    ],
+    "program": "cdm"
+  },
+  "ar-acm0002": {
+    "category": "forest",
+    "known-strings": ["AR-ACM0002"],
+    "program": "cdm"
+  },
+  "ar-acm0003": {
+    "category": "forest",
+    "known-strings": [
+      "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
+      "VM0026; AR-ACM0003; VM0042",
+      "VM0007; AR-ACM0003",
+      "AR-ACM0003",
+      "VM0003; AR-ACM0003",
+      "AM0014; VM0007; AR-ACM0003",
+      "VM0005; AR-ACM0003",
+      "AR-AM0005; AR-ACM0003"
+    ],
+    "program": "cdm"
+  },
+  "ar-am0002": {
+    "category": "forest",
+    "known-strings": ["AR-AM0002"],
+    "program": "cdm"
+  },
+  "ar-am0003": {
+    "category": "forest",
+    "known-strings": ["AR-AM0003"],
+    "program": "cdm"
+  },
+  "ar-am0005": {
+    "category": "forest",
+    "known-strings": ["AR-AM0005; AR-ACM0003", "AR-AM0005"],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/DB/QAM97WQWX94URIJXOJMTJFIS8KSE28"
+  },
+  "ar-am0007": {
+    "category": "forest",
+    "known-strings": ["AR-AM0007"],
+    "program": "cdm"
+  },
+  "ar-am0014": {
+    "category": "forest",
+    "known-strings": [
+      "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
+      "AR-AM0014"
+    ],
+    "program": "cdm"
+  },
+  "ar-ams0001": {
+    "category": "forest",
+    "known-strings": ["AR-AMS0001"],
+    "program": "cdm"
+  },
+  "ar-ams0002": {
+    "category": "forest",
+    "known-strings": ["AR-AMS0002"],
+    "program": "cdm"
+  },
+  "ar-ams0003": {
+    "category": "forest",
+    "known-strings": [
+      "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
+      "AR-AMS0003"
+    ],
+    "program": "cdm"
+  },
+  "ar-ams0004": {
+    "category": "forest",
+    "known-strings": ["AR-AMS0004"],
+    "program": "cdm"
+  },
+  "ar-ams0005": {
+    "category": "forest",
+    "known-strings": ["AR-AMS0005"],
+    "program": "cdm"
+  },
+  "ar-ams0006": {
+    "category": "forest",
+    "known-strings": ["AR-AMS0006"],
+    "program": "cdm"
+  },
+  "ar-ams0007": {
+    "category": "forest",
+    "known-strings": [
+      "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
+      "AR-AMS0007; AR-ACM0003",
+      "AR-AMS0007"
+    ],
+    "program": "cdm"
+  },
+  "arb-forest": {
+    "category": "forest",
+    "known-strings": [
+      "ARB Compliance Offset Protocol: U.S. Forest Projects",
+      "Improved Forest Management - ARB Compliance",
+      "Reforestation - ARB Compliance",
+      "Avoided Conversion - ARB Compliance"
+    ],
+    "program": "arb"
+  },
+  "arb-livestock": {
+    "category": "waste-management",
+    "is_methane": true,
+    "known-strings": [
+      "ARB Compliance Offset Protocol: Capturing and Destroying Methane from Manure Management Systems",
+      "Livestock - ARB Compliance"
+    ],
+    "program": "arb",
+    "sub-category": "livestock",
+    "url": "https://ww2.arb.ca.gov/our-work/programs/compliance-offset-program/compliance-offset-protocols/livestock-projects"
+  },
+  "arb-mine-methane": {
+    "category": "mine-methane",
+    "is_methane": true,
+    "known-strings": [
+      "ARB Compliance Offset Protocol: Mine Methane Capture Projects",
+      "Mine Methane Capture - ARB Compliance"
+    ],
+    "program": "arb"
+  },
+  "arb-ozone": {
+    "category": "industrial-gases",
+    "known-strings": [
+      "ARB Compliance Offset Protocol: Destruction of U.S. Ozone Depleting Substances Banks",
+      "Ozone Depleting Substances - U.S. - ARB Compliance"
+    ],
+    "program": "arb"
+  },
+  "art-trees": {
+    "category": "forest",
+    "known-strings": ["art-trees"]
+  },
+  "car-adipic": {
+    "category": "industrial-processes",
+    "known-strings": ["Adipic Acid"],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/industrial/adipic-acid-production/"
+  },
+  "car-forest": {
+    "category": "forest",
+    "known-strings": [
+      "Reforestation",
+      "Improved Forest Management",
+      "Conservation-Based Forest Management",
+      "Avoided Conversion",
+      "Climate Action Reserve Forest Project Protocol"
+    ],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/ncs/forest/"
+  },
+  "car-forest-mx": {
+    "category": "forest",
+    "known-strings": ["Forestry - MX"],
+    "url": "https://www.climateactionreserve.org/how/protocols/ncs/mexico-forest/"
+  },
+  "car-grassland": {
+    "category": "land-use",
+    "known-strings": ["Avoided Grassland Conversion"],
+    "program": "car",
+    "sub-category": "grassland",
+    "url": "https://www.climateactionreserve.org/how/protocols/ncs/grassland/"
+  },
+  "car-grassland-ca": {
+    "category": "land-use",
+    "known-strings": ["Canada Grassland"],
+    "program": "car",
+    "sub-category": "grassland",
+    "url": "https://www.climateactionreserve.org/how/protocols/ncs/canada-grassland/"
+  },
+  "car-landfill": {
+    "category": "landfill",
+    "known-strings": [
+      "Climate Action Reserve Landfill Project Protocol",
+      "Landfill Gas Capture/Combustion"
+    ],
+    "program": "car"
+  },
+  "car-landfill-mx": {
+    "category": "landfill",
+    "known-strings": ["Landfill - MX"],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/waste/mexico-landfill/"
+  },
+  "car-livestock": {
+    "category": "waste-management",
+    "known-strings": ["Livestock Gas Capture/Combustion"],
+    "program": "car",
+    "sub-category": "livestock",
+    "url": "https://www.climateactionreserve.org/how/protocols/waste/us-livestock/"
+  },
+  "car-livestock-mx": {
+    "category": "waste-management",
+    "known-strings": ["Livestock - MX"],
+    "program": "car",
+    "sub-category": "livestock",
+    "url": "https://www.climateactionreserve.org/how/protocols/waste/mexico-livestock/"
+  },
+  "car-mine-methane": {
+    "category": "mine-methane",
+    "known-strings": [
+      "Coal Mine Methane - VAM",
+      "Coal Mine Methane - Drainage"
+    ],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/waste/coal-mine-methane/"
+  },
+  "car-n2o": {
+    "category": "agriculture",
+    "known-strings": ["Nitrogen Management"],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/ncs/nitrogen-management/"
+  },
+  "car-nitric-acid": {
+    "category": "industrial-processes",
+    "known-strings": [
+      "Nitric Acid N2O - Tertiary Catalyst",
+      "Nitric Acid N2O- Secondary Catalyst",
+      "Nitric Acid N2O- Tertiary Catalyst"
+    ],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/industrial/nitric-acid-production/"
+  },
+  "car-organic-composting": {
+    "category": "waste-management",
+    "known-strings": ["Organic Waste Composting"],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/waste/organic-waste-composting/"
+  },
+  "car-ozone": {
+    "category": "industrial-gases",
+    "known-strings": [
+      "Ozone Depleting Substances - U.S.",
+      "Climate Action Reserve U.S. Ozone Depleting Substances Project Protocol",
+      "Ozone Depleting Substances - Article 5 Imports"
+    ],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/industrial/ozone-depleting-substances/"
+  },
+  "car-soil": {
+    "category": "agriculture",
+    "known-strings": ["Soil Enrichment"],
+    "program": "car",
+    "sub-category": "soil",
+    "url": "https://www.climateactionreserve.org/how/protocols/ncs/soil-enrichment/"
+  },
+  "climate-leaders-landfill": {
+    "category": "landfill",
+    "known-strings": [
+      "Offset Project Methodology for Landfill Methane Collection and Combustion"
+    ],
+    "program": "None"
+  },
+  "ecy-ozone": {
+    "category": "industrial-gases",
+    "known-strings": [
+      "ECY Compliance Offset Protocol: Ozone Depleting Substances Projects"
+    ],
+    "program": "ecy"
+  },
+  "ert-gas-sub": {
+    "category": "industrial-gases",
+    "known-strings": [
+      "Emission reductions through industrial gas substitution"
+    ],
+    "program": "acr"
+  },
+  "gccm0003": {
+    "category": "waste-management",
+    "known-strings": [
+      "GCCM003-Methodology-for-Energy-Generation-from-Animal-Manure-and-Waste-Management-Projects-v1",
+      "GCCM003-Methodology-for-Energy-Generation-from-Animal-Manure-and-Waste-Management-Projects-v2.0",
+      "GCCM003 ver1.0",
+      "GCCM003, AMS-III.AQ",
+      "GCCM003 v1.0 /ACM0018 ver 5.0"
+    ],
+    "program": "gcc",
+    "sub-category": "livestock"
+  },
+  "gccm001": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "GCCM001 V4.0 - 2022",
+      "GCCM001 v4.0",
+      "GCCM001 v4.0",
+      "GCCM001 Methodology for Renewable Energy Generation projects  supplying Electricity to Grid or Captive Consumers Version 3.0",
+      "GCCM001: Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid",
+      "GCCM001 Methodology for Renewable Energy Generation projects  supplying Electricity to Grid or Captive Consumers Version 3.0",
+      "GCCM001: Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 4.0",
+      "GCCM001 Methodology for Renewable Energy Generation projects  supplying Electricity to Grid or Captive Consumers Version 3.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, Ver 040",
+      "GCCM001 Version 3.0 /ACM0002 Version 20.0",
+      "GCCMOO1",
+      "GCCMOO1 v4.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 4.0",
+      "GCC M001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, Version 4.0.",
+      "GCCM0001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers--- Version 4.02",
+      "GCC M001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 3.0",
+      "GCC M001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, Version 3.0.",
+      "Energy Generation Projects Supplying Electricity to Grid or Captive Consumers (GCCM001 V3.0)",
+      "Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers (GCCM001 V3.0 – 2022)",
+      "Version 2.0 of GCCM001 “Methodology for Grid Connected Renewable Energy Generation Projects",
+      "Methodology for Grid Connected Renewable Energy Generation Projects (GCCM001 v2.0)",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers & version 3.0",
+      "GCCM001 v3",
+      "GCCM001: Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 3.0",
+      "GCCM001 V3.0 - 2022",
+      "GCCM001 “Methodology for Grid Connected Renewable Energy Generation Projects’,Version 2.0",
+      "GCCM001 Version 3.0",
+      "GCCM001 - Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 3.0",
+      "GCCM001 v2.0 - Methodology for Grid Connected Renewable Energy Generation Projects",
+      "GCCM001: Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers ; Version 3.0",
+      "GCCM001-Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers (Version 3.0 - 2022)",
+      "GCCM001 v3.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers V3.0",
+      "GCCM001 - Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 4.0",
+      "GCCM001 “Methodology for Grid Connected Renewable Energy Generation Projects”, version 2.0.",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers (Version 3.0)",
+      "GCCM001 Version 2.0 /ACM0002 Version 20.0",
+      "GCCM001 (Version 3.0) and ACM0002 (Version 20.0)",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, Ver 03.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 3.0",
+      "GCCM001 “Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers” -Version 3.0",
+      "GCCM001: Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, V3.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers V4.0 - 2022",
+      "GCCM001 V3.0 - Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers",
+      "GCCM001 - 3.0",
+      "GCCM001 Methodology for Renewable Energy Generation projects supplying Electricity to Grid or Captive Consumers Version 3.0",
+      "GCCM001 v2.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers version 4.0"
+    ],
+    "program": "gcc"
+  },
+  "gccm002": {
+    "known-strings": [
+      "GCCM002 v1.0 –Methodology for Energy Efficient Pumping Projects"
+    ],
+    "program": "gcc"
+  },
+  "gs-cookstoves": {
+    "category": "cookstoves",
+    "known-strings": [
+      "GS TPDDTEC v 1.",
+      "GS TPDDTEC v3.1",
+      "GS TPDDTEC v 2.",
+      "GS TPDDTEC V4.0: REDUCED EMISSIONS FROM COOKING AND HEATING – TECHNOLOGIES AND PRACTICES TO DISPLACE DECENTRALIZED THERMAL ENERGY CONSUMPTION",
+      "Methodology for Improved Cook stoves and Kitchen Regimes v1.",
+      "GS Methodology for Improved Cook stoves and Kitchen Regimes v2.",
+      "GS TPDDTEC v 3."
+    ]
+  },
+  "gs-drinking-water": {
+    "category": "unknown",
+    "known-strings": [
+      "GS Methodology for emission reductions from safe drinking water supply"
+    ]
+  },
+  "gs-simplified-cookstoves": {
+    "category": "cookstoves",
+    "known-strings": [
+      "GS MS Simplified Methodology for Efficient Cookstoves v1.",
+      "GS MS Simplified Methodology for Efficient Cookstoves v1.1",
+      "The Gold Standard Simplified Methodology for Clean and Efficient Cookstoves, Version 3.0"
+    ]
+  },
+  "unknown": {
+    "category": "unknown",
+    "known-strings": [
+      "Other",
+      "Not Provided",
+      "VCS v1 Project Specific",
+      "Methodology Under Development"
+    ]
+  },
+  "vm0001": {
+    "categry": "industrial-gases",
+    "known-strings": ["VM0001"],
+    "program": "vcs"
+  },
+  "vm0003": {
+    "category": "forest",
+    "known-strings": ["VM0003; AR-ACM0003", "VM0003"],
+    "program": "vcs"
+  },
+  "vm0004": {
+    "category": "forest",
+    "known-strings": ["VM0004"],
+    "program": "vcs",
+    "sub-category": "avoided-conversion",
+    "url": "https://verra.org/methodologies/revision-to-vm0004-methodology-for-conservation-projects-that-avoid-planned-land-use-conversion-in-peat-swamp-forests/"
+  },
+  "vm0005": {
+    "category": "forest",
+    "known-strings": [
+      "VM0005; VM0007; VM0017",
+      "VM0005; VM0015; Methodology Under Development",
+      "VM0005",
+      "VM0005; AR-ACM0003"
+    ],
+    "program": "vcs"
+  },
+  "vm0006": {
+    "category": "forest",
+    "known-strings": ["VM0006"],
+    "program": "vcs",
+    "sub-category": "redd",
+    "url": "https://verra.org/methodologies/vm0006-methodology-for-carbon-accounting-for-mosaic-and-landscape-scale-redd-projects-v2-2/"
+  },
+  "vm0007": {
+    "category": "forest",
+    "known-strings": [
+      "VM0007; AR-ACM0003",
+      "VM0007; VM0015",
+      "VM0005; VM0007; VM0017",
+      "VM0007",
+      "AM0014; VM0007; AR-ACM0003",
+      "VM0007; VM0010"
+    ],
+    "program": "vcs",
+    "sub-category": "redd"
+  },
+  "vm0008": {
+    "category": "energy-efficiency",
+    "known-strings": ["VM0008"],
+    "program": "vcs"
+  },
+  "vm0009": {
+    "category": "forest",
+    "known-strings": ["VM0009"],
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0009-methodology-for-avoided-ecosystem-conversion-v3-0/"
+  },
+  "vm0010": {
+    "category": "forest",
+    "known-strings": ["VM0010", "VM0007; VM0010"],
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0010-methodology-for-improved-forest-management-conversion-from-logged-to-protected-forest-v1-3/"
+  },
+  "vm0011": {
+    "known-strings": ["VM0011"],
+    "program": "vcs"
+  },
+  "vm0012": {
+    "known-strings": ["VM0012"],
+    "program": "cdm"
+  },
+  "vm0013": {
+    "known-strings": ["VM0013"],
+    "program": "vcs"
+  },
+  "vm0014": {
+    "known-strings": ["VM0014"],
+    "program": "vcs"
+  },
+  "vm0015": {
+    "category": "forest",
+    "known-strings": [
+      "VM00015",
+      "VM0005; VM0015; Methodology Under Development",
+      "VM0007; VM0015",
+      "VM0015",
+      "VM0015; VM0017"
+    ],
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0015-methodology-for-avoided-unplanned-deforestation-v1-1/"
+  },
+  "vm0016": {
+    "known-strings": ["VM0016"],
+    "program": "vcs"
+  },
+  "vm0017": {
+    "category": "agriculture",
+    "known-strings": [
+      "VM0005; VM0007; VM0017",
+      "VM0017",
+      "ACM0017; VM0017",
+      "VM0015; VM0017"
+    ],
+    "program": "vcs",
+    "sub-category": "soil",
+    "url": "https://verra.org/methodologies/vm0017-adoption-of-sustainable-agricultural-land-management-v1-0/"
+  },
+  "vm0018": {
+    "known-strings": ["VM0018; ACM0022", "VM0018"],
+    "program": "vcs"
+  },
+  "vm0019": {
+    "known-strings": ["VM0019"],
+    "program": "vcs"
+  },
+  "vm0021": {
+    "known-strings": ["AMS-III.F.; VM0021"],
+    "program": "vcs"
+  },
+  "vm0022": {
+    "known-strings": ["VM0022"],
+    "program": "vcs"
+  },
+  "vm0023": {
+    "known-strings": ["VM0023"],
+    "program": "vcs"
+  },
+  "vm0025": {
+    "known-strings": ["VM0025; VMD0038", "VM0025"],
+    "program": "vcs"
+  },
+  "vm0026": {
+    "category": "land-use",
+    "known-strings": ["VM0026; AR-ACM0003; VM0042", "VM0026"],
+    "program": "vcs",
+    "sub-category": "grassland",
+    "url": "https://verra.org/methodologies/vm0026-methodology-for-sustainable-grassland-management-sgm-v1-0/"
+  },
+  "vm0032": {
+    "known-strings": ["VM0032"],
+    "program": "vcs"
+  },
+  "vm0033": {
+    "known-strings": ["VM0033"],
+    "program": "vcs"
+  },
+  "vm0034": {
+    "known-strings": ["VM0034"],
+    "program": "vcs"
+  },
+  "vm0036": {
+    "known-strings": ["VM0036"],
+    "program": "vcs"
+  },
+  "vm0037": {
+    "known-strings": ["VM0037"],
+    "program": "vcs"
+  },
+  "vm0038": {
+    "known-strings": ["AMS-III.C.; VM0038", "VM0038"],
+    "program": "vcs"
+  },
+  "vm0039": {
+    "known-strings": ["VM0039"],
+    "program": "vcs"
+  },
+  "vm0041": {
+    "known-strings": ["VM0041"],
+    "program": "vcs"
+  },
+  "vm0042": {
+    "category": "agriculture",
+    "known-strings": [
+      "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
+      "VM0026; AR-ACM0003; VM0042",
+      "AMS-III.AU; VM0042",
+      "AMS-III.F.; VM0042",
+      "VM0042"
+    ],
+    "program": "vcs",
+    "sub-category": "soil",
+    "url": "https://verra.org/methodologies/vm0042-methodology-for-improved-agricultural-land-management-v2-0/"
+  },
+  "vm0043": {
+    "known-strings": ["VM0043"],
+    "program": "vcs"
+  },
+  "vm0044": {
+    "category": "biochar",
+    "known-strings": ["VM0044"],
+    "program": "verra",
+    "url": "https://verra.org/methodologies/vm0044-methodology-for-biochar-utilization-in-soil-and-non-soil-applications/"
+  },
+  "vm0045": {
+    "known-strings": ["VM0045"],
+    "program": "vcs"
+  },
+  "vmd00038": {
+    "category": "energy-efficiency",
+    "known-strings": ["VM0025; VMD0038"],
+    "program": "vcs"
+  },
+  "vmr0001": {
+    "category": "mine-methane",
+    "known-strings": ["VMR0001"],
+    "program": "vcs"
+  },
+  "vmr0002": {
+    "category": "mine-methane",
+    "known-strings": ["VMR0002", "ACM0008; VMR0002"],
+    "program": "vcs"
+  },
+  "vmr0003": {
+    "categry": "waste-management",
+    "known-strings": ["AMS-III.Y; VMR0003"],
+    "program": "vcs"
+  },
+  "vmr0006": {
+    "category": "cookstoves",
+    "known-strings": [
+      "VMR0006; AMS-III.AV.",
+      "AMS-II.G.; VMR0006",
+      "VMR0006; AMS-III.BG",
+      "VMR0006",
+      "VMR0006; AMS-III.AR",
+      "AMS-III.G.; VMR0006"
+    ],
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vmr0006-methodology-for-installation-of-high-efficiency-firewood-cookstoves/"
+  }
+}

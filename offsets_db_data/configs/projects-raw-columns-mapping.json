@@ -1,0 +1,58 @@
+{
+  "country": {
+    "american-carbon-registry": "Project Site Country",
+    "art-trees": "Program  Country",
+    "climate-action-reserve": "Project Site Country",
+    "global-carbon-council": "project_country",
+    "gold-standard": "country",
+    "verra": "Country/Area"
+  },
+  "listed_at": {
+    "american-carbon-registry": null,
+    "art-trees": null,
+    "climate-action-reserve": "Project Listed Date",
+    "global-carbon-council": null,
+    "gold-standard": null,
+    "verra": null
+  },
+  "name": {
+    "american-carbon-registry": "Project Name",
+    "art-trees": "Program Name",
+    "climate-action-reserve": "Project Name",
+    "global-carbon-council": null,
+    "gold-standard": "name",
+    "verra": "Name"
+  },
+  "original_protocol": {
+    "american-carbon-registry": "Project Methodology/Protocol",
+    "art-trees": null,
+    "climate-action-reserve": "Project Type",
+    "global-carbon-council": "project_methodology",
+    "gold-standard": "methodology",
+    "verra": "Methodology"
+  },
+  "project_id": {
+    "american-carbon-registry": "Project ID",
+    "art-trees": "Program ID",
+    "climate-action-reserve": "Project ID",
+    "global-carbon-council": "project_submission_number",
+    "gold-standard": "sustaincert_id",
+    "verra": "ID"
+  },
+  "proponent": {
+    "american-carbon-registry": null,
+    "art-trees": "Sovereign Program Developer",
+    "climate-action-reserve": "Project Owner",
+    "global-carbon-council": null,
+    "gold-standard": "project_developer",
+    "verra": "Proponent"
+  },
+  "status": {
+    "american-carbon-registry": null,
+    "art-trees": "Status",
+    "climate-action-reserve": "Status",
+    "global-carbon-council": "project_status",
+    "gold-standard": "status",
+    "verra": "Status"
+  }
+}

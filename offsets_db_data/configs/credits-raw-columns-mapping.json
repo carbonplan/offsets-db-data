@@ -1,0 +1,98 @@
+{
+  "american-carbon-registry": {
+    "cancellations": {
+      "project_id": "Project ID",
+      "quantity": "Quantity of Credits",
+      "transaction_date": "Status Effective",
+      "vintage": "Vintage"
+    },
+    "issuances": {
+      "project_id": "Project ID",
+      "quantity": "Total Credits Issued",
+      "transaction_date": "Date Issued",
+      "vintage": "Vintage"
+    },
+    "retirements": {
+      "project_id": "Project ID",
+      "quantity": "Quantity of Credits",
+      "transaction_date": "Status Effective",
+      "vintage": "Vintage"
+    }
+  },
+  "art-trees": {
+    "cancellations": {
+      "project_id": "Program ID",
+      "quantity": "Quantity of Credits",
+      "transaction_date": "Status Effective",
+      "vintage": "Vintage"
+    },
+    "issuances": {
+      "project_id": "Program ID",
+      "quantity": "Credits Verified",
+      "transaction_date": "Date Approved",
+      "vintage": "Vintage"
+    },
+    "retirements": {
+      "project_id": "Program ID",
+      "quantity": "Quantity of Credits",
+      "transaction_date": "Status Effective",
+      "vintage": "Vintage"
+    }
+  },
+  "climate-action-reserve": {
+    "cancellations": {
+      "project_id": "Project ID",
+      "quantity": "Quantity of Offset Credits",
+      "transaction_date": "Status Effective",
+      "vintage": "Vintage"
+    },
+    "issuances": {
+      "project_id": "Project ID",
+      "quantity": "Total Offset Credits Issued",
+      "transaction_date": "Date Issued",
+      "vintage": "Vintage"
+    },
+    "retirements": {
+      "project_id": "Project ID",
+      "quantity": "Quantity of Offset Credits",
+      "transaction_date": "Status Effective",
+      "vintage": "Vintage"
+    }
+  },
+  "global-carbon-council": {
+    "issuances": {
+      "project_id": null,
+      "quantity": "holding_quantity",
+      "transaction_date": null,
+      "vintage": "vintage"
+    },
+    "retirements": {
+      "project_id": null,
+      "quantity": "retirement_quantity",
+      "transaction_date": null,
+      "vintage": "vintage"
+    }
+  },
+  "gold-standard": {
+    "issuances": {
+      "project_id": null,
+      "quantity": "number_of_credits",
+      "transaction_date": "created_at",
+      "vintage": "vintage"
+    },
+    "retirements": {
+      "project_id": null,
+      "quantity": "number_of_credits",
+      "transaction_date": "created_at",
+      "vintage": "vintage"
+    }
+  },
+  "verra": {
+    "transactions": {
+      "project_id": null,
+      "quantity": null,
+      "transaction_date": null,
+      "vintage": null
+    }
+  }
+}
