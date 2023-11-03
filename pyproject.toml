@@ -98,15 +98,18 @@ select = [
 ]
 
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.mccabe]
 max-complexity = 18
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["offsets_db_data"]
 combine-as-imports = true
 
 [tool.ruff.format]
 quote-style = "single"
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
 
 
 [tool.pytest.ini_options]
