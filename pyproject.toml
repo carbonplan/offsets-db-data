@@ -84,7 +84,6 @@ ignore = [
     "E721", # Comparing types instead of isinstance
     "E741", # Ambiguous variable names
     "E501", # Conflicts with ruff format
-    "W191", # Conflicts with ruff format
 ]
 select = [
     # Pyflakes
@@ -108,7 +107,7 @@ combine-as-imports = true
 
 [tool.ruff.format]
 quote-style = "single"
-indent-style = "tab"
+
 
 [tool.pytest.ini_options]
 console_output_style = "count"
