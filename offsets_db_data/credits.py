@@ -9,7 +9,7 @@ import pandas_flavor as pf
 import upath
 
 CREDIT_SCHEMA_UPATH = (
-    upath.UPath(__file__).parents[1] / 'configs' / 'credits-raw-columns-mapping.json'
+    upath.UPath(__file__).parents[0] / 'configs' / 'credits-raw-columns-mapping.json'
 )
 
 

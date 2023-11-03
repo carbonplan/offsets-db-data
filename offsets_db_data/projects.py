@@ -8,9 +8,9 @@ import pandas as pd
 import pandas_flavor as pf
 import upath
 
-PROTOCOL_MAPPING_UPATH = upath.UPath(__file__).parents[1] / 'configs' / 'all-protocol-mapping.json'
+PROTOCOL_MAPPING_UPATH = upath.UPath(__file__).parents[0] / 'configs' / 'all-protocol-mapping.json'
 PROJECT_SCHEMA_UPATH = (
-    upath.UPath(__file__).parents[1] / 'configs' / 'projects-raw-columns-mapping.json'
+    upath.UPath(__file__).parents[0] / 'configs' / 'projects-raw-columns-mapping.json'
 )
 
 
