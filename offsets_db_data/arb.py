@@ -1,0 +1,112 @@
+import numpy as np
+import pandas as pd
+
+
+def _get_registry(item):
+    registry_map = {
+        'CAR': 'climate-action-reserve',
+        'ACR': 'american-carbon-registry',
+        'VCS': 'verra',
+        'ART': 'art-trees',
+    }
+    prefix = item[:3]
+    return registry_map.get(prefix)
+
+
+def process_arb_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Arb data
+
+    Returns
+    -------
+    data : pd.DataFrame
+        Arb data with processed columns
+
+    """
+
+    rename_d = {
+        'OPR Project ID': 'opr_id',
+        'ARB Offset Credits Issued': 'issuance',
+        'Project Type': 'project_type',
+        'Issuance Date': 'issued_at',
+        'Vintage': 'vintage',
+        'Retired Voluntarily': 'vcm_retirement',
+        'Retired 1st Compliance Period (CA)': 'first_compliance_ca',
+        'Retired 2nd Compliance Period (CA)': 'second_compliance_ca',
+        'Retired 3rd Compliance Period (CA)': 'third_compliance_ca',
+        'Retired 4th Compliance Period (CA)': 'fourth_compliance_ca',
+        'Retired for Compliance in Quebec': 'qc_compliance',
+    }
+
+    df = df.rename(columns=rename_d)
+    df['vintage'] = df[
+        'vintage'
+    ].interpolate()  # data is ordered; fills na vintage for zero issuance reporting periods
+
+    df['project_type'] = df['project_type'].str.lower()
+
+    # can be multiple issuance in single RP -- grab issuance ID so can aggregate later
+
+    df = df.replace('reforest defer', np.nan)
+    df.loc[pd.isna(df['issuance']), 'issuance'] = 0
+
+    print(f'Loaded {len(df)} rows from ARB issuance table')
+    df = df[rename_d.values()]
+
+    compliance_period_dates = {
+        'vcm_retirement': np.datetime64('NaT'),
+        'qc_compliance': np.datetime64('NaT'),
+        'first_compliance_ca': np.datetime64('2016-03-21'),
+        'second_compliance_ca': np.datetime64('2018-11-01'),
+        'third_compliance_ca': np.datetime64('2021-11-01'),
+        'fourth_compliance_ca': np.datetime64('2022-11-01'),
+    }
+    # rename columns to what we want `transaction_type` to be in the end. then call melt
+    # which casts to (opr_id, vintage, issued_at, transaction_type, quantity)
+    credit_cols = [
+        'issuance',
+        'vcm_retirement',
+        'first_compliance_ca',
+        'second_compliance_ca',
+        'third_compliance_ca',
+        'fourth_compliance_ca',
+        'qc_compliance',
+    ]
+    melted = df.melt(
+        id_vars=['opr_id', 'vintage', 'issued_at'],
+        value_vars=credit_cols,
+        var_name='transaction_type',
+        value_name='quantity',
+    )
+    melted.loc[
+        melted['transaction_type'].isin(compliance_period_dates.keys()), 'issued_at'
+    ] = melted['transaction_type'].map(compliance_period_dates)
+    melted = melted.rename(columns={'issued_at': 'transaction_date'}).to_datetime(
+        'transaction_date', format='mixed', utc=True
+    )
+    melted['transaction_type'] = melted.transaction_type.apply(
+        lambda x: 'retirement' if x in compliance_period_dates else x
+    )
+
+    # handle missing in retirement cols (i.e. ACR570 2022)
+    melted.loc[pd.isna(melted['quantity']), 'quantity'] = 0
+
+    # drop all th zero retirement events, as they're artifacts of processing steps
+    data = melted[
+        ~((melted['transaction_type'] == 'retirement') & (melted['quantity'] == 0))
+    ].copy()
+    # add a prefix to the project_id to indicate the source
+    data['project_id'] = data.opr_id.apply(
+        lambda item: item
+        if isinstance(item, str)
+        and (item.startswith('CAR') or item.startswith('ACR') or item.startswith('VCS'))
+        else f'VCS{item}'
+    )
+    data['registry'] = data.project_id.apply(_get_registry)
+    data['vintage'] = data['vintage'].astype(int)
+
+    return data
