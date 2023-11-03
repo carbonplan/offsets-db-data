@@ -1,3 +1,4 @@
+import contextlib
 import json
 from collections import defaultdict
 
@@ -138,7 +139,7 @@ def add_category(df, protocol_mapping) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def add_is_compliance_flag(df) -> pd.DataFrame:
+def add_is_compliance_flag(df: pd.DataFrame) -> pd.DataFrame:
     """Add is_arb flag"""
     print('Adding is_compliance flag...')
     df['is_compliance'] = df.apply(
@@ -150,7 +151,9 @@ def add_is_compliance_flag(df) -> pd.DataFrame:
 
 @pf.register_dataframe_method
 def map_protocol(
-    df, inverted_protocol_mapping, original_protocol_column: str = 'original_protocol'
+    df: pd.DataFrame,
+    inverted_protocol_mapping: dict,
+    original_protocol_column: str = 'original_protocol',
 ) -> pd.DataFrame:
     """Map protocol based on known string"""
     print('Mapping protocol based on known string...')
@@ -166,13 +169,13 @@ def map_protocol(
 
 
 @pf.register_dataframe_method
-def harmonize_status_codes(df, status_column: str = 'status') -> pd.DataFrame:
+def harmonize_status_codes(df: pd.DataFrame, status_column: str = 'status') -> pd.DataFrame:
     """Harmonize project status codes across registries
 
     Excludes ACR, as it requires special treatment across two columns
     """
     print('Harmonizing status codes')
-    try:
+    with contextlib.suppress(KeyError):
         GCC_STATES = {
             'VERIFICATION': 'listed',
             'RFR CC INCOMPLETE': 'unknown',
@@ -210,8 +213,6 @@ def harmonize_status_codes(df, status_column: str = 'status') -> pd.DataFrame:
 
         state_dict = GCC_STATES | CAR_STATES | VERRA_STATES | GS_STATES
         df[status_column] = df[status_column].apply(lambda x: state_dict.get(x, 'unknown'))
-    except KeyError:  # status not in raw data
-        pass
     return df
 
 
@@ -254,7 +255,7 @@ def get_protocol_category(protocol_strs: list[str] | str, protocol_mapping: dict
     return [_get_category(protocol_str, protocol_mapping) for protocol_str in protocol_strs]
 
 
-def harmonize_acr_status(row):
+def harmonize_acr_status(row: pd.Series) -> str:
     """Derive single project status for CAR and ACR projects
 
     Raw CAR and ACR data has two status columns -- one for compliance status, one for voluntary.
@@ -299,7 +300,7 @@ def load_protocol_mapping(path: upath.UPath = PROTOCOL_MAPPING_UPATH) -> dict:
     return json.loads(path.read_text())
 
 
-def load_inverted_protocol_mapping():
+def load_inverted_protocol_mapping() -> dict:
     protocol_mapping = load_protocol_mapping()
     store = defaultdict(list)
     for protocol_str, metadata in protocol_mapping.items():

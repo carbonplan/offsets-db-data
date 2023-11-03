@@ -14,7 +14,9 @@ CREDIT_SCHEMA_UPATH = (
 
 
 @pf.register_dataframe_method
-def filter_and_merge_transactions(df, arb_data, project_id_column: str = 'project_id'):
+def filter_and_merge_transactions(
+    df: pd.DataFrame, arb_data: pd.DataFrame, project_id_column: str = 'project_id'
+) -> pd.DataFrame:
     if intersection_values := list(
         set(df[project_id_column]).intersection(set(arb_data[project_id_column]))
     ):
@@ -26,7 +28,7 @@ def filter_and_merge_transactions(df, arb_data, project_id_column: str = 'projec
 
 
 @pf.register_dataframe_method
-def aggregate_issuance_transactions(df):
+def aggregate_issuance_transactions(df: pd.DataFrame) -> pd.DataFrame:
     # Check if 'transaction_type' exists in DataFrame columns
     if 'transaction_type' not in df.columns:
         raise KeyError("The column 'transaction_type' is missing.")
@@ -53,13 +55,13 @@ def aggregate_issuance_transactions(df):
 
 
 @pf.register_dataframe_method
-def handle_non_issuance_transactions(df):
+def handle_non_issuance_transactions(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df_non_issuance = df[df['transaction_type'] != 'issuance']
     return df_non_issuance
 
 
-def calculate_verra_issuances(*, df):
+def calculate_verra_issuances(*, df: pd.DataFrame) -> pd.DataFrame:
     """Logic to calculate verra transactions from prepocessed transaction data
 
     Verra allows rolling/partial issuances. This requires inferring vintage issuance from `Total Vintage Quantity`
@@ -78,14 +80,14 @@ def calculate_verra_issuances(*, df):
     return df_issuance
 
 
-def calculate_verra_retirements(*, df):
+def calculate_verra_retirements(*, df: pd.DataFrame) -> pd.DataFrame:
     """retirements + cancelations, but data doesnt allow us to distinguish the two"""
     retirements = df[df['transaction_type'] != 'issuance']
     retirements = retirements.rename(columns={'Quantity Issued': 'quantity'})
     return retirements
 
 
-def preprocess_verra_transactions(*, df):
+def preprocess_verra_transactions(*, df: pd.DataFrame) -> pd.DataFrame:
     """Preprocess Verra transactions data"""
 
     df = df.copy()
@@ -112,7 +114,7 @@ def preprocess_verra_transactions(*, df):
     return df
 
 
-def preprocess_gold_standard_transactions(*, df, download_type):
+def preprocess_gold_standard_transactions(*, df: pd.DataFrame, download_type: str) -> pd.DataFrame:
     """Preprocess Gold Standard transactions data"""
     df = df.copy()
     df['project'] = df['project'].apply(lambda x: x if isinstance(x, dict) else ast.literal_eval(x))
@@ -137,7 +139,7 @@ def add_gcc_project_id(*, transactions, projects):
     return transactions
 
 
-def preprocess_gcc_transactions(*, df, download_type):
+def preprocess_gcc_transactions(*, df: pd.DataFrame, download_type: str) -> pd.DataFrame:
     """Preprocess GCC transactions data"""
     df = df.copy()
 
@@ -166,7 +168,9 @@ def preprocess_gcc_transactions(*, df, download_type):
     return df
 
 
-def preprocess_apx_transactions(*, df, download_type, registry_name):
+def preprocess_apx_transactions(
+    *, df: pd.DataFrame, download_type: str, registry_name: str
+) -> pd.DataFrame:
     transaction_type_mapping = {
         'issuances': 'issuance',
         'retirements': 'retirement',
