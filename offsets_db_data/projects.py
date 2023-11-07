@@ -3,6 +3,7 @@ import json
 from collections import defaultdict
 
 import country_converter as coco
+import janitor  # noqa: F401
 import numpy as np
 import pandas as pd
 import pandas_flavor as pf
