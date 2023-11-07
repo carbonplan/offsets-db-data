@@ -2,7 +2,6 @@ import typing
 
 import pandas as pd
 import pandera as pa
-import pydantic
 
 RegistryType = typing.Literal[
     'verra',
@@ -12,34 +11,6 @@ RegistryType = typing.Literal[
     'american-carbon-registry',
     'climate-action-reserve',
 ]
-
-
-class Urls(pydantic.BaseModel):
-    post_url: pydantic.HttpUrl | None  # for APX
-    session_url: pydantic.HttpUrl | None  # for APX
-    get_url: pydantic.HttpUrl | None  # for all other registries
-    root_url: pydantic.HttpUrl | None
-    details_url: pydantic.HttpUrl | None
-
-    @pydantic.root_validator
-    def check_exclusivity(cls, values):
-        post_url = values.get('post_url')
-        session_url = values.get('session_url')
-        get_url = values.get('get_url')
-
-        if get_url is None and (post_url is None or session_url is None):
-            raise ValueError(
-                f'post_url: {post_url} and session_url: {session_url} must be defined together'
-            )
-        return values
-
-    @pydantic.validator('get_url')
-    def check_get_url(cls, v, values):
-        if v is not None and (
-            values.get('post_url') is not None or values.get('session_url') is not None
-        ):
-            raise ValueError('get_url cannot be defined if post_url and session_url are defined')
-        return v
 
 
 project_schema = pa.DataFrameSchema(
