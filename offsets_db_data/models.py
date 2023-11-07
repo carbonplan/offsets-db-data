@@ -42,23 +42,6 @@ class Urls(pydantic.BaseModel):
         return v
 
 
-class ConfigItem(pydantic.BaseModel):
-    """Configuration item"""
-
-    name: typing.Literal['projects', 'issuances', 'retirements', 'cancellations', 'transactions']
-    urls: Urls
-    data: dict | str | None
-    headers: dict | None
-
-
-class Configuration(pydantic.BaseModel):
-    projects: ConfigItem | None
-    issuances: ConfigItem | None
-    retirements: ConfigItem | None
-    cancellations: ConfigItem | None
-    transactions: ConfigItem | None
-
-
 project_schema = pa.DataFrameSchema(
     {
         'protocol': pa.Column(pa.Object, nullable=True),  # Array of strings
