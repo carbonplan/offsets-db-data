@@ -253,7 +253,8 @@ def get_protocol_category(protocol_strs: list[str] | str, protocol_mapping: dict
 
     if isinstance(protocol_strs, str):
         protocol_strs = [protocol_strs]
-    return [_get_category(protocol_str, protocol_mapping) for protocol_str in protocol_strs]
+    categories = [_get_category(protocol_str, protocol_mapping) for protocol_str in protocol_strs]
+    return list(set(categories)) # if multiple protocols have same category, just return category once
 
 
 def harmonize_acr_status(row: pd.Series) -> str:
