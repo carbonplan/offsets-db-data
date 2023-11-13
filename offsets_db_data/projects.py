@@ -31,8 +31,8 @@ def add_first_issuance_and_retirement_dates(
     Returns
     -------
     projects_data : pd.DataFrame
-        A pandas DataFrame which is the original projects DataFrame with an additional column 'first_issuance_date' representing
-        the first issuance date of each project.
+        A pandas DataFrame which is the original projects DataFrame with two additional columns 'first_issuance_at' representing
+        the first issuance date of each project and 'first_retirement_at' representing the first retirement date of each project.
     """
 
     first_issuance = (
@@ -57,8 +57,8 @@ def add_first_issuance_and_retirement_dates(
     # Rename the merged columns for clarity
     projects_with_dates.rename(
         columns={
-            'transaction_date_x': 'first_issuance_date',
-            'transaction_date_y': 'first_retirement_date',
+            'transaction_date_x': 'first_issuance_at',
+            'transaction_date_y': 'first_retirement_at',
         },
         inplace=True,
     )
@@ -163,8 +163,8 @@ def filter_project_data(data: pd.DataFrame) -> pd.DataFrame:
         'retired': float,
         'issued': float,
         'listed_at': pd.DatetimeTZDtype(tz='UTC'),
-        'first_issuance_date': pd.DatetimeTZDtype(tz='UTC'),
-        'first_retirement_date': pd.DatetimeTZDtype(tz='UTC'),
+        'first_issuance_at': pd.DatetimeTZDtype(tz='UTC'),
+        'first_retirement_at': pd.DatetimeTZDtype(tz='UTC'),
     }
 
     for filtered_column in filtered_columns_dtypes:
