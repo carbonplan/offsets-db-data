@@ -55,12 +55,11 @@ def add_first_issuance_and_retirement_dates(
     )
 
     # Rename the merged columns for clarity
-    projects_with_dates.rename(
+    projects_with_dates = projects_with_dates.rename(
         columns={
             'transaction_date_x': 'first_issuance_at',
             'transaction_date_y': 'first_retirement_at',
-        },
-        inplace=True,
+        }
     )
 
     return projects_with_dates
