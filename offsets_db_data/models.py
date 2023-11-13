@@ -11,6 +11,7 @@ RegistryType = typing.Literal[
     'art-trees',
     'american-carbon-registry',
     'climate-action-reserve',
+    'none',
 ]
 
 
@@ -30,7 +31,9 @@ project_schema = pa.DataFrameSchema(
         'proponent': pa.Column(pa.String, nullable=True),
         'status': pa.Column(pa.String, nullable=True),
         'country': pa.Column(pa.String, nullable=True),
-        'listed_at': pa.Column(pd.DatetimeTZDtype(tz='UTC'), nullable=True, required=False),
+        'listed_at': pa.Column(pd.DatetimeTZDtype(tz='UTC'), nullable=True),
+        'first_issuance_at': pa.Column(pd.DatetimeTZDtype(tz='UTC'), nullable=True),
+        'first_retirement_at': pa.Column(pd.DatetimeTZDtype(tz='UTC'), nullable=True),
         'is_compliance': pa.Column(pa.Bool, nullable=True),
         'project_url': pa.Column(pa.String, nullable=True),
     }
