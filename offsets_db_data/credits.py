@@ -224,6 +224,10 @@ def transform_raw_registry_data(
 def filter_and_merge_credits_and_arb(
     *, credits_data: pd.DataFrame, arb_data: pd.DataFrame
 ) -> pd.DataFrame:
+    """
+    ARB issuance table contains the authorative version of all credit transactions for ARB projects.
+    This function drops all registry crediting data and, isntead, patches in data from the ARB issuance table.
+    """
     df = credits_data.copy()
     project_id_column = 'project_id'
     if intersection_values := list(
@@ -231,6 +235,6 @@ def filter_and_merge_credits_and_arb(
     ):
         df = df[~df[project_id_column].isin(intersection_values)]
         df = pd.concat(
-            [df, arb_data[arb_data[project_id_column].isin(intersection_values)]], ignore_index=True
+            [df, arb_data], ignore_index=True
         )
     return filter_credit_data(df)
