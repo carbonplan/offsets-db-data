@@ -19,6 +19,7 @@ Utilities for cleaning, and processing data for the [carbonplan/offsets-db-web](
 
 [![CI](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml)
 [![PyPI](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml)
+[![PyPI][pypi-badge]][pypi-link]
 
 ## Installation
 
@@ -53,3 +54,6 @@ All the code in this repository is [MIT](https://choosealicense.com/licenses/mit
 ## about us
 
 CarbonPlan is a non-profit organization that uses data and science for climate action. We aim to improve the transparency and scientific integrity of carbon removal and climate solutions through open data and tools. Find out more at [carbonplan.org](https://carbonplan.org/) or get in touch by [opening an issue](https://github.com/carbonplan/offsets-db/issues/new) or [sending us an email](mailto:hello@carbonplan.org).
+
+[pypi-badge]: https://img.shields.io/pypi/v/offsets-db-data?logo=pypi
+[pypi-link]: https://pypi.org/project/offsets-db-data
