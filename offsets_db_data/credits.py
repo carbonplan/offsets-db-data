@@ -227,6 +227,18 @@ def filter_and_merge_credits_and_arb(
     """
     ARB issuance table contains the authorative version of all credit transactions for ARB projects.
     This function drops all registry crediting data and, isntead, patches in data from the ARB issuance table.
+
+    Parameters
+    ----------
+    credits_data: pd.DataFrame
+        Pandas dataframe containing registry credit data
+    arb_data: pd.DataFrame
+        Pandas dataframe containing ARB issuance data
+
+    Returns
+    -------
+    pd.DataFrame
+        Pandas dataframe containing merged credit and ARB data
     """
     df = credits_data.copy()
     project_id_column = 'project_id'
@@ -234,7 +246,6 @@ def filter_and_merge_credits_and_arb(
         set(df[project_id_column]).intersection(set(arb_data[project_id_column]))
     ):
         df = df[~df[project_id_column].isin(intersection_values)]
-        df = pd.concat(
-            [df, arb_data], ignore_index=True
-        )
+
+    df = pd.concat([df, arb_data], ignore_index=True)
     return filter_credit_data(df)
