@@ -13,13 +13,13 @@
   </a>
 </p>
 
-# carbonplan / offsets-db-data
-
-Utilities for cleaning, and processing data for the [carbonplan/offsets-db-web](https://github.com/carbonplan/offsets-db-web)
-
 [![CI](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml)
 [![PyPI](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml)
 [![PyPI][pypi-badge]][pypi-link]
+
+# carbonplan / offsets-db-data
+
+Utilities for cleaning, and processing data for the [carbonplan/offsets-db-web](https://github.com/carbonplan/offsets-db-web)
 
 ## Installation
 
