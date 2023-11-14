@@ -331,17 +331,20 @@ def find_protocol(search_string: str, inverted_protocol_mapping: dict[str, list[
 
 def get_protocol_category(protocol_strs: list[str] | str, protocol_mapping: dict) -> list[str]:
     """
+    Get category based on protocol string
+
     Parameters
     ----------
     protocol_strs : str or list
-    normalized protocol strings
-    protocol_mapping  dict
-    metadata about normalized protocols
+        single protocol string or list of protocol strings
+
+    protocol_mapping: dict
+        metadata about normalized protocol strings
 
     Returns
     -------
-    list[str] :
-    list of category strings
+    categories : list[str]
+        list of category strings
     """
 
     def _get_category(protocol_str, protocol_mapping):
@@ -352,7 +355,10 @@ def get_protocol_category(protocol_strs: list[str] | str, protocol_mapping: dict
 
     if isinstance(protocol_strs, str):
         protocol_strs = [protocol_strs]
-    return [_get_category(protocol_str, protocol_mapping) for protocol_str in protocol_strs]
+    categories = [_get_category(protocol_str, protocol_mapping) for protocol_str in protocol_strs]
+    return list(
+        set(categories)
+    )  # if multiple protocols have same category, just return category once
 
 
 def harmonize_acr_status(row: pd.Series) -> str:
@@ -360,6 +366,16 @@ def harmonize_acr_status(row: pd.Series) -> str:
 
     Raw CAR and ACR data has two status columns -- one for compliance status, one for voluntary.
     Handle and harmonize.
+
+    Parameters
+    ----------
+    row : pd.Series
+        A row from a pandas DataFrame
+
+    Returns
+    -------
+    value : str
+        The status of the project
     """
     if row['Compliance Program Status (ARB or Ecology)'] == 'Not ARB or Ecology Eligible':
         return row['Voluntary Status'].lower()
