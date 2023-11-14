@@ -15,7 +15,7 @@ PROJECT_SCHEMA_UPATH = (
 )
 
 
-def add_vcs_compliance_projects(*project_data: pd.DataFrame) -> pd.DataFrame:
+def add_vcs_compliance_projects(*, projects_data: pd.DataFrame) -> pd.DataFrame:
     """
     Add details about two compliance projects to projects database.
 
@@ -25,36 +25,42 @@ def add_vcs_compliance_projects(*project_data: pd.DataFrame) -> pd.DataFrame:
         A pandas DataFrame containing project data with a 'project_id' column.
 
     Returns
-    ----------
-    projects_dcta: pd.DataFrame
+    --------
+    projects_data: pd.DataFrame
         A pandas DataFrame with two additional rows, describing two projects from the mostly unused Verra compliance
         registry portal.
     """
 
-    vcs_project_dicts = [{"project_id": "VCSOPR2",
-                           "name": "Corinth Abandoned Mine Methane Recovery Project",
-                           "protocol": "arb-mine-methane",
-                           "category": ["mine-methane"],
-                           "proponent": "Keyrock Energy LLC",
-                           "country": "United States",
-                           "status": "registered",
-                           "is_compliance": True,
-                           "registry": "verra",
-                           "project_url": "https://registry.verra.org/app/projectDetail/VCS/2265"},
-                          {"project_id": "VCSOPR10",
-                           "name": "Blue Source-Alford Improved Forest Management Project",
-                           "protocol": "arb-forest",
-                           "category": ["forest"],
-                           "proponent": "Ozark Regional Land Trust",
-                           "country": "United States",
-                           "status": "registered",
-                           "is_compliance": True,
-                           "registry": "verra",
-                           "project_url": "https://registry.verra.org/app/projectDetail/VCS/2271"}
-                          ]
+    vcs_project_dicts = [
+        {
+            'project_id': 'VCSOPR2',
+            'name': 'Corinth Abandoned Mine Methane Recovery Project',
+            'protocol': 'arb-mine-methane',
+            'category': ['mine-methane'],
+            'proponent': 'Keyrock Energy LLC',
+            'country': 'United States',
+            'status': 'registered',
+            'is_compliance': True,
+            'registry': 'verra',
+            'project_url': 'https://registry.verra.org/app/projectDetail/VCS/2265',
+        },
+        {
+            'project_id': 'VCSOPR10',
+            'name': 'Blue Source-Alford Improved Forest Management Project',
+            'protocol': 'arb-forest',
+            'category': ['forest'],
+            'proponent': 'Ozark Regional Land Trust',
+            'country': 'United States',
+            'status': 'registered',
+            'is_compliance': True,
+            'registry': 'verra',
+            'project_url': 'https://registry.verra.org/app/projectDetail/VCS/2271',
+        },
+    ]
     verra_projects = pd.DataFrame(vcs_project_dicts)
-    project_data = pd.concat([project_data, verra_projects], ignore_index=True)
+    project_data = pd.concat([projects_data, verra_projects], ignore_index=True)
     return project_data
+
 
 def add_first_issuance_and_retirement_dates(
     *, credits_data: pd.DataFrame, projects_data: pd.DataFrame
