@@ -15,6 +15,103 @@ PROJECT_SCHEMA_UPATH = (
 )
 
 
+def add_vcs_compliance_projects(*, projects_data: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add details about two compliance projects to projects database.
+
+    Parameters
+    ----------
+    projects_data : pd.DataFrame
+        A pandas DataFrame containing project data with a 'project_id' column.
+
+    Returns
+    --------
+    projects_data: pd.DataFrame
+        A pandas DataFrame with two additional rows, describing two projects from the mostly unused Verra compliance
+        registry portal.
+    """
+
+    vcs_project_dicts = [
+        {
+            'project_id': 'VCSOPR2',
+            'name': 'Corinth Abandoned Mine Methane Recovery Project',
+            'protocol': 'arb-mine-methane',
+            'category': ['mine-methane'],
+            'proponent': 'Keyrock Energy LLC',
+            'country': 'United States',
+            'status': 'registered',
+            'is_compliance': True,
+            'registry': 'verra',
+            'project_url': 'https://registry.verra.org/app/projectDetail/VCS/2265',
+        },
+        {
+            'project_id': 'VCSOPR10',
+            'name': 'Blue Source-Alford Improved Forest Management Project',
+            'protocol': 'arb-forest',
+            'category': ['forest'],
+            'proponent': 'Ozark Regional Land Trust',
+            'country': 'United States',
+            'status': 'registered',
+            'is_compliance': True,
+            'registry': 'verra',
+            'project_url': 'https://registry.verra.org/app/projectDetail/VCS/2271',
+        },
+    ]
+    verra_projects = pd.DataFrame(vcs_project_dicts)
+    project_data = pd.concat([projects_data, verra_projects], ignore_index=True)
+    return project_data
+
+
+def add_first_issuance_and_retirement_dates(
+    *, credits_data: pd.DataFrame, projects_data: pd.DataFrame
+) -> pd.DataFrame:
+    """
+    Add the first issuance date of carbon credits to each project in the projects DataFrame.
+
+    Parameters
+    ----------
+    credits_data : pd.DataFrame
+        A pandas DataFrame containing credit issuance data with columns 'project_id', 'transaction_date', and 'transaction_type'.
+    projects_data : pd.DataFrame
+        A pandas DataFrame containing project data with a 'project_id' column.
+
+    Returns
+    -------
+    projects_data : pd.DataFrame
+        A pandas DataFrame which is the original projects DataFrame with two additional columns 'first_issuance_at' representing
+        the first issuance date of each project and 'first_retirement_at' representing the first retirement date of each project.
+    """
+
+    first_issuance = (
+        credits_data[credits_data['transaction_type'] == 'issuance']
+        .groupby('project_id')['transaction_date']
+        .min()
+        .reset_index()
+    )
+    first_retirement = (
+        credits_data[credits_data['transaction_type'] != 'issuance']
+        .groupby('project_id')['transaction_date']
+        .min()
+        .reset_index()
+    )
+
+    # Merge the projects DataFrame with the first issuance and retirement dates
+    projects_with_dates = pd.merge(projects_data, first_issuance, on='project_id', how='left')
+    projects_with_dates = pd.merge(
+        projects_with_dates, first_retirement, on='project_id', how='left'
+    )
+
+    # Rename the merged columns for clarity
+    projects_with_dates = projects_with_dates.rename(
+        columns={
+            'transaction_date_x': 'first_issuance_at',
+            'transaction_date_y': 'first_retirement_at',
+        }
+    )
+
+    return projects_with_dates
+
+
 def add_retired_and_issued_totals(
     *, credits_data: pd.DataFrame, projects_data: pd.DataFrame
 ) -> pd.DataFrame:
@@ -112,6 +209,8 @@ def filter_project_data(data: pd.DataFrame) -> pd.DataFrame:
         'retired': float,
         'issued': float,
         'listed_at': pd.DatetimeTZDtype(tz='UTC'),
+        'first_issuance_at': pd.DatetimeTZDtype(tz='UTC'),
+        'first_retirement_at': pd.DatetimeTZDtype(tz='UTC'),
     }
 
     for filtered_column in filtered_columns_dtypes:

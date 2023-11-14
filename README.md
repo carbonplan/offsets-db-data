@@ -17,7 +17,7 @@
 
 Utilities for cleaning, and processing data for the [carbonplan/offsets-db-web](https://github.com/carbonplan/offsets-db-web)
 
-[![CI](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yml)
+[![CI](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml)
 [![PyPI](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml)
 
 ## Installation
