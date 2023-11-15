@@ -40,18 +40,19 @@ project_schema = pa.DataFrameSchema(
 )
 
 
-credit_schema = pa.DataFrameSchema(
+credit_without_id_schema = pa.DataFrameSchema(
     {
         'quantity': pa.Column(
             pa.Int, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
         ),
-        'id': pa.Column(pa.Int, nullable=False),
         'project_id': pa.Column(pa.String, nullable=False),
         'vintage': pa.Column(pa.Int, nullable=True, coerce=True),
         'transaction_date': pa.Column(pd.DatetimeTZDtype(tz='UTC'), nullable=True),
         'transaction_type': pa.Column(pa.String, nullable=True),
     }
 )
+
+credit_schema = credit_without_id_schema.add_columns({'id': pa.Column(pa.Int, nullable=False)})
 
 
 clip_schema = pa.DataFrameSchema(
