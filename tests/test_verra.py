@@ -3,10 +3,13 @@ import pandas as pd
 import pytest
 
 from offsets_db_data.verra import (
+    add_vcs_compliance_projects,
     calculate_verra_issuances,
     calculate_verra_retirements,
     determine_verra_transaction_type,
     generate_verra_project_ids,
+    process_verra_projects,
+    process_verra_transactions,
     set_verra_transaction_dates,
     set_verra_vintage_year,
 )
@@ -296,18 +299,6 @@ def verra_transactions() -> pd.DataFrame:
     return df
 
 
-def test_generate_verra_project_ids(verra_projects):
-    df = verra_projects
-    df = generate_verra_project_ids(df, prefix='VCS')
-    assert df['project_id'].tolist() == [
-        'VCS75',
-        'VCS2498',
-        'VCS101',
-        'VCS3408',
-        'VCS1223',
-    ]
-
-
 def test_determine_verra_transaction_type(verra_transactions):
     df = determine_verra_transaction_type(
         verra_transactions, date_column='Retirement/Cancellation Date'
@@ -416,3 +407,90 @@ def test_calculate_verra_retirements(verra_transactions):
     # Ensure the 'quantity' column is correctly renamed
     assert 'quantity' in retirements.columns
     assert 'Quantity Issued' not in retirements.columns
+
+
+def test_generate_verra_project_ids(verra_projects):
+    df = verra_projects
+    df = generate_verra_project_ids(df, prefix='VCS')
+    assert df['project_id'].tolist() == [
+        'VCS75',
+        'VCS2498',
+        'VCS101',
+        'VCS3408',
+        'VCS1223',
+    ]
+
+
+def test_add_vcs_compliance_projects(verra_projects):
+    original_length = len(verra_projects)
+    df = add_vcs_compliance_projects(verra_projects)
+
+    # Check if two new rows are added
+    assert len(df) == original_length + 2
+
+    # Optionally, check for the presence of specific project details
+    assert 'VCSOPR2' in df['project_id'].values
+    assert 'VCSOPR10' in df['project_id'].values
+
+
+def test_process_verra_projects(verra_projects, verra_transactions):
+    verra_credits = process_verra_transactions(verra_transactions)
+    df = process_verra_projects(
+        verra_projects, credits=verra_credits, registry_name='verra', download_type='projects'
+    )
+
+    assert 'listed_at' in df.columns
+    # check project_url series
+    assert df['project_url'].tolist() == [
+        'https://registry.verra.org/app/projectDetail/VCS/VCS75',
+        'https://registry.verra.org/app/projectDetail/VCS/VCS2498',
+        'https://registry.verra.org/app/projectDetail/VCS/VCS101',
+        'https://registry.verra.org/app/projectDetail/VCS/VCS3408',
+        'https://registry.verra.org/app/projectDetail/VCS/VCS1223',
+        'https://registry.verra.org/app/projectDetail/VCS/2265',  # From add_vcs_compliance_projects
+        'https://registry.verra.org/app/projectDetail/VCS/2271',  # From add_vcs_compliance_projects
+    ]
+    # check project_id series
+    assert df['project_id'].tolist() == [
+        'VCS75',
+        'VCS2498',
+        'VCS101',
+        'VCS3408',
+        'VCS1223',
+        'VCSOPR2',  # From add_vcs_compliance_projects
+        'VCSOPR10',  # From add_vcs_compliance_projects
+    ]
+
+
+def test_process_verra_projects_with_totals_and_dates(verra_projects, verra_transactions):
+    # Process the verra_transactions as per your existing pipeline
+    # Assuming process_verra_transactions or similar functions are in place
+    verra_credits = process_verra_transactions(verra_transactions)
+
+    # Process the verra_projects
+    processed_projects = process_verra_projects(
+        verra_projects, credits=verra_credits, registry_name='verra', download_type='projects'
+    )
+
+    # Assertions for retired and issued totals, and first issuance/retirement dates
+    # You need to know expected values for at least one project based on your test data
+    project_id = 'VCS2498'
+
+    # Extract the row for the specific project
+    project_data = processed_projects[processed_projects['project_id'] == project_id]
+
+    # Assert the total issued and retired quantities
+    expected_total_issued = 435078  # Calculate this based on  verra_transactions fixture
+    expected_total_retired = 19549  # Calculate this based on  verra_transactions fixture
+    assert project_data['issued'].iloc[0] == expected_total_issued
+    assert project_data['retired'].iloc[0] == expected_total_retired
+
+    # Assert the first issuance and retirement dates
+    expected_first_issuance_at = pd.Timestamp(
+        '2022-01-12 00:00:00+0000', tz='UTC'
+    )  # Determine this based on verra_transactions fixture
+    expected_first_retirement_at = pd.Timestamp(
+        '2022-01-12 00:00:00+0000', tz='UTC'
+    )  # Determine this based on verra_transactions fixture
+    assert project_data['first_issuance_at'].iloc[0] == expected_first_issuance_at
+    assert project_data['first_retirement_at'].iloc[0] == expected_first_retirement_at
