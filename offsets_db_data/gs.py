@@ -35,7 +35,11 @@ def add_gs_project_id_from_credits(df: pd.DataFrame) -> pd.DataFrame:
 
 @pf.register_dataframe_method
 def process_gs_credits(
-    df: pd.DataFrame, *, download_type: str, registry_name: str = 'gold-standard'
+    df: pd.DataFrame,
+    *,
+    download_type: str,
+    registry_name: str = 'gold-standard',
+    arb: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     df = df.copy()
     column_mapping = load_column_mapping(
@@ -56,6 +60,9 @@ def process_gs_credits(
     data = data.convert_to_datetime(columns=['transaction_date']).validate(
         schema=credit_without_id_schema
     )
+
+    if arb is not None and not arb.empty:
+        data = data.merge_with_arb(arb=arb)
 
     return data
 

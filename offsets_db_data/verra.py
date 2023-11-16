@@ -14,10 +14,6 @@ from offsets_db_data.credits import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.projects import *  # noqa: F403
 
-##############################################################################
-################################## Credits Data ##############################
-##############################################################################
-
 
 @pf.register_dataframe_method
 def generate_verra_project_ids(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
@@ -81,6 +77,7 @@ def process_verra_transactions(
     download_type: str = 'transactions',
     registry_name: str = 'verra',
     prefix: str = 'VCS',
+    arb: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     df = df.copy()
     data = (
@@ -108,18 +105,16 @@ def process_verra_transactions(
 
     issuances = merged_df.aggregate_issuance_transactions()
     retirements = merged_df[merged_df['transaction_type'] != 'issuance']
-    results = (
+    data = (
         pd.concat([issuances, retirements])
         .reset_index(drop=True)
         .validate(schema=credit_without_id_schema)
     )
 
-    return results
+    if arb is not None and not arb.empty:
+        data = data.merge_with_arb(arb=arb)
 
-
-##############################################################################
-################################## Projects Data ##############################
-##############################################################################
+    return data
 
 
 @pf.register_dataframe_method

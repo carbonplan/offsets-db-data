@@ -63,6 +63,7 @@ def process_gcc_credits(
     raw_projects: pd.DataFrame,
     download_type: str,
     registry_name: str = 'global-carbon-council',
+    arb: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     df = df.copy()
     data = df.set_gcc_vintage_year()
@@ -92,6 +93,9 @@ def process_gcc_credits(
         .convert_to_datetime(columns=['transaction_date'])
         .validate(schema=credit_without_id_schema)
     )
+
+    if arb is not None and not arb.empty:
+        data = data.merge_with_arb(arb=arb)
     return data
 
 

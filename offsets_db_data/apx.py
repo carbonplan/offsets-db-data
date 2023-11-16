@@ -28,10 +28,7 @@ def determine_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.Da
 
 @pf.register_dataframe_method
 def process_apx_credits(
-    df: pd.DataFrame,
-    *,
-    download_type: str,
-    registry_name: str,
+    df: pd.DataFrame, *, download_type: str, registry_name: str, arb: pd.DataFrame | None = None
 ) -> pd.DataFrame:
     df = df.copy()
 
@@ -52,6 +49,8 @@ def process_apx_credits(
         data = data.aggregate_issuance_transactions()
 
     data = data.validate(schema=credit_without_id_schema)
+    if arb is not None and not arb.empty:
+        data = data.merge_with_arb(arb=arb)
     return data
 
 
