@@ -154,41 +154,6 @@ def get_protocol_category(*, protocol_strs: list[str] | str, protocol_mapping: d
     )  # if multiple protocols have same category, just return category once
 
 
-def harmonize_acr_status(row: pd.Series) -> str:
-    """Derive single project status for CAR and ACR projects
-
-    Raw CAR and ACR data has two status columns -- one for compliance status, one for voluntary.
-    Handle and harmonize.
-
-    Parameters
-    ----------
-    row : pd.Series
-        A row from a pandas DataFrame
-
-    Returns
-    -------
-    value : str
-        The status of the project
-    """
-    if row['Compliance Program Status (ARB or Ecology)'] == 'Not ARB or Ecology Eligible':
-        return row['Voluntary Status'].lower()
-    ACR_COMPLIANCE_STATE_MAP = {
-        'Listed - Active ARB Project': 'active',
-        'ARB Completed': 'completed',
-        'ARB Inactive': 'completed',
-        'Listed - Proposed Project': 'listed',
-        'Listed - Active Registry Project': 'listed',
-        'ARB Terminated': 'completed',
-        'Submitted': 'listed',
-        'Transferred ARB or Ecology Project': 'active',
-        'Listed – Active ARB Project': 'active',
-    }
-
-    return ACR_COMPLIANCE_STATE_MAP.get(
-        row['Compliance Program Status (ARB or Ecology)'], 'unknown'
-    )
-
-
 @pf.register_dataframe_method
 def add_first_issuance_and_retirement_dates(
     projects: pd.DataFrame, *, credits: pd.DataFrame
