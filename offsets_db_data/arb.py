@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 import pandas_flavor as pf
 
+from offsets_db_data.common import convert_to_datetime  # noqa: F401
+from offsets_db_data.models import credit_without_id_schema
+
 
 def _get_registry(item):
     registry_map = {
@@ -16,7 +19,7 @@ def _get_registry(item):
 
 
 @pf.register_dataframe_method
-def process_arb_data(df: pd.DataFrame) -> pd.DataFrame:
+def process_arb(df: pd.DataFrame) -> pd.DataFrame:
     """
 
     Parameters
@@ -30,6 +33,8 @@ def process_arb_data(df: pd.DataFrame) -> pd.DataFrame:
         Arb data with processed columns
 
     """
+
+    df = df.copy()
 
     rename_d = {
         'OPR Project ID': 'opr_id',
@@ -111,5 +116,9 @@ def process_arb_data(df: pd.DataFrame) -> pd.DataFrame:
     )
     data['registry'] = data.project_id.apply(_get_registry)
     data['vintage'] = data['vintage'].astype(int)
+
+    data = data.convert_to_datetime(columns=['transaction_date']).validate(
+        schema=credit_without_id_schema
+    )
 
     return data

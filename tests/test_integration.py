@@ -2,6 +2,7 @@ import pandas as pd
 import pytest
 
 from offsets_db_data.apx import *  # noqa: F403
+from offsets_db_data.arb import *  # noqa: F403
 from offsets_db_data.gcc import *  # noqa: F403
 from offsets_db_data.gs import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
@@ -18,10 +19,18 @@ def bucket() -> str:
     return 's3://carbonplan-offsets-db/raw'
 
 
-def test_verra(date, bucket):
+@pytest.fixture
+def arb() -> pd.DataFrame:
+    data = pd.read_excel(
+        's3://carbonplan-offsets-db/raw/2023-11-10/arb/nc-arboc_issuance.xlsx', sheet_name=3
+    )
+    return data.process_arb()
+
+
+def test_verra(date, bucket, arb):
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
-    df_credits = credits.process_verra_transactions()
+    df_credits = credits.process_verra_credits(arb=arb)
     df_projects = projects.process_verra_projects(credits=df_credits)
     project_schema.validate(df_projects)
     credit_without_id_schema.validate(df_credits)
@@ -35,14 +44,14 @@ def test_verra(date, bucket):
         ('climate-action-reserve', ['issuances', 'retirements', 'cancellations']),
     ],
 )
-def test_apx(date, bucket, registry, download_types):
+def test_apx(date, bucket, arb, registry, download_types):
     dfs = []
     for key in download_types:
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
         p = credits.process_apx_credits(download_type=key, registry_name=registry)
         dfs.append(p)
 
-    df_credits = pd.concat(dfs)
+    df_credits = pd.concat(dfs).merge_with_arb(arb=arb)
     credit_without_id_schema.validate(df_credits)
 
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')

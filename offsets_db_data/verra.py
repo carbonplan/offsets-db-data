@@ -71,7 +71,7 @@ def calculate_verra_retirements(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def process_verra_transactions(
+def process_verra_credits(
     df: pd.DataFrame,
     *,
     download_type: str = 'transactions',
