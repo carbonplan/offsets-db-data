@@ -1,226 +1,14 @@
 import contextlib
-import json
-from collections import defaultdict
 
 import country_converter as coco
 import janitor  # noqa: F401
 import numpy as np
 import pandas as pd
 import pandas_flavor as pf
-import upath
-
-PROTOCOL_MAPPING_UPATH = upath.UPath(__file__).parents[0] / 'configs' / 'all-protocol-mapping.json'
-PROJECT_SCHEMA_UPATH = (
-    upath.UPath(__file__).parents[0] / 'configs' / 'projects-raw-columns-mapping.json'
-)
-
-
-def add_vcs_compliance_projects(*, projects_data: pd.DataFrame) -> pd.DataFrame:
-    """
-    Add details about two compliance projects to projects database.
-
-    Parameters
-    ----------
-    projects_data : pd.DataFrame
-        A pandas DataFrame containing project data with a 'project_id' column.
-
-    Returns
-    --------
-    projects_data: pd.DataFrame
-        A pandas DataFrame with two additional rows, describing two projects from the mostly unused Verra compliance
-        registry portal.
-    """
-
-    vcs_project_dicts = [
-        {
-            'project_id': 'VCSOPR2',
-            'name': 'Corinth Abandoned Mine Methane Recovery Project',
-            'protocol': 'arb-mine-methane',
-            'category': ['mine-methane'],
-            'proponent': 'Keyrock Energy LLC',
-            'country': 'United States',
-            'status': 'registered',
-            'is_compliance': True,
-            'registry': 'verra',
-            'project_url': 'https://registry.verra.org/app/projectDetail/VCS/2265',
-        },
-        {
-            'project_id': 'VCSOPR10',
-            'name': 'Blue Source-Alford Improved Forest Management Project',
-            'protocol': 'arb-forest',
-            'category': ['forest'],
-            'proponent': 'Ozark Regional Land Trust',
-            'country': 'United States',
-            'status': 'registered',
-            'is_compliance': True,
-            'registry': 'verra',
-            'project_url': 'https://registry.verra.org/app/projectDetail/VCS/2271',
-        },
-    ]
-    verra_projects = pd.DataFrame(vcs_project_dicts)
-    project_data = pd.concat([projects_data, verra_projects], ignore_index=True)
-    return project_data
-
-
-def add_first_issuance_and_retirement_dates(
-    *, credits_data: pd.DataFrame, projects_data: pd.DataFrame
-) -> pd.DataFrame:
-    """
-    Add the first issuance date of carbon credits to each project in the projects DataFrame.
-
-    Parameters
-    ----------
-    credits_data : pd.DataFrame
-        A pandas DataFrame containing credit issuance data with columns 'project_id', 'transaction_date', and 'transaction_type'.
-    projects_data : pd.DataFrame
-        A pandas DataFrame containing project data with a 'project_id' column.
-
-    Returns
-    -------
-    projects_data : pd.DataFrame
-        A pandas DataFrame which is the original projects DataFrame with two additional columns 'first_issuance_at' representing
-        the first issuance date of each project and 'first_retirement_at' representing the first retirement date of each project.
-    """
-
-    first_issuance = (
-        credits_data[credits_data['transaction_type'] == 'issuance']
-        .groupby('project_id')['transaction_date']
-        .min()
-        .reset_index()
-    )
-    first_retirement = (
-        credits_data[credits_data['transaction_type'] != 'issuance']
-        .groupby('project_id')['transaction_date']
-        .min()
-        .reset_index()
-    )
-
-    # Merge the projects DataFrame with the first issuance and retirement dates
-    projects_with_dates = pd.merge(projects_data, first_issuance, on='project_id', how='left')
-    projects_with_dates = pd.merge(
-        projects_with_dates, first_retirement, on='project_id', how='left'
-    )
-
-    # Rename the merged columns for clarity
-    projects_with_dates = projects_with_dates.rename(
-        columns={
-            'transaction_date_x': 'first_issuance_at',
-            'transaction_date_y': 'first_retirement_at',
-        }
-    )
-
-    return projects_with_dates
-
-
-def add_retired_and_issued_totals(
-    *, credits_data: pd.DataFrame, projects_data: pd.DataFrame
-) -> pd.DataFrame:
-    credits_data = credits_data.copy()
-    projects_data = projects_data.copy()
-
-    # Drop conflicting columns if they exist
-    projects_data = projects_data.drop(columns=['issued', 'retired'], errors='ignore')
-
-    credits_data['transaction_type_mapped'] = credits_data['transaction_type'].apply(
-        lambda x: 'retirement' if x == 'retirement/cancellation' else x
-    )
-    # # filter out the projects that are not in the credits data
-    # credits_data = credits_data[credits_data['project_id'].isin(projects_data['project_id'].unique())]
-    # groupd and sum
-    credit_totals = (
-        credits_data.groupby(['project_id', 'transaction_type_mapped'])['quantity']
-        .sum()
-        .reset_index()
-    )
-    # pivot the table
-    credit_totals_pivot = credit_totals.pivot(
-        index='project_id', columns='transaction_type_mapped', values='quantity'
-    ).reset_index()
-
-    # merge with projects
-    projects_combined = pd.merge(
-        projects_data,
-        credit_totals_pivot[['project_id', 'issuance', 'retirement']],
-        left_on='project_id',
-        right_on='project_id',
-        how='left',
-    )
-
-    # rename columns for clarity
-    projects_combined = projects_combined.rename(
-        columns={'issuance': 'issued', 'retirement': 'retired'}
-    )
-
-    # replace Nans with 0 if any
-    projects_combined[['issued', 'retired']] = projects_combined[['issued', 'retired']].fillna(0)
-
-    return projects_combined
-
-
-def transform_raw_registry_data(raw_data: pd.DataFrame, registry_name: str) -> pd.DataFrame:
-    """Transform raw downloaded data to conform to `projects` data model"""
-
-    # load a bunch of static files that map things like raw protocol strings and column names to a common data model
-    registry_project_column_mapping = load_registry_project_column_mapping(
-        registry_name=registry_name
-    )
-    inverted_column_mapping = {v: k for k, v in registry_project_column_mapping.items()}
-
-    # map raw column strings to cross-registry consistent schema
-    raw_data = raw_data.rename(columns=inverted_column_mapping)
-
-    protocol_mapping = load_protocol_mapping()
-    inverted_protocol_mapping = load_inverted_protocol_mapping()
-
-    transformed_project_data = (
-        raw_data.harmonize_country_names()
-        .harmonize_status_codes()
-        .map_protocol(
-            inverted_protocol_mapping=inverted_protocol_mapping,
-        )
-        .add_category(protocol_mapping=protocol_mapping)
-        .add_is_compliance_flag()
-    )
-
-    transformed_project_data['registry'] = registry_name
-
-    for column in ['listed_at']:
-        if column in transformed_project_data.columns:
-            transformed_project_data = transformed_project_data.to_datetime(
-                column, format='mixed', utc=True
-            )
-
-    return transformed_project_data
-
-
-def filter_project_data(data: pd.DataFrame) -> pd.DataFrame:
-    # TODO this needs to run through pydantic
-    filtered_columns_dtypes = {
-        'project_id': str,
-        'name': str,
-        'protocol': 'object',
-        'category': 'object',
-        'proponent': str,
-        'country': str,
-        'status': str,
-        'is_compliance': bool,
-        'registry': str,
-        'project_url': str,
-        'retired': float,
-        'issued': float,
-        'listed_at': pd.DatetimeTZDtype(tz='UTC'),
-        'first_issuance_at': pd.DatetimeTZDtype(tz='UTC'),
-        'first_retirement_at': pd.DatetimeTZDtype(tz='UTC'),
-    }
-
-    for filtered_column in filtered_columns_dtypes:
-        if filtered_column not in data:
-            data.loc[:, filtered_column] = None
-    return data[list(filtered_columns_dtypes.keys())].astype(filtered_columns_dtypes)
 
 
 @pf.register_dataframe_method
-def harmonize_country_names(df: pd.DataFrame, country_column: str = 'country') -> pd.DataFrame:
+def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country') -> pd.DataFrame:
     print('Harmonizing country names...')
     cc = coco.CountryConverter()
     df[country_column] = cc.pandas_convert(df[country_column], to='name')
@@ -229,11 +17,11 @@ def harmonize_country_names(df: pd.DataFrame, country_column: str = 'country') -
 
 
 @pf.register_dataframe_method
-def add_category(df, protocol_mapping) -> pd.DataFrame:
+def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
     """Add category based on protocol"""
     print('Adding category based on protocol...')
     df['category'] = df['protocol'].apply(
-        lambda item: get_protocol_category(item, protocol_mapping)
+        lambda item: get_protocol_category(protocol_strs=item, protocol_mapping=protocol_mapping)
     )
     return df
 
@@ -252,6 +40,7 @@ def add_is_compliance_flag(df: pd.DataFrame) -> pd.DataFrame:
 @pf.register_dataframe_method
 def map_protocol(
     df: pd.DataFrame,
+    *,
     inverted_protocol_mapping: dict,
     original_protocol_column: str = 'original_protocol',
 ) -> pd.DataFrame:
@@ -259,7 +48,9 @@ def map_protocol(
     print('Mapping protocol based on known string...')
     try:
         df['protocol'] = df[original_protocol_column].apply(
-            lambda item: find_protocol(item, inverted_protocol_mapping)
+            lambda item: find_protocol(
+                search_string=item, inverted_protocol_mapping=inverted_protocol_mapping
+            )
         )
     except KeyError:
         # art-trees doesnt have protocol column
@@ -269,7 +60,7 @@ def map_protocol(
 
 
 @pf.register_dataframe_method
-def harmonize_status_codes(df: pd.DataFrame, status_column: str = 'status') -> pd.DataFrame:
+def harmonize_status_codes(df: pd.DataFrame, *, status_column: str = 'status') -> pd.DataFrame:
     """Harmonize project status codes across registries
 
     Excludes ACR, as it requires special treatment across two columns
@@ -316,7 +107,9 @@ def harmonize_status_codes(df: pd.DataFrame, status_column: str = 'status') -> p
     return df
 
 
-def find_protocol(search_string: str, inverted_protocol_mapping: dict[str, list[str]]) -> list[str]:
+def find_protocol(
+    *, search_string: str, inverted_protocol_mapping: dict[str, list[str]]
+) -> list[str]:
     """Match known strings of project methodologies to internal topology
 
     Unmatched strings are passed through to the database, until such time that we update mapping data.
@@ -329,7 +122,7 @@ def find_protocol(search_string: str, inverted_protocol_mapping: dict[str, list[
     return [search_string]
 
 
-def get_protocol_category(protocol_strs: list[str] | str, protocol_mapping: dict) -> list[str]:
+def get_protocol_category(*, protocol_strs: list[str] | str, protocol_mapping: dict) -> list[str]:
     """
     Get category based on protocol string
 
@@ -361,66 +154,91 @@ def get_protocol_category(protocol_strs: list[str] | str, protocol_mapping: dict
     )  # if multiple protocols have same category, just return category once
 
 
-def harmonize_acr_status(row: pd.Series) -> str:
-    """Derive single project status for CAR and ACR projects
-
-    Raw CAR and ACR data has two status columns -- one for compliance status, one for voluntary.
-    Handle and harmonize.
+@pf.register_dataframe_method
+def add_first_issuance_and_retirement_dates(
+    projects: pd.DataFrame, *, credits: pd.DataFrame
+) -> pd.DataFrame:
+    """
+    Add the first issuance date of carbon credits to each project in the projects DataFrame.
 
     Parameters
     ----------
-    row : pd.Series
-        A row from a pandas DataFrame
+    credits : pd.DataFrame
+        A pandas DataFrame containing credit issuance data with columns 'project_id', 'transaction_date', and 'transaction_type'.
+    projects : pd.DataFrame
+        A pandas DataFrame containing project data with a 'project_id' column.
 
     Returns
     -------
-    value : str
-        The status of the project
+    projects : pd.DataFrame
+        A pandas DataFrame which is the original projects DataFrame with two additional columns 'first_issuance_at' representing
+        the first issuance date of each project and 'first_retirement_at' representing the first retirement date of each project.
     """
-    if row['Compliance Program Status (ARB or Ecology)'] == 'Not ARB or Ecology Eligible':
-        return row['Voluntary Status'].lower()
-    ACR_COMPLIANCE_STATE_MAP = {
-        'Listed - Active ARB Project': 'active',
-        'ARB Completed': 'completed',
-        'ARB Inactive': 'completed',
-        'Listed - Proposed Project': 'listed',
-        'Listed - Active Registry Project': 'listed',
-        'ARB Terminated': 'completed',
-        'Submitted': 'listed',
-        'Transferred ARB or Ecology Project': 'active',
-        'Listed – Active ARB Project': 'active',
-    }
 
-    return ACR_COMPLIANCE_STATE_MAP.get(
-        row['Compliance Program Status (ARB or Ecology)'], 'unknown'
+    first_issuance = (
+        credits[credits['transaction_type'] == 'issuance']
+        .groupby('project_id')['transaction_date']
+        .min()
+        .reset_index()
+    )
+    first_retirement = (
+        credits[credits['transaction_type'] != 'issuance']
+        .groupby('project_id')['transaction_date']
+        .min()
+        .reset_index()
     )
 
+    # Merge the projects DataFrame with the first issuance and retirement dates
+    projects_with_dates = pd.merge(projects, first_issuance, on='project_id', how='left')
+    projects_with_dates = pd.merge(
+        projects_with_dates, first_retirement, on='project_id', how='left'
+    )
 
-def load_registry_project_column_mapping(
-    *, registry_name: str, file_path: upath.UPath = PROJECT_SCHEMA_UPATH
-) -> dict:
-    with open(file_path) as file:
-        data = json.load(file)
+    # Rename the merged columns for clarity
+    projects_with_dates = projects_with_dates.rename(
+        columns={
+            'transaction_date_x': 'first_issuance_at',
+            'transaction_date_y': 'first_retirement_at',
+        }
+    )
 
-    mapping = {}
-    for key1, value_dict in data.items():
-        for key2, value in value_dict.items():
-            if key2 not in mapping:
-                mapping[key2] = {}
-            if value:
-                mapping[key2][key1] = value
-    return mapping[registry_name]
-
-
-def load_protocol_mapping(path: upath.UPath = PROTOCOL_MAPPING_UPATH) -> dict:
-    return json.loads(path.read_text())
+    return projects_with_dates
 
 
-def load_inverted_protocol_mapping() -> dict:
-    protocol_mapping = load_protocol_mapping()
-    store = defaultdict(list)
-    for protocol_str, metadata in protocol_mapping.items():
-        for known_string in metadata.get('known-strings', []):
-            store[known_string].append(protocol_str)
+@pf.register_dataframe_method
+def add_retired_and_issued_totals(projects: pd.DataFrame, *, credits: pd.DataFrame) -> pd.DataFrame:
+    # Drop conflicting columns if they exist
+    projects = projects.drop(columns=['issued', 'retired'], errors='ignore')
 
-    return store
+    credits['transaction_type_mapped'] = credits['transaction_type'].apply(
+        lambda x: 'retirement' if x == 'retirement/cancellation' else x
+    )
+    # # filter out the projects that are not in the credits data
+    # credits = credits[credits['project_id'].isin(projects['project_id'].unique())]
+    # groupd and sum
+    credit_totals = (
+        credits.groupby(['project_id', 'transaction_type_mapped'])['quantity'].sum().reset_index()
+    )
+    # pivot the table
+    credit_totals_pivot = credit_totals.pivot(
+        index='project_id', columns='transaction_type_mapped', values='quantity'
+    ).reset_index()
+
+    # merge with projects
+    projects_combined = pd.merge(
+        projects,
+        credit_totals_pivot[['project_id', 'issuance', 'retirement']],
+        left_on='project_id',
+        right_on='project_id',
+        how='left',
+    )
+
+    # rename columns for clarity
+    projects_combined = projects_combined.rename(
+        columns={'issuance': 'issued', 'retirement': 'retired'}
+    )
+
+    # replace Nans with 0 if any
+    projects_combined[['issued', 'retired']] = projects_combined[['issued', 'retired']].fillna(0)
+
+    return projects_combined

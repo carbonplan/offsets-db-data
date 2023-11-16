@@ -1,6 +1,7 @@
 import janitor  # noqa: F401
 import numpy as np
 import pandas as pd
+import pandas_flavor as pf
 
 
 def _get_registry(item):
@@ -14,6 +15,7 @@ def _get_registry(item):
     return registry_map.get(prefix)
 
 
+@pf.register_dataframe_method
 def process_arb_data(df: pd.DataFrame) -> pd.DataFrame:
     """
 
