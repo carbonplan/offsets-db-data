@@ -21,7 +21,7 @@ def bucket() -> str:
 def test_verra(date, bucket):
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
-    df_credits = credits.process_verra_transactions()
+    df_credits = credits.process_verra_credits()
     df_projects = projects.process_verra_projects(credits=df_credits)
     project_schema.validate(df_projects)
     credit_without_id_schema.validate(df_credits)

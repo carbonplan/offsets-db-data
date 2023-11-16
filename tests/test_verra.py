@@ -8,8 +8,8 @@ from offsets_db_data.verra import (
     calculate_verra_retirements,
     determine_verra_transaction_type,
     generate_verra_project_ids,
+    process_verra_credits,
     process_verra_projects,
-    process_verra_transactions,
     set_verra_transaction_dates,
     set_verra_vintage_year,
 )
@@ -356,7 +356,7 @@ def test_set_verra_vintage_year(verra_transactions):
 
 
 def test_calculate_verra_issuances(verra_transactions):
-    # Process the verra_transactions similar to process_verra_transactions
+    # Process the verra_transactions similar to process_verra_credits
     processed_data = (
         verra_transactions.set_registry(registry_name='verra')
         .generate_verra_project_ids(prefix='VCS')
@@ -384,7 +384,7 @@ def test_calculate_verra_issuances(verra_transactions):
 
 
 def test_calculate_verra_retirements(verra_transactions):
-    # Process the verra_transactions similar to process_verra_transactions
+    # Process the verra_transactions similar to process_verra_credits
     processed_data = (
         verra_transactions.set_registry(registry_name='verra')
         .generate_verra_project_ids(prefix='VCS')
@@ -434,7 +434,7 @@ def test_add_vcs_compliance_projects(verra_projects):
 
 
 def test_process_verra_projects(verra_projects, verra_transactions):
-    verra_credits = process_verra_transactions(verra_transactions)
+    verra_credits = process_verra_credits(verra_transactions)
     df = process_verra_projects(
         verra_projects, credits=verra_credits, registry_name='verra', download_type='projects'
     )
@@ -464,8 +464,8 @@ def test_process_verra_projects(verra_projects, verra_transactions):
 
 def test_process_verra_projects_with_totals_and_dates(verra_projects, verra_transactions):
     # Process the verra_transactions as per your existing pipeline
-    # Assuming process_verra_transactions or similar functions are in place
-    verra_credits = process_verra_transactions(verra_transactions)
+    # Assuming process_verra_credits or similar functions are in place
+    verra_credits = process_verra_credits(verra_transactions)
 
     # Process the verra_projects
     processed_projects = process_verra_projects(
