@@ -186,6 +186,8 @@ def process_verra_projects(
     registry_name: str = 'verra',
     download_type: str = 'projects',
 ) -> pd.DataFrame:
+    df = df.copy()
+    credits = credits.copy()
     registry_project_column_mapping = load_registry_project_column_mapping(
         registry_name=registry_name, file_path=PROJECT_SCHEMA_UPATH
     )

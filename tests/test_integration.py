@@ -2,7 +2,7 @@ import pandas as pd
 import pytest
 
 from offsets_db_data.apx import *  # noqa: F403
-from offsets_db_data.arb import *  # noqa: F403
+from offsets_db_data.arb import *  # noqa: F403  # noqa: F403
 from offsets_db_data.gcc import *  # noqa: F403
 from offsets_db_data.gs import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
@@ -31,6 +31,7 @@ def test_verra(date, bucket, arb):
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
     df_credits = credits.process_verra_credits(arb=arb)
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
     df_projects = projects.process_verra_projects(credits=df_credits)
     project_schema.validate(df_projects)
     credit_without_id_schema.validate(df_credits)
@@ -54,6 +55,8 @@ def test_apx(date, bucket, arb, registry, download_types):
     df_credits = pd.concat(dfs).merge_with_arb(arb=arb)
     credit_without_id_schema.validate(df_credits)
 
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
     df_projects = projects.process_apx_projects(credits=df_credits, registry_name=registry)
     project_schema.validate(df_projects)
@@ -74,6 +77,8 @@ def test_gs(
 
     df_credits = pd.concat(dfs)
     credit_without_id_schema.validate(df_credits)
+
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
 
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
     df_projects = projects.process_gs_projects(credits=df_credits)
@@ -97,6 +102,8 @@ def test_gcc(
 
     df_credits = pd.concat(dfs)
     credit_without_id_schema.validate(df_credits)
+
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
 
     df_projects = projects.process_gcc_projects(credits=df_credits)
     project_schema.validate(df_projects)
