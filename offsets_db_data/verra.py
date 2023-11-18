@@ -104,7 +104,7 @@ def process_verra_credits(
     merged_df = pd.concat([issuances, retirements]).reset_index(drop=True).rename(columns=columns)
 
     issuances = merged_df.aggregate_issuance_transactions()
-    retirements = merged_df[merged_df['transaction_type'] != 'issuance']
+    retirements = merged_df[merged_df['transaction_type'].str.contains('retirement')]
     data = (
         pd.concat([issuances, retirements])
         .reset_index(drop=True)

@@ -182,7 +182,7 @@ def add_first_issuance_and_retirement_dates(
         .reset_index()
     )
     first_retirement = (
-        credits[credits['transaction_type'] != 'issuance']
+        credits[credits['transaction_type'].str.contains('retirement')]
         .groupby('project_id')['transaction_date']
         .min()
         .reset_index()
