@@ -18,23 +18,23 @@ from offsets_db_data.projects import *  # noqa: F403
 
 
 @pf.register_dataframe_method
-def determine_gs_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.DataFrame:
+def determine_gld_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.DataFrame:
     transaction_type_mapping = {'issuances': 'issuance', 'retirements': 'retirement'}
     df['transaction_type'] = transaction_type_mapping[download_type]
     return df
 
 
 @pf.register_dataframe_method
-def add_gs_project_id_from_credits(df: pd.DataFrame) -> pd.DataFrame:
+def add_gld_project_id_from_credits(df: pd.DataFrame) -> pd.DataFrame:
     df['project'] = df['project'].apply(lambda x: x if isinstance(x, dict) else ast.literal_eval(x))
-    df['project_id'] = 'GS' + df['project'].apply(lambda x: x.get('sustaincert_id', np.nan)).astype(
-        str
-    )
+    df['project_id'] = 'GLD' + df['project'].apply(
+        lambda x: x.get('sustaincert_id', np.nan)
+    ).astype(str)
     return df
 
 
 @pf.register_dataframe_method
-def process_gs_credits(
+def process_gld_credits(
     df: pd.DataFrame,
     *,
     download_type: str,
@@ -50,8 +50,8 @@ def process_gs_credits(
     data = (
         df.rename(columns=columns)
         .set_registry(registry_name=registry_name)
-        .determine_gs_transaction_type(download_type=download_type)
-        .add_gs_project_id_from_credits()
+        .determine_gld_transaction_type(download_type=download_type)
+        .add_gld_project_id_from_credits()
     )
 
     if download_type == 'issuances':
@@ -68,7 +68,7 @@ def process_gs_credits(
 
 
 @pf.register_dataframe_method
-def add_gs_project_url(df: pd.DataFrame) -> pd.DataFrame:
+def add_gld_project_url(df: pd.DataFrame) -> pd.DataFrame:
     df['project_url'] = 'https://registry.goldstandard.org/projects/details/' + df[
         'project_id'
     ].apply(str)
@@ -76,13 +76,13 @@ def add_gs_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def add_gs_project_id(df: pd.DataFrame) -> pd.DataFrame:
+def add_gld_project_id(df: pd.DataFrame) -> pd.DataFrame:
     df['project_id'] = df['project_id'].apply(lambda x: f'GS{str(x)}')
     return df
 
 
 @pf.register_dataframe_method
-def process_gs_projects(
+def process_gld_projects(
     df: pd.DataFrame, *, credits: pd.DataFrame, registry_name: str = 'gold-standard'
 ) -> pd.DataFrame:
     df = df.copy()
@@ -97,8 +97,8 @@ def process_gs_projects(
     data = (
         df.rename(columns=inverted_column_mapping)
         .set_registry(registry_name=registry_name)
-        .add_gs_project_id()
-        .add_gs_project_url()
+        .add_gld_project_id()
+        .add_gld_project_url()
         .harmonize_country_names()
         .harmonize_status_codes()
         .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
