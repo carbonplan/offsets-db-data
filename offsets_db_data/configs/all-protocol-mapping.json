@@ -353,6 +353,13 @@
     "program": "acr",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/restoration-of-california-deltaic-and-coastal-wetlands"
   },
+  "acr-canada-forest": {
+    "category": "forest",
+    "sub-category": "ifm",
+    "known-strings": ["Improved Forest Management (IFM) on Canadian Forestlands"],
+    "program": "acr",
+    "url": "https://acrcarbon.org/methodology/improved-forest-management-ifm-on-canadian-forestlands/"
+  },
   "acr-ccs": {
     "category": "ghg-management",
     "sub-category": "ccs",
@@ -366,13 +373,11 @@
     "program": "acr"
   },
   "acr-compost-graze": {
-    "category": "agriculture",
-    "sub-category": "livestock",
     "known-strings": [
       "Emission Reductions from Compost Additions to Grazed Grasslands"
     ],
     "program": "acr",
-    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/INACTIVE-Compost%20Additions%20to%20Grazed%20Grasslands"
+    "url": "https://acrcarbon.org/methodology/inactive-compost-additions-to-grazed-grasslands/"
   },
   "acr-foam": {
     "category": "ghg-management",
@@ -658,6 +663,7 @@
     "category": "renewable-energy",
     "known-strings": [
       "AM0072",
+      "AM0072 Fossil Fuel Displacement by Geothermal Resources for Space Heating",
       "CDM Methodology AM0072: Fossil Fuel Displacement by Geothermal Resources for Space Heating (Version 03.0)"
     ],
     "program": "cdm"
@@ -668,6 +674,7 @@
     "known-strings": [
       "AM0073; AMS-III.AQ",
       "AM0073",
+      "AM0073 GHG emission reductions through multi-site manure collection and treatment in a central plant",
       "AM0073: GHG emission reductions through multi-site manure collection and treatment in a central plant - Version 1.0",
       "AM0073 “GHG emission reductions through multi-site manure collection and treatment in a central plant” -- V1.0"
     ],
@@ -925,6 +932,11 @@
     "known-strings": ["AMS.I.J1; AMS-I.L.", "AMS.I.J1"],
     "program": "cdm"
   },
+  "ams-i-k": {
+    "category": "cookstove",
+    "known-strings": ["AMS-I.K. Solar cookers for households"],
+    "program": "cdm"
+  },
   "ams-i-l": {
     "category": "renewable-energy",
     "known-strings": [
@@ -968,7 +980,7 @@
     "program": "cdm"
   },
   "ams-ii-g": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "AMS-II.G. Energy Efficiency Measures in Thermal Applications of Non-Renewable Biomass",
       "AMS-II.G.; VMR0006",
@@ -1026,6 +1038,7 @@
   "ams-iii-ao": {
     "category": "ghg-management",
     "known-strings": [
+      "AMS-III.AO.; AMS-III.AQ",
       "AMS-III.AO. Methane recovery through controlled anaerobic digestion",
       "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
       "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
@@ -1040,6 +1053,7 @@
   "ams-iii-aq": {
     "category": "transportation",
     "known-strings": [
+      "AMS-III.AO.; AMS-III.AQ",
       "AM0073; AMS-III.AQ",
       "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
       "GCCM003, AMS-III.AQ",
@@ -1418,6 +1432,7 @@
     "category": "forest",
     "sub-category": "reforest",
     "known-strings": [
+      "AR-AMS0007; VM0006",
       "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
       "AR-AMS0007; AR-ACM0003",
       "AR-AMS0007"
@@ -1589,6 +1604,13 @@
     "program": "car",
     "url": "https://www.climateactionreserve.org/how/protocols/ncs/soil-enrichment/"
   },
+  "car-waste-digestion": {
+    "category": "ghg-management",
+    "sub-category": "waste-management",
+    "known-strings": ["Organic Waste Digestion"],
+    "program": "car",
+    "url": "https://www.climateactionreserve.org/how/protocols/waste/organic-waste-digestion/"
+  },
   "climate-leaders-landfill": {
     "category": "ghg-management",
     "sub-category": "landfill",
@@ -1687,15 +1709,22 @@
     "program": "gcc"
   },
   "gs-cookstoves": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "GS TPDDTEC v 1.",
       "GS TPDDTEC v3.1",
       "GS TPDDTEC v 2.",
       "GS TPDDTEC V4.0: REDUCED EMISSIONS FROM COOKING AND HEATING – TECHNOLOGIES AND PRACTICES TO DISPLACE DECENTRALIZED THERMAL ENERGY CONSUMPTION",
       "Methodology for Improved Cook stoves and Kitchen Regimes v1.",
+      "GS Methodology for Improved Cook stoves and Kitchen Regimes v1.",
       "GS Methodology for Improved Cook stoves and Kitchen Regimes v2.",
       "GS TPDDTEC v 3."
+    ]
+  },
+  "gs-metered-cookstoves": {
+    "category": "cookstove",
+    "known-strings": [
+      "Methodology for Metered & Measured Energy Cooking Devices"
     ]
   },
   "gs-drinking-water": {
@@ -1704,7 +1733,7 @@
     ]
   },
   "gs-simplified-cookstoves": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "GS MS Simplified Methodology for Efficient Cookstoves v1.",
       "GS MS Simplified Methodology for Efficient Cookstoves v1.1",
@@ -1716,6 +1745,7 @@
     "known-strings": [
       "Other",
       "Not Provided",
+      "Not provided",
       "VCS v1 Project Specific",
       "Methodology Under Development"
     ]
@@ -1753,7 +1783,7 @@
   "vm0006": {
     "category": "forest",
     "sub-category": "redd",
-    "known-strings": ["VM0006"],
+    "known-strings": ["VM0006", "AR-AMS0007; VM0006"],
     "program": "vcs",
     "sub-category": "redd",
     "url": "https://verra.org/methodologies/vm0006-methodology-for-carbon-accounting-for-mosaic-and-landscape-scale-redd-projects-v2-2/"
@@ -1976,7 +2006,7 @@
     "program": "vcs"
   },
   "vmr0006": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "VMR0006; AMS-III.AV.",
       "AMS-II.G.; VMR0006",
