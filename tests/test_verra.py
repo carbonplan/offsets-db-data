@@ -402,7 +402,7 @@ def test_calculate_verra_retirements(verra_transactions):
 
     # Assertions
     # Check if 'retirement' and 'cancellation' types are present and 'issuance' types are filtered out
-    assert all(retirements['transaction_type'] != 'issuance')
+    assert all(retirements['transaction_type'].str.contains('retirement'))
 
     # Ensure the 'quantity' column is correctly renamed
     assert 'quantity' in retirements.columns
