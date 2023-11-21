@@ -310,7 +310,7 @@ def test_determine_vcs_transaction_type(vcs_transactions):
     # Check that the function correctly assigns 'retirement/cancellation' or 'issuance'
     for i, row in df.iterrows():
         if pd.notnull(row['Retirement/Cancellation Date']):
-            assert row['transaction_type'] == 'retirement/cancellation'
+            assert row['transaction_type'] == 'retirement'
         else:
             assert row['transaction_type'] == 'issuance'
 

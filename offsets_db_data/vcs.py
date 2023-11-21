@@ -23,8 +23,11 @@ def generate_vcs_project_ids(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
 
 @pf.register_dataframe_method
 def determine_vcs_transaction_type(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
+    # Verra doesn't have a transaction type column, and doesn't differentitate between retirements and cancelattions
+    # So we'll use the date column to determine whether a transaction is a retirement or issuance and set the
+    # transaction type accordingly
     df['transaction_type'] = df[date_column].apply(
-        lambda x: 'retirement/cancellation' if pd.notnull(x) else 'issuance'
+        lambda x: 'retirement' if pd.notnull(x) else 'issuance'
     )
     return df
 
