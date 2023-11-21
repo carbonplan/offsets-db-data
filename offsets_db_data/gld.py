@@ -69,8 +69,12 @@ def process_gld_credits(
 
 @pf.register_dataframe_method
 def add_gld_project_url(df: pd.DataFrame) -> pd.DataFrame:
+    """Add url for gold standard projects
+    
+    gs project ids are different from the id used in gold standard urls.
+    """
     df['project_url'] = 'https://registry.goldstandard.org/projects/details/' + df[
-        'project_id'
+        'id'
     ].apply(str)
     return df
 
