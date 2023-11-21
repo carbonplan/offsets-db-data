@@ -1,6 +1,6 @@
 {
   "acm0001": {
-    "category": "landfill",
+    "category": "ghg-management",
     "known-strings": [
       "ACM0001 Flaring or use of landfill gas",
       "ACM0001; ACM0022",
@@ -22,7 +22,8 @@
       "ACM0001; AMS-I.D.",
       "ACM0001; AMS-III.B."
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "landfill"
   },
   "acm0002": {
     "category": "renewable-energy",
@@ -161,9 +162,10 @@
     "program": "cdm"
   },
   "acm0003": {
-    "category": "industrial-processes",
+    "category": "fuel-switching",
     "known-strings": ["ACM0003"],
     "program": "cdm",
+    "sub-category": "industrial-processes",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0003"
   },
   "acm0005": {
@@ -171,7 +173,7 @@
     "program": "cdm"
   },
   "acm0006": {
-    "category": "renewable-energy",
+    "category": "fuel-switching",
     "known-strings": [
       "ACM0006 Electricity and heat generation from biomass residues",
       "ACM0006",
@@ -187,7 +189,7 @@
     "program": "cdm"
   },
   "acm0008": {
-    "category": "mine-methane",
+    "category": "ghg-management",
     "known-strings": [
       "ACM0008 version8.0",
       "ACM0008 v08.0",
@@ -195,14 +197,16 @@
       "ACM0008",
       "ACM0008; VMR0002"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "mine-methane"
   },
   "acm0009": {
+    "category": "fuel-switching",
     "known-strings": ["ACM0009"],
     "program": "cdm"
   },
   "acm0010": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": [
       "ACM0010 GHG emission reductions from manure management systems",
       "ACM0010: Consolidated baseline methodology for GHG emission reductions from manure management systems",
@@ -210,7 +214,7 @@
       "ACM0010"
     ],
     "program": "cdm",
-    "sub-category": "livestock",
+    "sub-category": ["methane-destruction", "manure-management"],
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0010"
   },
   "acm0011": {
@@ -221,7 +225,7 @@
     "program": "cdm"
   },
   "acm0012": {
-    "category": "industrial-processes",
+    "category": "energy-efficiency",
     "known-strings": [
       "ACM0012 Waste energy recovery",
       "ACM0012: Waste Energy Recovery-Version 6",
@@ -236,22 +240,27 @@
       "ACM0012; AMS-I.C."
     ],
     "program": "cdm",
-    "sub-category": "energy-efficiency",
+    "sub-category": "industrial-processes",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0012"
   },
   "acm0013": {
+    "category": "fuel-switching",
     "known-strings": ["ACM0013"],
     "program": "cdm"
   },
   "acm0014": {
+    "category": "ghg-management",
+    "is_methane": true,
     "known-strings": [
       "ACM0014 Treatment of wastewater",
       "Emission reductions through wastewater treatment",
       "ACM0014"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0013"
   },
   "acm0016": {
+    "category": "transportation",
     "known-strings": [
       "ACM0016",
       "ACM0016 V5.0 - Mass rapid transit projects",
@@ -260,6 +269,7 @@
     "program": "cdm"
   },
   "acm0017": {
+    "category": "fuel-switching",
     "known-strings": [
       "ACM0017: Production of biofuel – Version 4.0",
       "ACM0017",
@@ -268,10 +278,11 @@
       "ACM0017; VM0017",
       "ACM0017: Production of biofuel – Version 4.0  "
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "biomass"
   },
   "acm0018": {
-    "category": "renewable-energy",
+    "category": "fuel-switching",
     "known-strings": [
       "ACM0018 Electricity generation from biomass residues in power-only plants",
       "ACM0018: Electricity generation from biomass in power-only plants --- Version 6.0",
@@ -281,14 +292,17 @@
       "ACM0018 – Electricity generation from biomass in power-only plants version 06.0",
       "GCCM003 v1.0 /ACM0018 ver 5.0"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "biomass"
   },
   "acm0019": {
+    "category": "ghg-management",
     "known-strings": ["AM0028; AM0034; ACM0019", "AM0034; ACM0019"],
-    "program": "cdm"
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0019"
   },
   "acm0022": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": [
       "ACM0022 Alternative waste treatment processes",
       "ACM0001; ACM0022",
@@ -310,25 +324,28 @@
       "ACM0022:“Alternative waste treatment processes” (Version 3.0)",
       "ACM0022:Large-scale Consolidated Methodology Alternative waste treatment processes(Version 03.0 )"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0022"
   },
   "acm0025": {
     "known-strings": ["ACM0025 version 2.0"],
     "program": "cdm"
   },
   "acr-abandoned-wells": {
-    "category": "oil-and-gas",
+    "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
       "Plugging Orphan Oil and Gas Wells in the U.S. and Canada"
     ],
     "program": "acr",
+    "sub-category": "abandoned-wells",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/plugging-orphaned-oil-and-gas-wells"
   },
   "acr-affor-refor": {
     "category": "forest",
     "known-strings": ["Afforestation and Reforestation of Degraded Lands"],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "reforest"
   },
   "acr-cali-wetlands": {
     "category": "land-use",
@@ -336,10 +353,20 @@
     "program": "acr",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/restoration-of-california-deltaic-and-coastal-wetlands"
   },
+  "acr-canada-forest": {
+    "category": "forest",
+    "known-strings": [
+      "Improved Forest Management (IFM) on Canadian Forestlands"
+    ],
+    "program": "acr",
+    "sub-category": "ifm",
+    "url": "https://acrcarbon.org/methodology/improved-forest-management-ifm-on-canadian-forestlands/"
+  },
   "acr-ccs": {
-    "category": "oil-and-gas",
+    "category": "ghg-management",
     "known-strings": ["Emission Reductions from Enhanced Oil Recovery"],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "ccs"
   },
   "acr-cogen": {
     "known-strings": [
@@ -348,20 +375,19 @@
     "program": "acr"
   },
   "acr-compost-graze": {
-    "category": "agriculture",
     "known-strings": [
       "Emission Reductions from Compost Additions to Grazed Grasslands"
     ],
     "program": "acr",
-    "sub-category": "livestock",
-    "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/INACTIVE-Compost%20Additions%20to%20Grazed%20Grasslands"
+    "url": "https://acrcarbon.org/methodology/inactive-compost-additions-to-grazed-grasslands/"
   },
   "acr-foam": {
-    "category": "industrial-processes",
+    "category": "ghg-management",
     "known-strings": [
       "Transition to Advanced Formulation Blowing Agents in Foam Manufacturing and Use"
     ],
     "program": "acr",
+    "sub-category": "industrial-processes",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/conversion-of-foam-blowing-agents-from-high-gwp-to-low-gwp-materials"
   },
   "acr-grasslands": {
@@ -370,20 +396,22 @@
       "Avoided Conversion of Grasslands and Shrublands to Crop Production"
     ],
     "program": "acr",
-    "sub-category": "grassland"
+    "sub-category": "avoided-conversion"
   },
   "acr-grazing": {
     "category": "agriculture",
     "known-strings": ["Grazing Land and Livestock Management"],
     "program": "acr",
+    "sub-category": "livestock",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/INACTIVE-grazing-land-and-livestock-management-gllm-ghg-methodology"
   },
   "acr-hfc": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": [
       "Certified Reclaimed HFC Refrigerants, Propellants, and Fire Suppressants"
     ],
     "program": "acr",
+    "sub-category": "industrial-gases",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/certified-reclaimed-hfc-refrigerants"
   },
   "acr-idling": {
@@ -401,6 +429,7 @@
       "Improved Forest Management (IFM) on Non-Federal U.S. Forestlands"
     ],
     "program": "acr",
+    "sub-category": "ifm",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/improved-forest-management-ifm-methodology-for-non-federal-u-s-forestlands"
   },
   "acr-ifm-timber": {
@@ -409,33 +438,37 @@
     "program": "acr"
   },
   "acr-international-ods": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": [
       "Destruction of Ozone Depleting Substances (ODS) from International Sources"
     ],
     "program": "acr",
+    "sub-category": "industrial-gases",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/destruction-of-ozone-depleting-substances-ods-and-high-global-warming-potential-gwp-foam-from-international-sources"
   },
   "acr-landfill": {
-    "category": "landfill",
+    "category": "ghg-management",
     "known-strings": [
       "Monitoring, Reporting and Verification Protocol for Landfill Gas Combustion",
       "Landfill Gas Destruction and Beneficial Use Projects"
     ],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "landfill"
   },
   "acr-lubricating-oil": {
     "known-strings": ["Re-refining Used Lubricating Oils"],
     "program": "acr"
   },
   "acr-mine-methane": {
-    "category": "mine-methane",
+    "category": "ghg-management",
     "known-strings": [
       "Capturing and Destroying Methane from Coal and Trona Mines in North America"
     ],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "mine-methane"
   },
   "acr-ms-wetlands": {
+    "category": "land-use",
     "known-strings": [
       "Restoration of Degraded Deltaic Wetlands of the Mississippi Delta"
     ],
@@ -446,39 +479,45 @@
     "known-strings": [
       "N2O Emission Reductions through Reduced Use of Fertilizer on Agricultural Crops"
     ],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "fertilizer"
   },
   "acr-ods": {
-    "category": "industrial-processes",
+    "category": "ghg-management",
     "known-strings": [
       "Destruction of Ozone Depleting Substances (ODS) and High-Global Warming Potential (GWP) Foam"
     ],
     "program": "acr",
+    "sub-category": "industrial-processes",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/destruction-of-ozone-depleting-substances-and-high-gwp-foam"
   },
   "acr-pneumatic": {
+    "category": "ghg-management",
     "known-strings": [
       "Conversion of High-Bleed Pneumatic Controllers in Oil and Natural Gas Systems"
     ],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "industrial-processes"
   },
   "acr-pocosin": {
+    "category": "land-use",
     "known-strings": ["Restoration of Pocosin Wetlands"],
     "program": "acr"
   },
   "acr-refrige": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": ["Advanced Refrigeration Systems"],
     "program": "acr",
+    "sub-category": "industrial-gases",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/use-of-reclaimed-hfc-refrigerants-and-advanced-refrigeration-systems"
   },
   "acr-rice": {
     "category": "agriculture",
     "known-strings": ["Emission Reductions in Rice Management Systems"],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "rice"
   },
   "acr-transformer-oil": {
-    "category": "industrial-processes",
     "known-strings": [
       "Reduction in Emissions from the Recycling of Transformer Oil"
     ],
@@ -486,103 +525,137 @@
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/methodology-for-reduction-in-emissions-from-the-recycling-of-transformer-oil"
   },
   "am0001": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": ["AM0001"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "industrial-gases",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0001"
   },
   "am0009": {
-    "category": "oil-and-gas",
+    "category": "ghg-management",
     "known-strings": ["AM0009"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "oil-and-gas",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0009"
   },
   "am0010": {
-    "category": "landfill",
+    "category": "ghg-management",
     "known-strings": ["AM0010"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "landfill"
   },
   "am0014": {
-    "category": "forest",
-    "known-strings": ["AM0014; VM0007; AR-ACM0003", "AM0014"],
+    "category": "fuel-switching",
+    "known-strings": ["AM0014"],
     "program": "cdm"
   },
   "am0023": {
-    "category": "industrial-processes",
+    "category": "ghg-management",
     "known-strings": ["AM0023"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "industrial-processes",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0023"
   },
   "am0024": {
-    "category": "industrial-processes",
     "known-strings": ["AM0024"],
     "program": "cdm"
   },
   "am0025": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": ["AM0025"],
     "program": "cdm"
   },
   "am0026": {
+    "category": "renewable-energy",
     "known-strings": ["AM0026"],
-    "program": "cdm"
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0026"
   },
   "am0028": {
+    "category": "ghg-management",
     "known-strings": ["AM0028", "AM0028; AM0034; ACM0019", "AM0028; AM0034"],
-    "program": "cdm"
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0028"
   },
   "am0029": {
+    "category": "fuel-switching",
     "known-strings": ["AM0029", "ACM0002; AM0029"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "natural-gas",
+    "url": "https://cdm.unfccc.int/methodologies/DB/WW4I82DG7LJUQE5E5YGT1NZE4PNS60"
   },
   "am0030": {
+    "category": "ghg-management",
     "known-strings": ["AM0030"],
-    "program": "cdm"
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0030"
   },
   "am0031": {
+    "category": "transportation",
     "known-strings": ["AM0031"],
     "program": "cdm"
   },
   "am0034": {
+    "category": "ghg-management",
     "known-strings": [
       "AM0034",
       "AM0028; AM0034; ACM0019",
       "AM0034; ACM0019",
       "AM0028; AM0034"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "industrial-processes",
+    "url": "https://cdm.unfccc.int/methodologies/DB/993RRDBB2WJI9TAD2XCKPK5YATQXY6"
   },
   "am0036": {
+    "category": "fuel-switching",
     "known-strings": [
       "AM0036 Fuel switch from fossil fuels to biomass residues in heat generation equipment",
       "AM0036",
       "AM0036 - Use of biomass in heat generation equipment version 07.0"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "biomass",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0036"
   },
   "am0046": {
+    "category": "ghg-management",
     "known-strings": ["AM0046"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "energy-efficiency",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0046"
   },
   "am0059": {
+    "category": "ghg-management",
     "known-strings": ["AM0059"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "energy-efficiency",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0059"
   },
   "am0061": {
+    "category": "ghg-management",
     "known-strings": [
       "AM0061 - Methodology for rehabilitation and/or energy efficiency improvement in existing power plants - Version 2.1"
     ],
     "program": "cdm",
+    "sub-category": "energy-efficiency",
     "url": "https://cdm.unfccc.int/methodologies/DB/U5APNKUZPGKRON461OMSR9PZU613GA"
   },
   "am0064": {
+    "category": "ghg-management",
     "known-strings": ["AM0064"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "mine-methane"
   },
   "am0065": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": [
       "AM0065",
       "AM0065: Replacement of SF6 with Alternate Cover Gas in the Magnesium Industry"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "industrial-gases",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0065"
   },
   "am0070": {
     "known-strings": ["AM0070"],
@@ -592,15 +665,17 @@
     "category": "renewable-energy",
     "known-strings": [
       "AM0072",
+      "AM0072 Fossil Fuel Displacement by Geothermal Resources for Space Heating",
       "CDM Methodology AM0072: Fossil Fuel Displacement by Geothermal Resources for Space Heating (Version 03.0)"
     ],
     "program": "cdm"
   },
   "am0073": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": [
       "AM0073; AMS-III.AQ",
       "AM0073",
+      "AM0073 GHG emission reductions through multi-site manure collection and treatment in a central plant",
       "AM0073: GHG emission reductions through multi-site manure collection and treatment in a central plant - Version 1.0",
       "AM0073 “GHG emission reductions through multi-site manure collection and treatment in a central plant” -- V1.0"
     ],
@@ -609,20 +684,25 @@
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0073"
   },
   "am0080": {
+    "category": "ghg-management",
     "known-strings": ["AM0080"],
-    "program": "cdm"
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0080"
   },
   "am0107": {
+    "category": "fuel-switching",
     "known-strings": [
       "AM0107 - New natural gas based cogeneration plant. Version 04 methodologies from UNFCCC"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "natural-gas"
   },
   "am0110": {
     "known-strings": ["AM0110"],
     "program": "cdm"
   },
   "ams-i-a": {
+    "category": "renewable-energy",
     "known-strings": [
       "AMS-I.A. Electricity generation by the user",
       "Electricity generation by the user",
@@ -631,6 +711,7 @@
     "program": "cdm"
   },
   "ams-i-b": {
+    "category": "renewable-energy",
     "known-strings": [
       "AMS-I.B. Mechanical energy for the user with or without electrical energy",
       "AMS-I.B Mechanical energy for the user with  or without electrical energy version 12.0.",
@@ -641,7 +722,7 @@
     "program": "cdm"
   },
   "ams-i-c": {
-    "category": "renewable-energy",
+    "category": "fuel-switching",
     "known-strings": [
       "AMS-I.C. Thermal energy production with or without electricity",
       "AMS-I.C.: Thermal energy production with or without electricity",
@@ -671,7 +752,8 @@
       "AMS-I.C. Version-22.0 Thermal energy production with or without electricity",
       "AMS I.C: Thermal Energy Production with or without electricity -version 22.0"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "biomass"
   },
   "ams-i-d": {
     "category": "renewable-energy",
@@ -833,13 +915,15 @@
     "program": "cdm"
   },
   "ams-i-i": {
-    "category": "unknown",
+    "category": "fuel-switching",
     "known-strings": [
       "AMS-I.I. Biogas/biomass thermal applications for households/small users"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "biomass"
   },
   "ams-i-j": {
+    "category": "renewable-energy",
     "known-strings": [
       "AMS-I.J; AMS-II.F.",
       "AMS-I.J. Solar water heating systems (SWH)"
@@ -850,7 +934,13 @@
     "known-strings": ["AMS.I.J1; AMS-I.L.", "AMS.I.J1"],
     "program": "cdm"
   },
+  "ams-i-k": {
+    "category": "cookstove",
+    "known-strings": ["AMS-I.K. Solar cookers for households"],
+    "program": "cdm"
+  },
   "ams-i-l": {
+    "category": "renewable-energy",
     "known-strings": [
       "AMS.I.J1; AMS-I.L.",
       "AMS-I.L.",
@@ -878,6 +968,7 @@
     "program": "cdm"
   },
   "ams-ii-e": {
+    "category": "energy-efficiency",
     "known-strings": [
       "AMS-I.D.; AMS-II.E.",
       "AMS-II.E.",
@@ -886,11 +977,12 @@
     "program": "cdm"
   },
   "ams-ii-f": {
+    "category": "energy-efficiency",
     "known-strings": ["AMS-II.F.", "AMS-I.J; AMS-II.F."],
     "program": "cdm"
   },
   "ams-ii-g": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "AMS-II.G. Energy Efficiency Measures in Thermal Applications of Non-Renewable Biomass",
       "AMS-II.G.; VMR0006",
@@ -917,6 +1009,7 @@
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_II_J"
   },
   "ams-ii-l": {
+    "category": "energy-efficiency",
     "known-strings": [
       "AMS-II.L Demand-side activities for efficient outdoor and street lighting technologies",
       "AMS II.L",
@@ -926,8 +1019,10 @@
     "program": "cdm"
   },
   "ams-iii-af": {
+    "category": "ghg-management",
     "known-strings": ["AMS-III.AF."],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "landfill"
   },
   "ams-iii-aj": {
     "known-strings": [
@@ -943,7 +1038,9 @@
     "program": "cdm"
   },
   "ams-iii-ao": {
+    "category": "ghg-management",
     "known-strings": [
+      "AMS-III.AO.; AMS-III.AQ",
       "AMS-III.AO. Methane recovery through controlled anaerobic digestion",
       "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
       "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
@@ -956,7 +1053,9 @@
     "program": "cdm"
   },
   "ams-iii-aq": {
+    "category": "transportation",
     "known-strings": [
+      "AMS-III.AO.; AMS-III.AQ",
       "AM0073; AMS-III.AQ",
       "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
       "GCCM003, AMS-III.AQ",
@@ -965,8 +1064,8 @@
     "program": "cdm"
   },
   "ams-iii-ar": {
+    "category": "fuel-switching",
     "known-strings": [
-      "AMS-III.AO. Methane recovery through controlled anaerobic digestion",
       "AMS-III.AR. Substituting fossil fuel based lighting with LED lighting systems",
       "AMS-III.AR",
       "AMS-II.G.; AMS-III.AR",
@@ -975,23 +1074,27 @@
     "program": "cdm"
   },
   "ams-iii-as": {
+    "category": "fuel-switching",
     "known-strings": [
       "AMS-III.AS.",
       "AMS-III.AS. Switch from fossil fuel to biomass in existing manufacturing facilities for non-energy applications"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "biomass"
   },
   "ams-iii-au": {
-    "category": "agriculture",
+    "category": "ghg-management",
     "known-strings": [
       "AMS-III.AU; VM0042",
       "AMS-III.AU",
       "CDM METHODOLOGY - AMS-III.AU “METHANE EMISSION REDUCTION BY ADJUSTED WATER MANAGEMENT PRACTICE IN RICE CULTIVATION"
     ],
     "program": "cdm",
+    "sub-category": "wastewater",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_AU"
   },
   "ams-iii-av": {
+    "category": "energy-efficiency",
     "known-strings": [
       "VMR0006; AMS-III.AV.",
       "AMS-III.AV.",
@@ -1000,6 +1103,7 @@
     "program": "cdm"
   },
   "ams-iii-b": {
+    "category": "fuel-switching",
     "known-strings": [
       "AMS-I.C.; AMS-III.B.",
       "AMS-III.B.",
@@ -1015,6 +1119,7 @@
     "program": "cdm"
   },
   "ams-iii-bb": {
+    "category": "energy-efficiency",
     "known-strings": ["AMS-III.BB."],
     "program": "cdm"
   },
@@ -1027,12 +1132,12 @@
     "program": "cdm"
   },
   "ams-iii-bd": {
-    "category": "industrial-processes",
+    "category": "energy-efficiency",
     "known-strings": ["AMS III BD – Version 01.0"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "industrial-processes"
   },
   "ams-iii-bg": {
-    "category": "industrial-processes",
     "known-strings": [
       "VMR0006; AMS-III.BG",
       "AMS-III.BG Emission reduction through sustainable charcoal production and consumption"
@@ -1040,6 +1145,7 @@
     "program": "cdm"
   },
   "ams-iii-bm": {
+    "category": "transportation",
     "known-strings": [
       "AMS-III.BM",
       "AMS-III.BM: Lightweight two and three wheeled personal transportation version 1.0"
@@ -1047,6 +1153,7 @@
     "program": "cdm"
   },
   "ams-iii-c": {
+    "category": "transportation",
     "known-strings": [
       "AMS-III.C. Emission reductions by electric and hybrid vehicles",
       "AMS-I.F.; AMS-III.C.",
@@ -1056,7 +1163,7 @@
     "program": "cdm"
   },
   "ams-iii-d": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": [
       "AMS-III.D. Methane recovery in animal manure management systems",
       "AMS-I.C.; AMS-III.D.; AMS-III.R.",
@@ -1086,6 +1193,7 @@
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_D"
   },
   "ams-iii-e": {
+    "category": "ghg-management",
     "known-strings": [
       "AMS-I.D.; AMS-III.E.",
       "AMS-III.E.: --- Version 17.0,  AMS-I.C.: --- Version 22.0",
@@ -1097,7 +1205,7 @@
     "program": "cdm"
   },
   "ams-iii-f": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
       "AMS-III.F. Avoidance of methane emissions through controlled biological treatment of biomass",
@@ -1113,7 +1221,7 @@
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_F"
   },
   "ams-iii-g": {
-    "category": "renewable-energy",
+    "category": "ghg-management",
     "known-strings": [
       "AMS-III.G. Landfill methane recovery",
       "AMS-I.C.; AMS-III.G.",
@@ -1133,10 +1241,11 @@
       "AMS-I.D.: Grid connected renewable electricity generation - Version 18.0, AMS-III.G.: Landfill methane recovery – Version 10.0",
       "AMS-III.G: “Landfill methane recovery” - Version 10.0; AMS-I.D: “Grid connected renewable electricity generation” - Version 18.0"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "landfill"
   },
   "ams-iii-h": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
       "AMS-III.H. Methane recovery in wastewater treatment",
@@ -1151,15 +1260,18 @@
       "AMS-I.C.; AMS-III.H.",
       "AMS-I.D.; AMS-III.H"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "wastewater"
   },
   "ams-iii-i": {
+    "category": "ghg-management",
     "known-strings": [
       "AMS-III.I",
       "AMS-III.I.",
       "AMS-III.I. Avoidance of methane production in wastewater treatment through replacement of anaerobic systems by aerobic systems"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "wastewater"
   },
   "ams-iii-iv": {
     "known-strings": [
@@ -1173,6 +1285,7 @@
     "program": "cdm"
   },
   "ams-iii-q": {
+    "category": "energy-efficiency",
     "known-strings": [
       "AMS-III.Q",
       "AMS-III.Q. Waste Energy Recovery (gas/heat/pressure) Projects"
@@ -1180,6 +1293,8 @@
     "program": "cdm"
   },
   "ams-iii-r": {
+    "category": "ghg-management",
+    "is_methane": true,
     "known-strings": [
       "AMS-III.R. Methane recovery in agricultural activities at household/small farm level",
       "AMS-I.C.; AMS-III.D.; AMS-III.R.",
@@ -1190,6 +1305,7 @@
     "program": "cdm"
   },
   "ams-iii-s": {
+    "category": "transportation",
     "known-strings": [
       "AMS-I.F.; AMS-III.S.",
       "AMS-III.S.",
@@ -1198,6 +1314,7 @@
     "program": "cdm"
   },
   "ams-iii-y": {
+    "category": "ghg-management",
     "known-strings": [
       "AMS-III.Y; VMR0003",
       "AMS-III.Y",
@@ -1207,7 +1324,7 @@
     "program": "cdm"
   },
   "ams-iii-z": {
-    "category": "industrial-processes",
+    "category": "energy-efficiency",
     "known-strings": [
       "AMS-III.Z. Fuel Switch = 159, process improvement and energy efficiency in brick manufacture",
       "AMS-III.Z. Fuel Switch, process improvement and energy efficiency in brick manufacture",
@@ -1215,7 +1332,7 @@
       "AMS-III.Z. “Fuel Switch, process improvement and energy efficiency in brick manufacture -Version 6.0"
     ],
     "program": "cdm",
-    "sub-category": "energy-efficiency",
+    "sub-category": "industrial-processes",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_Z"
   },
   "ar-acm0001": {
@@ -1224,12 +1341,14 @@
       "AR-ACM0001",
       "AR-ACM0001 Afforestation and Reforestation of Degraded Land"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "reforest"
   },
   "ar-acm0002": {
     "category": "forest",
     "known-strings": ["AR-ACM0002"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "reforest"
   },
   "ar-acm0003": {
     "category": "forest",
@@ -1243,7 +1362,8 @@
       "VM0005; AR-ACM0003",
       "AR-AM0005; AR-ACM0003"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "reforest"
   },
   "ar-am0002": {
     "category": "forest",
@@ -1269,6 +1389,7 @@
   "ar-am0014": {
     "category": "forest",
     "known-strings": [
+      "AM0014; VM0007; AR-ACM0003",
       "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
       "AR-AM0014"
     ],
@@ -1290,7 +1411,8 @@
       "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
       "AR-AMS0003"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "reforest"
   },
   "ar-ams0004": {
     "category": "forest",
@@ -1305,16 +1427,19 @@
   "ar-ams0006": {
     "category": "forest",
     "known-strings": ["AR-AMS0006"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "reforest"
   },
   "ar-ams0007": {
     "category": "forest",
     "known-strings": [
+      "AR-AMS0007; VM0006",
       "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
       "AR-AMS0007; AR-ACM0003",
       "AR-AMS0007"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "reforest"
   },
   "arb-forest": {
     "category": "forest",
@@ -1327,7 +1452,7 @@
     "program": "arb"
   },
   "arb-livestock": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
       "ARB Compliance Offset Protocol: Capturing and Destroying Methane from Manure Management Systems",
@@ -1338,30 +1463,33 @@
     "url": "https://ww2.arb.ca.gov/our-work/programs/compliance-offset-program/compliance-offset-protocols/livestock-projects"
   },
   "arb-mine-methane": {
-    "category": "mine-methane",
+    "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
       "ARB Compliance Offset Protocol: Mine Methane Capture Projects",
       "Mine Methane Capture - ARB Compliance"
     ],
-    "program": "arb"
+    "program": "arb",
+    "sub-category": "mine-methane"
   },
   "arb-ozone": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": [
       "ARB Compliance Offset Protocol: Destruction of U.S. Ozone Depleting Substances Banks",
       "Ozone Depleting Substances - U.S. - ARB Compliance"
     ],
-    "program": "arb"
+    "program": "arb",
+    "sub-category": "industrial-gases"
   },
   "art-trees": {
     "category": "forest",
     "known-strings": ["art-trees"]
   },
   "car-adipic": {
-    "category": "industrial-processes",
+    "category": "ghg-management",
     "known-strings": ["Adipic Acid"],
     "program": "car",
+    "sub-category": "industrial-processes",
     "url": "https://www.climateactionreserve.org/how/protocols/industrial/adipic-acid-production/"
   },
   "car-forest": {
@@ -1385,83 +1513,90 @@
     "category": "land-use",
     "known-strings": ["Avoided Grassland Conversion"],
     "program": "car",
-    "sub-category": "grassland",
+    "sub-category": "avoided-conversion",
     "url": "https://www.climateactionreserve.org/how/protocols/ncs/grassland/"
   },
   "car-grassland-ca": {
     "category": "land-use",
     "known-strings": ["Canada Grassland"],
     "program": "car",
-    "sub-category": "grassland",
+    "sub-category": "avoided-conversion",
     "url": "https://www.climateactionreserve.org/how/protocols/ncs/canada-grassland/"
   },
   "car-landfill": {
-    "category": "landfill",
+    "category": "ghg-management",
     "known-strings": [
       "Climate Action Reserve Landfill Project Protocol",
       "Landfill Gas Capture/Combustion"
     ],
-    "program": "car"
+    "program": "car",
+    "sub-category": "landfill"
   },
   "car-landfill-mx": {
-    "category": "landfill",
+    "category": "ghg-management",
     "known-strings": ["Landfill - MX"],
     "program": "car",
+    "sub-category": "landfill",
     "url": "https://www.climateactionreserve.org/how/protocols/waste/mexico-landfill/"
   },
   "car-livestock": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": ["Livestock Gas Capture/Combustion"],
     "program": "car",
     "sub-category": "livestock",
     "url": "https://www.climateactionreserve.org/how/protocols/waste/us-livestock/"
   },
   "car-livestock-mx": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": ["Livestock - MX"],
     "program": "car",
     "sub-category": "livestock",
     "url": "https://www.climateactionreserve.org/how/protocols/waste/mexico-livestock/"
   },
   "car-mine-methane": {
-    "category": "mine-methane",
+    "category": "ghg-management",
     "known-strings": [
       "Coal Mine Methane - VAM",
       "Coal Mine Methane - Drainage"
     ],
     "program": "car",
+    "sub-category": "mine-methane",
     "url": "https://www.climateactionreserve.org/how/protocols/waste/coal-mine-methane/"
   },
   "car-n2o": {
     "category": "agriculture",
     "known-strings": ["Nitrogen Management"],
     "program": "car",
+    "sub-category": "fertilizer",
     "url": "https://www.climateactionreserve.org/how/protocols/ncs/nitrogen-management/"
   },
   "car-nitric-acid": {
-    "category": "industrial-processes",
+    "category": "ghg-management",
     "known-strings": [
       "Nitric Acid N2O - Tertiary Catalyst",
       "Nitric Acid N2O- Secondary Catalyst",
       "Nitric Acid N2O- Tertiary Catalyst"
     ],
     "program": "car",
+    "sub-category": "industrial-processes",
     "url": "https://www.climateactionreserve.org/how/protocols/industrial/nitric-acid-production/"
   },
   "car-organic-composting": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": ["Organic Waste Composting"],
     "program": "car",
+    "sub-category": "waste-management",
     "url": "https://www.climateactionreserve.org/how/protocols/waste/organic-waste-composting/"
   },
   "car-ozone": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": [
       "Ozone Depleting Substances - U.S.",
       "Climate Action Reserve U.S. Ozone Depleting Substances Project Protocol",
       "Ozone Depleting Substances - Article 5 Imports"
     ],
     "program": "car",
+    "sub-category": "industrial-gases",
     "url": "https://www.climateactionreserve.org/how/protocols/industrial/ozone-depleting-substances/"
   },
   "car-soil": {
@@ -1471,29 +1606,39 @@
     "sub-category": "soil",
     "url": "https://www.climateactionreserve.org/how/protocols/ncs/soil-enrichment/"
   },
+  "car-waste-digestion": {
+    "category": "ghg-management",
+    "known-strings": ["Organic Waste Digestion"],
+    "program": "car",
+    "sub-category": "waste-management",
+    "url": "https://www.climateactionreserve.org/how/protocols/waste/organic-waste-digestion/"
+  },
   "climate-leaders-landfill": {
-    "category": "landfill",
+    "category": "ghg-management",
     "known-strings": [
       "Offset Project Methodology for Landfill Methane Collection and Combustion"
     ],
-    "program": "None"
+    "program": "epa",
+    "sub-category": "landfill"
   },
   "ecy-ozone": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": [
       "ECY Compliance Offset Protocol: Ozone Depleting Substances Projects"
     ],
-    "program": "ecy"
+    "program": "ecy",
+    "sub-category": "industrial-gases"
   },
   "ert-gas-sub": {
-    "category": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": [
       "Emission reductions through industrial gas substitution"
     ],
-    "program": "acr"
+    "program": "acr",
+    "sub-category": "industrial-gases"
   },
   "gccm0003": {
-    "category": "waste-management",
+    "category": "ghg-management",
     "known-strings": [
       "GCCM003-Methodology-for-Energy-Generation-from-Animal-Manure-and-Waste-Management-Projects-v1",
       "GCCM003-Methodology-for-Energy-Generation-from-Animal-Manure-and-Waste-Management-Projects-v2.0",
@@ -1566,25 +1711,31 @@
     "program": "gcc"
   },
   "gs-cookstoves": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "GS TPDDTEC v 1.",
       "GS TPDDTEC v3.1",
       "GS TPDDTEC v 2.",
       "GS TPDDTEC V4.0: REDUCED EMISSIONS FROM COOKING AND HEATING – TECHNOLOGIES AND PRACTICES TO DISPLACE DECENTRALIZED THERMAL ENERGY CONSUMPTION",
       "Methodology for Improved Cook stoves and Kitchen Regimes v1.",
+      "GS Methodology for Improved Cook stoves and Kitchen Regimes v1.",
       "GS Methodology for Improved Cook stoves and Kitchen Regimes v2.",
       "GS TPDDTEC v 3."
     ]
   },
   "gs-drinking-water": {
-    "category": "unknown",
     "known-strings": [
       "GS Methodology for emission reductions from safe drinking water supply"
     ]
   },
+  "gs-metered-cookstoves": {
+    "category": "cookstove",
+    "known-strings": [
+      "Methodology for Metered & Measured Energy Cooking Devices"
+    ]
+  },
   "gs-simplified-cookstoves": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "GS MS Simplified Methodology for Efficient Cookstoves v1.",
       "GS MS Simplified Methodology for Efficient Cookstoves v1.1",
@@ -1596,19 +1747,23 @@
     "known-strings": [
       "Other",
       "Not Provided",
+      "Not provided",
       "VCS v1 Project Specific",
       "Methodology Under Development"
     ]
   },
   "vm0001": {
-    "categry": "industrial-gases",
+    "category": "ghg-management",
     "known-strings": ["VM0001"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "industrial-gases",
+    "url": "https://verra.org/methodologies/vm0001-infrared-automatic-refrigerant-leak-detection-efficiency-project-methodology-v1-1/"
   },
   "vm0003": {
     "category": "forest",
     "known-strings": ["VM0003; AR-ACM0003", "VM0003"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "ifm"
   },
   "vm0004": {
     "category": "forest",
@@ -1629,7 +1784,7 @@
   },
   "vm0006": {
     "category": "forest",
-    "known-strings": ["VM0006"],
+    "known-strings": ["VM0006", "AR-AMS0007; VM0006"],
     "program": "vcs",
     "sub-category": "redd",
     "url": "https://verra.org/methodologies/vm0006-methodology-for-carbon-accounting-for-mosaic-and-landscape-scale-redd-projects-v2-2/"
@@ -1645,7 +1800,8 @@
       "VM0007; VM0010"
     ],
     "program": "vcs",
-    "sub-category": "redd"
+    "sub-category": "redd",
+    "url": "https://verra.org/methodologies/vm0007-redd-methodology-framework-redd-mf-v1-6/"
   },
   "vm0008": {
     "category": "energy-efficiency",
@@ -1665,20 +1821,25 @@
     "url": "https://verra.org/methodologies/vm0010-methodology-for-improved-forest-management-conversion-from-logged-to-protected-forest-v1-3/"
   },
   "vm0011": {
+    "category": "forest",
     "known-strings": ["VM0011"],
     "program": "vcs"
   },
   "vm0012": {
+    "category": "forest",
     "known-strings": ["VM0012"],
-    "program": "cdm"
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0012-improved-forest-management-in-temperate-and-boreal-forests-ltpf-v1-2/"
   },
   "vm0013": {
     "known-strings": ["VM0013"],
     "program": "vcs"
   },
   "vm0014": {
+    "category": "ghg-management",
     "known-strings": ["VM0014"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "mine-methane"
   },
   "vm0015": {
     "category": "forest",
@@ -1693,8 +1854,10 @@
     "url": "https://verra.org/methodologies/vm0015-methodology-for-avoided-unplanned-deforestation-v1-1/"
   },
   "vm0016": {
+    "category": "ghg-management",
     "known-strings": ["VM0016"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "industrial-gases"
   },
   "vm0017": {
     "category": "agriculture",
@@ -1713,6 +1876,7 @@
     "program": "vcs"
   },
   "vm0019": {
+    "category": "transportation",
     "known-strings": ["VM0019"],
     "program": "vcs"
   },
@@ -1721,14 +1885,19 @@
     "program": "vcs"
   },
   "vm0022": {
+    "category": "agriculture",
     "known-strings": ["VM0022"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "fertilizer"
   },
   "vm0023": {
+    "category": "ghg-management",
     "known-strings": ["VM0023"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "industrial-processes"
   },
   "vm0025": {
+    "category": "energy-efficiency",
     "known-strings": ["VM0025; VMD0038", "VM0025"],
     "program": "vcs"
   },
@@ -1736,40 +1905,52 @@
     "category": "land-use",
     "known-strings": ["VM0026; AR-ACM0003; VM0042", "VM0026"],
     "program": "vcs",
-    "sub-category": "grassland",
     "url": "https://verra.org/methodologies/vm0026-methodology-for-sustainable-grassland-management-sgm-v1-0/"
   },
   "vm0032": {
+    "category": "land-use",
     "known-strings": ["VM0032"],
     "program": "vcs"
   },
   "vm0033": {
+    "category": "land-use",
     "known-strings": ["VM0033"],
-    "program": "vcs"
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0033-methodology-for-tidal-wetland-and-seagrass-restoration-v2-1/"
   },
   "vm0034": {
+    "category": "forest",
     "known-strings": ["VM0034"],
-    "program": "vcs"
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0034-canadian-forest-carbon-offset-methodology-v2-0-2/"
   },
   "vm0036": {
+    "category": "land-use",
     "known-strings": ["VM0036"],
-    "program": "vcs"
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0036-methodology-for-rewetting-drained-temperate-peatlands-v1-0/"
   },
   "vm0037": {
+    "category": "forest",
     "known-strings": ["VM0037"],
-    "program": "vcs"
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0037-methodology-implementation-redd-activities-landscapes-affected-mosaic-deforestation-degradation-v1-0/"
   },
   "vm0038": {
+    "category": "transportation",
     "known-strings": ["AMS-III.C.; VM0038", "VM0038"],
-    "program": "vcs"
+    "program": "vcs",
+    "url": "https://verra.org/methodologies/vm0038-methodology-for-electric-vehicle-charging-systems-v1-0/"
   },
   "vm0039": {
     "known-strings": ["VM0039"],
     "program": "vcs"
   },
   "vm0041": {
+    "category": "ghg-management",
     "known-strings": ["VM0041"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "livestock"
   },
   "vm0042": {
     "category": "agriculture",
@@ -1785,8 +1966,10 @@
     "url": "https://verra.org/methodologies/vm0042-methodology-for-improved-agricultural-land-management-v2-0/"
   },
   "vm0043": {
+    "category": "ghg-management",
     "known-strings": ["VM0043"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "industrial-processes"
   },
   "vm0044": {
     "category": "biochar",
@@ -1795,8 +1978,11 @@
     "url": "https://verra.org/methodologies/vm0044-methodology-for-biochar-utilization-in-soil-and-non-soil-applications/"
   },
   "vm0045": {
+    "category": "forest",
     "known-strings": ["VM0045"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "ifm",
+    "url": "https://verra.org/methodologies/methodology-for-improved-forest-management/"
   },
   "vmd00038": {
     "category": "energy-efficiency",
@@ -1804,22 +1990,24 @@
     "program": "vcs"
   },
   "vmr0001": {
-    "category": "mine-methane",
+    "category": "ghg-management",
     "known-strings": ["VMR0001"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "mine-methane"
   },
   "vmr0002": {
-    "category": "mine-methane",
+    "category": "ghg-management",
     "known-strings": ["VMR0002", "ACM0008; VMR0002"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "mine-methane"
   },
   "vmr0003": {
-    "categry": "waste-management",
+    "category": "ghg-management",
     "known-strings": ["AMS-III.Y; VMR0003"],
     "program": "vcs"
   },
   "vmr0006": {
-    "category": "cookstoves",
+    "category": "cookstove",
     "known-strings": [
       "VMR0006; AMS-III.AV.",
       "AMS-II.G.; VMR0006",
