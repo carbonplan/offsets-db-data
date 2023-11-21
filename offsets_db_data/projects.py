@@ -210,18 +210,15 @@ def add_retired_and_issued_totals(projects: pd.DataFrame, *, credits: pd.DataFra
     # Drop conflicting columns if they exist
     projects = projects.drop(columns=['issued', 'retired'], errors='ignore')
 
-    credits['transaction_type_mapped'] = credits['transaction_type'].apply(
-        lambda x: 'retirement' if x == 'retirement/cancellation' else x
-    )
     # # filter out the projects that are not in the credits data
     # credits = credits[credits['project_id'].isin(projects['project_id'].unique())]
     # groupd and sum
     credit_totals = (
-        credits.groupby(['project_id', 'transaction_type_mapped'])['quantity'].sum().reset_index()
+        credits.groupby(['project_id', 'transaction_type'])['quantity'].sum().reset_index()
     )
     # pivot the table
     credit_totals_pivot = credit_totals.pivot(
-        index='project_id', columns='transaction_type_mapped', values='quantity'
+        index='project_id', columns='transaction_type', values='quantity'
     ).reset_index()
 
     # merge with projects
