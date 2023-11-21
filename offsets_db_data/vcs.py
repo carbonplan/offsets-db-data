@@ -167,9 +167,9 @@ def add_vcs_compliance_projects(df: pd.DataFrame) -> pd.DataFrame:
 @pf.register_dataframe_method
 def add_vcs_project_url(df: pd.DataFrame) -> pd.DataFrame:
     """Create url based on verra project id"""
-    df['project_url'] = 'https://registry.verra.org/app/projectDetail/VCS/' + df[
-        'project_id'
-    ].str[3:]
+    df['project_url'] = (
+        'https://registry.verra.org/app/projectDetail/VCS/' + df['project_id'].str[3:]
+    )
     return df
 
 
