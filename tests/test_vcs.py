@@ -442,13 +442,13 @@ def test_process_vcs_projects(vcs_projects, vcs_transactions):
     assert 'listed_at' in df.columns
     # check project_url series
     assert df['project_url'].tolist() == [
-        'https://registry.verra.org/app/projectDetail/VCS/VCS75',
-        'https://registry.verra.org/app/projectDetail/VCS/VCS2498',
-        'https://registry.verra.org/app/projectDetail/VCS/VCS101',
-        'https://registry.verra.org/app/projectDetail/VCS/VCS3408',
-        'https://registry.verra.org/app/projectDetail/VCS/VCS1223',
-        'https://registry.verra.org/app/projectDetail/VCS/2265',  # From add_vcs_compliance_projects
-        'https://registry.verra.org/app/projectDetail/VCS/2271',  # From add_vcs_compliance_projects
+        'https://registry.verra.org/app/projectDetail/VCS75',
+        'https://registry.verra.org/app/projectDetail/VCS2498',
+        'https://registry.verra.org/app/projectDetail/VCS101',
+        'https://registry.verra.org/app/projectDetail/VCS3408',
+        'https://registry.verra.org/app/projectDetail/VCS1223',
+        'https://registry.verra.org/app/projectDetail/2265',  # From add_vcs_compliance_projects
+        'https://registry.verra.org/app/projectDetail/2271',  # From add_vcs_compliance_projects
     ]
     # check project_id series
     assert df['project_id'].tolist() == [
