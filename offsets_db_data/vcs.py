@@ -16,13 +16,13 @@ from offsets_db_data.projects import *  # noqa: F403
 
 
 @pf.register_dataframe_method
-def generate_verra_project_ids(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
+def generate_vcs_project_ids(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
     df['project_id'] = prefix + df['ID'].astype(str)
     return df
 
 
 @pf.register_dataframe_method
-def determine_verra_transaction_type(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
+def determine_vcs_transaction_type(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
     df['transaction_type'] = df[date_column].apply(
         lambda x: 'retirement/cancellation' if pd.notnull(x) else 'issuance'
     )
@@ -30,7 +30,7 @@ def determine_verra_transaction_type(df: pd.DataFrame, *, date_column: str) -> p
 
 
 @pf.register_dataframe_method
-def set_verra_transaction_dates(
+def set_vcs_transaction_dates(
     df: pd.DataFrame, *, date_column: str, fallback_column: str
 ) -> pd.DataFrame:
     df['transaction_date'] = df[date_column].where(df[date_column].notnull(), df[fallback_column])
@@ -38,14 +38,14 @@ def set_verra_transaction_dates(
 
 
 @pf.register_dataframe_method
-def set_verra_vintage_year(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
+def set_vcs_vintage_year(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
     df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y', utc=True)
     df['vintage'] = df[date_column].dt.year
     return df
 
 
 @pf.register_dataframe_method
-def calculate_verra_issuances(df: pd.DataFrame) -> pd.DataFrame:
+def calculate_vcs_issuances(df: pd.DataFrame) -> pd.DataFrame:
     """Logic to calculate verra transactions from prepocessed transaction data
 
     Verra allows rolling/partial issuances. This requires inferring vintage issuance from `Total Vintage Quantity`
@@ -63,7 +63,7 @@ def calculate_verra_issuances(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def calculate_verra_retirements(df: pd.DataFrame) -> pd.DataFrame:
+def calculate_vcs_retirements(df: pd.DataFrame) -> pd.DataFrame:
     """retirements + cancelations, but data doesnt allow us to distinguish the two"""
     retirements = df[df['transaction_type'] != 'issuance']
     retirements = retirements.rename(columns={'Quantity Issued': 'quantity'})
@@ -71,7 +71,7 @@ def calculate_verra_retirements(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def process_verra_credits(
+def process_vcs_credits(
     df: pd.DataFrame,
     *,
     download_type: str = 'transactions',
@@ -82,18 +82,18 @@ def process_verra_credits(
     df = df.copy()
     data = (
         df.set_registry(registry_name=registry_name)
-        .generate_verra_project_ids(prefix=prefix)
-        .determine_verra_transaction_type(date_column='Retirement/Cancellation Date')
-        .set_verra_transaction_dates(
+        .generate_vcs_project_ids(prefix=prefix)
+        .determine_vcs_transaction_type(date_column='Retirement/Cancellation Date')
+        .set_vcs_transaction_dates(
             date_column='Retirement/Cancellation Date', fallback_column='Issuance Date'
         )
         .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
-        .set_verra_vintage_year(date_column='Vintage End')
+        .set_vcs_vintage_year(date_column='Vintage End')
         .convert_to_datetime(columns=['transaction_date'])
     )
 
-    issuances = data.calculate_verra_issuances()
-    retirements = data.calculate_verra_retirements()
+    issuances = data.calculate_vcs_issuances()
+    retirements = data.calculate_vcs_retirements()
 
     column_mapping = load_column_mapping(
         registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
@@ -104,7 +104,7 @@ def process_verra_credits(
     merged_df = pd.concat([issuances, retirements]).reset_index(drop=True).rename(columns=columns)
 
     issuances = merged_df.aggregate_issuance_transactions()
-    retirements = merged_df[merged_df['transaction_type'] != 'issuance']
+    retirements = merged_df[merged_df['transaction_type'].str.contains('retirement')]
     data = (
         pd.concat([issuances, retirements])
         .reset_index(drop=True)
@@ -160,12 +160,12 @@ def add_vcs_compliance_projects(df: pd.DataFrame) -> pd.DataFrame:
             'project_url': 'https://registry.verra.org/app/projectDetail/VCS/2271',
         },
     ]
-    verra_projects = pd.DataFrame(vcs_project_dicts)
-    return pd.concat([df, verra_projects], ignore_index=True)
+    vcs_projects = pd.DataFrame(vcs_project_dicts)
+    return pd.concat([df, vcs_projects], ignore_index=True)
 
 
 @pf.register_dataframe_method
-def add_verra_project_url(df: pd.DataFrame) -> pd.DataFrame:
+def add_vcs_project_url(df: pd.DataFrame) -> pd.DataFrame:
     df['project_url'] = 'https://registry.verra.org/app/projectDetail/VCS/' + df[
         'project_id'
     ].apply(str)
@@ -173,19 +173,21 @@ def add_verra_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def add_verra_project_id(df: pd.DataFrame) -> pd.DataFrame:
+def add_vcs_project_id(df: pd.DataFrame) -> pd.DataFrame:
     df['project_id'] = df['project_id'].apply(lambda x: f'VCS{str(x)}')
     return df
 
 
 @pf.register_dataframe_method
-def process_verra_projects(
+def process_vcs_projects(
     df: pd.DataFrame,
     *,
     credits: pd.DataFrame,
     registry_name: str = 'verra',
     download_type: str = 'projects',
 ) -> pd.DataFrame:
+    df = df.copy()
+    credits = credits.copy()
     registry_project_column_mapping = load_registry_project_column_mapping(
         registry_name=registry_name, file_path=PROJECT_SCHEMA_UPATH
     )
@@ -196,8 +198,8 @@ def process_verra_projects(
     data = (
         df.rename(columns=inverted_column_mapping)
         .set_registry(registry_name=registry_name)
-        .add_verra_project_id()
-        .add_verra_project_url()
+        .add_vcs_project_id()
+        .add_vcs_project_url()
         .harmonize_country_names()
         .harmonize_status_codes()
         .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)

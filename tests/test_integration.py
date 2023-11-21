@@ -2,11 +2,11 @@ import pandas as pd
 import pytest
 
 from offsets_db_data.apx import *  # noqa: F403
-from offsets_db_data.arb import *  # noqa: F403
+from offsets_db_data.arb import *  # noqa: F403  # noqa: F403
 from offsets_db_data.gcc import *  # noqa: F403
-from offsets_db_data.gs import *  # noqa: F403
+from offsets_db_data.gld import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
-from offsets_db_data.verra import *  # noqa: F403
+from offsets_db_data.vcs import *  # noqa: F403
 
 
 @pytest.fixture
@@ -30,8 +30,9 @@ def arb() -> pd.DataFrame:
 def test_verra(date, bucket, arb):
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
-    df_credits = credits.process_verra_credits(arb=arb)
-    df_projects = projects.process_verra_projects(credits=df_credits)
+    df_credits = credits.process_vcs_credits(arb=arb)
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    df_projects = projects.process_vcs_projects(credits=df_credits)
     project_schema.validate(df_projects)
     credit_without_id_schema.validate(df_credits)
 
@@ -54,6 +55,8 @@ def test_apx(date, bucket, arb, registry, download_types):
     df_credits = pd.concat(dfs).merge_with_arb(arb=arb)
     credit_without_id_schema.validate(df_credits)
 
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
     df_projects = projects.process_apx_projects(credits=df_credits, registry_name=registry)
     project_schema.validate(df_projects)
@@ -69,14 +72,16 @@ def test_gs(
     dfs = []
     for key in download_types:
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
-        p = credits.process_gs_credits(download_type=key)
+        p = credits.process_gld_credits(download_type=key)
         dfs.append(p)
 
     df_credits = pd.concat(dfs)
     credit_without_id_schema.validate(df_credits)
 
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
-    df_projects = projects.process_gs_projects(credits=df_credits)
+    df_projects = projects.process_gld_projects(credits=df_credits)
     project_schema.validate(df_projects)
 
 
@@ -97,6 +102,8 @@ def test_gcc(
 
     df_credits = pd.concat(dfs)
     credit_without_id_schema.validate(df_credits)
+
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
 
     df_projects = projects.process_gcc_projects(credits=df_credits)
     project_schema.validate(df_projects)
