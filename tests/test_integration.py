@@ -28,31 +28,35 @@ def arb() -> pd.DataFrame:
 
 
 def test_verra(date, bucket, arb):
+    prefix = 'VCS'
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
-    df_credits = credits.process_vcs_credits(arb=arb)
+    df_credits = credits.process_vcs_credits(arb=arb[arb.project_id.str.startswith(prefix)])
     assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
     df_projects = projects.process_vcs_projects(credits=df_credits)
     project_schema.validate(df_projects)
     credit_without_id_schema.validate(df_credits)
 
+    assert df_projects['project_id'].str.startswith(prefix).all()
+    assert df_credits['project_id'].str.startswith(prefix).all()
+
 
 @pytest.mark.parametrize(
-    'registry, download_types',
+    'registry, download_types, prefix',
     [
-        ('art-trees', ['issuances', 'retirements', 'cancellations']),
-        ('american-carbon-registry', ['issuances', 'retirements', 'cancellations']),
-        ('climate-action-reserve', ['issuances', 'retirements', 'cancellations']),
+        ('art-trees', ['issuances', 'retirements', 'cancellations'], 'ART'),
+        ('american-carbon-registry', ['issuances', 'retirements', 'cancellations'], 'ACR'),
+        ('climate-action-reserve', ['issuances', 'retirements', 'cancellations'], 'CAR'),
     ],
 )
-def test_apx(date, bucket, arb, registry, download_types):
+def test_apx(date, bucket, arb, registry, download_types, prefix):
     dfs = []
     for key in download_types:
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
         p = credits.process_apx_credits(download_type=key, registry_name=registry)
         dfs.append(p)
 
-    df_credits = pd.concat(dfs).merge_with_arb(arb=arb)
+    df_credits = pd.concat(dfs).merge_with_arb(arb=arb[arb.project_id.str.startswith(prefix)])
     credit_without_id_schema.validate(df_credits)
 
     assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
@@ -61,13 +65,17 @@ def test_apx(date, bucket, arb, registry, download_types):
     df_projects = projects.process_apx_projects(credits=df_credits, registry_name=registry)
     project_schema.validate(df_projects)
 
+    assert df_projects['project_id'].str.startswith(prefix).all()
+    assert df_credits['project_id'].str.startswith(prefix).all()
 
-def test_gs(
+
+def test_gld(
     date,
     bucket,
 ):
     registry = 'gold-standard'
     download_types = ['issuances', 'retirements']
+    prefix = 'GLD'
 
     dfs = []
     for key in download_types:
@@ -84,6 +92,10 @@ def test_gs(
     df_projects = projects.process_gld_projects(credits=df_credits)
     project_schema.validate(df_projects)
 
+    # check if all project_id use the same prefix
+    assert df_projects['project_id'].str.startswith(prefix).all()
+    assert df_credits['project_id'].str.startswith(prefix).all()
+
 
 def test_gcc(
     date,
@@ -91,6 +103,7 @@ def test_gcc(
 ):
     registry = 'global-carbon-council'
     download_types = ['issuances', 'retirements']
+    prefix = 'GCC'
 
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
 
@@ -107,3 +120,6 @@ def test_gcc(
 
     df_projects = projects.process_gcc_projects(credits=df_credits)
     project_schema.validate(df_projects)
+
+    assert df_projects['project_id'].str.startswith(prefix).all()
+    assert df_credits['project_id'].str.startswith(prefix).all()

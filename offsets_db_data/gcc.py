@@ -18,6 +18,12 @@ from offsets_db_data.projects import *  # noqa: F403
 
 
 @pf.register_dataframe_method
+def modify_gcc_project_id(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
+    df['project_id'] = df['project_id'].str.replace('S', prefix, regex=False)
+    return df
+
+
+@pf.register_dataframe_method
 def set_gcc_vintage_year(df: pd.DataFrame) -> pd.DataFrame:
     df['vintage'] = df['vintage'].apply(
         lambda vintage: vintage.split(' - ')[-1] if ' - ' in vintage else vintage
@@ -63,6 +69,7 @@ def process_gcc_credits(
     raw_projects: pd.DataFrame,
     download_type: str,
     registry_name: str = 'global-carbon-council',
+    prefix: str = 'GCC',
     arb: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     df = df.copy()
@@ -90,6 +97,7 @@ def process_gcc_credits(
 
     data = (
         data.rename(columns=columns)
+        .modify_gcc_project_id(prefix=prefix)
         .convert_to_datetime(columns=['transaction_date'])
         .validate(schema=credit_without_id_schema)
     )
@@ -97,11 +105,6 @@ def process_gcc_credits(
     if arb is not None and not arb.empty:
         data = data.merge_with_arb(arb=arb)
     return data
-
-
-##############################################################################
-################################# Projects Data #############################
-##############################################################################
 
 
 @pf.register_dataframe_method
@@ -121,7 +124,11 @@ def add_gcc_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 @pf.register_dataframe_method
 def process_gcc_projects(
-    df: pd.DataFrame, *, credits: pd.DataFrame, registry_name='global-carbon-council'
+    df: pd.DataFrame,
+    *,
+    credits: pd.DataFrame,
+    registry_name='global-carbon-council',
+    prefix: str = 'GCC',
 ) -> pd.DataFrame:
     df = df.copy()
     credits = credits.copy()
@@ -136,6 +143,7 @@ def process_gcc_projects(
         .set_registry(registry_name=registry_name)
         .add_gcc_project_name()
         .add_gcc_project_url()
+        .modify_gcc_project_id(prefix=prefix)
         .harmonize_country_names()
         .harmonize_status_codes()
         .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
