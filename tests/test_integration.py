@@ -11,7 +11,7 @@ from offsets_db_data.vcs import *  # noqa: F403
 
 @pytest.fixture
 def date() -> str:
-    return '2023-11-10'
+    return '2023-11-28'
 
 
 @pytest.fixture
@@ -22,7 +22,7 @@ def bucket() -> str:
 @pytest.fixture
 def arb() -> pd.DataFrame:
     data = pd.read_excel(
-        's3://carbonplan-offsets-db/raw/2023-11-10/arb/nc-arboc_issuance.xlsx', sheet_name=3
+        's3://carbonplan-offsets-db/raw/2023-11-28/arb/nc-arboc_issuance.xlsx', sheet_name=3
     )
     return data.process_arb()
 
@@ -79,7 +79,7 @@ def test_gld(
 
     dfs = []
     for key in download_types:
-        credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
+        credits = pd.read_csv(f'{bucket}/2023-11-27/{registry}/{key}.csv.gz')
         p = credits.process_gld_credits(download_type=key)
         dfs.append(p)
 
