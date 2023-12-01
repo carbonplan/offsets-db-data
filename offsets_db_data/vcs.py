@@ -142,7 +142,7 @@ def add_vcs_compliance_projects(df: pd.DataFrame) -> pd.DataFrame:
             'project_id': 'VCSOPR2',
             'name': 'Corinth Abandoned Mine Methane Recovery Project',
             'protocol': ['arb-mine-methane'],
-            'category': ['mine-methane'],
+            'category': ['ghg-management'],
             'proponent': 'Keyrock Energy LLC',
             'country': 'United States',
             'status': 'registered',
