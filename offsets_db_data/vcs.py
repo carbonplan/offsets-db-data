@@ -92,7 +92,7 @@ def process_vcs_credits(
         )
         .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
         .set_vcs_vintage_year(date_column='Vintage End')
-        .convert_to_datetime(columns=['transaction_date'])
+        .convert_to_datetime(columns=['transaction_date'], date_format='%d-%m-%Y')
     )
 
     issuances = data.calculate_vcs_issuances()
