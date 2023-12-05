@@ -1,4 +1,5 @@
 import json
+import typing
 from collections import defaultdict
 
 import pandas as pd
@@ -60,11 +61,11 @@ def set_registry(df: pd.DataFrame, registry_name: str) -> pd.DataFrame:
 
 @pf.register_dataframe_method
 def convert_to_datetime(
-    df: pd.DataFrame, *, columns: list, date_format: str = 'mixed', utc: bool = True
+    df: pd.DataFrame, *, columns: list, utc: bool = True, **kwargs: typing.Any
 ) -> pd.DataFrame:
     for column in columns:
         if column in df.columns:
-            df[column] = pd.to_datetime(df[column], format=date_format, utc=utc)
+            df[column] = pd.to_datetime(df[column], utc=utc, **kwargs)
         else:
             raise KeyError(f"The column '{column}' is missing.")
     return df

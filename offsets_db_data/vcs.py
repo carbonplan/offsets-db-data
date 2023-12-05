@@ -92,7 +92,7 @@ def process_vcs_credits(
         )
         .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
         .set_vcs_vintage_year(date_column='Vintage End')
-        .convert_to_datetime(columns=['transaction_date'])
+        .convert_to_datetime(columns=['transaction_date'], dayfirst=True)
     )
 
     issuances = data.calculate_vcs_issuances()
@@ -213,7 +213,7 @@ def process_vcs_projects(
         .add_retired_and_issued_totals(credits=credits)
         .add_first_issuance_and_retirement_dates(credits=credits)
         .add_missing_columns(columns=project_schema.columns.keys())
-        .convert_to_datetime(columns=['listed_at'])
+        .convert_to_datetime(columns=['listed_at'], dayfirst=True)
         .validate(schema=project_schema)
     )
 
