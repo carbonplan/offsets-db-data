@@ -45,6 +45,10 @@ jobs:
         run: |
           python -m pip install .
 
+      - name: List packages
+        run: |
+          python -m pip list
+
       - name: Run tests
         run: |
           python -m pytest
