@@ -65,7 +65,7 @@ def convert_to_datetime(
 ) -> pd.DataFrame:
     for column in columns:
         if column in df.columns:
-            df[column] = pd.to_datetime(df[column], utc=utc, **kwargs)
+            df[column] = pd.to_datetime(df[column], utc=utc, **kwargs).dt.normalize()
         else:
             raise KeyError(f"The column '{column}' is missing.")
     return df
