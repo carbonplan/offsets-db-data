@@ -9,6 +9,22 @@ import pandas_flavor as pf
 
 @pf.register_dataframe_method
 def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country') -> pd.DataFrame:
+    """
+    Harmonize country names in the DataFrame to standardized country names.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with country data.
+    country_column : str, optional
+        The name of the column containing country names to be harmonized (default is 'country').
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with harmonized country names in the specified column.
+    """
+
     print('Harmonizing country names...')
     cc = coco.CountryConverter()
     df[country_column] = cc.pandas_convert(df[country_column], to='name')
@@ -18,7 +34,22 @@ def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country'
 
 @pf.register_dataframe_method
 def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
-    """Add category based on protocol"""
+    """
+    Add a category to each record in the DataFrame based on its protocol.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing protocol data.
+    protocol_mapping : dict
+        Dictionary mapping protocol strings to categories.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'category' column, derived from the protocol information.
+    """
+
     print('Adding category based on protocol...')
     df['category'] = df['protocol'].apply(
         lambda item: get_protocol_category(protocol_strs=item, protocol_mapping=protocol_mapping)
@@ -28,7 +59,20 @@ def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
 
 @pf.register_dataframe_method
 def add_is_compliance_flag(df: pd.DataFrame) -> pd.DataFrame:
-    """Add is_arb flag"""
+    """
+    Add a compliance flag to the DataFrame based on the protocol.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing protocol data.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'is_compliance' column, indicating if the protocol starts with 'arb-'.
+    """
+
     print('Adding is_compliance flag...')
     df['is_compliance'] = df.apply(
         lambda row: np.any([protocol_str.startswith('arb-') for protocol_str in row['protocol']]),
@@ -44,7 +88,24 @@ def map_protocol(
     inverted_protocol_mapping: dict,
     original_protocol_column: str = 'original_protocol',
 ) -> pd.DataFrame:
-    """Map protocol based on known string"""
+    """
+    Map protocols in the DataFrame to standardized names based on an inverted protocol mapping.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing protocol data.
+    inverted_protocol_mapping : dict
+        Dictionary mapping protocol strings to standardized protocol names.
+    original_protocol_column : str, optional
+        Name of the column containing original protocol information (default is 'original_protocol').
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'protocol' column, containing mapped protocol names.
+    """
+
     print('Mapping protocol based on known string...')
     try:
         df['protocol'] = df[original_protocol_column].apply(
@@ -64,6 +125,18 @@ def harmonize_status_codes(df: pd.DataFrame, *, status_column: str = 'status') -
     """Harmonize project status codes across registries
 
     Excludes ACR, as it requires special treatment across two columns
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with project status data.
+    status_column : str, optional
+        Name of the column containing status codes to harmonize (default is 'status').
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with harmonized project status codes.
     """
     print('Harmonizing status codes')
     with contextlib.suppress(KeyError):
@@ -207,6 +280,22 @@ def add_first_issuance_and_retirement_dates(
 
 @pf.register_dataframe_method
 def add_retired_and_issued_totals(projects: pd.DataFrame, *, credits: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add total quantities of issued and retired credits to each project.
+
+    Parameters
+    ----------
+    projects : pd.DataFrame
+        DataFrame containing project data.
+    credits : pd.DataFrame
+        DataFrame containing credit transaction data.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with two new columns: 'issued' and 'retired', representing the total quantities of issued and retired credits.
+    """
+
     # Drop conflicting columns if they exist
     projects = projects.drop(columns=['issued', 'retired'], errors='ignore')
 
