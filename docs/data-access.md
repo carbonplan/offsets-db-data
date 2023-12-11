@@ -1,17 +1,16 @@
 # Download OffsetsDB
 
-## CSV 
+## CSV
 
-Download the latest version of OffsetsDB in csv:
+Download the latest version of OffsetsDB in CSV:
 
-- [Download Credits](TK)
-- [Download Projects](https://youtu.be/dQw4w9WgXcQ)
+- [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/archive/latest/offsets-db.csv.zip)
 
 ## Parquet
-Download the latest version of OffsetsDB in parquet:
 
-- [Download Credits](TK)
-- [Download Projects](https://youtu.be/dQw4w9WgXcQ)
+Download the latest version of OffsetsDB in [Parquet](https://parquet.apache.org/):
+
+- [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/archive/latest/offsets-db.csv.zip)
 
 You can also use parquet to access the full archive of OffsetsDB, representing the full history of the produciton of OffsetsDB:
 
