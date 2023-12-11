@@ -5,6 +5,20 @@ import pandas_flavor as pf
 
 @pf.register_dataframe_method
 def aggregate_issuance_transactions(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Aggregate issuance transactions by summing the quantity for each combination of project ID, transaction date, and vintage.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing issuance transaction data.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with aggregated issuance transactions, filtered to include only those with a positive quantity.
+    """
+
     # Check if 'transaction_type' exists in DataFrame columns
     if 'transaction_type' not in df.columns:
         raise KeyError("The column 'transaction_type' is missing.")
@@ -33,6 +47,24 @@ def aggregate_issuance_transactions(df: pd.DataFrame) -> pd.DataFrame:
 def filter_and_merge_transactions(
     df: pd.DataFrame, arb_data: pd.DataFrame, project_id_column: str = 'project_id'
 ) -> pd.DataFrame:
+    """
+    Filter transactions based on project ID intersection with ARB data and merge the filtered transactions.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with transaction data.
+    arb_data : pd.DataFrame
+        DataFrame containing ARB issuance data.
+    project_id_column : str, optional
+        The name of the column containing project IDs (default is 'project_id').
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with transactions from the input DataFrame, excluding those present in ARB data, merged with relevant ARB transactions.
+    """
+
     if intersection_values := list(
         set(df[project_id_column]).intersection(set(arb_data[project_id_column]))
     ):
@@ -45,6 +77,20 @@ def filter_and_merge_transactions(
 
 @pf.register_dataframe_method
 def handle_non_issuance_transactions(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Filter the DataFrame to include only non-issuance transactions.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing transaction data.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame containing only transactions where 'transaction_type' is not 'issuance'.
+    """
+
     df_non_issuance = df[df['transaction_type'] != 'issuance']
     return df_non_issuance
 

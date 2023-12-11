@@ -55,6 +55,21 @@ def load_column_mapping(*, registry_name: str, download_type: str, mapping_path:
 
 @pf.register_dataframe_method
 def set_registry(df: pd.DataFrame, registry_name: str) -> pd.DataFrame:
+    """
+    Set the registry name for each record in the DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame.
+    registry_name : str
+        Name of the registry to set.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'registry' column set to the specified registry name."""
+
     df['registry'] = registry_name
     return df
 
@@ -63,6 +78,26 @@ def set_registry(df: pd.DataFrame, registry_name: str) -> pd.DataFrame:
 def convert_to_datetime(
     df: pd.DataFrame, *, columns: list, utc: bool = True, **kwargs: typing.Any
 ) -> pd.DataFrame:
+    """
+    Convert specified columns in the DataFrame to datetime format.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame.
+    columns : list
+        List of column names to convert to datetime.
+    utc : bool, optional
+        Whether to convert to UTC (default is True).
+    **kwargs : typing.Any
+        Additional keyword arguments passed to pd.to_datetime.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with specified columns converted to datetime format.
+    """
+
     for column in columns:
         if column in df.columns:
             df[column] = pd.to_datetime(df[column], utc=utc, **kwargs).dt.normalize()
@@ -73,6 +108,22 @@ def convert_to_datetime(
 
 @pf.register_dataframe_method
 def add_missing_columns(df: pd.DataFrame, *, columns: list[str]) -> pd.DataFrame:
+    """
+    Add any missing columns to the DataFrame and initialize them with None.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame.
+    columns : list[str]
+        List of column names to ensure presence in the DataFrame.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with all specified columns, adding missing ones initialized to None.
+    """
+
     for column in columns:
         if column not in df.columns:
             df.loc[:, column] = None
@@ -81,6 +132,22 @@ def add_missing_columns(df: pd.DataFrame, *, columns: list[str]) -> pd.DataFrame
 
 @pf.register_dataframe_method
 def validate(df: pd.DataFrame, schema: pa.DataFrameSchema) -> pd.DataFrame:
+    """
+    Validate the DataFrame against a given Pandera schema.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame.
+    schema : pa.DataFrameSchema
+        Pandera schema to validate against.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with columns sorted according to the schema and validated against it.
+    """
+
     results = schema.validate(df)
     keys = sorted(list(schema.columns.keys()))
     results = results[keys]
@@ -90,6 +157,22 @@ def validate(df: pd.DataFrame, schema: pa.DataFrameSchema) -> pd.DataFrame:
 
 @pf.register_dataframe_method
 def clean_and_convert_numeric_columns(df: pd.DataFrame, *, columns: list[str]) -> pd.DataFrame:
+    """
+    Clean and convert specified columns to numeric format in the DataFrame.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame.
+    columns : list[str]
+        List of column names to clean and convert to numeric format.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with specified columns cleaned (removing commas) and converted to numeric format.
+    """
+
     for column in columns:
         df[column] = df[column].str.replace(',', '', regex=True)
         df[column] = pd.to_numeric(df[column], errors='coerce')
