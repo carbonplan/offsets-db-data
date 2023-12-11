@@ -40,6 +40,17 @@ data-access.md
 ```{toctree}
 ---
 maxdepth: 2
+caption: Reference
+hidden:
+---
+
+api.md
+
+```
+
+```{toctree}
+---
+maxdepth: 2
 caption: Project links
 hidden:
 ---
