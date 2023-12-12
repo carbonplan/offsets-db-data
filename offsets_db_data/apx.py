@@ -17,6 +17,22 @@ from offsets_db_data.projects import *  # noqa: F403
 
 @pf.register_dataframe_method
 def determine_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.DataFrame:
+    """
+    Assign a transaction type to each record in the DataFrame based on the download type.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing transaction data.
+    download_type : str
+        Type of transaction ('issuances', 'retirements', 'cancellations') to determine the transaction type.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'transaction_type' column, containing assigned transaction types based on download_type.
+    """
+
     transaction_type_mapping = {
         'issuances': 'issuance',
         'retirements': 'retirement',
@@ -30,6 +46,27 @@ def determine_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.Da
 def process_apx_credits(
     df: pd.DataFrame, *, download_type: str, registry_name: str, arb: pd.DataFrame | None = None
 ) -> pd.DataFrame:
+    """
+    Process APX credits data by setting registry, determining transaction types, renaming columns,
+    converting date columns, aggregating issuances (if applicable), and validating the schema.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with raw APX credits data.
+    download_type : str
+        Type of download ('issuances', 'retirements', etc.).
+    registry_name : str
+        Name of the registry for setting and mapping columns.
+    arb : pd.DataFrame | None, optional
+        Additional DataFrame for data merging (default is None).
+
+    Returns
+    -------
+    pd.DataFrame
+        Processed DataFrame with APX credits data.
+    """
+
     df = df.copy()
 
     column_mapping = load_column_mapping(
@@ -91,6 +128,22 @@ def harmonize_acr_status(row: pd.Series) -> str:
 
 @pf.register_dataframe_method
 def add_project_url(df: pd.DataFrame, *, registry_name: str) -> pd.DataFrame:
+    """
+    Add a project URL to each record in the DataFrame based on the registry name and project ID.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing project data.
+    registry_name : str
+        Name of the registry ('american-carbon-registry', 'climate-action-reserve', 'art-trees').
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'project_url' column, containing URLs for each project.
+    """
+
     if registry_name == 'american-carbon-registry':
         base = 'https://acr2.apx.com/mymodule/reg/prjView.asp?id1='
     elif registry_name == 'climate-action-reserve':
@@ -109,6 +162,25 @@ def add_project_url(df: pd.DataFrame, *, registry_name: str) -> pd.DataFrame:
 def process_apx_projects(
     df: pd.DataFrame, *, credits: pd.DataFrame, registry_name: str
 ) -> pd.DataFrame:
+    """
+    Process APX projects data, including renaming, adding, and validating columns, harmonizing statuses,
+    and merging with credits data.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with raw projects data.
+    credits : pd.DataFrame
+        DataFrame containing credits data for merging.
+    registry_name : str
+        Name of the registry for specific processing steps.
+
+    Returns
+    -------
+    pd.DataFrame
+        Processed DataFrame with harmonized and validated APX projects data.
+    """
+
     df = df.copy()
     credits = credits.copy()
     registry_project_column_mapping = load_registry_project_column_mapping(

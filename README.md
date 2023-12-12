@@ -45,7 +45,25 @@ python -m pip install -e ".[all]"
 # or
 
 python -m pip install -e ".[dev]"
+
 ```
+
+## Building the documentation
+
+To build the documentation locally, you can use [sphinx](https://www.sphinx-doc.org/en/master/). You can install the documentation dependencies by running:
+
+```bash
+python -m pip install -r requirements-docs.txt
+python -m pip install .
+```
+
+Then, you can build the documentation by running:
+
+```bash
+sphinx-build docs docs/_build
+```
+
+You can view the documentation by opening `docs/_build/index.html` in your browser.
 
 ## license
 

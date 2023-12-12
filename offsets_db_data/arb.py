@@ -21,17 +21,32 @@ def _get_registry(item):
 @pf.register_dataframe_method
 def process_arb(df: pd.DataFrame) -> pd.DataFrame:
     """
+    Process ARB (Air Resources Board) data by renaming columns, handling nulls, interpolating vintages,
+    and transforming the data structure for transactions.
 
     Parameters
     ----------
     df : pd.DataFrame
-        Arb data
+        Input DataFrame containing raw ARB data.
 
     Returns
     -------
     data : pd.DataFrame
-        Arb data with processed columns
+        Processed DataFrame with ARB data. Columns include 'opr_id', 'vintage', 'issued_at' (interpolated),
+        various credit transaction types, and quantities. The DataFrame is also validated against
+        a predefined schema for credit data.
 
+    Notes
+    -----
+    - The function renames columns for readability and standardization.
+    - It interpolates missing vintage values and handles NaNs in 'issuance' column.
+    - Retirement transactions are derived based on compliance period dates.
+    - The DataFrame is melted to restructure credit data.
+    - Zero retirement events are dropped as they are considered artifacts.
+    - A prefix is added to 'project_id' to indicate the source.
+    - The 'registry' column is derived based on the project_id prefix.
+    - The 'vintage' column is converted to integer type.
+    - Finally, the data is converted to datetime where necessary and validated against a predefined schema.
     """
 
     df = df.copy()
