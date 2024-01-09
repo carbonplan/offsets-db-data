@@ -373,7 +373,7 @@ def process_vcs_projects(
         .add_vcs_compliance_projects()
         .add_retired_and_issued_totals(credits=credits)
         .add_first_issuance_and_retirement_dates(credits=credits)
-        .add_missing_columns(columns=project_schema.columns.keys())
+        .add_missing_columns(schema=project_schema)
         .convert_to_datetime(columns=['listed_at'], dayfirst=True)
         .validate(schema=project_schema)
     )

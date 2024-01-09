@@ -97,28 +97,38 @@ def process_gld_credits(
         Processed DataFrame with Gold Standard credits data.
     """
 
-    df = df.copy()
     column_mapping = load_column_mapping(
         registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
     )
 
     columns = {v: k for k, v in column_mapping.items()}
-    data = (
-        df.rename(columns=columns)
-        .set_registry(registry_name=registry_name)
-        .determine_gld_transaction_type(download_type=download_type)
-        .add_gld_project_id_from_credits(prefix=prefix)
-    )
 
-    if download_type == 'issuances':
-        data = data.aggregate_issuance_transactions()
+    df = df.copy()
+    if not df.empty:
+        data = (
+            df.rename(columns=columns)
+            .set_registry(registry_name=registry_name)
+            .determine_gld_transaction_type(download_type=download_type)
+            .add_gld_project_id_from_credits(prefix=prefix)
+        )
 
-    data = data.convert_to_datetime(columns=['transaction_date']).validate(
-        schema=credit_without_id_schema
-    )
+        if download_type == 'issuances':
+            data = data.aggregate_issuance_transactions()
 
-    if arb is not None and not arb.empty:
-        data = data.merge_with_arb(arb=arb)
+        data = data.convert_to_datetime(columns=['transaction_date']).validate(
+            schema=credit_without_id_schema
+        )
+
+        if arb is not None and not arb.empty:
+            data = data.merge_with_arb(arb=arb)
+
+    else:
+        data = (
+            pd.DataFrame(columns=credit_without_id_schema.columns.keys())
+            .add_missing_columns(schema=credit_without_id_schema)
+            .convert_to_datetime(columns=['transaction_date'])
+            .validate(schema=credit_without_id_schema)
+        )
 
     return data
 
@@ -194,29 +204,58 @@ def process_gld_projects(
         Processed DataFrame with harmonized and validated Gold Standard projects data.
     """
 
-    df = df.copy()
-    credits = credits.copy()
-
     registry_project_column_mapping = load_registry_project_column_mapping(
         registry_name=registry_name, file_path=PROJECT_SCHEMA_UPATH
     )
     inverted_column_mapping = {value: key for key, value in registry_project_column_mapping.items()}
     protocol_mapping = load_protocol_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
-    data = (
-        df.rename(columns=inverted_column_mapping)
-        .set_registry(registry_name=registry_name)
-        .add_gld_project_id(prefix=prefix)
-        .add_gld_project_url()
-        .harmonize_country_names()
-        .harmonize_status_codes()
-        .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
-        .add_category(protocol_mapping=protocol_mapping)
-        .add_is_compliance_flag()
-        .add_retired_and_issued_totals(credits=credits)
-        .add_first_issuance_and_retirement_dates(credits=credits)
-        .add_missing_columns(columns=project_schema.columns.keys())
-        .convert_to_datetime(columns=['listed_at'])
-        .validate(schema=project_schema)
-    )
-    return data
+
+    df = df.copy()
+    credits = credits.copy()
+
+    if not df.empty and not credits.empty:
+        data = (
+            df.rename(columns=inverted_column_mapping)
+            .set_registry(registry_name=registry_name)
+            .add_gld_project_id(prefix=prefix)
+            .add_gld_project_url()
+            .harmonize_country_names()
+            .harmonize_status_codes()
+            .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
+            .add_category(protocol_mapping=protocol_mapping)
+            .add_is_compliance_flag()
+            .add_retired_and_issued_totals(credits=credits)
+            .add_first_issuance_and_retirement_dates(credits=credits)
+            .add_missing_columns(schema=project_schema)
+            .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])
+            .validate(schema=project_schema)
+        )
+        return data
+
+    elif not df.empty and credits.empty:
+        data = (
+            df.rename(columns=inverted_column_mapping)
+            .set_registry(registry_name=registry_name)
+            .add_gld_project_id(prefix=prefix)
+            .add_gld_project_url()
+            .harmonize_country_names()
+            .harmonize_status_codes()
+            .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
+            .add_category(protocol_mapping=protocol_mapping)
+            .add_is_compliance_flag()
+            .add_missing_columns(schema=project_schema)
+            .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])
+            .validate(schema=project_schema)
+        )
+        return data
+    elif df.empty:
+        data = (
+            pd.DataFrame(columns=project_schema.columns.keys())
+            .add_missing_columns(schema=project_schema)
+            .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])
+        )
+
+        data['is_compliance'] = data['is_compliance'].astype(bool)
+        data = data.validate(schema=project_schema)
+        return data
