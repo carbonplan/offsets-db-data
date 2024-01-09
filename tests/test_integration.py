@@ -97,6 +97,44 @@ def test_gld(
     assert df_credits['project_id'].str.startswith(prefix).all()
 
 
+@pytest.mark.parametrize(
+    'df_credits',
+    [
+        pd.DataFrame().process_gld_credits(download_type='issuances'),
+        pd.concat(
+            [
+                pd.read_csv(
+                    's3://carbonplan-offsets-db/raw/2023-11-27/gold-standard/issuances.csv.gz'
+                ).process_gld_credits(download_type='issuances'),
+                pd.read_csv(
+                    's3://carbonplan-offsets-db/raw/2023-11-27/gold-standard/retirements.csv.gz'
+                ).process_gld_credits(download_type='retirements'),
+            ]
+        ),
+    ],
+)
+@pytest.mark.parametrize(
+    'projects',
+    [
+        pd.DataFrame(),
+        pd.read_csv('s3://carbonplan-offsets-db/raw/2023-11-28/gold-standard/projects.csv.gz'),
+    ],
+)
+def test_gld_empty(df_credits, projects):
+    prefix = 'GLD'
+
+    credit_without_id_schema.validate(df_credits)
+
+    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+
+    df_projects = projects.process_gld_projects(credits=df_credits)
+    project_schema.validate(df_projects)
+
+    # check if all project_id use the same prefix
+    assert df_projects['project_id'].str.startswith(prefix).all()
+    assert df_credits['project_id'].str.startswith(prefix).all()
+
+
 def test_gcc(
     date,
     bucket,
