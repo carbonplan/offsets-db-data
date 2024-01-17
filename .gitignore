@@ -162,3 +162,5 @@ offsets_db_data/_version.py
 
 .DS_Store
 .idea
+.jupyter_cache/
+jupyter_execute/

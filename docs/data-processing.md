@@ -1,3 +1,12 @@
+---
+jupytext:
+  text_representation:
+    format_name: myst
+kernelspec:
+  display_name: Python 3
+  name: python3
+---
+
 # Order of Operations
 
 OffsetsDB follows a typical extract-transform-load (ETL) workflow.
@@ -33,11 +42,11 @@ These functions contain the registry-specific logic needed to map Verra's raw da
 ### An example
 
 In practice, replicating the behavior of OffsetsDB should be simple.
-Here's an example of using `offsets_db_download` to transform the raw transactions data from Verra into a normalized, analysis ready file:
+Here's an example of using `offsets_db_data` to transform the raw transactions data from Verra into a normalized, analysis ready file:
 
-```python
+```{code-cell} ipython3
 import pandas as pd
-from offsets_db_download import vcs
+from offsets_db_data import vcs
 
 archive_fname = 's3://carbonplan-offsets-db/raw/2023-12-05/verra/transactions.csv.gz'
 raw_credits =  pd.read_csv(archive_fname)
@@ -48,12 +57,12 @@ Invoking single transformation functions, like `set_vcs_vintage_year` is even mo
 Let's say you want to understand more about how OffsetsDB assigns Verra credits a vintage year.
 You can explore the behavior of this single transformation function by calling:
 
-```python
-raw_credits.set_vcs_vintage_year(date_column='Vintage End')
+```{code-cell} ipython3
+raw_credits.set_vcs_vintage_year(date_column='Vintage End').head()
 ```
 
 It's worth noting that we've wrapped all transformation functions using the `pandas_flavor.register_dataframe_method` decorator.
-That means that after importing a registry module from `offsets_db_download`, the transformation functions of that module are directly callable by any Pandas dataframe.
+That means that after importing a registry module from `offsets_db_data`, the transformation functions of that module are directly callable by any Pandas dataframe.
 
 ## Initial Column Mapping
 
