@@ -1,4 +1,6 @@
-# Definitions of some of the technical terms used in OffsetsDB
+# Glossary
+
+Definitions of some of the technical terms used in OffsetsDB
 
 ## Terms that apply to offset projects
 
