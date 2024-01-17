@@ -2,6 +2,7 @@ import json
 import typing
 from collections import defaultdict
 
+import numpy as np
 import pandas as pd
 import pandas_flavor as pf
 import pandera as pa
@@ -107,7 +108,7 @@ def convert_to_datetime(
 
 
 @pf.register_dataframe_method
-def add_missing_columns(df: pd.DataFrame, *, columns: list[str]) -> pd.DataFrame:
+def add_missing_columns(df: pd.DataFrame, *, schema: pa.DataFrameSchema) -> pd.DataFrame:
     """
     Add any missing columns to the DataFrame and initialize them with None.
 
@@ -115,8 +116,9 @@ def add_missing_columns(df: pd.DataFrame, *, columns: list[str]) -> pd.DataFrame
     ----------
     df : pd.DataFrame
         Input DataFrame.
-    columns : list[str]
-        List of column names to ensure presence in the DataFrame.
+    schema : pa.DataFrameSchema
+        Pandera schema to validate against.
+
 
     Returns
     -------
@@ -124,9 +126,23 @@ def add_missing_columns(df: pd.DataFrame, *, columns: list[str]) -> pd.DataFrame
         DataFrame with all specified columns, adding missing ones initialized to None.
     """
 
-    for column in columns:
+    default_values = {
+        np.dtype('int64'): 0,
+        np.dtype('int32'): 0,
+        np.dtype('float64'): 0.0,
+        np.dtype('float32'): 0.0,
+        np.dtype('O'): None,
+        np.dtype('<U'): None,
+        np.dtype('U'): None,
+        np.dtype('bool'): False,
+        np.dtype('<M8[ns]'): pd.NaT,  # datetime64[ns]
+    }
+
+    for column, value in schema.columns.items():
+        dtype = value.dtype.type
         if column not in df.columns:
-            df.loc[:, column] = None
+            default_value = default_values.get(dtype, None)
+            df[column] = pd.Series([default_value] * len(df), index=df.index, dtype=dtype)
     return df
 
 
