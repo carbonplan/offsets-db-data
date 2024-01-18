@@ -18,7 +18,7 @@ Load involves uploading the resulting data to S3 and the Postgres-backend that p
 
 We download a fresh copy of project and transaction data on a daily basis.
 While downloading, we make no changes to the raw data provided by the registries.
-All data are permanently archived and are made immediately available for download in a publicly available S3 bucket (see Data Access TK).
+All data are permanently archived and are made immediately available for download in a publicly available S3 bucket (see [Data Access](data-access.md)).
 
 We have no plans to release the code the directly interacts with registries.
 We decided to keep this part of OffsetsDB private in an effort to limit download requests from the registries.
@@ -83,7 +83,7 @@ These rules specify things like when measurements must be made and what paperwor
 Unfortunately, there is no standardized way of referring to the exact protocol (or protocol version) used to develop an offset project.
 Even within the domain of a single registry, references to the exact protocol used to develop a project are often inconsistent.
 Take for example the Clean Development Mechanism protocol AMS-III.D., "Methane recovery in animal manure management systems".
-Across all six registries included in OffsetsDB, we identified twenty-two unique strings referring to this single protocol.
+Across all six registries included in OffsetsDB, we identified twenty-two unique ways of referring to this one protocol.
 
 OffsetsDB addresses this problem by manually assigning every known protocol string to a common schema.
 Continuing with the AMS-III.D. example, we map all twenty-two "known strings" that describe the same protocol to a single, unified reference, `ams-iii-d`.
@@ -104,10 +104,9 @@ Several other categories (and sub-categories) exist within the data.
 We plan to further refine and sub-divide protocol (and project) categories in the future.
 
 ## Registry specific transformations
-
-Some of the transformations involved in producing OffsetsDB require special knowledge or assumptions about the underlying data.
-This section highlights some of those special cases.
-For additional context, consult specific function docstrings or [reach out on GitHub](https://github.com/carbonplan/offsets-db-data/issues) if something doesn't make sense.
+Some transformations involved in producing OffsetsDB require special knowledge or assumptions about the underlying data.
+This section highlights special cases. 
+For additional context, consult specific function docstrings or [reach out on GitHub](https://github.com/carbonplan/offsets-db-data/issues) if something doesn't make sense. 
 
 ### American Carbon Registry
 
