@@ -104,9 +104,10 @@ Several other categories (and sub-categories) exist within the data.
 We plan to further refine and sub-divide protocol (and project) categories in the future.
 
 ## Registry specific transformations
+
 Some transformations involved in producing OffsetsDB require special knowledge or assumptions about the underlying data.
-This section highlights special cases. 
-For additional context, consult specific function docstrings or [reach out on GitHub](https://github.com/carbonplan/offsets-db-data/issues) if something doesn't make sense. 
+This section highlights special cases.
+For additional context, consult specific function docstrings or [reach out on GitHub](https://github.com/carbonplan/offsets-db-data/issues) if something doesn't make sense.
 
 ### American Carbon Registry
 
