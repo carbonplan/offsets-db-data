@@ -53,7 +53,7 @@ myst_url_schemes = ['http', 'https', 'mailto']
 copybutton_prompt_text = r'>>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: '
 copybutton_prompt_is_regexp = True
 
-nb_execution_mode = 'cache'
+# nb_execution_mode = 'cache'
 nb_execution_timeout = 600
 nb_execution_raise_on_error = True
 autosummary_generate = True
