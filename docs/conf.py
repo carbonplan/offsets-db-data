@@ -31,7 +31,7 @@ release = f'v{offsets_db_data.__version__}'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'myst_parser',
+    'myst_nb',
     'sphinxext.opengraph',
     'sphinx_copybutton',
     'sphinx_design',
@@ -74,6 +74,7 @@ html_theme_options = {
     'light_logo': 'monogram-dark-cropped.png',
     'dark_logo': 'monogram-light-cropped.png',
 }
+
 
 html_theme = 'furo'
 html_title = ''

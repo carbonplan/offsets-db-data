@@ -1,6 +1,7 @@
 furo>=2023.09.10
-myst-parser
+myst-nb
 sphinx
 sphinx-copybutton
 sphinx-design
 sphinxext-opengraph
+jupyterlab

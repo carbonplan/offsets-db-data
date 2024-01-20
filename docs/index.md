@@ -35,6 +35,7 @@ hidden:
 ---
 install-offsets-db-data.md
 data-access.md
+
 ```
 
 ```{toctree}
@@ -44,8 +45,9 @@ caption: Reference
 hidden:
 ---
 
+data-processing.md
 api.md
-
+glossary.md
 ```
 
 ```{toctree}
