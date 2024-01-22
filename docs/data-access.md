@@ -23,17 +23,9 @@ Download the latest version of OffsetsDB in [Parquet](https://parquet.apache.org
 
 - [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/archive/latest/offsets-db.parquet.zip)
 
-## Raw Registry Data
+## Accessing The Full Data Archive Through Python
 
-You can also use parquet to access the full archive of OffsetsDB, representing the full history of the produciton of OffsetsDB:
-
-```python
-# TK an example of how we want folks to work with archive data
-```
-
-## Accessing Data Through Python
-
-For more dynamic and programmatic access to OffsetsDB, you can use our Python data package. This package allows you to load and interact with the data directly in your Python environment.
+For more dynamic and programmatic access to OffsetsDB, you can use our Python data package. This package allows you to load and interact with the data directly in your Python environment. With the data package, you can access the data in a variety of formats including CSV (for raw data) and Parquet (for processed data).
 
 ### Installation
 
@@ -62,8 +54,15 @@ The catalog includes different datasets, like credits and projects. You can list
 
 ```{code-cell} ipython3
 # List available datasets in the catalog
-print(list(catalog.keys()))
+[key for key in sorted(list(catalog.keys()))]
+```
 
+#### Getting Descriptive Information About a Dataset
+
+You can get information about a dataset using the `describe()` method. For example, to get information about the 'credits' dataset:
+
+```{code-cell} ipython3
+catalog['raw_projects'].describe()
 ```
 
 #### Accessing Specific Datasets
