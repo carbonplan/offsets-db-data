@@ -38,7 +38,7 @@ repository = "https://github.com/carbonplan/offsets-db-data"
 include = ["offsets_db_data*"]
 
 [tool.setuptools.package-data]
-offsets_db_data = ["py.typed", "configs/*.json"]
+offsets_db_data = ["py.typed", "configs/*.json", "*.yaml"]
 
 [tool.setuptools_scm]
 version_scheme = "post-release"

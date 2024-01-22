@@ -1,0 +1,141 @@
+sources:
+  credits:
+    description: OffsetsDB processed and transformed data
+    driver: parquet
+    parameters:
+      date:
+        description: date of the data to load
+        type: str
+        default: '2024-01-01'
+    args:
+      urlpath: 's3://carbonplan-offsets-db/final/{{ date }}/credits-augmented.parquet'
+      storage_options: { 'anon': True }
+      engine: 'fastparquet'
+
+  projects:
+    description: OffsetsDB processed and transformed data
+    driver: parquet
+    parameters:
+      date:
+        description: date of the data to load
+        type: str
+        default: '2024-01-01'
+    args:
+      urlpath: 's3://carbonplan-offsets-db/final/{{ date }}/projects-augmented.parquet'
+      storage_options: { 'anon': True }
+      engine: 'fastparquet'
+
+  raw_projects:
+    description: Raw projects data downloaded from the registries on a daily basis
+    driver: csv
+    parameters:
+      registry:
+        description: registry name
+        type: str
+        default: verra
+        allowed:
+          - verra
+          - art-trees
+          - gold-standard
+          - american-carbon-registry
+          - climate-action-reserve
+          - global-carbon-council
+      date:
+        description: date of the data to load
+        type: str
+        default: '2024-01-01'
+    args:
+      urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/{{ registry }}/projects.csv.gz'
+      storage_options: { 'anon': True }
+
+  raw_verra_transactions:
+    description: Raw Verra transactions data downloaded from the registries on a daily basis
+    driver: csv
+    parameters:
+      date:
+        description: date of the data to load
+        type: str
+        default: '2024-01-01'
+    args:
+      urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/verra/transactions.csv.gz'
+      storage_options: { 'anon': True }
+
+  raw_gold_standard_transactions:
+    description: Raw Gold Standard transactions data downloaded from the registries on a daily basis
+    driver: csv
+    parameters:
+      date:
+        description: date of the data to load
+        type: str
+        default: '2024-01-01'
+      transaction_type:
+        description: transaction type
+        type: str
+        default: 'issuances'
+        allowed:
+          - issuances
+          - retirements
+          - cancellations
+    args:
+      urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/gold-standard/{{ transaction_type }}.csv.gz'
+      storage_options: { 'anon': True }
+
+  raw_art_trees_transactions:
+    description: Raw Art Trees transactions data downloaded from the registries on a daily basis
+    driver: csv
+    parameters:
+      date:
+        description: date of the data to load
+        type: str
+        default: '2024-01-01'
+      transaction_type:
+        description: transaction type
+        type: str
+        default: 'issuances'
+        allowed:
+          - issuances
+          - retirements
+          - cancellations
+    args:
+      urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/art-trees/{{ transaction_type }}.csv.gz'
+      storage_options: { 'anon': True }
+
+    raw_global_carbon_council_transactions:
+      description: Raw Global Carbon Council transactions data downloaded from the registries on a daily basis
+      driver: csv
+      parameters:
+        date:
+          description: date of the data to load
+          type: str
+          default: '2024-01-01'
+        transaction_type:
+          description: transaction type
+          type: str
+          default: 'issuances'
+          allowed:
+            - issuances
+            - retirements
+            - cancellations
+      args:
+        urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/global-carbon-council/{{ transaction_type }}.csv.gz'
+        storage_options: { 'anon': True }
+
+  raw_american_carbon_registry_transactions:
+    description: Raw American Carbon Registry transactions data downloaded from the registries on a daily basis
+    driver: csv
+    parameters:
+      date:
+        description: date of the data to load
+        type: str
+        default: '2024-01-01'
+      transaction_type:
+        description: transaction type
+        type: str
+        default: 'issuances'
+        allowed:
+          - issuances
+          - retirements
+          - cancellations
+    args:
+      urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/american-carbon-registry/{{ transaction_type }}.csv.gz'
+      storage_options: { 'anon': True }
