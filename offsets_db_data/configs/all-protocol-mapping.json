@@ -28,6 +28,12 @@
   "acm0002": {
     "category": "renewable-energy",
     "known-strings": [
+      "ACM0002: “Grid-connected electricity generation from renewable sources” (Version 21.0);",
+      "ACM0002: “Grid-connected electricity generation from renewable sources” (Version 21.0)",
+      "Applied methodologies (Shall be approved by the GCC or the CDM) ACM0002: “Grid-connected electricity generation from renewable sources” (Version 21.0)",
+      "ACM0002.: Grid-connected electricity generation from renewable sources, Version 21.0 ",
+      "ACM0002: \"Grid-connected electricity generation from renewable sources\",Version 21.0",
+      "Approved CDM Methodology: Grid-connected electricity generation from Renewable sources, ACM0002, Version 21",
       "ACM0002 Grid-connected electricity generation from renewable sources",
       "AMS  I.D Version 18 & ACM0002 , version 20.0",
       "ACM0002 V21",
@@ -35,6 +41,11 @@
       "ACM0002&20.0",
       "ACM0002 ver 21.0",
       "ACM0002 ver 21.0",
+      "ACM0002 Version 21.0",
+      "ACM0002 v21.0",
+      "ACM0002, Version 21",
+      "ACM0002, Version 21.0",
+      "ACM0002,Version 21",
       "ACM0002: Grid-connected electricity generation from renewable sources ; Version 21.0",
       "ACM0002 ,Version 21",
       "ACM0002: Grid-connected electricity generation from renewable sources  (Version 20.0);",
@@ -58,6 +69,8 @@
       "ACM0002 – Grid-connected electricity generation from renewable sources, version 21.0",
       "ACM0002 – Grid-connected electricity generation from renewable  sources, version 20.0'",
       "GCCM001 Version 2.0 /ACM0002 Version 20.0",
+      "GCCM001 Version: v.4.0",
+      "GCCM001-v4.0",
       "GCCM001 (Version 3.0) and ACM0002 (Version 20.0)",
       "Large-scale Consolidated Methodology for Grid-connected electricity generation from renewable sources (ACM0002 v20.0)",
       "CDM methodology ACM0002 “Grid-connected electricity generation from renewable sources” version 20.0",
@@ -758,6 +771,9 @@
   "ams-i-d": {
     "category": "renewable-energy",
     "known-strings": [
+      "AMS-I.D.: Grid connected renewable electricity generation --- Version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation --- Version 18.02",
+      "AMS-I.D.: Grid connected renewable electricity generation -Version 18.0.",
       "AMS-I.D. Grid connected renewable electricity generation",
       "AMS-I.D.; AMS-II.E.",
       "AMS-I.D.; AMS-III.E.",
@@ -883,6 +899,8 @@
   "ams-i-f": {
     "category": "renewable-energy",
     "known-strings": [
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid --- Version 4.02",
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid--- Version 4.02",
       "AMS-I.F. Renewable electricity generation for captive use and mini-grid",
       "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
       "AMS-I.F.; AMS-III.S.",
@@ -1700,7 +1718,12 @@
       "GCCM001 - 3.0",
       "GCCM001 Methodology for Renewable Energy Generation projects supplying Electricity to Grid or Captive Consumers Version 3.0",
       "GCCM001 v2.0",
-      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers version 4.0"
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers version 4.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers (Version 4.0)",
+      "GCCM001 Methodology for Renewable Energy Generation Projects  Supplying Electricity to Grid or Captive Consumers , version 3.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects  Supplying Electricity to Grid or Captive Consumers , Ver 04.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects  Supplying Electricity to Grid or Captive Consumers , Version 4.0.",
+      "GCCM001 Methodology for Renewable Energy Generation Projects  Supplying Electricity to Grid or Captive Consumers , version 4.0"
     ],
     "program": "gcc"
   },
@@ -1709,6 +1732,26 @@
       "GCCM002 v1.0 –Methodology for Energy Efficient Pumping Projects"
     ],
     "program": "gcc"
+  },
+  "gs-shipping": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "GS Retrofit Energy Efficiency Measures in Shipping v2",
+      "GS Retrofit Energy Efficiency Measures in Shipping v1"
+    ],
+    "url": "https://globalgoals.goldstandard.org/standards/422_V2.0_EE_Shipping_Retrofit-Energy-Efficiency-Measures-in-Shipping.pdf"
+  },
+  "gs-alt-coal": {
+    "category": "energy-efficiency",
+    "known-strings": ["GS Alternative Ignition Coal Fires v1."],
+    "url": "https://www.goldstandard.org/sites/default/files/documents/alternative_ignition.pdf"
+  },
+  "gs-reforest": {
+    "category": "forest",
+    "known-strings": [
+      "Afforestation/Reforestation GHG Emissions Reduction & Sequestration Methodology"
+    ],
+    "url": "https://globalgoals.goldstandard.org/standards/403_V2.0_LUF_AR-Methodology-GHGs-emission-reduction-and-Sequestration-Methodology.pdf"
   },
   "gs-cookstoves": {
     "category": "cookstove",
@@ -1902,18 +1945,18 @@
     "program": "vcs"
   },
   "vm0026": {
-    "category": "land-use",
+    "category": "agriculture",
     "known-strings": ["VM0026; AR-ACM0003; VM0042", "VM0026"],
     "program": "vcs",
     "url": "https://verra.org/methodologies/vm0026-methodology-for-sustainable-grassland-management-sgm-v1-0/"
   },
   "vm0032": {
-    "category": "land-use",
+    "category": "agriculture",
     "known-strings": ["VM0032"],
     "program": "vcs"
   },
   "vm0033": {
-    "category": "land-use",
+    "category": "unknown",
     "known-strings": ["VM0033"],
     "program": "vcs",
     "url": "https://verra.org/methodologies/vm0033-methodology-for-tidal-wetland-and-seagrass-restoration-v2-1/"
@@ -1947,7 +1990,7 @@
     "program": "vcs"
   },
   "vm0041": {
-    "category": "ghg-management",
+    "category": "agriculture",
     "known-strings": ["VM0041"],
     "program": "vcs",
     "sub-category": "livestock"
