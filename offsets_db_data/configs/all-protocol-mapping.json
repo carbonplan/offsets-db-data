@@ -1801,7 +1801,7 @@
     ]
   },
   "gs-drinking-water": {
-    "category":  "energy-efficiency",
+    "category": "energy-efficiency",
     "sub-category": "drinking-water",
     "known-strings": [
       "GS Methodology for emission reductions from safe drinking water supply"
