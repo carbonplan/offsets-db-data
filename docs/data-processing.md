@@ -46,6 +46,7 @@ Here's an example of using `offsets_db_data` to transform the raw transactions d
 
 ```{code-cell} ipython3
 import pandas as pd
+pd.options.display.max_columns = 5
 from offsets_db_data import vcs
 
 archive_fname = 's3://carbonplan-offsets-db/raw/2024-01-30/verra/transactions.csv.gz'

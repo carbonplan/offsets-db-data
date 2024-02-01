@@ -42,6 +42,8 @@ Once installed, you can access the data through an Intake catalog. This catalog 
 Loading the Catalog
 
 ```{code-cell} ipython3
+import pandas as pd
+pd.options.display.max_columns = 5
 from offsets_db_data.data import catalog
 
 # Display the catalog
