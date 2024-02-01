@@ -7,7 +7,7 @@ kernelspec:
   name: python3
 ---
 
-# Download OffsetsDB
+# Access OffsetsDB Data
 
 OffsetsDB provides a comprehensive and detailed view of carbon offset credits and projects. You can access the data in various formats or directly through Python using our data package.
 
@@ -42,6 +42,8 @@ Once installed, you can access the data through an Intake catalog. This catalog 
 Loading the Catalog
 
 ```{code-cell} ipython3
+import pandas as pd
+pd.options.display.max_columns = 5
 from offsets_db_data.data import catalog
 
 # Display the catalog
@@ -97,4 +99,8 @@ Calling `projects.read()` and `credits.read()` without specifying a date, will r
 ```{code-cell} ipython3
 projects_df = catalog['projects'](date='2024-01-10').read()
 projects_df.head()
+```
+
+```{note}
+For a more detailed guide on how to access and process the data, refer to the [tutorial](tutorial.md).
 ```

@@ -32,7 +32,7 @@ release = f'v{offsets_db_data.__version__}'
 
 extensions = [
     'myst_nb',
-    'sphinxext.opengraph',
+    # 'sphinxext.opengraph',
     'sphinx_copybutton',
     'sphinx_design',
     'sphinx.ext.autodoc',
