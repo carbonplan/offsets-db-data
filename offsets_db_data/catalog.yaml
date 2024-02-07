@@ -6,7 +6,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
     args:
       urlpath: 's3://carbonplan-offsets-db/final/{{ date }}/credits-augmented.parquet'
       storage_options: { 'anon': True }
@@ -19,7 +19,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
     args:
       urlpath: 's3://carbonplan-offsets-db/final/{{ date }}/projects-augmented.parquet'
       storage_options: { 'anon': True }
@@ -43,7 +43,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
     args:
       urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/{{ registry }}/projects.csv.gz'
       storage_options: { 'anon': True }
@@ -55,7 +55,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
     args:
       urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/verra/transactions.csv.gz'
       storage_options: { 'anon': True }
@@ -67,7 +67,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
       transaction_type:
         description: transaction type
         type: str
@@ -87,7 +87,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
       transaction_type:
         description: transaction type
         type: str
@@ -107,7 +107,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
       transaction_type:
         description: transaction type
         type: str
@@ -127,7 +127,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
       transaction_type:
         description: transaction type
         type: str
@@ -147,7 +147,7 @@ sources:
       date:
         description: date of the data to load
         type: str
-        default: '2024-01-01'
+        default: '2024-02-06'
       transaction_type:
         description: transaction type
         type: str

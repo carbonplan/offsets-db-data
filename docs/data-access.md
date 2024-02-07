@@ -93,11 +93,11 @@ projects_df.head()
 ```
 
 ```{note}
-Calling `projects.read()` and `credits.read()` without specifying a date, will return the data downloaded and processed on `2024-01-01`. To load data for a specific date, you can specify the date as a string in the format `YYYY-MM-DD`. For example:
+Calling `projects.read()` and `credits.read()` without specifying a date, will return the data downloaded and processed on `2024-02-06`. To load data for a specific date, you can specify the date as a string in the format `YYYY-MM-DD`. For example:
 ```
 
 ```{code-cell} ipython3
-projects_df = catalog['projects'](date='2024-01-10').read()
+projects_df = catalog['projects'](date='2024-02-07').read()
 projects_df.head()
 ```
 

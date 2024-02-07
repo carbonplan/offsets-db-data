@@ -49,7 +49,7 @@ import pandas as pd
 pd.options.display.max_columns = 5
 from offsets_db_data import vcs
 
-archive_fname = 's3://carbonplan-offsets-db/raw/2024-01-30/verra/transactions.csv.gz'
+archive_fname = 's3://carbonplan-offsets-db/raw/2024-02-06/verra/transactions.csv.gz'
 raw_credits =  pd.read_csv(archive_fname)
 processed_credits =  vcs.process_vcs_credits(raw_credits)
 ```

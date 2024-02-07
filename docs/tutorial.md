@@ -47,13 +47,13 @@ We can use the `describe` function to get an overview of what each database enta
 catalog['raw_projects'].describe()
 ```
 
-This indicates that the package allows you to fetch the raw projects data from the registry of your choice, for any particular date. As per the default parameters, it fetches data from the 'verra' registry, for the date '2024-01-01'.
+This indicates that the package allows you to fetch the raw projects data from the registry of your choice, for any particular date. As per the default parameters, it fetches data from the 'verra' registry, for the date '2024-02-06'.
 
-Let's load the `raw_projects` data for the `registry_name` as 'verra' and `date` as '2024-01-30'.
+Let's load the `raw_projects` data for the `registry_name` as 'verra' and `date` as '2024-02-06'.
 
 ```{code-cell} ipython3
 registry_name = 'verra'
-date='2024-01-01'
+date='2024-02-06'
 
 df = catalog['raw_projects'](registry=registry_name, date=date).read()
 ```
