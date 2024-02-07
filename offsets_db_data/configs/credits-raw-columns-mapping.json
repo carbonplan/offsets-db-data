@@ -75,16 +75,16 @@
   },
   "gold-standard": {
     "issuances": {
-      "project_id": null,
-      "quantity": "number_of_credits",
-      "transaction_date": "created_at",
-      "vintage": "vintage"
+      "project_id": "GSID",
+      "quantity": "Quantity",
+      "transaction_date": "Issuance Date",
+      "vintage": "Vintage"
     },
     "retirements": {
-      "project_id": null,
-      "quantity": "number_of_credits",
-      "transaction_date": "created_at",
-      "vintage": "vintage"
+      "project_id": "GSID",
+      "quantity": "Quantity",
+      "transaction_date": "Retirement Date",
+      "vintage": "Vintage"
     }
   },
   "verra": {

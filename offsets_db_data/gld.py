@@ -66,6 +66,28 @@ def add_gld_project_id_from_credits(df: pd.DataFrame, *, prefix: str) -> pd.Data
 
 
 @pf.register_dataframe_method
+def add_gld_project_id(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
+    """
+    Add Gold Standard project IDs to the DataFrame
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing credits data.
+    prefix : str
+        Prefix string to prepend to each project ID.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'project_id' column, containing the generated project IDs.
+    """
+
+    df['project_id'] = prefix + df['project_id'].astype(str)
+    return df
+
+
+@pf.register_dataframe_method
 def process_gld_credits(
     df: pd.DataFrame,
     *,
@@ -109,15 +131,15 @@ def process_gld_credits(
             df.rename(columns=columns)
             .set_registry(registry_name=registry_name)
             .determine_gld_transaction_type(download_type=download_type)
-            .add_gld_project_id_from_credits(prefix=prefix)
+            .add_gld_project_id(prefix=prefix)
         )
 
         if download_type == 'issuances':
             data = data.aggregate_issuance_transactions()
 
-        data = data.convert_to_datetime(columns=['transaction_date']).validate(
-            schema=credit_without_id_schema
-        )
+        data = data.convert_to_datetime(
+            columns=['transaction_date'], yearfirst=True, format='mixed'
+        ).validate(schema=credit_without_id_schema)
 
         if arb is not None and not arb.empty:
             data = data.merge_with_arb(arb=arb)
@@ -149,29 +171,9 @@ def add_gld_project_url(df: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         DataFrame with a new 'project_url' column, containing URLs for each project.
     """
-    df['project_url'] = 'https://registry.goldstandard.org/projects/details/' + df['id'].apply(str)
-    return df
-
-
-@pf.register_dataframe_method
-def add_gld_project_id(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
-    """
-    Add a prefix to each project ID in the DataFrame for Gold Standard projects.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame containing Gold Standard project data.
-    prefix : str
-        Prefix to add to the project IDs.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with updated 'project_id' column, containing the prefixed project IDs.
-    """
-
-    df['project_id'] = df['project_id'].apply(lambda x: f'{prefix}{str(x)}')
+    df['project_url'] = 'https://registry.goldstandard.org/projects?q=gs' + df['project_id'].apply(
+        str
+    )
     return df
 
 
@@ -218,8 +220,8 @@ def process_gld_projects(
         data = (
             df.rename(columns=inverted_column_mapping)
             .set_registry(registry_name=registry_name)
-            .add_gld_project_id(prefix=prefix)
             .add_gld_project_url()
+            .add_gld_project_id(prefix=prefix)
             .harmonize_country_names()
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
