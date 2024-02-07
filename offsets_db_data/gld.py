@@ -171,14 +171,9 @@ def add_gld_project_url(df: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         DataFrame with a new 'project_url' column, containing URLs for each project.
     """
-    if 'id' in df.columns:
-        # TODO: workaround for missing ids in the downloaded CSV file. Figure out how to fix this post launch
-        df['project_url'] = 'https://registry.goldstandard.org/projects/details/' + df['id'].apply(
-            str
-        )
-    else:
-        df['project_url'] = 'https://registry.goldstandard.org/projects/details/'
-
+    df['project_url'] = 'https://registry.goldstandard.org/projects?q=gs' + df['project_id'].apply(
+        str
+    )
     return df
 
 
@@ -225,8 +220,8 @@ def process_gld_projects(
         data = (
             df.rename(columns=inverted_column_mapping)
             .set_registry(registry_name=registry_name)
-            .add_gld_project_id(prefix=prefix)
             .add_gld_project_url()
+            .add_gld_project_id(prefix=prefix)
             .harmonize_country_names()
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
