@@ -4,7 +4,7 @@
     "art-trees": "Program  Country",
     "climate-action-reserve": "Project Site Country",
     "global-carbon-council": "project_country",
-    "gold-standard": "country",
+    "gold-standard": "Country",
     "verra": "Country/Area"
   },
   "listed_at": {
@@ -20,7 +20,7 @@
     "art-trees": "Program Name",
     "climate-action-reserve": "Project Name",
     "global-carbon-council": null,
-    "gold-standard": "name",
+    "gold-standard": "Project Name",
     "verra": "Name"
   },
   "original_protocol": {
@@ -28,7 +28,7 @@
     "art-trees": null,
     "climate-action-reserve": "Project Type",
     "global-carbon-council": "project_methodology",
-    "gold-standard": "methodology",
+    "gold-standard": "Methodology",
     "verra": "Methodology"
   },
   "project_id": {
@@ -36,7 +36,7 @@
     "art-trees": "Program ID",
     "climate-action-reserve": "Project ID",
     "global-carbon-council": "project_submission_number",
-    "gold-standard": "sustaincert_id",
+    "gold-standard": "GSID",
     "verra": "ID"
   },
   "proponent": {
@@ -44,7 +44,7 @@
     "art-trees": "Sovereign Program Developer",
     "climate-action-reserve": "Project Owner",
     "global-carbon-council": null,
-    "gold-standard": "project_developer",
+    "gold-standard": "Project Developer Name",
     "verra": "Proponent"
   },
   "status": {
@@ -52,7 +52,7 @@
     "art-trees": "Status",
     "climate-action-reserve": "Status",
     "global-carbon-council": "project_status",
-    "gold-standard": "status",
+    "gold-standard": "Status",
     "verra": "Status"
   }
 }
