@@ -29,7 +29,7 @@ def aggregate_issuance_transactions(df: pd.DataFrame) -> pd.DataFrame:
 
     if not df_issuance.empty:
         df_issuance_agg = (
-            df_issuance.groupby(['project_id', 'transaction_date', 'vintage'])
+            df_issuance.groupby(['project_id', df_issuance.transaction_date.dt.date, 'vintage'])
             .agg(
                 {
                     'quantity': 'sum',
