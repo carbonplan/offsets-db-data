@@ -1,4 +1,4 @@
-import numpy as np  # noqa: F401
+import numpy as np  # noqa: F401, I001
 import pandas as pd
 import pandas_flavor as pf
 
@@ -10,9 +10,21 @@ from offsets_db_data.common import (
     load_protocol_mapping,
     load_registry_project_column_mapping,
 )
-from offsets_db_data.credits import *  # noqa: F403
+from offsets_db_data.credits import (
+    aggregate_issuance_transactions,  # noqa: F401
+    filter_and_merge_transactions,  # noqa: F401
+    merge_with_arb,  # noqa: F401
+)
 from offsets_db_data.models import credit_without_id_schema, project_schema
-from offsets_db_data.projects import *  # noqa: F403
+from offsets_db_data.projects import (
+    harmonize_country_names,  # noqa: F401
+    add_category,  # noqa: F401
+    add_is_compliance_flag,  # noqa: F401
+    map_protocol,  # noqa: F401
+    harmonize_status_codes,  # noqa: F401
+    add_first_issuance_and_retirement_dates,  # noqa: F401
+    add_retired_and_issued_totals,  # noqa: F401
+)
 
 
 @pf.register_dataframe_method
@@ -109,11 +121,12 @@ def process_gld_credits(
         )
         # split on T and discard the microseconds for consistency
         data['transaction_date'] = data['transaction_date'].str.split('T').str[0]
+        data = data.convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
 
         if download_type == 'issuances':
             data = data.aggregate_issuance_transactions()
 
-        data = data.convert_to_datetime(columns=['transaction_date']).validate(
+        data = data.convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d').validate(
             schema=credit_without_id_schema
         )
 
@@ -124,7 +137,7 @@ def process_gld_credits(
         data = (
             pd.DataFrame(columns=credit_without_id_schema.columns.keys())
             .add_missing_columns(schema=credit_without_id_schema)
-            .convert_to_datetime(columns=['transaction_date'])
+            .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
             .validate(schema=credit_without_id_schema)
         )
 
