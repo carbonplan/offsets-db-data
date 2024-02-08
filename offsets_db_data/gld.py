@@ -1,6 +1,4 @@
-import ast
-
-import numpy as np  # noqa: F401
+import numpy as np  # noqa: F401, I001
 import pandas as pd
 import pandas_flavor as pf
 
@@ -12,9 +10,21 @@ from offsets_db_data.common import (
     load_protocol_mapping,
     load_registry_project_column_mapping,
 )
-from offsets_db_data.credits import *  # noqa: F403
+from offsets_db_data.credits import (
+    aggregate_issuance_transactions,  # noqa: F401
+    filter_and_merge_transactions,  # noqa: F401
+    merge_with_arb,  # noqa: F401
+)
 from offsets_db_data.models import credit_without_id_schema, project_schema
-from offsets_db_data.projects import *  # noqa: F403
+from offsets_db_data.projects import (
+    harmonize_country_names,  # noqa: F401
+    add_category,  # noqa: F401
+    add_is_compliance_flag,  # noqa: F401
+    map_protocol,  # noqa: F401
+    harmonize_status_codes,  # noqa: F401
+    add_first_issuance_and_retirement_dates,  # noqa: F401
+    add_retired_and_issued_totals,  # noqa: F401
+)
 
 
 @pf.register_dataframe_method
@@ -37,31 +47,6 @@ def determine_gld_transaction_type(df: pd.DataFrame, *, download_type: str) -> p
 
     transaction_type_mapping = {'issuances': 'issuance', 'retirements': 'retirement'}
     df['transaction_type'] = transaction_type_mapping[download_type]
-    return df
-
-
-@pf.register_dataframe_method
-def add_gld_project_id_from_credits(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
-    """
-    Add Gold Standard project IDs to the DataFrame by extracting 'sustaincert_id' from the 'project' column.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame containing credits data.
-    prefix : str
-        Prefix string to prepend to each project ID.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with a new 'project_id' column, containing the generated project IDs.
-    """
-
-    df['project'] = df['project'].apply(lambda x: x if isinstance(x, dict) else ast.literal_eval(x))
-    df['project_id'] = prefix + df['project'].apply(
-        lambda x: x.get('sustaincert_id', np.nan)
-    ).astype(str)
     return df
 
 
@@ -126,6 +111,7 @@ def process_gld_credits(
     columns = {v: k for k, v in column_mapping.items()}
 
     df = df.copy()
+
     if not df.empty:
         data = (
             df.rename(columns=columns)
@@ -133,13 +119,14 @@ def process_gld_credits(
             .determine_gld_transaction_type(download_type=download_type)
             .add_gld_project_id(prefix=prefix)
         )
+        # split on T and discard the microseconds for consistency
+        data['transaction_date'] = data['transaction_date'].str.split('T').str[0]
+        data = data.convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
 
         if download_type == 'issuances':
             data = data.aggregate_issuance_transactions()
 
-        data = data.convert_to_datetime(
-            columns=['transaction_date'], yearfirst=True, format='mixed'
-        ).validate(schema=credit_without_id_schema)
+        data = data.validate(schema=credit_without_id_schema)
 
         if arb is not None and not arb.empty:
             data = data.merge_with_arb(arb=arb)
@@ -148,7 +135,7 @@ def process_gld_credits(
         data = (
             pd.DataFrame(columns=credit_without_id_schema.columns.keys())
             .add_missing_columns(schema=credit_without_id_schema)
-            .convert_to_datetime(columns=['transaction_date'])
+            .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
             .validate(schema=credit_without_id_schema)
         )
 
@@ -239,8 +226,8 @@ def process_gld_projects(
         data = (
             df.rename(columns=inverted_column_mapping)
             .set_registry(registry_name=registry_name)
-            .add_gld_project_id(prefix=prefix)
             .add_gld_project_url()
+            .add_gld_project_id(prefix=prefix)
             .harmonize_country_names()
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
