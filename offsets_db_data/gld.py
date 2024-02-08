@@ -126,9 +126,7 @@ def process_gld_credits(
         if download_type == 'issuances':
             data = data.aggregate_issuance_transactions()
 
-        data = data.convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d').validate(
-            schema=credit_without_id_schema
-        )
+        data = data.validate(schema=credit_without_id_schema)
 
         if arb is not None and not arb.empty:
             data = data.merge_with_arb(arb=arb)
