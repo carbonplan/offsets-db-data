@@ -157,10 +157,10 @@ The processed data can be accessed from the catalog using the `projects` key. Le
 catalog['projects'].describe()
 ```
 
-As you can see, the processed data is stored in a parquet file format. Let's load the processed data for the date '2024-01-30':
+As you can see, the processed data is stored in a parquet file format. Let's load the processed data for the date '2024-02-06':
 
 ```{code-cell} ipython3
-processed_df = catalog['projects'](date='2024-01-30').read()
+processed_df = catalog['projects'](date='2024-02-06').read()
 processed_df.head()
 ```
 
