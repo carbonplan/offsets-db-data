@@ -10,8 +10,6 @@
 import datetime
 import sys
 
-from sphinx.application import Sphinx
-
 import offsets_db_data
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -97,16 +95,3 @@ intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
     'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
 }
-
-
-def setup(app: Sphinx):
-    app.connect('html-page-context', add_modal_code)
-
-
-def add_modal_code(app, pagename, templatename, context, doctree):
-    context['modal_html'] = '<div id="termsModal" style="display:none;">...</div>'
-    context['modal_js'] = """
-    <script>
-    // JavaScript code here
-    </script>
-    """
