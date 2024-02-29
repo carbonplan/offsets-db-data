@@ -2,6 +2,7 @@
   "acm0001": {
     "category": "ghg-management",
     "known-strings": [
+      "ACM0001: “Flaring or use of landfill gas” Version 19.0 and ACM0022: “Alternative waste treatment processes” Version 3.0",
       "ACM0001 Flaring or use of landfill gas",
       "ACM0001; ACM0022",
       "ACM0001 - Flaring or use of Landfill Gas version 19.0",
@@ -28,6 +29,29 @@
   "acm0002": {
     "category": "renewable-energy",
     "known-strings": [
+      "CDM Approved ACM0002 Grid-connected electricity generation from renewable sources, version 21.0",
+      "CDM methodology ACM0002 “Grid-connected electricity generation from renewable sources” version 21.0",
+      "ACM 0002: Grid-connected electricity generation from renewable sources - Version 21.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources (Version 21.0)",
+      "ACM0002 Grid-connected electricity generation from renewable sources Version 21",
+      "ACM0002 Grid-connected electricity generation from renewable sources ver 21.0",
+      "ACM0002 Grid-connected electricity generation from renewable sources, ver: 21.0",
+      "ACM0002 Methodology for Grid-connected electricity generation  from renewable sources, version 21.0  ",
+      "ACM0002 Methodology for Grid-connected electricity generation from renewable sources, version 21.0",
+      "ACM0002 Version 21 Grid Connected electricity generation from renewable sources ",
+      "ACM0002 version 21.0, Grid-connected electricity generation from renewable sources",
+      "ACM0002 – Grid-connected electricity generation from renewable  sources, version 21.0",
+      "ACM0002 – Grid-connected electricity generation from renewable sources Version 21.0",
+      "ACM0002 – Grid-connected electricity generation from renewable sources – Version 21.0",
+      "ACM0002,”Grid-connected electricity generation from renewable sources”, V21.0",
+      "ACM0002.: Grid-connected electricity generation from renewable sources, Version 21.0 ",
+      "ACM0002: Grid-connected electricity generation from renewable sources  (Version 21.0);",
+      "ACM0002: Grid-connected electricity generation from renewable sources (Version 21.0)",
+      "ACM0002: Grid-connected electricity generation from renewable sources - Version 21.0",
+      "ACM0002: Grid-connected electricity generation from renewable sources( Version 21.0)",
+      "ACM0002: Grid-connected electricity generation from renewable sources” (Version 21.0)",
+      "ACM0002: “Grid-connected electricity generation from renewable  sources” (Version 21.0)",
+      "ACM0002: “Grid-connected electricity generation from renewable sources”, Version 21.0",
       "ACM0002: “Grid-connected electricity generation from renewable sources” (Version 21.0);",
       "ACM0002: “Grid-connected electricity generation from renewable sources” (Version 21.0)",
       "Applied methodologies (Shall be approved by the GCC or the CDM) ACM0002: “Grid-connected electricity generation from renewable sources” (Version 21.0)",
@@ -240,6 +264,7 @@
   "acm0012": {
     "category": "energy-efficiency",
     "known-strings": [
+      "ACM0012 Waste energy recovery, Version 6.0",
       "ACM0012 Waste energy recovery",
       "ACM0012: Waste Energy Recovery-Version 6",
       "ACM0012: Waste energy recovery --- Version 6.0",
@@ -298,6 +323,7 @@
   "acm0018": {
     "category": "fuel-switching",
     "known-strings": [
+      "ACM0018 “Large-scale Consolidated Methodology: Electricity generation from biomass in power-only plants”, Version 6.0",
       "ACM0018 Electricity generation from biomass residues in power-only plants",
       "ACM0018: Electricity generation from biomass in power-only plants --- Version 6.0",
       "ACM0018, Version - 5.0",
@@ -318,6 +344,8 @@
   "acm0022": {
     "category": "ghg-management",
     "known-strings": [
+      "ACM0022: Alternative waste treatment process Version 03.0 ",
+      "ACM0022:Large-scale Consolidated Methodology Alternative waste treatment processes(Version 03.0)",
       "ACM0022 Alternative waste treatment processes",
       "ACM0001; ACM0022",
       "ACM0022: Alternative waste treatment processes --- Version 3.0",
@@ -627,6 +655,7 @@
   "am0036": {
     "category": "fuel-switching",
     "known-strings": [
+      "AM0036 - Use of biomass in heat generation equipment version 7.0",
       "AM0036 Fuel switch from fossil fuels to biomass residues in heat generation equipment",
       "AM0036",
       "AM0036 - Use of biomass in heat generation equipment version 07.0"
@@ -740,6 +769,8 @@
   "ams-i-c": {
     "category": "fuel-switching",
     "known-strings": [
+      "AMS-I.C.: Thermal energy production with or without electricity - Version 22.0",
+      "AMS-I.C.: Thermal energy production with or without electricity --- Version 22.02",
       "AMS-I.C. Thermal energy production with or without electricity",
       "AMS-I.C.: Thermal energy production with or without electricity",
       "AMS-I.C.; AMS-III.D.; AMS-III.R.",
@@ -774,6 +805,11 @@
   "ams-i-d": {
     "category": "renewable-energy",
     "known-strings": [
+      "AMS-I.D. \"Grid-connected renewable electricity generation” (Version 18)",
+      "AMS-I.D. Grid-connected renewable electricity generation, version 18.0",
+      "AMS-I.D.: Grid connected renewable electricity generation --- Version  18.0",
+      "AMS I D: Grid Connected renewable electricity generation -Version  18.0",
+      "AMSI.D.: Grid connected renewable electricity generation Version18.0",
       "AMS-I.D.: Grid connected renewable electricity generation --- Version 18.0",
       "AMS-I.D.: Grid connected renewable electricity generation --- Version 18.02",
       "AMS-I.D.: Grid connected renewable electricity generation -Version 18.0.",
@@ -902,6 +938,8 @@
   "ams-i-f": {
     "category": "renewable-energy",
     "known-strings": [
+      "AMS-I.F.: Renewable electricity generation for captive use and mini-grid ---Version 5.0  ",
+      "AMS I.F Renewable Electricity Generation for Captive use and mini grid version 5.0",
       "AMS-I.F.: Renewable electricity generation for captive use and mini-grid --- Version 4.02",
       "AMS-I.F.: Renewable electricity generation for captive use and mini-grid--- Version 4.02",
       "AMS-I.F. Renewable electricity generation for captive use and mini-grid",
@@ -1684,6 +1722,7 @@
   "gccm0003": {
     "category": "ghg-management",
     "known-strings": [
+      "GCCM003: Methodology for Energy Generation from Animal Manure and Waste Management Projects v2.0",
       "GCCM003-Methodology-for-Energy-Generation-from-Animal-Manure-and-Waste-Management-Projects-v1",
       "GCCM003-Methodology-for-Energy-Generation-from-Animal-Manure-and-Waste-Management-Projects-v2.0",
       "GCCM003 ver1.0",
@@ -1696,6 +1735,11 @@
   "gccm001": {
     "category": "renewable-energy",
     "known-strings": [
+      "GCC M001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, version 4.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, Ver 04.0",
+      "GCCM001 Methodology for Renewable Energy Generation Projects Supplying Electricity to Grid or Captive Consumers, Version 4.0.",
+      "GCCM001- Grid Connected Renewable Energy Generation Projects (Version No. – V3.0)",
+      "GCCM001: Grid-connected electricity generation from renewable sources --- Version 3.0",
       "GCCM001 V4.0 - 2022",
       "GCCM001 v4.0",
       "GCCM001 v4.0",
