@@ -47,13 +47,13 @@ We can use the `describe` function to get an overview of what each database enta
 catalog['raw_projects'].describe()
 ```
 
-This indicates that the package allows you to fetch the raw projects data from the registry of your choice, for any particular date. As per the default parameters, it fetches data from the 'verra' registry, for the date '2024-02-06'.
+This indicates that the package allows you to fetch the raw projects data from the registry of your choice, for any particular date. As per the default parameters, it fetches data from the 'verra' registry, for the date '2024-02-13'.
 
-Let's load the `raw_projects` data for the `registry_name` as 'verra' and `date` as '2024-02-06'.
+Let's load the `raw_projects` data for the `registry_name` as 'verra' and `date` as '2024-02-13'.
 
 ```{code-cell} ipython3
 registry_name = 'verra'
-date='2024-02-06'
+date='2024-02-13'
 
 df = catalog['raw_projects'](registry=registry_name, date=date).read()
 ```
@@ -157,10 +157,10 @@ The processed data can be accessed from the catalog using the `projects` key. Le
 catalog['projects'].describe()
 ```
 
-As you can see, the processed data is stored in a parquet file format. Let's load the processed data for the date '2024-02-06':
+As you can see, the processed data is stored in a parquet file format. Let's load the processed data for the date '2024-02-13':
 
 ```{code-cell} ipython3
-processed_df = catalog['projects'](date='2024-02-06').read()
+processed_df = catalog['projects'](date='2024-02-13').read()
 processed_df.head()
 ```
 

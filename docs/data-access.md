@@ -11,17 +11,21 @@ kernelspec:
 
 OffsetsDB provides a comprehensive and detailed view of carbon offset credits and projects. You can access the data in various formats or directly through Python using our data package.
 
-## CSV
+## CSV & Parquet Zipped Files
+
+```{admonition} By downloading the data, you agree to the [Terms of Use](TK).
+:class: toggle
+:class: dropdown
 
 Download the latest version of OffsetsDB in CSV:
 
-- [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/archive/latest/offsets-db.csv.zip)
-
-## Parquet
+- [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/production/latest/offsets-db.csv.zip)
 
 Download the latest version of OffsetsDB in [Parquet](https://parquet.apache.org/):
 
-- [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/archive/latest/offsets-db.parquet.zip)
+- [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/production/latest/offsets-db.parquet.zip)
+
+```
 
 ## Accessing The Full Data Archive Through Python
 
@@ -93,7 +97,7 @@ projects_df.head()
 ```
 
 ```{note}
-Calling `projects.read()` and `credits.read()` without specifying a date, will return the data downloaded and processed on `2024-02-06` which is the first date the data was collected and made available.
+Calling `projects.read()` and `credits.read()` without specifying a date, will return the data downloaded and processed on `2024-02-13` which is the first date the data was collected and made available.
 
 To load data for a specific date, you can specify the date as a string in the format `YYYY-MM-DD`. For example:
 ```
