@@ -52,9 +52,13 @@ import pandas as pd
 pd.options.display.max_columns = 5
 from offsets_db_data import vcs
 
-archive_fname = 's3://carbonplan-offsets-db/raw/2024-02-13/verra/transactions.csv.gz'
+archive_fname = {{ path to local copy of Verra transaction data }}
 raw_credits =  pd.read_csv(archive_fname)
 processed_credits =  vcs.process_vcs_credits(raw_credits)
+```
+
+```{note}
+Running the above example requires first downloading [a copy of Verra's transaction data](https://registry.verra.org/app/search/VCS) and changing the above code to reference the location of that data on your local machine.
 ```
 
 Invoking single transformation functions, like {py:obj}`offsets_db_data.vcs.set_vcs_vintage_year` is even more straightforward.

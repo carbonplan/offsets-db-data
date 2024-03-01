@@ -9,11 +9,11 @@ kernelspec:
 
 # Access OffsetsDB Data
 
-OffsetsDB provides a comprehensive and detailed view of carbon offset credits and projects. You can access the data in various formats or directly through Python using our data package.
+OffsetsDB provides a detailed view of carbon offset credits and projects. You can access the data in various formats or directly through Python using our data package.
 
 ## CSV & Parquet Zipped Files
 
-```{admonition} By downloading the data, you agree to the [Terms of Use](TK).
+```{admonition} Click here to download the data. By clicking, you agree to the [Terms of Data Access](TERMS-OF-DATA-ACCESS.md).
 :class: toggle
 :class: dropdown
 
@@ -68,7 +68,7 @@ The catalog includes different datasets, like credits and projects. You can list
 You can get information about a dataset using the `describe()` method. For example, to get information about the 'credits' dataset:
 
 ```{code-cell} ipython3
-catalog['raw_projects'].describe()
+catalog['credits'].describe()
 ```
 
 #### Accessing Specific Datasets
@@ -96,17 +96,11 @@ projects_df = projects.read()
 projects_df.head()
 ```
 
-```{note}
 Calling `projects.read()` and `credits.read()` without specifying a date, will return the data downloaded and processed on `2024-02-13` which is the first date the data was collected and made available.
 
 To load data for a specific date, you can specify the date as a string in the format `YYYY-MM-DD`. For example:
-```
 
 ```{code-cell} ipython3
 projects_df = catalog['projects'](date='2024-02-07').read()
 projects_df.head()
-```
-
-```{note}
-For a more detailed guide on how to access and process the data, refer to the [tutorial](tutorial.md).
 ```
