@@ -2,8 +2,7 @@ import pandas as pd
 import pytest
 
 from offsets_db_data.apx import *  # noqa: F403
-from offsets_db_data.arb import *  # noqa: F403  # noqa: F403
-from offsets_db_data.gcc import *  # noqa: F403
+from offsets_db_data.arb import *  # noqa: F403
 from offsets_db_data.gld import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.vcs import *  # noqa: F403
@@ -131,33 +130,5 @@ def test_gld_empty(df_credits, projects):
     project_schema.validate(df_projects)
 
     # check if all project_id use the same prefix
-    assert df_projects['project_id'].str.startswith(prefix).all()
-    assert df_credits['project_id'].str.startswith(prefix).all()
-
-
-def test_gcc(
-    date,
-    bucket,
-):
-    registry = 'global-carbon-council'
-    download_types = ['issuances', 'retirements']
-    prefix = 'GCC'
-
-    projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
-
-    dfs = []
-    for key in download_types:
-        credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
-        p = credits.process_gcc_credits(download_type=key, raw_projects=projects)
-        dfs.append(p)
-
-    df_credits = pd.concat(dfs)
-    credit_without_id_schema.validate(df_credits)
-
-    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
-
-    df_projects = projects.process_gcc_projects(credits=df_credits)
-    project_schema.validate(df_projects)
-
     assert df_projects['project_id'].str.startswith(prefix).all()
     assert df_credits['project_id'].str.startswith(prefix).all()

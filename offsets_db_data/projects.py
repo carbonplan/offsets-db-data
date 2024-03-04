@@ -140,14 +140,6 @@ def harmonize_status_codes(df: pd.DataFrame, *, status_column: str = 'status') -
     """
     print('Harmonizing status codes')
     with contextlib.suppress(KeyError):
-        GCC_STATES = {
-            'VERIFICATION': 'listed',
-            'RFR CC INCOMPLETE': 'unknown',
-            'GCC ASSESMENT': 'listed',
-            'REGISTERED': 'registered',
-            'REQUEST FOR REGISTRATION': 'listed',
-        }
-
         CAR_STATES = {
             'Registered': 'registered',
             'Completed': 'completed',
@@ -175,7 +167,7 @@ def harmonize_status_codes(df: pd.DataFrame, *, status_column: str = 'status') -
             'GOLD_STANDARD_CERTIFIED_DESIGN': 'registered',
         }
 
-        state_dict = GCC_STATES | CAR_STATES | VERRA_STATES | GS_STATES
+        state_dict = CAR_STATES | VERRA_STATES | GS_STATES
         df[status_column] = df[status_column].apply(lambda x: state_dict.get(x, 'unknown'))
     return df
 

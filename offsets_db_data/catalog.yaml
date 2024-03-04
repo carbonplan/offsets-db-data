@@ -39,7 +39,7 @@ sources:
           - gold-standard
           - american-carbon-registry
           - climate-action-reserve
-          - global-carbon-council
+
       date:
         description: date of the data to load
         type: str
@@ -98,26 +98,6 @@ sources:
           - cancellations
     args:
       urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/art-trees/{{ transaction_type }}.csv.gz'
-      storage_options: { 'anon': True }
-
-  raw_global_carbon_council_transactions:
-    description: Raw Global Carbon Council transactions data downloaded from the registries on a daily basis
-    driver: csv
-    parameters:
-      date:
-        description: date of the data to load
-        type: str
-        default: '2024-02-13'
-      transaction_type:
-        description: transaction type
-        type: str
-        default: 'issuances'
-        allowed:
-          - issuances
-          - retirements
-          - cancellations
-    args:
-      urlpath: 's3://carbonplan-offsets-db/raw/{{ date }}/global-carbon-council/{{ transaction_type }}.csv.gz'
       storage_options: { 'anon': True }
 
   raw_american_carbon_registry_transactions:
