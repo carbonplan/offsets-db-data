@@ -59,20 +59,6 @@
       "vintage": "Vintage"
     }
   },
-  "global-carbon-council": {
-    "issuances": {
-      "project_id": null,
-      "quantity": "holding_quantity",
-      "transaction_date": null,
-      "vintage": "vintage"
-    },
-    "retirements": {
-      "project_id": null,
-      "quantity": "retirement_quantity",
-      "transaction_date": null,
-      "vintage": "vintage"
-    }
-  },
   "gold-standard": {
     "issuances": {
       "project_id": "GSID",

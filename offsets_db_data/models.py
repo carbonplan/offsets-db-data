@@ -6,7 +6,6 @@ import pandera as pa
 
 RegistryType = typing.Literal[
     'verra',
-    'global-carbon-council',
     'gold-standard',
     'art-trees',
     'american-carbon-registry',

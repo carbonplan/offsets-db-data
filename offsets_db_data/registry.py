@@ -3,7 +3,6 @@ REGISTRY_ABBR_MAP = {
     'car': 'climate-action-reserve',
     'acr': 'american-carbon-registry',
     'art': 'art-trees',
-    'gcc': 'global-carbon-council',
     'gld': 'gold-standard',
 }
 
