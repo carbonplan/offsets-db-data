@@ -268,17 +268,17 @@ Project data conform to the following schema:
 The majority of project attributes are directly taken from the project data downloaded from each registry.
 Table 1 provides the mapping from the raw column names found in downloaded registry data to the OffsetsDB project schema.
 
-|                         | **verra**              | **climate-action-reserve** | **american-carbon-registry**           | **global-carbon-council**     | **gold-standard**      | **art-trees**               |
-| ----------------------- | ---------------------- | -------------------------- | -------------------------------------- | ----------------------------- | ---------------------- | --------------------------- |
-| **project_id**          | ID                     | Project ID                 | Project ID                             | project_submission_number     | id                     | Program ID                  |
-| **name**                | Name                   | Project Name               | Project Name                           | project_url                   | name                   | Program Name                |
-| **protocol**            | Methodology            | Project Type               | Project Methodology/Protocol           | project_methodology           | methodology            | \-                          |
-| **category**            | inferred from protocol | inferred from protocol     | inferred from protocol                 | inferred from protocol        | inferred from protocol | inferred from protocol      |
-| **project_subcategory** | manually assigned      | manually assigned          | manually assigned                      | manually assigned             | manually assigned      | manually assigned           |
-| **proponent**           | Proponent              | Project Owner              | Project Developer                      | project_details:project_owner | project_developer      | Sovereign Program Developer |
-| **country**             | Country/Area           | Project Site Country       | Project Site Country                   | project_country               | country                | Program Country             |
-| **status**              | Status                 | Status                     | Derived: voluntary + compliance status | project_status                | status                 | Status                      |
-| **listed_at**           | Project Listed Date    | \-                         | \-                                     | \-                            | \-                     | \-                          |
+|                         | **verra**              | **climate-action-reserve** | **american-carbon-registry**           | **gold-standard**      | **art-trees**               |
+| ----------------------- | ---------------------- | -------------------------- | -------------------------------------- | ---------------------- | --------------------------- | --- |
+| **project_id**          | ID                     | Project ID                 | Project ID                             | id                     | Program ID                  |
+| **name**                | Name                   | Project Name               | Project Name                           | name                   | Program Name                |
+| **protocol**            | Methodology            | Project Type               | Project Methodology/Protocol           | methodology            | \-                          |
+| **category**            | inferred from protocol | inferred from protocol     | inferred from protocol                 | inferred from protocol | inferred from protocol      |
+| **project_subcategory** | manually assigned      | manually assigned          | manually assigned                      | manually assigned      | manually assigned           |
+| **proponent**           | Proponent              | Project Owner              | Project Developer                      | project_developer      | Sovereign Program Developer |
+| **country**             | Country/Area           | Project Site Country       | Project Site Country                   | country                | Program Country             |
+| **status**              | Status                 | Status                     | Derived: voluntary + compliance status | status                 | Status                      |
+| **listed_at**           | Project Listed Date    | \-                         | \-                                     | \-                     | \-                          | \-  |
 
 ### Credits
 
