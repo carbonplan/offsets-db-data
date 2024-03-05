@@ -35,7 +35,6 @@ hidden:
 ---
 install-offsets-db-data.md
 data-access.md
-tutorial.md
 ```
 
 ```{toctree}

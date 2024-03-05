@@ -1,12 +1,3 @@
----
-jupytext:
-  text_representation:
-    format_name: myst
-kernelspec:
-  display_name: Python 3
-  name: python3
----
-
 # Order of Operations
 
 OffsetsDB follows a typical extract-transform-load (ETL) workflow.
@@ -47,7 +38,7 @@ These functions contain the registry-specific logic needed to map Verra's raw da
 In practice, replicating the behavior of OffsetsDB should be simple.
 Here's an example of using `offsets_db_data` to transform the raw transactions data from Verra into a normalized, analysis ready file:
 
-```{code-cell} ipython3
+```python
 import pandas as pd
 pd.options.display.max_columns = 5
 from offsets_db_data import vcs
@@ -65,7 +56,7 @@ Invoking single transformation functions, like {py:obj}`offsets_db_data.vcs.set_
 Let's say you want to understand more about how OffsetsDB assigns Verra credits a vintage year.
 You can explore the behavior of this single transformation function by calling:
 
-```{code-cell} ipython3
+```python
 raw_credits.set_vcs_vintage_year(date_column='Vintage End').head()
 ```
 
