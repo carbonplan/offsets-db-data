@@ -1,6 +1,6 @@
 # Install offsetsDB data
 
-offsets-db-data Python package can be installed in three ways:
+offsets-db-data Python package can be installed in two ways:
 
 ```{eval-rst}
 
