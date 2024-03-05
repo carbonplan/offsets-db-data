@@ -5,3 +5,4 @@ sphinx-copybutton
 sphinx-design
 sphinxext-opengraph
 jupyterlab
+sphinx-togglebutton

@@ -43,6 +43,7 @@ extensions = [
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
+    'sphinx_togglebutton',
 ]
 
 # MyST config
