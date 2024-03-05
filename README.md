@@ -68,7 +68,7 @@ You can view the documentation by opening `docs/_build/index.html` in your brows
 ## license
 
 All the code in this repository is [MIT](https://choosealicense.com/licenses/mit/) licensed.
-The data associated with this repository are subject to additional [terms of data access](../offsets-db-data/docs/TERMS-OF-DATA-ACCESS.md).
+Data associated with this repository are subject to additional [terms of data access](../offsets-db-data/docs/TERMS-OF-DATA-ACCESS.md).
 
 ## about us
 
