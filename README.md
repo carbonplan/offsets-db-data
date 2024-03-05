@@ -68,8 +68,7 @@ You can view the documentation by opening `docs/_build/index.html` in your brows
 ## license
 
 > [!IMPORTANT]
-
-All the code in this repository is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+> All the code in this repository is [MIT](https://choosealicense.com/licenses/mit/) licensed.
 Data associated with this repository are subject to additional [terms of data access](./docs/TERMS-OF-DATA-ACCESS.md).
 
 ## about us
