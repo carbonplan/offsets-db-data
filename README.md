@@ -67,7 +67,8 @@ You can view the documentation by opening `docs/_build/index.html` in your brows
 
 ## license
 
-All the code in this repository is [MIT](https://choosealicense.com/licenses/mit/) licensed. When possible, the data used by this project is licensed using the [CC-BY-4.0](https://choosealicense.com/licenses/cc-by-4.0/) license. We include attribution and additional license information for third party datasets, and we request that you also maintain that attribution if using this data.
+All the code in this repository is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+Data associated with this repository are subject to additional [terms of data access](./docs/TERMS-OF-DATA-ACCESS.md).
 
 ## about us
 

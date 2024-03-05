@@ -32,15 +32,6 @@ The following functions are specific to a given registry and are grouped under e
    :show-inheritance:
 ```
 
-### Global Carbon Council
-
-```{eval-rst}
-.. automodule:: offsets_db_data.gcc
-   :members:
-   :undoc-members:
-   :show-inheritance:
-```
-
 ### APX Registries
 
 Functionality for APX registries is currently grouped under the `apx`` module.
