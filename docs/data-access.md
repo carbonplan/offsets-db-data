@@ -7,15 +7,15 @@ kernelspec:
   name: python3
 ---
 
+```{important}
+By downloading or accessing the OffsetsDB data archives, you agree to the [Terms of Data Access](TERMS-OF-DATA-ACCESS.md).
+```
+
 # Access OffsetsDB Data
 
 OffsetsDB provides a detailed view of carbon offset credits and projects. You can access the data in various formats or directly through Python using our data package.
 
 ## CSV & Parquet Zipped Files
-
-```{admonition} Click here to download the data. By clicking, you agree to the [Terms of Data Access](TERMS-OF-DATA-ACCESS.md).
-:class: toggle
-:class: dropdown
 
 Download the latest version of OffsetsDB in CSV:
 
@@ -24,8 +24,6 @@ Download the latest version of OffsetsDB in CSV:
 Download the latest version of OffsetsDB in [Parquet](https://parquet.apache.org/):
 
 - [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/production/latest/offsets-db.parquet.zip)
-
-```
 
 ## Accessing The Full Data Archive Through Python
 
@@ -56,12 +54,7 @@ print(catalog)
 
 #### Available Data
 
-The catalog includes different datasets, like credits and projects. You can list the available datasets using:
-
-```{code-cell} ipython3
-# List available datasets in the catalog
-[key for key in sorted(list(catalog.keys()))]
-```
+The catalog includes different datasets, like credits and projects
 
 #### Getting Descriptive Information About a Dataset
 
