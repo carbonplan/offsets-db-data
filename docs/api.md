@@ -8,7 +8,6 @@ The following functions are specific to a given registry and are grouped under e
 
 - [verra](https://registry.verra.org/)
 - [gold-standard](https://www.goldstandard.org)
-- [global carbon council](https://www.globalcarboncouncil.com/)
 - APX registries
   - [art-trees](https://art.apx.com/)
   - [climate action reserve](https://thereserve2.apx.com)
