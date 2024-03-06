@@ -105,9 +105,9 @@ def process_arb(df: pd.DataFrame) -> pd.DataFrame:
         var_name='transaction_type',
         value_name='quantity',
     )
-    melted.loc[
-        melted['transaction_type'].isin(compliance_period_dates.keys()), 'issued_at'
-    ] = melted['transaction_type'].map(compliance_period_dates)
+    melted.loc[melted['transaction_type'].isin(compliance_period_dates.keys()), 'issued_at'] = (
+        melted['transaction_type'].map(compliance_period_dates)
+    )
     melted = melted.rename(columns={'issued_at': 'transaction_date'}).to_datetime(
         'transaction_date', format='mixed', utc=True
     )
