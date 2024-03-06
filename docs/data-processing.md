@@ -82,7 +82,7 @@ These rules specify things like when measurements must be made and what paperwor
 Unfortunately, there is no standardized way of referring to the exact protocol (or protocol version) used to develop an offset project.
 Even within the domain of a single registry, references to the exact protocol used to develop a project are often inconsistent.
 Take for example the Clean Development Mechanism protocol AMS-III.D., "Methane recovery in animal manure management systems".
-Across all six registries included in OffsetsDB, we identified twenty-two unique ways of referring to this one protocol.
+Across all five registries included in OffsetsDB, we identified twenty-two unique ways of referring to this one protocol.
 
 OffsetsDB addresses this problem by manually assigning every known protocol string to a common schema.
 Continuing with the AMS-III.D. example, we map all twenty-two "known strings" that describe the same protocol to a single, unified reference, `ams-iii-d`.
