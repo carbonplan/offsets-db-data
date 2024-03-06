@@ -734,6 +734,13 @@
     "program": "cdm",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0080"
   },
+  "am0090": {
+    "category": "energy-efficiency",
+    "sub-category": "transportation",
+    "known-strings": ["AM0090"],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0090"
+  },
   "am0107": {
     "category": "fuel-switching",
     "known-strings": [
@@ -744,6 +751,10 @@
   },
   "am0110": {
     "known-strings": ["AM0110"],
+    "program": "cdm"
+  },
+  "am0123": {
+    "known-strings": ["AM0123"],
     "program": "cdm"
   },
   "ams-i-a": {
@@ -769,6 +780,7 @@
   "ams-i-c": {
     "category": "fuel-switching",
     "known-strings": [
+      "AMS-I.C.; AMS-I.F.; AMS-III.H.",
       "AMS-I.C.: Thermal energy production with or without electricity - Version 22.0",
       "AMS-I.C.: Thermal energy production with or without electricity --- Version 22.02",
       "AMS-I.C. Thermal energy production with or without electricity",
@@ -805,6 +817,8 @@
   "ams-i-d": {
     "category": "renewable-energy",
     "known-strings": [
+      "AMS-I.D.; AMS-III.F.; AMS-III.Y",
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.; AMS-III.O.; AMS-III.AQ",
       "AMS-I.D. \"Grid-connected renewable electricity generation” (Version 18)",
       "AMS-I.D. Grid-connected renewable electricity generation, version 18.0",
       "AMS-I.D.: Grid connected renewable electricity generation --- Version  18.0",
@@ -938,6 +952,7 @@
   "ams-i-f": {
     "category": "renewable-energy",
     "known-strings": [
+      "AMS-I.C.; AMS-I.F.; AMS-III.H.",
       "AMS-I.F.: Renewable electricity generation for captive use and mini-grid ---Version 5.0  ",
       "AMS I.F Renewable Electricity Generation for Captive use and mini grid version 5.0",
       "AMS-I.F.: Renewable electricity generation for captive use and mini-grid --- Version 4.02",
@@ -984,6 +999,7 @@
   "ams-i-j": {
     "category": "renewable-energy",
     "known-strings": [
+      "AMS-I.J.",
       "AMS-I.J; AMS-II.F.",
       "AMS-I.J. Solar water heating systems (SWH)"
     ],
@@ -1122,6 +1138,8 @@
     "category": "fuel-switching",
     "sub-category": "transportation",
     "known-strings": [
+      "AMS-III.H.; AMS-III.AQ",
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.; AMS-III.O.; AMS-III.AQ",
       "AMS-III.AO.; AMS-III.AQ",
       "AM0073; AMS-III.AQ",
       "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
@@ -1239,6 +1257,7 @@
   "ams-iii-d": {
     "category": "ghg-management",
     "known-strings": [
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.; AMS-III.O.; AMS-III.AQ",
       "AMS-III.D. Methane recovery in animal manure management systems",
       "AMS-I.C.; AMS-III.D.; AMS-III.R.",
       "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
@@ -1271,6 +1290,7 @@
     "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
+      "AMS-I.F.; AMS-III.E.; VM0044",
       "AMS-I.D.; AMS-III.E.",
       "AMS-III.E.: --- Version 17.0,  AMS-I.C.: --- Version 22.0",
       "AMS-III.E, Version 17.0 & AMS-I.D, Version 18.0",
@@ -1284,6 +1304,8 @@
     "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
+      "AMS-I.D.; AMS-III.F.; AMS-III.Y",
+      "AMS-I.F.; AMS-III.E.; VM0044",
       "AMS-III.F. Avoidance of methane emissions through controlled biological treatment of biomass",
       "AMS-III.F.; VM0021",
       "AMS-III.F.: Avoidance of methane emissions through composting - Ver12.0; AMS-III.D: Methane recovery in animal manure management systems Ver 21.0",
@@ -1325,6 +1347,9 @@
     "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
+      "AMS-III.H.; AMS-III.AQ",
+      "AMS-I.C.; AMS-I.F.; AMS-III.H.",
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.; AMS-III.O.; AMS-III.AQ",
       "AMS-III.H. Methane recovery in wastewater treatment",
       "AMS-I.F.; AMS-III.H.",
       "AMS-I.D.; AMS-III.H.",
@@ -1358,10 +1383,31 @@
     "program": "cdm",
     "url": "https://cdm.unfccc.int/methodologies/DB/DKCLAOGT0S146VR70ZADDFGOVD61JK"
   },
+  "ams-iii-j": {
+    "category": "fuel-switching",
+    "known-string": ["AMS-III.J."],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_J"
+  },
+  "ams-iii-l": {
+    "category": "ghg-management",
+    "is_methane": true,
+    "known-string": ["AMS-III.L."],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_L"
+  },
   "ams-iii-m": {
     "category": "energy-efficiency",
     "known-strings": ["AMS-III.M."],
     "program": "cdm"
+  },
+  "ams-iii-o": {
+    "category": "fuel-switching",
+    "known-strings": [
+      "AMS-I.D.; AMS-III.D.; AMS-III.H.; AMS-III.O.; AMS-III.AQ"
+    ],
+    "program": "cdm",
+    "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_O"
   },
   "ams-iii-q": {
     "category": "energy-efficiency",
@@ -1397,6 +1443,7 @@
     "category": "ghg-management",
     "is_methane": true,
     "known-strings": [
+      "AMS-I.D.; AMS-III.F.; AMS-III.Y",
       "AMS-III.Y; VMR0003",
       "AMS-III.Y",
       "AMS-I.D.; AMS-III.Y",
@@ -1434,6 +1481,7 @@
   "ar-acm0003": {
     "category": "forest",
     "known-strings": [
+      "ACM0003; VM0042",
       "AR-AMS0003; AR-AMS0007; AR-ACM0003; AR-AM0014",
       "VM0026; AR-ACM0003; VM0042",
       "VM0007; AR-ACM0003",
@@ -1920,7 +1968,8 @@
       "VM0005; VM0007; VM0017",
       "VM0007",
       "AM0014; VM0007; AR-ACM0003",
-      "VM0007; VM0010"
+      "VM0007; VM0010",
+      "VM0007; VM0048"
     ],
     "program": "vcs",
     "sub-category": "redd",
@@ -2006,7 +2055,7 @@
     "program": "vcs"
   },
   "vm0021": {
-    "known-strings": ["AMS-III.F.; VM0021"],
+    "known-strings": ["AMS-III.F.; VM0021", "VM0021"],
     "program": "vcs"
   },
   "vm0022": {
@@ -2074,13 +2123,15 @@
   },
   "vm0041": {
     "category": "agriculture",
-    "known-strings": ["VM0041"],
+    "known-strings": ["VM0041", "VM0041; VM0042"],
     "program": "vcs",
     "sub-category": "livestock"
   },
   "vm0042": {
     "category": "agriculture",
     "known-strings": [
+      "VM0041; VM0042",
+      "ACM0003; VM0042",
       "AMS-I.F.; AMS-III.D.; AMS-III.AO.; VM0042",
       "VM0026; AR-ACM0003; VM0042",
       "AMS-III.AU; VM0042",
@@ -2099,7 +2150,7 @@
   },
   "vm0044": {
     "category": "biochar",
-    "known-strings": ["VM0044"],
+    "known-strings": ["VM0044", "AMS-I.F.; AMS-III.E.; VM0044"],
     "program": "verra",
     "url": "https://verra.org/methodologies/vm0044-methodology-for-biochar-utilization-in-soil-and-non-soil-applications/"
   },
@@ -2109,6 +2160,24 @@
     "program": "vcs",
     "sub-category": "ifm",
     "url": "https://verra.org/methodologies/methodology-for-improved-forest-management/"
+  },
+  "vm0046": {
+    "category": "ghg-management",
+    "known-strings": ["VM0046"],
+    "program": "verra",
+    "url": "https://verra.org/methodologies/vm0046-methodology-for-reducing-food-loss-and-waste-v1-0/"
+  },
+  "vm0047": {
+    "category": "forest",
+    "known-strings": ["VM0047", "VM0047; VM0048"],
+    "program": "verra",
+    "url": "https://verra.org/methodologies/vm0047-afforestation-reforestation-and-revegetation-v1-0/"
+  },
+  "vm0048": {
+    "category": "forest",
+    "known-strings": ["VM0007; VM0048", "VM0047; VM0048", "VM0048"],
+    "program": "verra",
+    "url": "https://verra.org/methodologies/vm0047-afforestation-reforestation-and-revegetation-v1-0/"
   },
   "vmd00038": {
     "category": "energy-efficiency",
