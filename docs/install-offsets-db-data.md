@@ -1,4 +1,4 @@
-# Install offsetsDB data
+# Install offsets-db-data
 
 offsets-db-data Python package can be installed in two ways:
 
