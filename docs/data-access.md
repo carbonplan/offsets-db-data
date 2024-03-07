@@ -13,7 +13,9 @@ By downloading or accessing the OffsetsDB data archives, you agree to the [Terms
 
 # Access OffsetsDB Data
 
-OffsetsDB provides a detailed view of carbon offset credits and projects. You can access the data in various formats or directly through Python using our data package.
+OffsetsDB provides a detailed view of carbon offset credits and projects.
+You can access the data in various formats or directly through Python using our data package.
+By downloading or accessing the OffsetsDB data archives, you agree to the [Terms of Data Access](TERMS-OF-DATA-ACCESS.md).
 
 ## CSV & Parquet Zipped Files
 
@@ -24,6 +26,12 @@ Download the latest version of OffsetsDB in CSV:
 Download the latest version of OffsetsDB in [Parquet](https://parquet.apache.org/):
 
 - [Download Credits & Projects](https://carbonplan-offsets-db.s3.us-west-2.amazonaws.com/production/latest/offsets-db.parquet.zip)
+
+## Citation
+
+Please cite OffsetsDB as:
+
+CarbonPlan (2024) “OffsetsDB” [https://carbonplan.org/research/offsets-db](https://carbonplan.org/research/offsets-db)
 
 ## Accessing The Full Data Archive Through Python
 
