@@ -22,7 +22,7 @@
 
 Utilities for cleaning, and processing data for the [OffsetsDB web tool](https://carbonplan.org/research/offsets-db/)
 
-## Installation
+## installation
 
 To install the package, you can use pip:
 
@@ -49,7 +49,7 @@ python -m pip install -e ".[dev]"
 
 ```
 
-## Building the documentation
+## building the documentation
 
 To build the documentation locally, you can use [sphinx](https://www.sphinx-doc.org/en/master/). You can install the documentation dependencies by running:
 
