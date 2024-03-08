@@ -60,6 +60,8 @@ hidden:
 
 GitHub Repo <https://github.com/carbonplan/offsets-db-data>
 GitHub discussions <https://github.com/carbonplan/offsets-db-data/discussions>
-Live Deployment <https://carbonplan.org/research/offsets-db/>
+Database Web Tool <https://carbonplan.org/research/offsets-db/>
+Methods <https://carbonplan.org/research/offsets-db-methods>
+Explainer <https://carbonplan.org/research/offsets-db-explainer>
 
 ```
