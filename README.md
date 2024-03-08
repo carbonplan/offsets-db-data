@@ -20,7 +20,7 @@
 
 # carbonplan / offsets-db-data
 
-Utilities for cleaning, and processing data for the [carbonplan/offsets-db-web](https://github.com/carbonplan/offsets-db-web)
+Utilities for cleaning, and processing data for the [OffsetsDB web tool](https://carbonplan.org/research/offsets-db/)
 
 ## Installation
 
