@@ -7,15 +7,14 @@ kernelspec:
   name: python3
 ---
 
-```{important}
-By downloading or accessing the OffsetsDB data archives, you agree to the [Terms of Data Access](TERMS-OF-DATA-ACCESS.md).
-```
-
 # Access OffsetsDB Data
 
 OffsetsDB provides a detailed view of carbon offset credits and projects.
 You can access the data in various formats or directly through Python using our data package.
+
+```{important}
 By downloading or accessing the OffsetsDB data archives, you agree to the [Terms of Data Access](TERMS-OF-DATA-ACCESS.md).
+```
 
 ## CSV & Parquet Zipped Files
 
