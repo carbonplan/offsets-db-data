@@ -28,7 +28,7 @@ dynamic = ["version", "dependencies"]
 [tool.setuptools.dynamic]
 
 dependencies = { file = ["requirements.txt"] }
-optional-dependencies = { dev = { file = ["requirements-dev.txt"] } }
+optional-dependencies = { dev = { file = ["requirements-dev.txt"] }, docs = { file = ["requirements-docs.txt"] } }
 
 
 [project.urls]

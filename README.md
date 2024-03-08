@@ -20,7 +20,7 @@
 
 # carbonplan / offsets-db-data
 
-Utilities for cleaning, and processing data for the [carbonplan/offsets-db-web](https://github.com/carbonplan/offsets-db-web)
+Utilities for cleaning, and processing data for the [OffsetsDB web tool](https://carbonplan.org/research/offsets-db/)
 
 ## Installation
 
@@ -54,8 +54,7 @@ python -m pip install -e ".[dev]"
 To build the documentation locally, you can use [sphinx](https://www.sphinx-doc.org/en/master/). You can install the documentation dependencies by running:
 
 ```bash
-python -m pip install -r requirements-docs.txt
-python -m pip install .
+python -m pip install -e ".[docs]"
 ```
 
 Then, you can build the documentation by running:
