@@ -16,6 +16,7 @@
 [![CI](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/CI.yaml)
 [![PyPI](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml/badge.svg)](https://github.com/carbonplan/offsets-db-data/actions/workflows/pypi.yaml)
 [![PyPI][pypi-badge]][pypi-link]
+[![Documentation Status][rtd-badge]][rtd-link]
 
 # carbonplan / offsets-db-data
 
@@ -78,3 +79,5 @@ CarbonPlan is a non-profit organization that uses data and science for climate a
 
 [pypi-badge]: https://img.shields.io/pypi/v/offsets-db-data?logo=pypi
 [pypi-link]: https://pypi.org/project/offsets-db-data
+[rtd-badge]: https://readthedocs.org/projects/offsets-db-data/badge/?version=latest
+[rtd-link]: https://offsets-db-data.readthedocs.io/en/latest/?badge=latest
