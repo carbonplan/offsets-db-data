@@ -54,8 +54,7 @@ python -m pip install -e ".[dev]"
 To build the documentation locally, you can use [sphinx](https://www.sphinx-doc.org/en/master/). You can install the documentation dependencies by running:
 
 ```bash
-python -m pip install -r requirements-docs.txt
-python -m pip install .
+python -m pip install -e ".[docs]"
 ```
 
 Then, you can build the documentation by running:
