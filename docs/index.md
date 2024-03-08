@@ -4,7 +4,7 @@
 
 ```
 
-Welcome to OffsetsDB! This documentation provides an overview of offsets-db-data, a Python package with utilities for cleaning and processing data for [carbonplan/offsets-db-web](https://github.com/carbonplan/offsets-db-web)
+Welcome to OffsetsDB! This documentation provides an overview of offsets-db-data, a Python package with utilities for cleaning and processing data for [OffsetsDB web tool](https://carbonplan.org/research/offsets-db/)
 
 ```{button-ref} install-offsets-db-data
 :ref-type: doc
