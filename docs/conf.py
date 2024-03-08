@@ -70,24 +70,25 @@ source_suffix = ['.rst', '.md']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 
-html_title = 'offsets-db-data'
-html_theme_options = {
-    'light_logo': 'monogram-dark-cropped.png',
-    'dark_logo': 'monogram-light-cropped.png',
-}
+html_theme = 'sphinx_book_theme'
 
-
-html_theme = 'furo'
-html_title = ''
-repository = 'carbonplan/offsets-db-data'
-repository_url = 'https://github.com/carbonplan/offsets-db-data'
 
 html_last_updated_fmt = '%b %d, %Y'
-html_context = {
-    'github_user': 'carbonplan',
-    'github_repo': 'offsets-db-data',
-    'github_version': 'main',
-    'doc_path': 'docs',
+
+html_title = 'offsets-db-data'
+
+
+html_theme_options = {
+    'repository_url': 'https://github.com/carbonplan/offsets-db-data',
+    'repository_branch': 'main',
+    'use_repository_button': True,
+    'path_to_docs': 'docs',
+    'use_edit_page_button': True,
+    'use_source_button': True,
+    'logo': {
+        'image_dark': 'monogram-light-cropped.png',
+        'image_light': 'monogram-dark-cropped.png',
+    },
 }
 html_static_path = ['_static']
 
