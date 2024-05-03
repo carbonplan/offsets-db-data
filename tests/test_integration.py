@@ -10,7 +10,7 @@ from offsets_db_data.vcs import *  # noqa: F403
 
 @pytest.fixture
 def date() -> str:
-    return '2024-02-13'
+    return '2024-05-03'
 
 
 @pytest.fixture
