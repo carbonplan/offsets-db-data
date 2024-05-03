@@ -19,6 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering",
 ]
 
@@ -33,6 +34,9 @@ optional-dependencies = { dev = { file = ["requirements-dev.txt"] }, docs = { fi
 
 [project.urls]
 repository = "https://github.com/carbonplan/offsets-db-data"
+"documentation" = "https://offsets-db-data.readthedocs.io/"
+"database web tool"= "https://carbonplan.org/research/offsets-db"
+"explainer" = "https://carbonplan.org/research/offsets-db-explainer"
 
 [tool.setuptools.packages.find]
 include = ["offsets_db_data*"]
@@ -124,6 +128,10 @@ docstring-code-format = true
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
 
 
 [tool.pytest.ini_options]
