@@ -3,19 +3,19 @@
     "cancellations": {
       "project_id": "Project ID",
       "quantity": "Quantity of Credits",
-      "transaction_date": "Status Effective",
+      "transaction_date": "Status Effective  (GMT)",
       "vintage": "Vintage"
     },
     "issuances": {
       "project_id": "Project ID",
       "quantity": "Total Credits Issued",
-      "transaction_date": "Date Issued",
+      "transaction_date": "Date Issued (GMT)",
       "vintage": "Vintage"
     },
     "retirements": {
       "project_id": "Project ID",
       "quantity": "Quantity of Credits",
-      "transaction_date": "Status Effective",
+      "transaction_date": "Status Effective (GMT)",
       "vintage": "Vintage"
     }
   },
