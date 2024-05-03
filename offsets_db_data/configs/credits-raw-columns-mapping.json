@@ -3,7 +3,7 @@
     "cancellations": {
       "project_id": "Project ID",
       "quantity": "Quantity of Credits",
-      "transaction_date": "Status Effective (GMT)",
+      "transaction_date": "Status Effective  (GMT)",
       "vintage": "Vintage"
     },
     "issuances": {
