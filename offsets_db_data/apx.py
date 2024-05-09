@@ -79,8 +79,12 @@ def process_apx_credits(
         df.set_registry(registry_name=registry_name)
         .determine_transaction_type(download_type=download_type)
         .rename(columns=columns)
-        .convert_to_datetime(columns=['transaction_date'])
     )
+
+    # split the date and time and keeping only the date. this helps with the inconsistency in the date format
+    data['transaction_date'] = data['transaction_date'].str.split().str[0]
+
+    data = data.convert_to_datetime(columns=['transaction_date'])
 
     if download_type == 'issuances':
         data = data.aggregate_issuance_transactions()
