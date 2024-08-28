@@ -3,5 +3,5 @@ pytest-cov==4.1.*
 pytest-xdist==3.3.*
 pytest-mock==3.10.*
 requests-mock==1.11.*
-hypothesis==6.86.*
+hypothesis==6.111.*
 openpyxl
