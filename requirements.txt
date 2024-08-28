@@ -1,6 +1,6 @@
 country_converter==1.0.0
 dask==2024.6.1
-fastparquet==2024.6.1
+fastparquet==2024.5.0
 fsspec==2024.6.1
 intake-parquet>=0.3.0
 intake<2
