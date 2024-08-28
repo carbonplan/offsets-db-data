@@ -4,8 +4,8 @@ fastparquet==2024.5.0
 fsspec==2024.6.1
 intake-parquet>=0.3.0
 intake<2
-pandas==2.1.1
-pandera==0.17
+pandas==2.2.2
+pandera==0.20
 pydantic==2.5.*
 pyjanitor==0.23.*
 requests>=2.31.0
