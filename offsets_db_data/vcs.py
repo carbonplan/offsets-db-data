@@ -225,6 +225,7 @@ def process_vcs_credits(
     data = (
         pd.concat([issuances, retirements])
         .reset_index(drop=True)
+        .add_missing_columns(schema=credit_without_id_schema)
         .validate(schema=credit_without_id_schema)
     )
 

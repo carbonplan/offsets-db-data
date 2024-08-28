@@ -10,7 +10,7 @@ from offsets_db_data.vcs import *  # noqa: F403
 
 @pytest.fixture
 def date() -> str:
-    return '2024-05-03'
+    return '2024-08-27'
 
 
 @pytest.fixture
@@ -21,7 +21,7 @@ def bucket() -> str:
 @pytest.fixture
 def arb() -> pd.DataFrame:
     data = pd.read_excel(
-        's3://carbonplan-offsets-db/raw/2024-05-03/arb/nc-arboc_issuance.xlsx', sheet_name=3
+        's3://carbonplan-offsets-db/raw/2024-08-27/arb/nc-arboc_issuance.xlsx', sheet_name=3
     )
     return data.process_arb()
 
@@ -103,10 +103,10 @@ def test_gld(
         pd.concat(
             [
                 pd.read_csv(
-                    's3://carbonplan-offsets-db/raw/2024-05-03/gold-standard/issuances.csv.gz'
+                    's3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/issuances.csv.gz'
                 ).process_gld_credits(download_type='issuances'),
                 pd.read_csv(
-                    's3://carbonplan-offsets-db/raw/2024-05-03/gold-standard/retirements.csv.gz'
+                    's3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/retirements.csv.gz'
                 ).process_gld_credits(download_type='retirements'),
             ]
         ),
@@ -116,7 +116,7 @@ def test_gld(
     'projects',
     [
         pd.DataFrame(),
-        pd.read_csv('s3://carbonplan-offsets-db/raw/2024-05-03/gold-standard/projects.csv.gz'),
+        pd.read_csv('s3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/projects.csv.gz'),
     ],
 )
 def test_gld_empty(df_credits, projects):

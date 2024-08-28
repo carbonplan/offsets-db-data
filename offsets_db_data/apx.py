@@ -89,7 +89,9 @@ def process_apx_credits(
     if download_type == 'issuances':
         data = data.aggregate_issuance_transactions()
 
-    data = data.validate(schema=credit_without_id_schema)
+    data = data.add_missing_columns(schema=credit_without_id_schema).validate(
+        schema=credit_without_id_schema
+    )
     if arb is not None and not arb.empty:
         data = data.merge_with_arb(arb=arb)
     return data

@@ -1,82 +1,130 @@
 {
   "american-carbon-registry": {
     "cancellations": {
+      "account": null,
+      "beneficiary": null,
+      "note": null,
       "project_id": "Project ID",
       "quantity": "Quantity of Credits",
+      "reason": null,
       "transaction_date": "Status Effective  (GMT)",
       "vintage": "Vintage"
     },
     "issuances": {
+      "account": null,
+      "beneficiary": null,
+      "note": null,
       "project_id": "Project ID",
       "quantity": "Total Credits Issued",
+      "reason": null,
       "transaction_date": "Date Issued (GMT)",
       "vintage": "Vintage"
     },
     "retirements": {
+      "account": "Account Holder",
+      "beneficiary": null,
+      "note": "Purpose of Retirement",
       "project_id": "Project ID",
       "quantity": "Quantity of Credits",
+      "reason": "Retirement Reason",
       "transaction_date": "Status Effective (GMT)",
       "vintage": "Vintage"
     }
   },
   "art-trees": {
     "cancellations": {
+      "account": null,
+      "beneficiary": null,
+      "note": null,
       "project_id": "Program ID",
       "quantity": "Quantity of Credits",
+      "reason": null,
       "transaction_date": "Status Effective",
       "vintage": "Vintage"
     },
     "issuances": {
+      "account": null,
+      "beneficiary": null,
+      "note": null,
       "project_id": "Program ID",
       "quantity": "Credits Verified",
+      "reason": null,
       "transaction_date": "Date Approved",
       "vintage": "Vintage"
     },
     "retirements": {
+      "account": "Account Holder",
+      "beneficiary": null,
+      "note": "Retirement Reason Details",
       "project_id": "Program ID",
       "quantity": "Quantity of Credits",
+      "reason": "Retirement Reason",
       "transaction_date": "Status Effective",
       "vintage": "Vintage"
     }
   },
   "climate-action-reserve": {
     "cancellations": {
+      "account": null,
+      "beneficiary": null,
+      "note": null,
       "project_id": "Project ID",
       "quantity": "Quantity of Offset Credits",
+      "reason": null,
       "transaction_date": "Status Effective",
       "vintage": "Vintage"
     },
     "issuances": {
+      "account": null,
+      "beneficiary": null,
+      "note": null,
       "project_id": "Project ID",
       "quantity": "Total Offset Credits Issued",
+      "reason": null,
       "transaction_date": "Date Issued",
       "vintage": "Vintage"
     },
     "retirements": {
+      "account": "Account Holder",
+      "beneficiary": null,
+      "note": "Retirement Reason Details",
       "project_id": "Project ID",
       "quantity": "Quantity of Offset Credits",
+      "reason": "Retirement Reason",
       "transaction_date": "Status Effective",
       "vintage": "Vintage"
     }
   },
   "gold-standard": {
     "issuances": {
+      "account": null,
+      "beneficiary": null,
+      "note": null,
       "project_id": "GSID",
       "quantity": "Quantity",
+      "reason": null,
       "transaction_date": "Issuance Date",
       "vintage": "Vintage"
     },
     "retirements": {
+      "account": null,
+      "beneficiary": "Using Entity",
+      "note": "Note",
       "project_id": "GSID",
       "quantity": "Quantity",
+      "reason": null,
       "transaction_date": "Retirement Date",
       "vintage": "Vintage"
     }
   },
   "verra": {
     "transactions": {
+      "account": null,
+      "beneficiary": "Retirement Beneficiary",
+      "note": "Retirement Details",
       "project_id": null,
       "quantity": null,
+      "reason": "Retirement Reason",
       "transaction_date": null,
       "vintage": null
     }

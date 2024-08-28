@@ -48,6 +48,10 @@ credit_without_id_schema = pa.DataFrameSchema(
         'vintage': pa.Column(pa.Int, nullable=True, coerce=True),
         'transaction_date': pa.Column(pd.DatetimeTZDtype(tz='UTC'), nullable=True),
         'transaction_type': pa.Column(pa.String, nullable=True),
+        'account': pa.Column(pa.String, nullable=True),
+        'reason': pa.Column(pa.String, nullable=True),
+        'note': pa.Column(pa.String, nullable=True),
+        'beneficiary': pa.Column(pa.String, nullable=True),
     }
 )
 
