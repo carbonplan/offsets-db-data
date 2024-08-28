@@ -132,8 +132,10 @@ def process_arb(df: pd.DataFrame) -> pd.DataFrame:
     data['registry'] = data.project_id.apply(_get_registry)
     data['vintage'] = data['vintage'].astype(int)
 
-    data = data.convert_to_datetime(columns=['transaction_date']).validate(
-        schema=credit_without_id_schema
+    data = (
+        data.add_missing_columns(schema=credit_without_id_schema)
+        .convert_to_datetime(columns=['transaction_date'])
+        .validate(schema=credit_without_id_schema)
     )
 
     return data

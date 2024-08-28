@@ -141,7 +141,7 @@ def add_missing_columns(df: pd.DataFrame, *, schema: pa.DataFrameSchema) -> pd.D
     for column, value in schema.columns.items():
         dtype = value.dtype.type
         if column not in df.columns:
-            default_value = default_values.get(dtype, None)
+            default_value = default_values.get(dtype)
             df[column] = pd.Series([default_value] * len(df), index=df.index, dtype=dtype)
     return df
 
