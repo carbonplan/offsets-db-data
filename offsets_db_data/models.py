@@ -13,6 +13,14 @@ RegistryType = typing.Literal[
     'none',
 ]
 
+project_types_schema = pa.DataFrameSchema(
+    {
+        'project_id': pa.Column(pa.String, nullable=False),
+        'project_type': pa.Column(pa.String, nullable=False),
+        'source': pa.Column(pa.String, nullable=False),
+    }
+)
+
 
 project_schema = pa.DataFrameSchema(
     {
