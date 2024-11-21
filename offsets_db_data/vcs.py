@@ -109,7 +109,10 @@ def set_vcs_vintage_year(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
         DataFrame with a new 'vintage' column, containing the vintage year of each transaction.
     """
 
-    df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y', utc=True)
+    try:
+        df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y', utc=True)
+    except ValueError:
+        df[date_column] = pd.to_datetime(df[date_column], utc=True)
     df['vintage'] = df[date_column].dt.year
     return df
 
