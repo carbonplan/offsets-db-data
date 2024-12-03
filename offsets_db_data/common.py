@@ -100,10 +100,12 @@ def convert_to_datetime(
     """
 
     for column in columns:
-        if column in df.columns:
-            df[column] = pd.to_datetime(df[column], utc=utc, **kwargs).dt.normalize()
-        else:
+        if column not in df.columns:
             raise KeyError(f"The column '{column}' is missing.")
+        try:
+            df[column] = pd.to_datetime(df[column], utc=utc, **kwargs).dt.normalize()
+        except ValueError:
+            df[column] = pd.to_datetime(df[column], utc=utc).dt.normalize()
     return df
 
 
