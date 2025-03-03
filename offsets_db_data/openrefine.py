@@ -2,6 +2,7 @@ import pathlib
 import shutil
 import subprocess
 import tempfile
+import traceback
 
 import requests
 import rich.console
@@ -28,25 +29,30 @@ def install(
     Install orcli from GitHub.
     """
 
-    tempfile_path = pathlib.Path(tempfile.mkdtemp()) / 'orcli'
+    try:
+        tempfile_path = (pathlib.Path(tempfile.mkdtemp()) / 'orcli').as_posix()
 
-    file_path = f'{destination}/orcli' if destination else 'orcli'
-    abs_file_path = pathlib.Path(file_path).expanduser().resolve()
-    filename = abs_file_path.as_posix()
-    # Download orcli from GitHub
-    # Download the file with streaming to handle large files.
-    response = requests.get(url, stream=True)
-    response.raise_for_status()  # Raise error if the download failed.
+        file_path = f'{destination}/orcli' if destination else 'orcli'
+        abs_file_path = pathlib.Path(file_path).expanduser().resolve()
+        filename = abs_file_path.as_posix()
+        # Download orcli from GitHub
+        # Download the file with streaming to handle large files.
+        response = requests.get(url, stream=True)
+        response.raise_for_status()  # Raise error if the download failed.
 
-    with open(tempfile_path, 'wb') as f:
-        for chunk in response.iter_content(chunk_size=8192):
-            if chunk:  # Filter out keep-alive chunks.
-                f.write(chunk)
+        with open(tempfile_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:  # Filter out keep-alive chunks.
+                    f.write(chunk)
 
-    # Make the file executable
-    subprocess.run(['chmod', '+x', tempfile_path], check=True)
-    subprocess.run(['mv', tempfile_path, destination], check=True)
-    console.print(f'orcli installed to {filename}.')
+        # Make the file executable
+        subprocess.run(['chmod', '+x', tempfile_path], check=True)
+        subprocess.run(['mv', tempfile_path, destination], check=True)
+        console.print(f'orcli installed to {filename}.')
+
+    except Exception as _:
+        console.print(f'Error: {traceback.format_exc()}')
+        raise typer.Exit(1)
 
 
 @app.command()
