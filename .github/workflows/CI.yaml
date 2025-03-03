@@ -23,7 +23,7 @@ env:
   AWS_DEFAULT_REGION: us-west-2
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     defaults:
@@ -55,6 +55,11 @@ jobs:
       - name: List packages
         run: |
           python -m pip list
+
+      - name: Install CLI
+        run: |
+          offsets-db-data-orcli install --destination /usr/local/bin
+          offsets-db-data-orcli --help
 
       - name: Run tests
         run: |
