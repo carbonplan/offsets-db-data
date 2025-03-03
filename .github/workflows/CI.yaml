@@ -23,7 +23,7 @@ env:
   AWS_DEFAULT_REGION: us-west-2
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     defaults:
