@@ -31,7 +31,7 @@ def install(
     """
     Install orcli from GitHub.
     """
-    file_path = destination if move else 'orcli'
+    file_path = f'{destination}/orcli' if move else 'orcli'
     abs_file_path = pathlib.Path(file_path).expanduser().resolve()
     filename = abs_file_path.as_posix()
     # Download orcli from GitHub

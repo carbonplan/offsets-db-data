@@ -56,6 +56,11 @@ jobs:
         run: |
           python -m pip list
 
+      - name: Install CLI
+        run: |
+          python -m offsets-db-data-orcli install --move --destination /usr/local/bin
+          python -m offsets-db-data-orcli --help
+
       - name: Run tests
         run: |
           python -m pytest
