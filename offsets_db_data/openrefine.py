@@ -20,7 +20,7 @@ def install(
         show_default=True,
     ),
     destination: str = typer.Option(
-        '',
+        './',
         help='The destination path to move the downloaded file to.',
         show_default=True,
     ),
@@ -30,7 +30,7 @@ def install(
     """
 
     try:
-        tempfile_path = (pathlib.Path(tempfile.mkdtemp()) / 'orcli').as_posix()
+        tempfile_path = (pathlib.Path(tempfile.gettempdir()) / 'orcli').as_posix()
 
         file_path = f'{destination}/orcli' if destination else 'orcli'
         abs_file_path = pathlib.Path(file_path).expanduser().resolve()
@@ -47,6 +47,7 @@ def install(
 
         # Make the file executable
         subprocess.run(['chmod', '+x', tempfile_path], check=True)
+        console.print(f'Moving orcli from {tempfile_path} to {filename}.')
         subprocess.run(['mv', tempfile_path, destination], check=True)
         console.print(f'orcli installed to {filename}.')
 
