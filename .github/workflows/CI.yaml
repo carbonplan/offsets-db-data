@@ -58,7 +58,7 @@ jobs:
 
       - name: Install CLI
         run: |
-          offsets-db-data-orcli install--destination /usr/local/bin
+          offsets-db-data-orcli install --destination /usr/local/bin
           offsets-db-data-orcli --help
 
       - name: Run tests
