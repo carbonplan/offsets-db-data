@@ -1,6 +1,7 @@
 import pathlib
 import shutil
 import subprocess
+import tempfile
 
 import requests
 import rich.console
@@ -17,11 +18,6 @@ def install(
         help='The URL to download orcli from.',
         show_default=True,
     ),
-    move: bool = typer.Option(
-        False,
-        help='If True, move the downloaded file to the specified destination.',
-        show_default=True,
-    ),
     destination: str = typer.Option(
         '',
         help='The destination path to move the downloaded file to.',
@@ -31,7 +27,10 @@ def install(
     """
     Install orcli from GitHub.
     """
-    file_path = f'{destination}/orcli' if move else 'orcli'
+
+    tempfile_path = pathlib.Path(tempfile.mkdtemp()) / 'orcli'
+
+    file_path = f'{destination}/orcli' if destination else 'orcli'
     abs_file_path = pathlib.Path(file_path).expanduser().resolve()
     filename = abs_file_path.as_posix()
     # Download orcli from GitHub
@@ -39,17 +38,14 @@ def install(
     response = requests.get(url, stream=True)
     response.raise_for_status()  # Raise error if the download failed.
 
-    with open(filename, 'wb') as f:
+    with open(tempfile_path, 'wb') as f:
         for chunk in response.iter_content(chunk_size=8192):
             if chunk:  # Filter out keep-alive chunks.
                 f.write(chunk)
 
     # Make the file executable
-    subprocess.run(['chmod', '+x', 'orcli'], check=True)
-    # Optionally move the file to the specified destination
-    if move:
-        subprocess.run(['mv', 'orcli', destination], check=True)
-
+    subprocess.run(['chmod', '+x', tempfile_path], check=True)
+    subprocess.run(['mv', tempfile_path, destination], check=True)
     console.print(f'orcli installed to {filename}.')
 
 
