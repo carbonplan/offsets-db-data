@@ -152,6 +152,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
                 'run',
                 '--',
                 'import',
+                'csv',
                 str(temp_path),
                 '--projectName',
                 f'{project_name}',
