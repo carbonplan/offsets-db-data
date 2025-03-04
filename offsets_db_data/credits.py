@@ -142,9 +142,25 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     temp_path = pathlib.Path(tempdir) / 'credits.csv'
     credits.to_csv(temp_path, index=False)
 
+    project_name = 'beneficiary-harmonization'
+
     try:
         result = subprocess.run(
-            ['offsets-db-data-orcli', 'run', 'list'],
+            [
+                'offsets-db-data-orcli',
+                'run',
+                'import',
+                str(temp_path),
+                '--projectName',
+                f'{project_name}',
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+
+        result = subprocess.run(
+            ['offsets-db-data-orcli', 'run', 'info', project_name],
             capture_output=True,
             text=True,
             check=True,
