@@ -26,12 +26,17 @@ def arb() -> pd.DataFrame:
     return data.process_arb()
 
 
-def test_verra(date, bucket, arb):
+@pytest.mark.parametrize(
+    'harmonize_beneficiary_info',
+    [True, False],
+)
+def test_verra(date, bucket, arb, harmonize_beneficiary_info):
     prefix = 'VCS'
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
     df_credits = credits.process_vcs_credits(
-        arb=arb[arb.project_id.str.startswith(prefix)], harmonize_beneficiary_info=True
+        arb=arb[arb.project_id.str.startswith(prefix)],
+        harmonize_beneficiary_info=harmonize_beneficiary_info,
     )
     assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
     df_projects = projects.process_vcs_projects(credits=df_credits)
@@ -72,9 +77,14 @@ def test_apx(date, bucket, arb, registry, download_types, prefix):
     assert df_credits['project_id'].str.startswith(prefix).all()
 
 
+@pytest.mark.parametrize(
+    'harmonize_beneficiary_info',
+    [True, False],
+)
 def test_gld(
     date,
     bucket,
+    harmonize_beneficiary_info,
 ):
     registry = 'gold-standard'
     download_types = ['issuances', 'retirements']
@@ -83,7 +93,9 @@ def test_gld(
     dfs = []
     for key in download_types:
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
-        p = credits.process_gld_credits(download_type=key, harmonize_beneficiary_info=True)
+        p = credits.process_gld_credits(
+            download_type=key, harmonize_beneficiary_info=harmonize_beneficiary_info
+        )
         dfs.append(p)
 
     df_credits = pd.concat(dfs)
