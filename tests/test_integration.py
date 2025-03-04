@@ -30,7 +30,9 @@ def test_verra(date, bucket, arb):
     prefix = 'VCS'
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
-    df_credits = credits.process_vcs_credits(arb=arb[arb.project_id.str.startswith(prefix)])
+    df_credits = credits.process_vcs_credits(
+        arb=arb[arb.project_id.str.startswith(prefix)], harmoniz_beneficiary_info=True
+    )
     assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
     df_projects = projects.process_vcs_projects(credits=df_credits)
     project_schema.validate(df_projects)
@@ -52,7 +54,9 @@ def test_apx(date, bucket, arb, registry, download_types, prefix):
     dfs = []
     for key in download_types:
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
-        p = credits.process_apx_credits(download_type=key, registry_name=registry)
+        p = credits.process_apx_credits(
+            download_type=key, registry_name=registry, harmonize_beneficiary_info=True
+        )
         dfs.append(p)
 
     df_credits = pd.concat(dfs).merge_with_arb(arb=arb[arb.project_id.str.startswith(prefix)])
@@ -79,7 +83,7 @@ def test_gld(
     dfs = []
     for key in download_types:
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
-        p = credits.process_gld_credits(download_type=key)
+        p = credits.process_gld_credits(download_type=key, harmonize_beneficiary_info=True)
         dfs.append(p)
 
     df_credits = pd.concat(dfs)
@@ -99,15 +103,17 @@ def test_gld(
 @pytest.mark.parametrize(
     'df_credits',
     [
-        pd.DataFrame().process_gld_credits(download_type='issuances'),
+        pd.DataFrame().process_gld_credits(
+            download_type='issuances', harmonize_beneficiary_info=True
+        ),
         pd.concat(
             [
                 pd.read_csv(
                     's3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/issuances.csv.gz'
-                ).process_gld_credits(download_type='issuances'),
+                ).process_gld_credits(download_type='issuances', harmonize_beneficiary_info=True),
                 pd.read_csv(
                     's3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/retirements.csv.gz'
-                ).process_gld_credits(download_type='retirements'),
+                ).process_gld_credits(download_type='retirements', harmonize_beneficiary_info=True),
             ]
         ),
     ],
