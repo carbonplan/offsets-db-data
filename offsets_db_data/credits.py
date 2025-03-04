@@ -150,6 +150,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
             [
                 'offsets-db-data-orcli',
                 'run',
+                '--',
                 'import',
                 str(temp_path),
                 '--projectName',
@@ -161,14 +162,21 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
         )
 
         result = subprocess.run(
-            ['offsets-db-data-orcli', 'run', 'info', project_name],
+            ['offsets-db-data-orcli', 'run', '--', 'info', project_name],
             capture_output=True,
             text=True,
             check=True,
         )
 
         result = subprocess.run(
-            ['offsets-db-data-orcli', 'run', 'transform', project_name, f"'{transformation_url}'"],
+            [
+                'offsets-db-data-orcli',
+                'run',
+                '--',
+                'transform',
+                project_name,
+                f"'{transformation_url}'",
+            ],
             capture_output=True,
             text=True,
             check=True,
@@ -176,4 +184,4 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
         print(result.stdout)
         return credits
     except Exception as e:
-        raise ValueError(f'Failed to harmonize beneficiary data: {e}')
+        raise ValueError(f'Failed to harmonize beneficiary data: {e}') from e
