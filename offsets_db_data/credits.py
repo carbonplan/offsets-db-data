@@ -143,6 +143,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     credits.to_csv(temp_path, index=False)
 
     project_name = 'beneficiary-harmonization'
+    transformation_url = 'https://gist.githubusercontent.com/andersy005/e92d2403e60657d642f49aa28d5f16f9/raw/11be9a5cb014df626e49114f08c80fb97776e1d3/beneficiary-mappings.json'
 
     try:
         result = subprocess.run(
@@ -165,7 +166,14 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
             text=True,
             check=True,
         )
+
+        result = subprocess.run(
+            ['offsets-db-data-orcli', 'run', 'transform', project_name, f"'{transformation_url}'"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
         print(result.stdout)
         return credits
     except Exception as e:
-        raise e
+        raise ValueError(f'Failed to harmonize beneficiary data: {e} - {result.stderr}')
