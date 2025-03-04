@@ -150,5 +150,6 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
             check=True,
         )
         print(result.stdout)
+        return credits
     except Exception as e:
         raise e
