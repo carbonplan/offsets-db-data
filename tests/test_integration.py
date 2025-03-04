@@ -31,7 +31,7 @@ def test_verra(date, bucket, arb):
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
     df_credits = credits.process_vcs_credits(
-        arb=arb[arb.project_id.str.startswith(prefix)], harmoniz_beneficiary_info=True
+        arb=arb[arb.project_id.str.startswith(prefix)], harmonize_beneficiary_info=True
     )
     assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
     df_projects = projects.process_vcs_projects(credits=df_credits)
