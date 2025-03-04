@@ -1,3 +1,7 @@
+import pathlib
+import subprocess
+import tempfile
+
 import janitor  # noqa: F401
 import pandas as pd
 import pandas_flavor as pf
@@ -122,3 +126,29 @@ def merge_with_arb(credits: pd.DataFrame, *, arb: pd.DataFrame) -> pd.DataFrame:
 
     df = pd.concat([df, arb], ignore_index=True)
     return df
+
+
+def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
+    """
+    Harmonize the beneficiary information by removing the 'beneficiary_id' column and renaming the 'beneficiary_name' column to 'beneficiary'.
+
+    Parameters
+    ----------
+    credits : pd.DataFrame
+        Input DataFrame containing credit data.
+    """
+
+    tempdir = tempfile.gettempdir()
+    temp_path = pathlib.Path(tempdir) / 'credits.csv'
+    credits.to_csv(temp_path, index=False)
+
+    try:
+        result = subprocess.run(
+            ['offsets-db-data-orcli', 'run', 'list'],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        print(result.stdout)
+    except Exception as e:
+        raise e

@@ -11,6 +11,7 @@ from offsets_db_data.common import (
     load_registry_project_column_mapping,
 )
 from offsets_db_data.credits import *  # noqa: F403
+from offsets_db_data.credits import harmonize_beneficiary_data
 from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.projects import *  # noqa: F403
 
@@ -175,6 +176,7 @@ def process_vcs_credits(
     registry_name: str = 'verra',
     prefix: str = 'VCS',
     arb: pd.DataFrame | None = None,
+    harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
     """
     Process Verra credits data, including generation of project IDs, determination of transaction types,
@@ -234,6 +236,9 @@ def process_vcs_credits(
 
     if arb is not None and not arb.empty:
         data = data.merge_with_arb(arb=arb)
+
+    if harmonize_beneficiary_info:
+        data = data.pipe(harmonize_beneficiary_data)
 
     return data
 

@@ -11,6 +11,7 @@ from offsets_db_data.common import (
     load_registry_project_column_mapping,
 )
 from offsets_db_data.credits import *  # noqa: F403
+from offsets_db_data.credits import harmonize_beneficiary_data
 from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.projects import *  # noqa: F403
 
@@ -44,7 +45,12 @@ def determine_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.Da
 
 @pf.register_dataframe_method
 def process_apx_credits(
-    df: pd.DataFrame, *, download_type: str, registry_name: str, arb: pd.DataFrame | None = None
+    df: pd.DataFrame,
+    *,
+    download_type: str,
+    registry_name: str,
+    arb: pd.DataFrame | None = None,
+    harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
     """
     Process APX credits data by setting registry, determining transaction types, renaming columns,
@@ -94,6 +100,9 @@ def process_apx_credits(
     )
     if arb is not None and not arb.empty:
         data = data.merge_with_arb(arb=arb)
+
+    if harmonize_beneficiary_info:
+        data = data.pipe(harmonize_beneficiary_data)
     return data
 
 
