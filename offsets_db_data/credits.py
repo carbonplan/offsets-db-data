@@ -148,17 +148,24 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     temp_path = pathlib.Path(tempdir) / 'credits.csv'
 
     if len(credits) == 0:
-        raise ValueError(
+        print(
             f'Empty dataframe with shape={credits.shape} - columns:{credits.columns.tolist()}. No credits to harmonize'
         )
+        data = credits.copy()
+        data['retirement_beneficiary_harmonized'] = pd.Series(dtype='str')
+        return data
     credits.to_csv(temp_path, index=False)
 
     project_name = f'beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}'
+    output_path = pathlib.Path(tempdir) / f'{project_name}.csv'
 
     try:
-        return _extract_harmonized_beneficiary_data_via_openrefine(
-            temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), credits
+        _extract_harmonized_beneficiary_data_via_openrefine(
+            temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), credits, str(output_path)
         )
+
+        data = pd.read_csv(output_path)
+        return data
     except subprocess.CalledProcessError as e:
         raise ValueError(
             f'Commad failed with return code: {e.returncode}\nOutput: {e.output}\nError output: {e.stderr}'
@@ -166,7 +173,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
 
 
 def _extract_harmonized_beneficiary_data_via_openrefine(
-    temp_path, project_name, beneficiary_mapping_path, credits
+    temp_path, project_name, beneficiary_mapping_path, credits, output_path
 ):
     result = subprocess.run(['cat', temp_path], capture_output=True, text=True, check=True)
     result = subprocess.run(
@@ -207,6 +214,22 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
     )
 
     result = subprocess.run(
+        [
+            'offsets-db-data-orcli',
+            'run',
+            '--',
+            'export',
+            'csv',
+            project_name,
+            '--output',
+            output_path,
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
         ['offsets-db-data-orcli', 'run', '--', 'delete', project_name],
         capture_output=True,
         text=True,
@@ -214,4 +237,3 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
     )
 
     print(result.stdout)
-    return credits
