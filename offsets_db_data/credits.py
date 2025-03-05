@@ -162,7 +162,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
 
     try:
         return _extract_harmonized_beneficiary_data_via_openrefine(
-            temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), credits, str(output_path)
+            temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), str(output_path)
         )
 
     except subprocess.CalledProcessError as e:
@@ -172,9 +172,8 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
 
 
 def _extract_harmonized_beneficiary_data_via_openrefine(
-    temp_path, project_name, beneficiary_mapping_path, credits, output_path
+    temp_path, project_name, beneficiary_mapping_path, output_path
 ):
-    result = subprocess.run(['cat', temp_path], capture_output=True, text=True, check=True)
     result = subprocess.run(
         [
             'offsets-db-data-orcli',
