@@ -141,7 +141,7 @@ def process_gld_credits(
         )
 
     if harmonize_beneficiary_info:
-        data = data.pipe(harmonize_beneficiary_data)
+        data = data.pipe(harmonize_beneficiary_data).validate(schema=credit_without_id_schema)
 
     return data
 

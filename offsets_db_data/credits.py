@@ -4,6 +4,7 @@ import subprocess
 import tempfile
 
 import janitor  # noqa: F401
+import numpy as np
 import pandas as pd
 import pandas_flavor as pf
 import upath
@@ -160,13 +161,10 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     output_path = pathlib.Path(tempdir) / f'{project_name}.csv'
 
     try:
-        _extract_harmonized_beneficiary_data_via_openrefine(
+        return _extract_harmonized_beneficiary_data_via_openrefine(
             temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), credits, str(output_path)
         )
 
-        data = pd.read_csv(output_path)
-        data.to_csv(f's3://carbonplan-scratch/offsets-db-data/{project_name}.csv', index=False)
-        return data
     except subprocess.CalledProcessError as e:
         raise ValueError(
             f'Commad failed with return code: {e.returncode}\nOutput: {e.output}\nError output: {e.stderr}'
@@ -238,3 +236,13 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
     )
 
     print(result.stdout)
+
+    data = pd.read_csv(output_path)
+    data['merged_beneficiary'] = np.where(
+        data['merged_beneficiary'].notnull() & (~data['merged_beneficiary'].str.contains(';%')),
+        data['merged_beneficiary'],
+        '',  # or np.nan if you want nulls instead of empty strings
+    )
+    data = data.rename(columns={'merged_beneficiary': 'retirement_beneficiary_harmonized'})
+    data.to_csv(f's3://carbonplan-scratch/offsets-db-data/{project_name}.csv', index=False)
+    return data

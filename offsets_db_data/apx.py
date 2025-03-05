@@ -102,7 +102,7 @@ def process_apx_credits(
         data = data.merge_with_arb(arb=arb)
 
     if harmonize_beneficiary_info:
-        data = data.pipe(harmonize_beneficiary_data)
+        data = data.pipe(harmonize_beneficiary_data).validate(schema=credit_without_id_schema)
     return data
 
 
