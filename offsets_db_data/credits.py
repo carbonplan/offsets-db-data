@@ -159,6 +159,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
 def _extract_harmonized_beneficiary_data_via_openrefine(
     temp_path, project_name, transformation_url, credits
 ):
+    result = subprocess.run(['cat', temp_path], capture_output=True, text=True, check=True)
     result = subprocess.run(
         [
             'offsets-db-data-orcli',
