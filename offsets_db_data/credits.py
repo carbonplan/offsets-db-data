@@ -244,6 +244,6 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
     data['retirement_beneficiary_harmonized'] = np.where(
         data['merged_beneficiary'].notnull() & (~data['merged_beneficiary'].str.contains(';%')),
         data['merged_beneficiary'],
-        '',
+        np.nan,
     )
     return data
