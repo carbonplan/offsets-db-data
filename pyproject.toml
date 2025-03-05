@@ -132,5 +132,5 @@
     keep-runtime-typing = true
 
 [tool.pytest.ini_options]
-    addopts              = "-n auto --cov=./ --cov-report=xml  --cov-report=term-missing --verbose"
+    addopts              = "--cov=./ --cov-report=xml  --cov-report=term-missing --verbose"
     console_output_style = "count"
