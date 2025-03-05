@@ -102,7 +102,13 @@ def process_apx_credits(
         data = data.merge_with_arb(arb=arb)
 
     if harmonize_beneficiary_info:
-        data = data.pipe(harmonize_beneficiary_data).validate(schema=credit_without_id_schema)
+        data = data.pipe(harmonize_beneficiary_data)
+
+    data = (
+        data.add_missing_columns(schema=credit_without_id_schema)
+        .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
+        .validate(schema=credit_without_id_schema)
+    )
     return data
 
 
