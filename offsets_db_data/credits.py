@@ -165,6 +165,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
         )
 
         data = pd.read_csv(output_path)
+        data.to_csv(f's3://carbonplan-scratch/offsets-db-data/{project_name}.csv', index=False)
         return data
     except subprocess.CalledProcessError as e:
         raise ValueError(
