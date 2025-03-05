@@ -6,6 +6,11 @@ import tempfile
 import janitor  # noqa: F401
 import pandas as pd
 import pandas_flavor as pf
+import upath
+
+BENEFICIARY_MAPPING_UPATH = (
+    upath.UPath(__file__).parents[0] / 'configs' / 'beneficiary-mappings.json'
+)
 
 
 @pf.register_dataframe_method
@@ -144,11 +149,10 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     credits.to_csv(temp_path, index=False)
 
     project_name = f'beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}'
-    transformation_url = 'https://gist.githubusercontent.com/andersy005/e92d2403e60657d642f49aa28d5f16f9/raw/11be9a5cb014df626e49114f08c80fb97776e1d3/beneficiary-mappings.json'
 
     try:
         return _extract_harmonized_beneficiary_data_via_openrefine(
-            temp_path, project_name, transformation_url, credits
+            temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), credits
         )
     except subprocess.CalledProcessError as e:
         raise ValueError(
@@ -157,7 +161,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
 
 
 def _extract_harmonized_beneficiary_data_via_openrefine(
-    temp_path, project_name, transformation_url, credits
+    temp_path, project_name, beneficiary_mapping_path, credits
 ):
     result = subprocess.run(['cat', temp_path], capture_output=True, text=True, check=True)
     result = subprocess.run(
@@ -190,7 +194,7 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
             '--',
             'transform',
             project_name,
-            f"'{transformation_url}'",
+            beneficiary_mapping_path,
         ],
         capture_output=True,
         text=True,
