@@ -243,6 +243,8 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
         data['merged_beneficiary'],
         '',
     )
-    data = data.rename(columns={'merged_beneficiary': 'retirement_beneficiary_harmonized'})
+    data = data.rename(
+        columns={'merged_beneficiary': 'retirement_beneficiary_harmonized'}
+    ).reset_index(drop=True)
     data.to_csv(f's3://carbonplan-scratch/offsets-db-data/{project_name}.csv', index=False)
-    return data
+    return data.reset_index(drop=True)
