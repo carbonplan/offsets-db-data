@@ -73,12 +73,13 @@ def run(
         raise typer.Exit(1)
 
     command = [binary_path] + list(args)
-    result = subprocess.run(command, check=True, capture_output=True, text=True)
-    console.print(result.stdout)
-    if result.stderr:
-        console.print(result.stderr)
-        raise typer.Exit(result.returncode)
-    return result.stdout
+    try:
+        result = subprocess.run(command, check=True, capture_output=True, text=True)
+        console.print(result.stdout)
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        console.print(e.stderr)
+        raise typer.Exit(e.returncode) from e
 
 
 def main():

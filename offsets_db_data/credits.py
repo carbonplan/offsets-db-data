@@ -184,5 +184,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
         )
         print(result.stdout)
         return credits
-    except Exception as e:
-        raise ValueError(f'Failed to harmonize beneficiary data: {e}') from e
+    except subprocess.CalledProcessError as e:
+        raise ValueError(
+            f'Commad failed with return code: {e.returncode}\nOutput: {e.output}\nError output: {e.stderr}'
+        ) from e
