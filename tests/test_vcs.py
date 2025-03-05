@@ -442,7 +442,7 @@ def test_add_vcs_compliance_projects(vcs_projects):
 
 
 def test_process_vcs_projects(vcs_projects, vcs_transactions):
-    vcs_credits = process_vcs_credits(vcs_transactions)
+    vcs_credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
     df = process_vcs_projects(
         vcs_projects, credits=vcs_credits, registry_name='verra', download_type='projects'
     )
@@ -473,7 +473,7 @@ def test_process_vcs_projects(vcs_projects, vcs_transactions):
 def test_process_vcs_projects_with_totals_and_dates(vcs_projects, vcs_transactions):
     # Process the vcs_transactions as per your existing pipeline
     # Assuming process_vcs_credits or similar functions are in place
-    vcs_credits = process_vcs_credits(vcs_transactions)
+    vcs_credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
 
     # Process the vcs_projects
     processed_projects = process_vcs_projects(

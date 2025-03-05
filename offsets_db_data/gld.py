@@ -10,21 +10,18 @@ from offsets_db_data.common import (
     load_protocol_mapping,
     load_registry_project_column_mapping,
 )
-from offsets_db_data.credits import (
-    aggregate_issuance_transactions,  # noqa: F401
-    filter_and_merge_transactions,  # noqa: F401
-    merge_with_arb,  # noqa: F401
-)
+from offsets_db_data.credits import aggregate_issuance_transactions  # noqa: F401
+from offsets_db_data.credits import filter_and_merge_transactions  # noqa: F401
+from offsets_db_data.credits import merge_with_arb  # noqa: F401
+from offsets_db_data.credits import harmonize_beneficiary_data
 from offsets_db_data.models import credit_without_id_schema, project_schema
-from offsets_db_data.projects import (
-    harmonize_country_names,  # noqa: F401
-    add_category,  # noqa: F401
-    add_is_compliance_flag,  # noqa: F401
-    map_protocol,  # noqa: F401
-    harmonize_status_codes,  # noqa: F401
-    add_first_issuance_and_retirement_dates,  # noqa: F401
-    add_retired_and_issued_totals,  # noqa: F401
-)
+from offsets_db_data.projects import add_category  # noqa: F401
+from offsets_db_data.projects import add_first_issuance_and_retirement_dates  # noqa: F401
+from offsets_db_data.projects import add_is_compliance_flag  # noqa: F401
+from offsets_db_data.projects import add_retired_and_issued_totals  # noqa: F401
+from offsets_db_data.projects import harmonize_country_names  # noqa: F401
+from offsets_db_data.projects import harmonize_status_codes  # noqa: F401
+from offsets_db_data.projects import map_protocol  # noqa: F401
 
 
 @pf.register_dataframe_method
@@ -80,6 +77,7 @@ def process_gld_credits(
     registry_name: str = 'gold-standard',
     prefix: str = 'GLD',
     arb: pd.DataFrame | None = None,
+    harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
     """
     Process Gold Standard credits data by renaming columns, setting registry, determining transaction types,
@@ -141,6 +139,17 @@ def process_gld_credits(
             .add_missing_columns(schema=credit_without_id_schema)
             .validate(schema=credit_without_id_schema)
         )
+
+    if harmonize_beneficiary_info:
+        data = data.pipe(
+            harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
+        )
+
+    data = (
+        data.add_missing_columns(schema=credit_without_id_schema)
+        .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
+        .validate(schema=credit_without_id_schema)
+    )
 
     return data
 

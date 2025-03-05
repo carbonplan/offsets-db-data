@@ -1,6 +1,18 @@
+import datetime
+import pathlib
+import subprocess
+import tempfile
+import uuid
+
 import janitor  # noqa: F401
+import numpy as np
 import pandas as pd
 import pandas_flavor as pf
+import upath
+
+BENEFICIARY_MAPPING_UPATH = (
+    upath.UPath(__file__).parents[0] / 'configs' / 'beneficiary-mappings.json'
+)
 
 
 @pf.register_dataframe_method
@@ -122,3 +134,116 @@ def merge_with_arb(credits: pd.DataFrame, *, arb: pd.DataFrame) -> pd.DataFrame:
 
     df = pd.concat([df, arb], ignore_index=True)
     return df
+
+
+def harmonize_beneficiary_data(
+    credits: pd.DataFrame, registry_name: str, download_type: str
+) -> pd.DataFrame:
+    """
+    Harmonize the beneficiary information by removing the 'beneficiary_id' column and renaming the 'beneficiary_name' column to 'beneficiary'.
+
+    Parameters
+    ----------
+    credits : pd.DataFrame
+        Input DataFrame containing credit data.
+    """
+
+    tempdir = tempfile.gettempdir()
+    temp_path = pathlib.Path(tempdir) / f'{registry_name}-{download_type}-credits.csv'
+
+    if len(credits) == 0:
+        print(
+            f'Empty dataframe with shape={credits.shape} - columns:{credits.columns.tolist()}. No credits to harmonize'
+        )
+        data = credits.copy()
+        data['retirement_beneficiary_harmonized'] = pd.Series(dtype='str')
+        return data
+    credits.to_csv(temp_path, index=False)
+
+    project_name = f'{registry_name}-{download_type}-beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}-{uuid.uuid4()}'
+    output_path = pathlib.Path(tempdir) / f'{project_name}.csv'
+
+    try:
+        return _extract_harmonized_beneficiary_data_via_openrefine(
+            temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), str(output_path)
+        )
+
+    except subprocess.CalledProcessError as e:
+        raise ValueError(
+            f'Commad failed with return code: {e.returncode}\nOutput: {e.output}\nError output: {e.stderr}'
+        ) from e
+
+
+def _extract_harmonized_beneficiary_data_via_openrefine(
+    temp_path, project_name, beneficiary_mapping_path, output_path
+):
+    result = subprocess.run(
+        [
+            'offsets-db-data-orcli',
+            'run',
+            '--',
+            'import',
+            'csv',
+            str(temp_path),
+            '--projectName',
+            f'{project_name}',
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
+        ['offsets-db-data-orcli', 'run', '--', 'info', project_name],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
+        [
+            'offsets-db-data-orcli',
+            'run',
+            '--',
+            'transform',
+            project_name,
+            beneficiary_mapping_path,
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
+        [
+            'offsets-db-data-orcli',
+            'run',
+            '--',
+            'export',
+            'csv',
+            project_name,
+            '--output',
+            output_path,
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
+        ['offsets-db-data-orcli', 'run', '--', 'delete', project_name],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    print(result.stdout)
+
+    data = pd.read_csv(output_path)
+    data['merged_beneficiary'] = data['merged_beneficiary'].fillna('').astype(str)
+    data['retirement_beneficiary_harmonized'] = np.where(
+        data['merged_beneficiary'].notnull() & (~data['merged_beneficiary'].str.contains(';%')),
+        data['merged_beneficiary'],
+        '',
+    )
+    return data

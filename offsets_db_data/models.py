@@ -60,6 +60,7 @@ credit_without_id_schema = pa.DataFrameSchema(
         'retirement_reason': pa.Column(pa.String, nullable=True),
         'retirement_note': pa.Column(pa.String, nullable=True),
         'retirement_beneficiary': pa.Column(pa.String, nullable=True),
+        'retirement_beneficiary_harmonized': pa.Column(pa.String, nullable=True),
     }
 )
 
