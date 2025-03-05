@@ -147,45 +147,61 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     transformation_url = 'https://gist.githubusercontent.com/andersy005/e92d2403e60657d642f49aa28d5f16f9/raw/11be9a5cb014df626e49114f08c80fb97776e1d3/beneficiary-mappings.json'
 
     try:
-        result = subprocess.run(
-            [
-                'offsets-db-data-orcli',
-                'run',
-                '--',
-                'import',
-                'csv',
-                str(temp_path),
-                '--projectName',
-                f'{project_name}',
-            ],
-            capture_output=True,
-            text=True,
-            check=True,
+        return _extract_harmonized_beneficiary_data_via_openrefine(
+            temp_path, project_name, transformation_url, credits
         )
-
-        result = subprocess.run(
-            ['offsets-db-data-orcli', 'run', '--', 'info', project_name],
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-
-        result = subprocess.run(
-            [
-                'offsets-db-data-orcli',
-                'run',
-                '--',
-                'transform',
-                project_name,
-                f"'{transformation_url}'",
-            ],
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-        print(result.stdout)
-        return credits
     except subprocess.CalledProcessError as e:
         raise ValueError(
             f'Commad failed with return code: {e.returncode}\nOutput: {e.output}\nError output: {e.stderr}'
         ) from e
+
+
+def _extract_harmonized_beneficiary_data_via_openrefine(
+    temp_path, project_name, transformation_url, credits
+):
+    result = subprocess.run(
+        [
+            'offsets-db-data-orcli',
+            'run',
+            '--',
+            'import',
+            'csv',
+            str(temp_path),
+            '--projectName',
+            f'{project_name}',
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
+        ['offsets-db-data-orcli', 'run', '--', 'info', project_name],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
+        [
+            'offsets-db-data-orcli',
+            'run',
+            '--',
+            'transform',
+            project_name,
+            f"'{transformation_url}'",
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    result = subprocess.run(
+        ['offsets-db-data-orcli', 'run', '--', 'delete', project_name],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    print(result.stdout)
+    return credits
