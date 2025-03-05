@@ -1,3 +1,4 @@
+import datetime
 import pathlib
 import subprocess
 import tempfile
@@ -142,7 +143,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     temp_path = pathlib.Path(tempdir) / 'credits.csv'
     credits.to_csv(temp_path, index=False)
 
-    project_name = 'beneficiary-harmonization'
+    project_name = f'beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}'
     transformation_url = 'https://gist.githubusercontent.com/andersy005/e92d2403e60657d642f49aa28d5f16f9/raw/11be9a5cb014df626e49114f08c80fb97776e1d3/beneficiary-mappings.json'
 
     try:
