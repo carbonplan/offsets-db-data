@@ -148,7 +148,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     temp_path = pathlib.Path(tempdir) / 'credits.csv'
 
     if len(credits) == 0:
-        raise ValueError('No credits to harmonize')
+        raise ValueError('Empty dataframe. No credits to harmonize')
     credits.to_csv(temp_path, index=False)
 
     project_name = f'beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}'

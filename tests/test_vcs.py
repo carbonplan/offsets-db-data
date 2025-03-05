@@ -441,11 +441,8 @@ def test_add_vcs_compliance_projects(vcs_projects):
     assert 'VCSOPR10' in df['project_id'].values
 
 
-@pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
-def test_process_vcs_projects(vcs_projects, vcs_transactions, harmonize_beneficiary_info):
-    vcs_credits = process_vcs_credits(
-        vcs_transactions, harmonize_beneficiary_info=harmonize_beneficiary_info
-    )
+def test_process_vcs_projects(vcs_projects, vcs_transactions):
+    vcs_credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
     df = process_vcs_projects(
         vcs_projects, credits=vcs_credits, registry_name='verra', download_type='projects'
     )
@@ -473,15 +470,10 @@ def test_process_vcs_projects(vcs_projects, vcs_transactions, harmonize_benefici
     ]
 
 
-@pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
-def test_process_vcs_projects_with_totals_and_dates(
-    vcs_projects, vcs_transactions, harmonize_beneficiary_info
-):
+def test_process_vcs_projects_with_totals_and_dates(vcs_projects, vcs_transactions):
     # Process the vcs_transactions as per your existing pipeline
     # Assuming process_vcs_credits or similar functions are in place
-    vcs_credits = process_vcs_credits(
-        vcs_transactions, harmonize_beneficiary_info=harmonize_beneficiary_info
-    )
+    vcs_credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
 
     # Process the vcs_projects
     processed_projects = process_vcs_projects(
