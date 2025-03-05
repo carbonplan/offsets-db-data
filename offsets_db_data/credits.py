@@ -2,6 +2,7 @@ import datetime
 import pathlib
 import subprocess
 import tempfile
+import uuid
 
 import janitor  # noqa: F401
 import numpy as np
@@ -159,7 +160,7 @@ def harmonize_beneficiary_data(
         return data
     credits.to_csv(temp_path, index=False)
 
-    project_name = f'{registry_name}-{download_type}-beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}'
+    project_name = f'{registry_name}-{download_type}-beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}-{uuid.uuid4()}'
     output_path = pathlib.Path(tempdir) / f'{project_name}.csv'
 
     try:
