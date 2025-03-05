@@ -102,7 +102,9 @@ def process_apx_credits(
         data = data.merge_with_arb(arb=arb)
 
     if harmonize_beneficiary_info:
-        data = data.pipe(harmonize_beneficiary_data)
+        data = data.pipe(
+            harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
+        )
 
     data = (
         data.add_missing_columns(schema=credit_without_id_schema)

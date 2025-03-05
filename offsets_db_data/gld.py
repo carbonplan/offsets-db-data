@@ -141,7 +141,9 @@ def process_gld_credits(
         )
 
     if harmonize_beneficiary_info:
-        data = data.pipe(harmonize_beneficiary_data)
+        data = data.pipe(
+            harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
+        )
 
     data = (
         data.add_missing_columns(schema=credit_without_id_schema)

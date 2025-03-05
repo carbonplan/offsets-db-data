@@ -135,7 +135,9 @@ def merge_with_arb(credits: pd.DataFrame, *, arb: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
+def harmonize_beneficiary_data(
+    credits: pd.DataFrame, registry_name: str, download_type: str
+) -> pd.DataFrame:
     """
     Harmonize the beneficiary information by removing the 'beneficiary_id' column and renaming the 'beneficiary_name' column to 'beneficiary'.
 
@@ -146,7 +148,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
     """
 
     tempdir = tempfile.gettempdir()
-    temp_path = pathlib.Path(tempdir) / 'credits.csv'
+    temp_path = pathlib.Path(tempdir) / f'{registry_name}-{download_type}-credits.csv'
 
     if len(credits) == 0:
         print(
@@ -157,7 +159,7 @@ def harmonize_beneficiary_data(credits: pd.DataFrame) -> pd.DataFrame:
         return data
     credits.to_csv(temp_path, index=False)
 
-    project_name = f'beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}'
+    project_name = f'{registry_name}-{download_type}-beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}'
     output_path = pathlib.Path(tempdir) / f'{project_name}.csv'
 
     try:
@@ -243,5 +245,4 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
         data['merged_beneficiary'],
         '',
     )
-    data.to_csv(f's3://carbonplan-scratch/offsets-db-data/{project_name}.csv', index=False)
-    return data.reset_index(drop=True)
+    return data
