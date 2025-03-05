@@ -238,10 +238,11 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
     print(result.stdout)
 
     data = pd.read_csv(output_path)
+    data['merged_beneficiary'] = data['merged_beneficiary'].fillna('').astype(str)
     data['merged_beneficiary'] = np.where(
         data['merged_beneficiary'].notnull() & (~data['merged_beneficiary'].str.contains(';%')),
         data['merged_beneficiary'],
-        '',  # or np.nan if you want nulls instead of empty strings
+        '',
     )
     data = data.rename(columns={'merged_beneficiary': 'retirement_beneficiary_harmonized'})
     data.to_csv(f's3://carbonplan-scratch/offsets-db-data/{project_name}.csv', index=False)
