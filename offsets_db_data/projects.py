@@ -58,6 +58,34 @@ def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
+def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add project types to the DataFrame based on project characteristics
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing project data.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'type' column, indicating the project's type. Defaults to None
+    """
+    df.loc[:, 'type'] = None
+    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'type'] = 'redd'
+    df.loc[df.apply(lambda x: 'acr-non-fed' in x['protocol'], axis=1), 'type'] = (
+        'improved-forest-management'
+    )
+    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'type'] = 'reforestation'
+    df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'type'] = (
+        'improved-forest-management'
+    )
+    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'type'] = 'soil'
+    return df
+
+
+@pf.register_dataframe_method
 def add_is_compliance_flag(df: pd.DataFrame) -> pd.DataFrame:
     """
     Add a compliance flag to the DataFrame based on the protocol.
