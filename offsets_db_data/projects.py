@@ -75,7 +75,8 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         DataFrame with a new 'type' column, indicating the project's type. Defaults to None
     """
-    df.loc[:, 'type'] = None
+    df.loc[:, 'type'] = 'unknown'
+    df.loc[:, 'type_source'] = 'carbonplan'
     df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'type'] = 'redd'
     df.loc[df.apply(lambda x: 'acr-non-fed' in x['protocol'], axis=1), 'type'] = (
         'improved-forest-management'
