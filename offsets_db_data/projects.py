@@ -1,4 +1,5 @@
 import contextlib
+import json
 
 import country_converter as coco
 import janitor  # noqa: F401
@@ -54,6 +55,35 @@ def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
     df['category'] = df['protocol'].apply(
         lambda item: get_protocol_category(protocol_strs=item, protocol_mapping=protocol_mapping)
     )
+    return df
+
+
+@pf.register_dataframe_method
+def override_project_types(df: pd.DataFrame, *, override_data_path: str, source_str: str):
+    """
+    Override project types to the DataFrame based on project characteristics
+    We treat Berkeley data as source of truth for most project types
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing project data.
+    override_data_path: str
+        Path to where json of override data lives
+    source: str
+        Value to write to `type_source` when applying override values
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a 'type' column overridden by all values in override_data.
+    """
+
+    # TODO: ask anderson if we want to pass the data in, as opposed to loading here
+    override_d = json.load(open(override_data_path))
+    df['type'] = df['project_id'].map(override_d).fillna(df['type'])
+    df.loc[df['project_id'].isin(list(override_d.keys())), 'type_source'] = source_str
+
     return df
 
 
