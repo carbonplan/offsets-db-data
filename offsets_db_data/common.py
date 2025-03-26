@@ -19,6 +19,10 @@ TYPE_CATEGORY_MAPPING_UPATH = (
     upath.UPath(__file__).parents[0] / 'configs' / 'type-category-mapping.json'
 )
 
+TYPE_CATEGORY_OVERRIDES_UPATH = (
+    upath.UPath(__file__).parents[0] / 'configs' / 'type-category-overrides.json'
+)
+
 
 def load_registry_project_column_mapping(
     *, registry_name: str, file_path: upath.UPath = PROJECT_SCHEMA_UPATH

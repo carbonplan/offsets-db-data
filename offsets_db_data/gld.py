@@ -5,6 +5,7 @@ import pandas_flavor as pf
 from offsets_db_data.common import (
     CREDIT_SCHEMA_UPATH,
     PROJECT_SCHEMA_UPATH,
+    TYPE_CATEGORY_OVERRIDES_UPATH,
     load_column_mapping,
     load_inverted_protocol_mapping,
     load_registry_project_column_mapping,
@@ -226,7 +227,9 @@ def process_gld_projects(
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
             .infer_project_type()
-            .override_project_type(override_data_path='/tmp/TK', source_str='berkeley')
+            .override_project_types(
+                override_data_path=TYPE_CATEGORY_OVERRIDES_UPATH, source_str='berkeley'
+            )
             .add_category(
                 type_category_mapping=type_category_mapping
             )  # must come after types; type -> category
