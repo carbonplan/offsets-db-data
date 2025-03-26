@@ -34,7 +34,7 @@ def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country'
 
 
 @pf.register_dataframe_method
-def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
+def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFrame:
     """
     Add a category to each record in the DataFrame based on its protocol.
 
@@ -52,9 +52,7 @@ def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
     """
 
     print('Adding category based on protocol...')
-    df['category'] = df['protocol'].apply(
-        lambda item: get_protocol_category(protocol_strs=item, protocol_mapping=protocol_mapping)
-    )
+    df['category'] = df['type'].map(type_category_mapping).fillna('unknown')
     return df
 
 

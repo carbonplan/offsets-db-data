@@ -7,7 +7,7 @@ from offsets_db_data.common import (
     PROJECT_SCHEMA_UPATH,
     load_column_mapping,
     load_inverted_protocol_mapping,
-    load_protocol_mapping,
+    load_type_category_mapping,
     load_registry_project_column_mapping,
 )
 from offsets_db_data.credits import aggregate_issuance_transactions  # noqa: F401
@@ -209,7 +209,7 @@ def process_gld_projects(
         registry_name=registry_name, file_path=PROJECT_SCHEMA_UPATH
     )
     inverted_column_mapping = {value: key for key, value in registry_project_column_mapping.items()}
-    protocol_mapping = load_protocol_mapping()
+    type_category_mapping = load_type_category_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
 
     df = df.copy()
@@ -224,7 +224,7 @@ def process_gld_projects(
             .harmonize_country_names()
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
-            .add_category(protocol_mapping=protocol_mapping)
+            .add_category(type_category_mapping=type_category_mapping)
             .add_is_compliance_flag()
             .add_retired_and_issued_totals(credits=credits)
             .add_first_issuance_and_retirement_dates(credits=credits)
@@ -243,7 +243,7 @@ def process_gld_projects(
             .harmonize_country_names()
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
-            .add_category(protocol_mapping=protocol_mapping)
+            .add_category(type_category_mapping=type_category_mapping)
             .add_is_compliance_flag()
             .add_missing_columns(schema=project_schema)
             .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])

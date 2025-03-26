@@ -11,10 +11,12 @@ import upath
 CREDIT_SCHEMA_UPATH = (
     upath.UPath(__file__).parents[0] / 'configs' / 'credits-raw-columns-mapping.json'
 )
-
 PROTOCOL_MAPPING_UPATH = upath.UPath(__file__).parents[0] / 'configs' / 'all-protocol-mapping.json'
 PROJECT_SCHEMA_UPATH = (
     upath.UPath(__file__).parents[0] / 'configs' / 'projects-raw-columns-mapping.json'
+)
+TYPE_CATEGORY_MAPPING_UPATH = (
+    upath.UPath(__file__).parents[0] / 'configs' / 'type-category-mapping.json'
 )
 
 
@@ -52,6 +54,10 @@ def load_column_mapping(*, registry_name: str, download_type: str, mapping_path:
     with open(mapping_path) as f:
         registry_credit_column_mapping = json.load(f)
     return registry_credit_column_mapping[registry_name][download_type]
+
+
+def load_type_category_mapping(path: upath.UPath = TYPE_CATEGORY_MAPPING_UPATH) -> dict:
+    return json.loads(path.read_text())
 
 
 @pf.register_dataframe_method
