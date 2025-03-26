@@ -225,7 +225,11 @@ def process_gld_projects(
             .harmonize_country_names()
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
-            .add_category(type_category_mapping=type_category_mapping)
+            .infer_project_type()
+            .override_project_type(override_data_path='/tmp/TK', source_str='berkeley')
+            .add_category(
+                type_category_mapping=type_category_mapping
+            )  # must come after types; type -> category
             .add_is_compliance_flag()
             .add_retired_and_issued_totals(credits=credits)
             .add_first_issuance_and_retirement_dates(credits=credits)
