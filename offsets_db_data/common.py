@@ -19,8 +19,8 @@ TYPE_CATEGORY_MAPPING_UPATH = (
     upath.UPath(__file__).parents[0] / 'configs' / 'type-category-mapping.json'
 )
 
-TYPE_CATEGORY_OVERRIDES_UPATH = (
-    upath.UPath(__file__).parents[0] / 'configs' / 'type-category-overrides.json'
+BERKELEY_PROJECT_TYPE_UPATH = (
+    upath.UPath(__file__).parents[0] / 'configs' / 'berkeley-project-types.json'
 )
 
 
