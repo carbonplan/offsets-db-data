@@ -107,15 +107,15 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     """
     df.loc[:, 'type'] = 'unknown'
     df.loc[:, 'type_source'] = 'carbonplan'
-    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'type'] = 'redd'
+    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'type'] = 'redd+'
     df.loc[df.apply(lambda x: 'acr-non-fed' in x['protocol'], axis=1), 'type'] = (
-        'improved-forest-management'
+        'improved forest management'
     )
     df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'type'] = 'reforestation'
     df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'type'] = (
-        'improved-forest-management'
+        'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'type'] = 'soil'
+    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'type'] = 'agriculture'
     return df
 
 
