@@ -19,10 +19,6 @@ TYPE_CATEGORY_MAPPING_UPATH = (
     upath.UPath(__file__).parents[0] / 'configs' / 'type-category-mapping.json'
 )
 
-BERKELEY_PROJECT_TYPE_UPATH = (
-    upath.UPath(__file__).parents[0] / 'configs' / 'berkeley-project-types.json'
-)
-
 
 def load_registry_project_column_mapping(
     *, registry_name: str, file_path: upath.UPath = PROJECT_SCHEMA_UPATH
@@ -58,6 +54,10 @@ def load_column_mapping(*, registry_name: str, download_type: str, mapping_path:
     with open(mapping_path) as f:
         registry_credit_column_mapping = json.load(f)
     return registry_credit_column_mapping[registry_name][download_type]
+
+
+def load_type_category_mapping(path: upath.UPath = TYPE_CATEGORY_MAPPING_UPATH) -> dict:
+    return json.loads(path.read_text())
 
 
 def load_type_category_mapping(path: upath.UPath = TYPE_CATEGORY_MAPPING_UPATH) -> dict:
