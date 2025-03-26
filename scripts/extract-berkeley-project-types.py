@@ -24,7 +24,7 @@ def main():
             return s
 
     out_d = project_data.dropna().set_index('Project ID')[' Type'].to_dict()
-    out_d = {_fix_gld_ids(k): v.lower().replace(' ', '-') for k, v in out_d.items()}
+    out_d = {_fix_gld_ids(k): v.lower() for k, v in out_d.items()}
     out_f = '/tmp/berkeley-project-types.json'
     with open(out_f, 'w') as f:
         print(f'Writing project types to {out_f}')
