@@ -53,7 +53,12 @@ def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFra
     """
 
     print('Adding category based on protocol...')
-    df['category'] = df['type'].map(type_category_mapping).fillna('unknown')
+    df['category'] = (
+        df['type']
+        .str.lower()
+        .map({key.lower(): value for key, value in type_category_mapping.items()})
+        .fillna('unknown')
+    )
     return df
 
 
