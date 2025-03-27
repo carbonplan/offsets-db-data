@@ -250,7 +250,13 @@ def process_gld_projects(
             .harmonize_country_names()
             .harmonize_status_codes()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
-            .add_category(type_category_mapping=type_category_mapping)
+            .infer_project_type()
+            .override_project_types(
+                override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
+            )
+            .add_category(
+                type_category_mapping=type_category_mapping
+            )  # must come after types; type -> category
             .add_is_compliance_flag()
             .add_missing_columns(schema=project_schema)
             .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])

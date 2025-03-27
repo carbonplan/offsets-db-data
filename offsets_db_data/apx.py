@@ -3,12 +3,14 @@ import pandas as pd
 import pandas_flavor as pf
 
 from offsets_db_data.common import (
+    BERKELEY_PROJECT_TYPE_UPATH,
     CREDIT_SCHEMA_UPATH,
     PROJECT_SCHEMA_UPATH,
     load_column_mapping,
     load_inverted_protocol_mapping,
     load_protocol_mapping,
     load_registry_project_column_mapping,
+    load_type_category_mapping,
 )
 from offsets_db_data.credits import *  # noqa: F403
 from offsets_db_data.credits import harmonize_beneficiary_data
@@ -212,10 +214,11 @@ def process_apx_projects(
     inverted_column_mapping = {value: key for key, value in registry_project_column_mapping.items()}
     protocol_mapping = load_protocol_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
+    type_category_mapping = load_type_category_mapping()
     data = df.rename(columns=inverted_column_mapping)
     if registry_name == 'art-trees':
         data['protocol'] = [['art-trees']] * len(data)
-        data['category'] = [['forest']] * len(data)
+
     else:
         data = data.map_protocol(inverted_protocol_mapping=inverted_protocol_mapping).add_category(
             protocol_mapping=protocol_mapping
@@ -230,6 +233,13 @@ def process_apx_projects(
         data.set_registry(registry_name=registry_name)
         .add_project_url(registry_name=registry_name)
         .harmonize_country_names()
+        .infer_project_type()
+        .override_project_types(
+            override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
+        )
+        .add_category(
+            type_category_mapping=type_category_mapping
+        )  # must come after types; type -> category
         .add_is_compliance_flag()
         .add_retired_and_issued_totals(credits=credits)
         .add_first_issuance_and_retirement_dates(credits=credits)
