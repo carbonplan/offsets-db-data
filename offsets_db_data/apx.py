@@ -8,7 +8,6 @@ from offsets_db_data.common import (
     PROJECT_SCHEMA_UPATH,
     load_column_mapping,
     load_inverted_protocol_mapping,
-    load_protocol_mapping,
     load_registry_project_column_mapping,
     load_type_category_mapping,
 )
@@ -212,7 +211,6 @@ def process_apx_projects(
         registry_name=registry_name, file_path=PROJECT_SCHEMA_UPATH
     )
     inverted_column_mapping = {value: key for key, value in registry_project_column_mapping.items()}
-    protocol_mapping = load_protocol_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
     type_category_mapping = load_type_category_mapping()
     data = df.rename(columns=inverted_column_mapping)
@@ -220,9 +218,7 @@ def process_apx_projects(
         data['protocol'] = [['art-trees']] * len(data)
 
     else:
-        data = data.map_protocol(inverted_protocol_mapping=inverted_protocol_mapping).add_category(
-            protocol_mapping=protocol_mapping
-        )
+        data = data.map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
 
     if registry_name == 'american-carbon-registry':
         data['status'] = data.apply(harmonize_acr_status, axis=1)
