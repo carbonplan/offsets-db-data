@@ -241,7 +241,6 @@ def write_latest_production(
     *,
     credits: pd.DataFrame,
     projects: pd.DataFrame,
-    project_types: pd.DataFrame,
     bucket: str,
     terms_url: str = 's3://carbonplan-offsets-db/TERMS_OF_DATA_ACCESS.txt',
 ):
@@ -254,8 +253,6 @@ def write_latest_production(
         DataFrame containing credit data.
     projects : pd.DataFrame
         DataFrame containing project data.
-    project_types : pd.DataFrame
-        DataFrame containing project type data.
     bucket : str
         S3 bucket path to write the data to.
     terms_url : str, optional
