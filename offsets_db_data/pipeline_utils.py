@@ -83,7 +83,6 @@ def summarize(
     *,
     credits: pd.DataFrame,
     projects: pd.DataFrame,
-    project_types: pd.DataFrame | None = None,
     registry_name: str | None = None,
 ) -> None:
     """
@@ -95,8 +94,6 @@ def summarize(
         The credits data.
     projects : DataFrame
         The projects data.
-    project_types : DataFrame, optional
-        The project types data.
     registry_name : str, optional
         Name of the specific registry to summarize. If None, summarizes across all registries.
 
@@ -148,22 +145,12 @@ def summarize(
         else:
             print('No credits found')
 
-    # Always handle project types if provided
-    if project_types is not None and not project_types.empty:
-        print(
-            f'Summary Statistics for project types:\n'
-            f'{project_types.groupby(["project_type", "source"]).count()}\n'
-        )
-    elif project_types is not None:
-        print('No project types found')
-
 
 def to_parquet(
     *,
     credits: pd.DataFrame,
     projects: pd.DataFrame,
     output_paths: dict,
-    project_types: pd.DataFrame | None = None,
     registry_name: str | None = None,
 ):
     """
@@ -177,8 +164,7 @@ def to_parquet(
             The DataFrame containing projects data.
     output_paths : dict
             Dictionary containing output file paths.
-    project_types : pd.DataFrame, optional
-            The DataFrame containing project types data.
+
     registry_name : str, optional
             The name of the registry for logging purposes.
     """
@@ -187,28 +173,18 @@ def to_parquet(
     )
 
     prefix = f'{registry_name} ' if registry_name else ''
-    print(f'Wrote {prefix}credits to {output_paths["credits"]}...')
+    print(f'Wrote {prefix} credits to {output_paths["credits"]}...')
 
     projects.to_parquet(
         output_paths['projects'], index=False, compression='gzip', engine='fastparquet'
     )
-    print(f'Wrote {prefix}projects to {output_paths["projects"]}...')
-
-    if project_types is not None and 'project-types' in output_paths:
-        project_types.to_parquet(
-            output_paths['project-types'],
-            index=False,
-            compression='gzip',
-            engine='fastparquet',
-        )
-        print(f'Wrote project types to {output_paths["project-types"]}...')
+    print(f'Wrote {prefix} projects to {output_paths["projects"]}...')
 
 
 def _create_data_zip_buffer(
     *,
     credits: pd.DataFrame,
     projects: pd.DataFrame,
-    project_types: pd.DataFrame,
     format_type: str,
     terms_content: str,
 ) -> io.BytesIO:
@@ -243,8 +219,6 @@ def _create_data_zip_buffer(
                 credits.to_csv(buffer, index=False)
             with zf.open('projects.csv', 'w') as buffer:
                 projects.to_csv(buffer, index=False)
-            with zf.open('project-types.csv', 'w') as buffer:
-                project_types.to_csv(buffer, index=False)
 
         elif format_type == 'parquet':
             # Write Parquet files to temporary files
@@ -257,11 +231,6 @@ def _create_data_zip_buffer(
                 projects.to_parquet(temp_projects.name, index=False, engine='fastparquet')
                 temp_projects.seek(0)
                 zf.writestr('projects.parquet', temp_projects.read())
-
-            with tempfile.NamedTemporaryFile(suffix='.parquet') as temp_project_types:
-                project_types.to_parquet(temp_project_types.name, index=False, engine='fastparquet')
-                temp_project_types.seek(0)
-                zf.writestr('project-types.parquet', temp_project_types.read())
 
     # Move to the beginning of the BytesIO buffer
     zip_buffer.seek(0)
@@ -306,7 +275,6 @@ def write_latest_production(
         zip_buffer = _create_data_zip_buffer(
             credits=credits,
             projects=projects,
-            project_types=project_types,
             format_type=format_type,
             terms_content=terms_content,
         )
