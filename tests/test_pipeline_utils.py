@@ -43,18 +43,8 @@ def sample_projects():
             'is_compliance': [False, True, False, True],
             'retired': [50, 200, 75, 250],
             'issued': [100, 200, 150, 300],
-        }
-    )
-
-
-@pytest.fixture
-def sample_project_types():
-    """Sample project types dataframe for testing."""
-    return pd.DataFrame(
-        {
-            'project_id': ['VCS123', 'VCS124', 'ACR456', 'CAR789'],
-            'project_type': ['forestry', 'renewable-energy', 'agriculture', 'forestry'],
-            'source': ['manual', 'registry', 'manual', 'registry'],
+            'type': ['forestry', 'renewable-energy', 'agriculture', 'forestry'],
+            'type_source': ['carbonplan', 'berkeley', 'carbonplan', 'carbonplan'],
         }
     )
 
@@ -102,29 +92,26 @@ def test_summarize_single_registry(sample_credits, sample_projects, capsys):
     assert f'Credits summary (in Millions) for {registry_name}' in captured.out
 
 
-def test_summarize_multi_registry(sample_credits, sample_projects, sample_project_types, capsys):
+def test_summarize_multi_registry(sample_credits, sample_projects, capsys):
     """Test summarize function across multiple registries."""
 
     summarize(
         credits=sample_credits,
         projects=sample_projects,
-        project_types=sample_project_types,
     )
 
     captured = capsys.readouterr()
 
     assert 'Summary Statistics for projects (in Millions)' in captured.out
     assert 'Summary Statistics for credits (in Millions)' in captured.out
-    assert 'Summary Statistics for project types' in captured.out
 
 
-def test_create_data_zip_buffer_csv(sample_credits, sample_projects, sample_project_types):
+def test_create_data_zip_buffer_csv(sample_credits, sample_projects):
     """Test _create_data_zip_buffer with CSV format."""
 
     buffer = _create_data_zip_buffer(
         credits=sample_credits,
         projects=sample_projects,
-        project_types=sample_project_types,
         format_type='csv',
         terms_content='Test terms content',
     )
@@ -137,18 +124,16 @@ def test_create_data_zip_buffer_csv(sample_credits, sample_projects, sample_proj
         assert 'TERMS_OF_DATA_ACCESS.txt' in filenames
         assert 'credits.csv' in filenames
         assert 'projects.csv' in filenames
-        assert 'project-types.csv' in filenames
 
         # Check terms content
         assert zip_ref.read('TERMS_OF_DATA_ACCESS.txt').decode('utf-8') == 'Test terms content'
 
 
-def test_create_data_zip_buffer_parquet(sample_credits, sample_projects, sample_project_types):
+def test_create_data_zip_buffer_parquet(sample_credits, sample_projects):
     """Test _create_data_zip_buffer with Parquet format."""
     buffer = _create_data_zip_buffer(
         credits=sample_credits,
         projects=sample_projects,
-        project_types=sample_project_types,
         format_type='parquet',
         terms_content='Test terms content',
     )
@@ -160,7 +145,6 @@ def test_create_data_zip_buffer_parquet(sample_credits, sample_projects, sample_
         assert 'TERMS_OF_DATA_ACCESS.txt' in filenames
         assert 'credits.parquet' in filenames
         assert 'projects.parquet' in filenames
-        assert 'project-types.parquet' in filenames
 
 
 @patch('fsspec.filesystem')
@@ -172,7 +156,6 @@ def test_write_latest_production(
     mock_fsspec_fs,
     sample_credits,
     sample_projects,
-    sample_project_types,
 ):
     """Test write_latest_production function."""
     # Setup mocks
@@ -195,7 +178,6 @@ def test_write_latest_production(
     write_latest_production(
         credits=sample_credits,
         projects=sample_projects,
-        project_types=sample_project_types,
         bucket='s3://test-bucket',
     )
 
@@ -239,7 +221,7 @@ def test_transform_registry_data(mock_summarize, mock_to_parquet, sample_credits
 
 
 @patch('tempfile.NamedTemporaryFile')
-def test_to_parquet(mock_temp_file, sample_credits, sample_projects, sample_project_types):
+def test_to_parquet(mock_temp_file, sample_credits, sample_projects):
     """Test to_parquet function."""
     # Setup mock
     mock_temp = MagicMock()
@@ -249,7 +231,6 @@ def test_to_parquet(mock_temp_file, sample_credits, sample_projects, sample_proj
     output_paths = {
         'credits': 'path/to/credits',
         'projects': 'path/to/projects',
-        'project-types': 'path/to/project-types',
     }
 
     # Patch pandas to_parquet to prevent actual file writing
@@ -257,10 +238,9 @@ def test_to_parquet(mock_temp_file, sample_credits, sample_projects, sample_proj
         to_parquet(
             credits=sample_credits,
             projects=sample_projects,
-            project_types=sample_project_types,
             output_paths=output_paths,
             registry_name='test-registry',
         )
 
         # Assert to_parquet called for all three dataframes
-        assert mock_to_parquet.call_count == 3
+        assert mock_to_parquet.call_count == 2
