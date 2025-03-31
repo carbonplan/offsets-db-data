@@ -82,7 +82,6 @@ def override_project_types(df: pd.DataFrame, *, override_data_path: str, source_
         DataFrame with a 'type' column overridden by all values in override_data.
     """
 
-    # TODO: ask anderson if we want to pass the data in, as opposed to loading here
     override_d = json.load(open(override_data_path))
     df['type'] = df['project_id'].map(override_d).fillna(df['type'])
     df.loc[df['project_id'].isin(list(override_d.keys())), 'type_source'] = source_str
@@ -108,14 +107,28 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     df.loc[:, 'type'] = 'unknown'
     df.loc[:, 'type_source'] = 'carbonplan'
     df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'type'] = 'redd+'
-    df.loc[df.apply(lambda x: 'acr-non-fed' in x['protocol'], axis=1), 'type'] = (
+
+    df.loc[df.apply(lambda x: 'acr-ifm-nonfed' in x['protocol'], axis=1), 'type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'type'] = 'reforestation'
+    df.loc[df.apply(lambda x: 'acr-abandoned-wells' in x['protocol'], axis=1), 'type'] = (
+        'plugging oil & gas wells'
+    )
+
+    df.loc[df.apply(lambda x: 'arb-mine-methane' in x['protocol'], axis=1), 'type'] = (
+        'mine methane capture'
+    )
+
+    df.loc[df.apply(lambda x: 'vm0048' in x['protocol'], axis=1), 'type'] = 'redd+'
+    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'type'] = (
+        'afforestation/reforestation'
+    )
     df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'type'] = (
         'improved forest management'
     )
     df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'type'] = 'agriculture'
+    df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'type'] = 'redd+'
+
     return df
 
 
