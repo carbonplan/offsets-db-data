@@ -201,65 +201,222 @@ Project data conform to the following schema:
 
 ```json
 {
-  "title": "Project",
   "properties": {
-    "project_id": {
-      "title": "Project Id",
-      "description": "Project id used by registry system",
-      "type": "string"
-    },
-    "name": {
-      "title": "Name",
-      "description": "Name of the project",
-      "type": "string"
-    },
-    "registry": {
-      "title": "Registry",
-      "description": "Name of the registry",
-      "type": "string"
-    },
-    "proponent": { "title": "Proponent", "type": "string" },
-    "protocol": {
-      "title": "Protocol",
-      "description": "List of protocols",
-      "type": "array",
-      "items": { "type": "string" }
-    },
     "category": {
-      "title": "Category",
-      "description": "List of categories",
-      "type": "array",
-      "items": { "type": "string" }
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Category of the project",
+      "title": "Category"
     },
-    "status": { "title": "Status", "type": "string" },
-    "country": { "title": "Country", "type": "string" },
-    "listed_at": {
-      "title": "Listed At",
-      "description": "Date project was listed",
-      "type": "string",
-      "format": "date"
+    "country": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Country"
+    },
+    "first_issuance_at": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Date of first issuance of credits",
+      "title": "First Issuance At"
+    },
+    "first_retirement_at": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Date of first retirement of credits",
+      "title": "First Retirement At"
     },
     "is_compliance": {
-      "title": "Is Compliance",
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
       "description": "Whether project is compliance project",
-      "type": "boolean"
-    },
-    "retired": {
-      "title": "Retired",
-      "description": "Total of retired credits",
-      "type": "integer"
+      "title": "Is Compliance"
     },
     "issued": {
-      "title": "Issued",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
       "description": "Total of issued credits",
-      "type": "integer"
+      "title": "Issued"
+    },
+    "listed_at": {
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Date project was listed",
+      "title": "Listed At"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Name of the project",
+      "title": "Name"
+    },
+    "project_id": {
+      "description": "Project id used by registry system",
+      "title": "Project Id",
+      "type": "string"
     },
     "project_url": {
-      "title": "Project Url",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
       "description": "URL to project details",
+      "title": "Project Url"
+    },
+    "proponent": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Proponent"
+    },
+    "protocol": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "List of protocols",
+      "title": "Protocol"
+    },
+    "registry": {
+      "description": "Name of the registry",
+      "title": "Registry",
       "type": "string"
+    },
+    "retired": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": 0,
+      "description": "Total of retired credits",
+      "title": "Retired"
+    },
+    "status": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Status"
+    },
+    "type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Type of project",
+      "title": "Type"
+    },
+    "type_source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Source of project type information",
+      "title": "Type Source"
     }
-  }
+  },
+  "required": [
+    "project_id",
+    "name",
+    "registry",
+    "proponent",
+    "category",
+    "status",
+    "country",
+    "listed_at",
+    "is_compliance",
+    "first_issuance_at",
+    "first_retirement_at",
+    "project_url",
+    "type",
+    "type_source"
+  ],
+  "title": "Project",
+  "type": "object"
 }
 ```
 
@@ -284,39 +441,141 @@ Credit data conform to the following schema:
 
 ```json
 {
-  "title": "Credit",
   "properties": {
     "id": {
+      "default": null,
       "title": "Id",
       "type": "integer"
     },
     "project_id": {
-      "title": "Project ID",
-      "description": "Unique project identifier, by registry",
-      "type": "string"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Project id used by registry system",
+      "title": "Project Id"
     },
     "quantity": {
+      "description": "Tons of carbon dioxide equivalent (each ton is one carbon credit",
       "title": "Quantity",
-      "description": "Number of credits",
       "type": "integer"
     },
-    "vintage": {
-      "title": "Vintage",
-      "description": "Vintage year of credits",
-      "type": "integer"
+    "retirement_account": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Account used for the transaction",
+      "title": "Retirement Account"
+    },
+    "retirement_beneficiary": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Beneficiary of credits",
+      "title": "Retirement Beneficiary"
+    },
+    "retirement_beneficiary_harmonized": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Harmonized beneficiary of credits",
+      "title": "Retirement Beneficiary Harmonized"
+    },
+    "retirement_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Note",
+      "title": "Retirement Note"
+    },
+    "retirement_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Reason for transaction",
+      "title": "Retirement Reason"
     },
     "transaction_date": {
-      "title": "Transaction Date",
+      "anyOf": [
+        {
+          "format": "date",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
       "description": "Date of transaction",
-      "type": "string",
-      "format": "date"
+      "title": "Transaction Date"
     },
     "transaction_type": {
-      "title": "Transaction Type",
-      "description": "Type of transaction (i.e., issuance, retirement)",
-      "type": "string"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Type of transaction",
+      "title": "Transaction Type"
+    },
+    "vintage": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Recorded year when carbon avoidance/removal occurred",
+      "title": "Vintage"
     }
-  }
+  },
+  "required": [
+    "quantity",
+    "vintage",
+    "transaction_date",
+    "transaction_type",
+    "retirement_account",
+    "retirement_beneficiary",
+    "retirement_reason",
+    "retirement_note",
+    "retirement_beneficiary_harmonized",
+    "project_id"
+  ],
+  "title": "Credit",
+  "type": "object"
 }
 ```
 
