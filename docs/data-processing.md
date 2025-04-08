@@ -154,8 +154,10 @@ Simple queries, like "give me all the retirements", suddenly required writing co
 credits[(credits['transaction_type'] == 'retirement') | (credits['transaction_type'] == 'retirement/cancellation')]
 ```
 
+```{warning}
 Because we know the majority of Verra `retirement/cancellation` events are in fact `retirement`, we opted for this more ergonomic representation of the data.
 Any analysis involving Verra retirement data should clearly specify that Verra's raw data does not currently distinguish between retirement and cancellation events.
+```
 
 Vintage Date: Verra allows for the simultaneous issuance of multiple vintages.
 We assign all credits from these multi-vintage issuances to the earliest reported vintage year.
