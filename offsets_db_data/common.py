@@ -64,10 +64,6 @@ def load_type_category_mapping(path: upath.UPath = TYPE_CATEGORY_MAPPING_UPATH) 
     return json.loads(path.read_text())
 
 
-def load_type_category_mapping(path: upath.UPath = TYPE_CATEGORY_MAPPING_UPATH) -> dict:
-    return json.loads(path.read_text())
-
-
 @pf.register_dataframe_method
 def set_registry(df: pd.DataFrame, registry_name: str) -> pd.DataFrame:
     """
