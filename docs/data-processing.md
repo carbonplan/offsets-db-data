@@ -116,8 +116,8 @@ Project types represent more specific offset approaches. For example, within "fo
 
 Project types are determined through a multi-step process:
 
-1. first, we attempt to infer the project type from protocol information (via `infer_project_type()`)
-2. then we apply manual overrides from curated data sources (via `override_project_types()`)
+1. first, we attempt to infer the project type from protocol information (via {py:obj}`offsets_db_data.projects.infer_project_type`)
+2. then we apply manual overrides from curated data sources (via {py:obj}`offsets_db_data.projects.override_project_types`)
 3. the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as an authoriative source for project types.
 
 ### Challenges in categorization
