@@ -127,6 +127,47 @@ That is especially the case with energy efficiency and fuel switching protocols.
 Many protocols in these categories allow for projects that accomplish some mixture of the two approaches for displacing and reducing greenhouse gas emissions.
 Despite this blurriness, we assign each protocol to a single category.
 
+## Retirement beneficiary harmonization
+
+Carbon offset credits are often retired on behalf of a specific entity or organization. However, the names of these beneficiaries appear inconsistently across registry data, making it difficult to analyze retirement patterns.
+
+### Harmonization process
+
+We try to standardize retirement beneficiary information across registries using the following steps:
+
+1. **Data merging**: we combine information from four sources into a single `merged_beneficiary` field:
+
+   - `retirement_beneficiary`: the named beneficiary of the credit retirement from the raw registry data
+   - `retirement_account`: the account used for the transaction
+   - `retirement_note`: additional notes attached to the retirement
+   - `retirement_reason` the stated reason for retirement
+
+2. **Standardization via OpenRefine**: we process this merged information (`merged_beneficiary`) through [OpenRefine](https://openrefine.org/) using a detailed set of transformation rules define in [`offsets-db-data/configs/beneficiary-mappings.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/beneficiary-mappings.json). This includes:
+   - text transformations that standardize common company names and entities
+   - pattern matching to identify the same entities despite different formatting
+
+Only confident matches are included in the harmonized beneficiary field, `retirement_beneficiary_harmonized`.
+
+### Implementation details
+
+The beneficiary harmonization is implemented in the function {py:obj}`offsets_db_data.credits.harmonize_beneficiary_data`. This function runs a temporary OpenRefine project using the `offsets-db-data-orcli` command-line tool (which is a wrapper around [`orcli`](https://github.com/opencultureconsulting/orcli), an OpenRefine's command-line interface) to apply the transformations defined in our mapping file. The result is a new column, `retirement_beneficiary_harmonized`, that contains the standardized beneficiary names.
+
+### Examples of Standardization
+
+Our harmonization process unifies many common variations:
+
+- "Delta Air Lines", "Delta Airlines" → "Delta Air Lines"
+- "Terpel", "Organizacion Terpel", "Terpel S.A." → "Terpel"
+- "Pangolin;Retired on behalf of Sydney Opera House" → "Sydney Opera House"
+
+### Why this matters
+
+Without beneficiary harmonization, the same entity might appear under multiple names, making it difficult to accurately analyze which entities are retiring the most credits. This harmonization allows for more accurate aggregation of retirement data by beneficiary.
+
+```{note}
+The harmonizaton process can be toggled on or off via the  `harmonize_beneficiary_info` parameter of the `process_{registry_abbreviation}_credits` functions.
+```
+
 ## Registry specific transformations
 
 Some transformations involved in producing OffsetsDB require special knowledge or assumptions about the underlying data.
