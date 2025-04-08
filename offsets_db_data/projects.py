@@ -1,4 +1,5 @@
 import contextlib
+import json
 
 import country_converter as coco
 import janitor  # noqa: F401
@@ -33,7 +34,7 @@ def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country'
 
 
 @pf.register_dataframe_method
-def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
+def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFrame:
     """
     Add a category to each record in the DataFrame based on its protocol.
 
@@ -51,9 +52,83 @@ def add_category(df: pd.DataFrame, *, protocol_mapping: dict) -> pd.DataFrame:
     """
 
     print('Adding category based on protocol...')
-    df['category'] = df['protocol'].apply(
-        lambda item: get_protocol_category(protocol_strs=item, protocol_mapping=protocol_mapping)
+    df['category'] = (
+        df['type']
+        .str.lower()
+        .map({key.lower(): value for key, value in type_category_mapping.items()})
+        .fillna('unknown')
     )
+    return df
+
+
+@pf.register_dataframe_method
+def override_project_types(df: pd.DataFrame, *, override_data_path: str, source_str: str):
+    """
+    Override project types to the DataFrame based on project characteristics
+    We treat Berkeley data as source of truth for most project types
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing project data.
+    override_data_path: str
+        Path to where json of override data lives
+    source: str
+        Value to write to `type_source` when applying override values
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a 'type' column overridden by all values in override_data.
+    """
+
+    override_d = json.load(open(override_data_path))
+    df['type'] = df['project_id'].map(override_d).fillna(df['type'])
+    df.loc[df['project_id'].isin(list(override_d.keys())), 'type_source'] = source_str
+
+    return df
+
+
+@pf.register_dataframe_method
+def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Add project types to the DataFrame based on project characteristics
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing project data.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'type' column, indicating the project's type. Defaults to None
+    """
+    df.loc[:, 'type'] = 'unknown'
+    df.loc[:, 'type_source'] = 'carbonplan'
+    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'type'] = 'redd+'
+
+    df.loc[df.apply(lambda x: 'acr-ifm-nonfed' in x['protocol'], axis=1), 'type'] = (
+        'improved forest management'
+    )
+    df.loc[df.apply(lambda x: 'acr-abandoned-wells' in x['protocol'], axis=1), 'type'] = (
+        'plugging oil & gas wells'
+    )
+
+    df.loc[df.apply(lambda x: 'arb-mine-methane' in x['protocol'], axis=1), 'type'] = (
+        'mine methane capture'
+    )
+
+    df.loc[df.apply(lambda x: 'vm0048' in x['protocol'], axis=1), 'type'] = 'redd+'
+    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'type'] = (
+        'afforestation/reforestation'
+    )
+    df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'type'] = (
+        'improved forest management'
+    )
+    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'type'] = 'agriculture'
+    df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'type'] = 'redd+'
+
     return df
 
 
