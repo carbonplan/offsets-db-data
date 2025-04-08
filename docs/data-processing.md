@@ -135,14 +135,14 @@ Carbon offset credits are often retired on behalf of a specific entity or organi
 
 We try to standardize retirement beneficiary information across registries using the following steps:
 
-1. **Data merging**: we combine information from four sources into a single `merged_beneficiary` field:
+1. **Data merging**: we combine information from four sources into a single _temporary_ field:
 
    - `retirement_beneficiary`: the named beneficiary of the credit retirement from the raw registry data
    - `retirement_account`: the account used for the transaction
    - `retirement_note`: additional notes attached to the retirement
    - `retirement_reason` the stated reason for retirement
 
-2. **Standardization via OpenRefine**: we process this merged information (`merged_beneficiary`) through [OpenRefine](https://openrefine.org/) using a detailed set of transformation rules define in [`offsets-db-data/configs/beneficiary-mappings.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/beneficiary-mappings.json). This includes:
+2. **Standardization via OpenRefine**: we process this merged information through [OpenRefine](https://openrefine.org/) using a detailed set of transformation rules define in [`offsets-db-data/configs/beneficiary-mappings.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/beneficiary-mappings.json). This includes:
    - text transformations that standardize common company names and entities
    - pattern matching to identify the same entities despite different formatting
 
