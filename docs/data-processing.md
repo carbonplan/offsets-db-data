@@ -76,7 +76,7 @@ There is a separate mapping file for `projects` data and `credits` data.
 Some properties either aren't included in the raw data or inferring their value requires special processing.
 In these cases, a `null` value is recorded in the column mapping files and the property is populated using registry-specific logic.
 
-## Protocol Mapping & Categorization
+## Protocol Mapping
 
 Offset projects are developed by following a set of rules, known as a protocol.
 These rules specify things like when measurements must be made and what paperwork must be submitted in order for a project to receive credits.
@@ -90,25 +90,42 @@ Continuing with the AMS-III.D. example, we map all twenty-two "known strings" th
 We repeat this manual unification of dissimilar strings for all protocols across all registries.
 The results of the mapping are contained within [`offsets-db-data/configs/all-protocol-mapping.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/all-protocol-mapping.json).
 
-We also categorize each of these unified protocol references.
-Those categories include:
+## Project type & categorization
 
-- agriculture: offsets derived from changes in the management of agricultural systems, including livestock.
-- forest: offsets derived from the management of forests.
+In addition to unifying protocol mapping, we also assign two levels of classification to projects: `category` and `type`. Categories represent broad classes of offset approaches, while types provide more specific information about the mitigation strategy.
+
+### Category assignment
+
+Projects are assigned to one of these broad categories
+
+- agriculture: offsets derived from changes in the management of agricultural systems, including livestock
+- forest: offsets derived from the management of forests
 - ghg-management: offsets derived from the destruction or elimination (e.g., substitution) of greenhouse gases
 - renewable-energy: offsets derived from expanding renewable energy capacity
-- energy-efficiency: offsets derived from decreasing the amount of energy required to complete a task.
-- fuel-switching: offsets derived from generating energy using a fuel source that produces fewer greenhouse gasses.
+- energy-efficiency: offsets derived from decreasing the amount of energy required to complete a task
+- fuel-switching: offsets derived from generating energy using a fuel source that produces fewer greenhouse gasses
+- carbon-capture: offsets derived from technologies that capture and store carbon
+- land-use: offsets derived from land management changes outside of forests
+- biochar: offsets derived from biochar production and application
+
+Category assignment is primarily determined by project type through the mapping defined in [`offsets-db-data/configs/type-category-mapping.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/type-category-mapping.json). This mapping connects specific project types (like "improved forest management" or "cookstoves") to their appropriate category.
+
+### Project type assignment
+
+Project types represent more specific offset approaches. For example, within "forest" category, projects might be classified as "improved forest management", "afforestation/reforestation", or "avoided forest conversion".
+
+Project types are determined through a multi-step process:
+
+1. first, we attempt to infer the project type from protocol information (via `infer_project_type()`)
+2. then we apply manual overrides from curated data sources (via `override_project_types()`)
+3. the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as an authoriative source for project types.
+
+### Challenges in categorization
 
 The borders between these categories often blur.
 That is especially the case with energy efficiency and fuel switching protocols.
 Many protocols in these categories allow for projects that accomplish some mixture of the two approaches for displacing and reducing greenhouse gas emissions.
 Despite this blurriness, we assign each protocol to a single category.
-In the future, we are especially interested in adding project-level categorizations to the data.
-These project categories would highlight various sub-types of projects.
-This, for example, would provide an approach for distinguishing hydroelectric projects from wind projects, both of which fall within the renewable energy category.
-
-Finally, several smaller categories exist within the data (e.g., biochar).
 
 ## Registry specific transformations
 
