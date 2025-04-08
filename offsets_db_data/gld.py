@@ -211,7 +211,6 @@ def process_gld_projects(
     )
     inverted_column_mapping = {value: key for key, value in registry_project_column_mapping.items()}
     type_category_mapping = load_type_category_mapping()
-    type_category_mapping = load_type_category_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
 
     df = df.copy()
