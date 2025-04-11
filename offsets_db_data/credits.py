@@ -140,7 +140,7 @@ def harmonize_beneficiary_data(
     credits: pd.DataFrame, registry_name: str, download_type: str
 ) -> pd.DataFrame:
     """
-    Harmonize the beneficiary information by removing the 'beneficiary_id' column and renaming the 'beneficiary_name' column to 'beneficiary'.
+    Harmonize the beneficiary information via OpenRefine.
 
     Parameters
     ----------
