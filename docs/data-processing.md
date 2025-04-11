@@ -137,7 +137,7 @@ We try to standardize retirement beneficiary information across registries using
    - `retirement_beneficiary`: the named beneficiary of the credit retirement from the raw registry data
    - `retirement_account`: the account used for the transaction
    - `retirement_note`: additional notes attached to the retirement
-   - `retirement_reason` the stated reason for retirement
+   - `retirement_reason`: the stated reason for retirement
 
    In practice, any one of these fields might contain information useful for relating a transaction to a retirement beneficary.
 
@@ -618,7 +618,7 @@ Credit data conform to the following schema:
           "type": "null"
         }
       ],
-      "description": "Recorded year when carbon avoidance/removal occurred",
+      "description": "Year when carbon avoidance/removal occurred",
       "title": "Vintage"
     }
   },
