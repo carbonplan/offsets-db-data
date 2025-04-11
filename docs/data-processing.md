@@ -5,7 +5,7 @@
 OffsetsDB follows a typical extract-transform-load (ETL) workflow.
 Extraction involves querying and downloading raw credit and project data hosted by offset registries.
 Transformation involves executing the functions contained within this repo, `offsets-db-data`.
-Load involves uploading the resulting data to S3 and the Postgres-backend that powers the OffsetsDB web tool.
+Load involves uploading the resulting data to S3 and the Postgres-backend that powers the OffsetsDB database tool.
 
 ## Downloading Raw Data
 
@@ -92,7 +92,8 @@ The results of the mapping are contained within [`offsets-db-data/configs/all-pr
 
 ## Project Type & Categorization
 
-In addition to unifying protocol mapping, we also assign two levels of classification to projects: `category` and `type`. Categories represent broad classes of offset approaches, while types provide more specific information about the mitigation strategy.
+In addition to unifying protocol mapping, we also assign two levels of classification to projects: `category` and `type`.
+Categories represent broad classes of offset approaches, while types provide more specific information about the mitigation strategy.
 
 ### Category Assignment
 
@@ -108,28 +109,24 @@ Projects are assigned to one of these broad categories
 - land-use: offsets derived from land management changes outside of forests
 - biochar: offsets derived from biochar production and application
 
-Category assignment is primarily determined by project type through the mapping defined in [`offsets-db-data/configs/type-category-mapping.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/type-category-mapping.json). This mapping connects specific project types (like "improved forest management" or "cookstoves") to their appropriate category.
+Category assignment is primarily determined by project type through the mapping defined in [`offsets-db-data/configs/type-category-mapping.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/type-category-mapping.json).
+This mapping connects specific project types (like "improved forest management" or "cookstoves") to their appropriate category.
 
 ### Project Type Assignment
 
-Project types represent more specific offset approaches. For example, within "forest" category, projects might be classified as "improved forest management", "afforestation/reforestation", or "avoided forest conversion".
+Project types represent more specific offset approaches.
+For example, within the category of "forest", projects might be classified as "improved forest management", "afforestation/reforestation", or "avoided forest conversion".
 
 Project types are determined through a multi-step process:
 
-1. first, we attempt to infer the project type from protocol information (via {py:obj}`offsets_db_data.projects.infer_project_type`)
-2. then we apply manual overrides from curated data sources (via {py:obj}`offsets_db_data.projects.override_project_types`)
-3. the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as an authoriative source for project types.
-
-### Challenges in Categorization
-
-The borders between these categories often blur.
-That is especially the case with energy efficiency and fuel switching protocols.
-Many protocols in these categories allow for projects that accomplish some mixture of the two approaches for displacing and reducing greenhouse gas emissions.
-Despite this blurriness, we assign each protocol to a single category.
+1. First, we attempt to infer the project type from protocol information (via {py:obj}`offsets_db_data.projects.infer_project_type`).
+2. We apply manual overrides from curated data sources (via {py:obj}`offsets_db_data.projects.override_project_types`).
+   Currently, the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as the authoritative source for project types.
 
 ## Retirement Beneficiary Harmonization
 
-Carbon offset credits are often retired on behalf of a specific entity or organization. However, the names of these beneficiaries appear inconsistently across registry data, making it difficult to analyze retirement patterns.
+Carbon offset credits are often retired on behalf of a specific entity or organization.
+However, the names of these beneficiaries appear inconsistently across registry data, making it difficult to analyze retirement patterns.
 
 ### Harmonization Process
 
@@ -142,6 +139,8 @@ We try to standardize retirement beneficiary information across registries using
    - `retirement_note`: additional notes attached to the retirement
    - `retirement_reason` the stated reason for retirement
 
+   In practice, any one of these fields might contain information useful for relating a transaction to a retirement beneficary.
+
 2. **Standardization via OpenRefine**: we process this merged information through [OpenRefine](https://openrefine.org/) using a detailed set of transformation rules define in [`offsets-db-data/configs/beneficiary-mappings.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/beneficiary-mappings.json). This includes:
    - text transformations that standardize common company names and entities
    - pattern matching to identify the same entities despite different formatting
@@ -150,19 +149,22 @@ Only confident matches are included in the harmonized beneficiary field, `retire
 
 ### Implementation Details
 
-The beneficiary harmonization is implemented in the function {py:obj}`offsets_db_data.credits.harmonize_beneficiary_data`. This function runs a temporary OpenRefine project using the `offsets-db-data-orcli` command-line tool (which is a wrapper around [`orcli`](https://github.com/opencultureconsulting/orcli), an OpenRefine's command-line interface) to apply the transformations defined in our mapping file. The result is a new column, `retirement_beneficiary_harmonized`, that contains the standardized beneficiary names.
+The beneficiary harmonization is implemented in the function {py:obj}`offsets_db_data.credits.harmonize_beneficiary_data`.
+This function runs a temporary OpenRefine project using the `offsets-db-data-orcli` command-line tool (which is a wrapper around [`orcli`](https://github.com/opencultureconsulting/orcli), an OpenRefine's command-line interface) to apply the transformations defined in our mapping file.
+The result is a new column, `retirement_beneficiary_harmonized`, that contains the standardized beneficiary names.
 
 ### Examples of Standardization
 
 Our harmonization process unifies many common variations:
 
-- "Delta Air Lines", "Delta Airlines" → "Delta Air Lines"
+- "Delta Air Lines", "Delta Airlines" → "Delta Airlines"
 - "Terpel", "Organizacion Terpel", "Terpel S.A." → "Terpel"
 - "Pangolin;Retired on behalf of Sydney Opera House" → "Sydney Opera House"
 
 ### Why This Matters
 
-Without beneficiary harmonization, the same entity might appear under multiple names, making it difficult to accurately analyze which entities are retiring the most credits. This harmonization allows for more accurate aggregation of retirement data by beneficiary.
+Without beneficiary harmonization, the same entity might appear under multiple names, making it difficult to accurately analyze which entities are retiring the most credits.
+This harmonization allows for more accurate aggregation of retirement data by beneficiary.
 
 ```{note}
 The harmonizaton process can be toggled on or off via the  `harmonize_beneficiary_info` parameter of the `process_{registry_abbreviation}_credits` functions.
