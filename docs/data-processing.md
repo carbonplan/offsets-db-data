@@ -134,10 +134,10 @@ We try to standardize retirement beneficiary information across registries using
 
 1. **Data merging**: we combine information from four sources into a single _temporary_ field:
 
-   - `retirement_beneficiary`: the named beneficiary of the credit retirement from the raw registry data
-   - `retirement_account`: the account used for the transaction
-   - `retirement_note`: additional notes attached to the retirement
-   - `retirement_reason`: the stated reason for retirement
+   - `retirement_beneficiary`: note specifically designating the entity claiming a credit’s environmental benefits
+   - `retirement_account`: name on account from which credits were retired
+   - `retirement_note`: short-form text accompanying credit retirement
+   - `retirement_reason`: short form note specifying why credits were retired (e.g., compliance purposes). Sometimes similar to a retirement note
 
    In practice, any one of these fields might contain information useful for relating a transaction to a retirement beneficary.
 
@@ -533,7 +533,7 @@ Credit data conform to the following schema:
           "type": "null"
         }
       ],
-      "description": "Account used for the transaction",
+      "description": "Name on account from which credits were retired",
       "title": "Retirement Account"
     },
     "retirement_beneficiary": {
@@ -545,7 +545,7 @@ Credit data conform to the following schema:
           "type": "null"
         }
       ],
-      "description": "Beneficiary of credits",
+      "description": "Note specifically designating the entity claiming a credit’s environmental benefits",
       "title": "Retirement Beneficiary"
     },
     "retirement_beneficiary_harmonized": {
@@ -569,7 +569,7 @@ Credit data conform to the following schema:
           "type": "null"
         }
       ],
-      "description": "Note",
+      "description": "Short-form text accompanying credit retirement",
       "title": "Retirement Note"
     },
     "retirement_reason": {
@@ -581,7 +581,7 @@ Credit data conform to the following schema:
           "type": "null"
         }
       ],
-      "description": "Reason for transaction",
+      "description": "Short form note specifying why credits were retired (e.g., compliance purposes). Sometimes similar to a retirement note. ",
       "title": "Retirement Reason"
     },
     "transaction_date": {
