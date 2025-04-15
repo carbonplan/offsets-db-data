@@ -127,9 +127,11 @@ Project types are determined through a multi-step process:
 
 Carbon offset credits are often retired on behalf of a specific entity or organization.
 However, the names of these beneficiaries appear inconsistently across registry data, making it difficult to analyze retirement patterns.
+The following section describes our approach for identifying and harmonizing information about the end-users of specific offset credits.
 
 ### Harmonization Process
 
+The harmonization process attempts to identify specific "retirement users" from publicly disclosed retirement beneficiary information.
 We try to standardize retirement beneficiary information across registries using the following steps:
 
 1. **Data merging**: we combine information from four sources into a single _temporary_ field:
@@ -147,6 +149,13 @@ We try to standardize retirement beneficiary information across registries using
 
 Only confident matches are included in the harmonized beneficiary field, `retirement_beneficiary_harmonized`.
 
+The retirement user harmonization process runs daily, along with the rest of OffsetsDB.
+However, the underyling standardization rules (implemented via OpenRefine) are only irregularly updated.
+This means that there might be new retirement data that _could_ be mapped to a known entity but, because of that mapping has not previously been described, that relationship is not reflected in OffsetsDB.
+To account for this, all searches via the database tool return matches across _all available_ retirement beneficiary fields: `retirement_beneficiary`, `retirement_account`, `retirement_note`, `retirement_reason`, _and_ `retirement_beneficiary_harmonized`.
+Thus, searching for known retirement users, like `Delta`, will return all records that contain the substring `delta` anywhere within their retirement beneficiary data.
+Users should carefully examine these unmapped transactions to determine whether or not these unmapped records are relevant to their specific search.
+
 ### Implementation Details
 
 The beneficiary harmonization is implemented in the function {py:obj}`offsets_db_data.credits.harmonize_beneficiary_data`.
@@ -159,7 +168,7 @@ Our harmonization process unifies many common variations:
 
 - "Delta Air Lines", "Delta Airlines" → "Delta Airlines"
 - "Terpel", "Organizacion Terpel", "Terpel S.A." → "Terpel"
-- "Pangolin;Retired on behalf of Sydney Opera House" → "Sydney Opera House"
+- "Retired on behalf of Sydney Opera House" → "Sydney Opera House"
 
 ### Why This Matters
 
