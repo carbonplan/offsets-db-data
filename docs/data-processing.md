@@ -434,7 +434,7 @@ Project data conform to the following schema:
       ],
       "title": "Status"
     },
-    "type": {
+    "project_type": {
       "anyOf": [
         {
           "type": "string"
@@ -444,9 +444,9 @@ Project data conform to the following schema:
         }
       ],
       "description": "Type of project",
-      "title": "Type"
+      "title": "Project Type"
     },
-    "type_source": {
+    "project_type_source": {
       "anyOf": [
         {
           "type": "string"
@@ -456,7 +456,7 @@ Project data conform to the following schema:
         }
       ],
       "description": "Source of project type information",
-      "title": "Type Source"
+      "title": "Project Type Source"
     }
   },
   "required": [
@@ -472,8 +472,8 @@ Project data conform to the following schema:
     "first_issuance_at",
     "first_retirement_at",
     "project_url",
-    "type",
-    "type_source"
+    "project_type",
+    "project_type_source"
   ],
   "title": "Project",
   "type": "object"
@@ -483,17 +483,17 @@ Project data conform to the following schema:
 The majority of project attributes are directly taken from the project data downloaded from each registry.
 Table 1 provides the mapping from the raw column names found in downloaded registry data to the OffsetsDB project schema.
 
-|                | **verra**                      | **climate-action-reserve**     | **american-carbon-registry**           | **gold-standard**              | **art-trees**                  |
-| -------------- | ------------------------------ | ------------------------------ | -------------------------------------- | ------------------------------ | ------------------------------ |
-| **project_id** | ID                             | Project ID                     | Project ID                             | id                             | Program ID                     |
-| **name**       | Name                           | Project Name                   | Project Name                           | name                           | Program Name                   |
-| **protocol**   | Methodology                    | Project Type                   | Project Methodology/Protocol           | methodology                    | \-                             |
-| **category**   | inferred from protocol or type | inferred from protocol or type | inferred from protocol                 | inferred from protocol or type | inferred from protocol or type |
-| **type**       | manually assigned              | manually assigned              | manually assigned                      | manually assigned              | manually assigned              |
-| **proponent**  | Proponent                      | Project Owner                  | Project Developer                      | project_developer              | Sovereign Program Developer    |
-| **country**    | Country/Area                   | Project Site Country           | Project Site Country                   | country                        | Program Country                |
-| **status**     | Status                         | Status                         | Derived: voluntary + compliance status | status                         | Status                         |
-| **listed_at**  | Project Listed Date            | \-                             | \-                                     | \-                             | \-                             |
+|                  | **verra**                      | **climate-action-reserve**     | **american-carbon-registry**           | **gold-standard**              | **art-trees**                  |
+| ---------------- | ------------------------------ | ------------------------------ | -------------------------------------- | ------------------------------ | ------------------------------ |
+| **project_id**   | ID                             | Project ID                     | Project ID                             | id                             | Program ID                     |
+| **name**         | Name                           | Project Name                   | Project Name                           | name                           | Program Name                   |
+| **protocol**     | Methodology                    | Project Type                   | Project Methodology/Protocol           | methodology                    | \-                             |
+| **category**     | inferred from protocol or type | inferred from protocol or type | inferred from protocol                 | inferred from protocol or type | inferred from protocol or type |
+| **proejct_type** | manually assigned              | manually assigned              | manually assigned                      | manually assigned              | manually assigned              |
+| **proponent**    | Proponent                      | Project Owner                  | Project Developer                      | project_developer              | Sovereign Program Developer    |
+| **country**      | Country/Area                   | Project Site Country           | Project Site Country                   | country                        | Program Country                |
+| **status**       | Status                         | Status                         | Derived: voluntary + compliance status | status                         | Status                         |
+| **listed_at**    | Project Listed Date            | \-                             | \-                                     | \-                             | \-                             |
 
 ### Credits
 

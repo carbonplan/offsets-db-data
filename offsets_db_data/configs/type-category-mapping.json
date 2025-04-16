@@ -1,78 +1,306 @@
 {
-  "Advanced Refrigerants": "ghg-management",
-  "Afforestation/Reforestation": "forest",
-  "Aluminum Smelters Emission Reductions": "fuel-switching",
-  "Avoided Forest Conversion": "forest",
-  "Avoided Grassland Conversion": "land-use",
-  "Bicycles": "fuel-switching",
-  "Biochar": "biochar",
-  "Biodigesters": "ghg-management",
-  "Biomass": "fuel-switching",
-  "Brick Manufacturing Emission Reductions": "energy-efficiency",
-  "Bundled Compost Production and Soil Application": "ghg-management",
-  "Bundled Energy Efficiency": "energy-efficiency",
-  "Carbon Capture & Enhanced Oil Recovery": "ghg-management",
-  "Carbon Capture in Concrete": "carbon-capture",
-  "Carbon Capture in Plastic": "carbon-capture",
-  "Carbon-Absorbing Concrete": "carbon-capture",
-  "Clean Water": "energy-efficiency",
-  "Community Boreholes": "energy-efficiency",
-  "Composting": "ghg-management",
-  "Cookstoves": "fuel-switching",
-  "Electric Vehicles & Charging": "fuel-switching",
-  "Energy Efficiency": "energy-efficiency",
-  "Feed Additives": "ghg-management",
-  "Fleet Efficiency": "energy-efficiency",
-  "Fuel Switching": "fuel-switching",
-  "Fuel Transport": "fuel-switching",
-  "Geothermal": "renewable-energy",
-  "Grid Expansion & Mini-Grids": "fuel-switching",
-  "HFC Refrigerant Reclamation": "ghg-management",
-  "HFC Replacement in Foam Production": "ghg-management",
-  "HFC23 Destruction": "ghg-management",
-  "Hydropower": "renewable-energy",
-  "Improved Forest Management": "forest",
-  "Improved Irrigation Management": "agriculture",
-  "Landfill Methane": "ghg-management",
-  "Leak Detection & Repair in Gas Systems": "ghg-management",
-  "Lighting": "energy-efficiency",
-  "Lower Carbon Cement & Concrete": "energy-efficiency",
-  "Manure Methane Digester": "ghg-management",
-  "Mass Transit": "energy-efficiency",
-  "Methane Recovery in Wastewater": "ghg-management",
-  "Mine Methane Capture": "ghg-management",
-  "N2O Destruction in Adipic Acid Production": "ghg-management",
-  "N2O Destruction in Nitric Acid Production": "ghg-management",
-  "Natural Gas Electricity Generation": "fuel-switching",
-  "Nitrogen Management": "agriculture",
-  "Oil Recycling": "energy-efficiency",
-  "Ozone Depleting Substances Recovery & Destruction": "ghg-management",
-  "Plugging Oil & Gas Wells": "ghg-management",
-  "Pneumatic Retrofit": "ghg-management",
-  "Propylene Oxide Production": "ghg-management",
-  "RE Bundled": "renewable-energy",
-  "REDD+": "forest",
-  "Refrigerant Leak Detection": "ghg-management",
-  "Rice Emission Reductions": "agriculture",
-  "Road Construction Emission Reductions": "energy-efficiency",
-  "SF6 Replacement": "ghg-management",
-  "Shipping": "energy-efficiency",
-  "Solar - Centralized": "renewable-energy",
-  "Solar - Distributed": "renewable-energy",
-  "Solar Lighting": "renewable-energy",
-  "Solar Water Heaters": "renewable-energy",
-  "Solid Waste Separation": "ghg-management",
-  "Sustainable Agriculture": "agriculture",
-  "Sustainable Grassland Management": "land-use",
-  "Truck Stop Electrification": "energy-efficiency",
-  "University Campus Emission Reductions": "energy-efficiency",
-  "Waste Diversion": "ghg-management",
-  "Waste Gas Recovery": "ghg-management",
-  "Waste Heat Recovery": "energy-efficiency",
-  "Waste Incineration": "fuel-switching",
-  "Waste Recycling": "energy-efficiency",
-  "Waste Reduction": "ghg-management",
-  "Weatherization": "energy-efficiency",
-  "Wetland Restoration": "land-use",
-  "Wind": "renewable-energy"
+  "advanced refrigerants": {
+    "category": "ghg-management",
+    "project-type-display-name": "Advanced Refrigerants"
+  },
+  "afforestation/reforestation": {
+    "category": "forest",
+    "project-type-display-name": "Afforestation + Reforestation"
+  },
+  "aluminum smelters emission reductions": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Aluminum Smelter"
+  },
+  "avoided forest conversion": {
+    "category": "forest",
+    "project-type-display-name": "Avoided Forest Conversion"
+  },
+  "avoided grassland conversion": {
+    "category": "land-use",
+    "project-type-display-name": "Avoided Grassland Conversion"
+  },
+  "bicycles": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Bicycle"
+  },
+  "biochar": {
+    "category": "biochar",
+    "project-type-display-name": "Biochar"
+  },
+  "biodigesters": {
+    "category": "ghg-management",
+    "project-type-display-name": "Methane Biodigester"
+  },
+  "biomass": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Biomass"
+  },
+  "brick manufacturing emission reductions": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Brick Manufacturing"
+  },
+  "bundled compost production and soil application": {
+    "category": "ghg-management",
+    "project-type-display-name": "Compost"
+  },
+  "bundled energy efficiency": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Energy Efficiency"
+  },
+  "carbon capture & enhanced oil recovery": {
+    "category": "ghg-management",
+    "project-type-display-name": "Enhanced Oil Recovery"
+  },
+  "carbon capture in concrete": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Concrete CCS"
+  },
+  "carbon capture in plastic": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Plastic CCS"
+  },
+  "carbon-absorbing concrete": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Concrete CCS"
+  },
+  "clean water": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Clean Water"
+  },
+  "community boreholes": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Borehole"
+  },
+  "composting": {
+    "category": "ghg-management",
+    "project-type-display-name": "Compost"
+  },
+  "cookstoves": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Cookstove"
+  },
+  "electric vehicles & charging": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Electric Vehicle"
+  },
+  "energy efficiency": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Energy Efficiency"
+  },
+  "feed additives": {
+    "category": "ghg-management",
+    "project-type-display-name": "Feed Additive"
+  },
+  "fleet efficiency": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Fleet Efficiency"
+  },
+  "fuel switching": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Fuel Switching"
+  },
+  "fuel transport": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Fuel Transport"
+  },
+  "geothermal": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Geothermal"
+  },
+  "grid expansion & mini-grids": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Grid Improvements"
+  },
+  "hfc refrigerant reclamation": {
+    "category": "ghg-management",
+    "project-type-display-name": "HFC Reclamation"
+  },
+  "hfc replacement in foam production": {
+    "category": "ghg-management",
+    "project-type-display-name": "HFC Replacement"
+  },
+  "hfc23 destruction": {
+    "category": "ghg-management",
+    "project-type-display-name": "HFC Destruction"
+  },
+  "hydropower": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Hydropower"
+  },
+  "improved forest management": {
+    "category": "forest",
+    "project-type-display-name": "Improved Forest Management"
+  },
+  "improved irrigation management": {
+    "category": "agriculture",
+    "project-type-display-name": "Improved Irrigation Management"
+  },
+  "landfill methane": {
+    "category": "ghg-management",
+    "project-type-display-name": "Landfill"
+  },
+  "leak detection & repair in gas systems": {
+    "category": "ghg-management",
+    "project-type-display-name": "Gas Leak Repair"
+  },
+  "lighting": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Lighting"
+  },
+  "lower carbon cement & concrete": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Low Carbon Concrete"
+  },
+  "manure methane digester": {
+    "category": "ghg-management",
+    "project-type-display-name": "Manure Biodigester"
+  },
+  "mass transit": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Mass Transit"
+  },
+  "methane recovery in wastewater": {
+    "category": "ghg-management",
+    "project-type-display-name": "Wastewater Methane"
+  },
+  "mine methane capture": {
+    "category": "ghg-management",
+    "project-type-display-name": "Mine Methane"
+  },
+  "n2o destruction in adipic acid production": {
+    "category": "ghg-management",
+    "project-type-display-name": "N\\u2082O Destruction (Adipic Acid)"
+  },
+  "n2o destruction in nitric acid production": {
+    "category": "ghg-management",
+    "project-type-display-name": "N\\u2082O Destruction (Nitric Acid)"
+  },
+  "natural gas electricity generation": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Natural Gas"
+  },
+  "nitrogen management": {
+    "category": "agriculture",
+    "project-type-display-name": "Nitrogen Management"
+  },
+  "oil recycling": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Oil Recycling"
+  },
+  "ozone depleting substances recovery & destruction": {
+    "category": "ghg-management",
+    "project-type-display-name": "Ozone Depleting Substances"
+  },
+  "plugging oil & gas wells": {
+    "category": "ghg-management",
+    "project-type-display-name": "Oil + Gas Well"
+  },
+  "pneumatic retrofit": {
+    "category": "ghg-management",
+    "project-type-display-name": "Pneumatic Retrofit"
+  },
+  "propylene oxide production": {
+    "category": "ghg-management",
+    "project-type-display-name": "Propylene Oxide"
+  },
+  "re bundled": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Renewable Energy"
+  },
+  "redd+": {
+    "category": "forest",
+    "project-type-display-name": "REDD+"
+  },
+  "refrigerant leak detection": {
+    "category": "ghg-management",
+    "project-type-display-name": "Refrigerant Leak"
+  },
+  "rice emission reductions": {
+    "category": "agriculture",
+    "project-type-display-name": "Rice Emission"
+  },
+  "road construction emission reductions": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Road Construction"
+  },
+  "sf6 replacement": {
+    "category": "ghg-management",
+    "project-type-display-name": "SF\\u2086 Replacement"
+  },
+  "shipping": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Shipping"
+  },
+  "solar - centralized": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Centralized Solar"
+  },
+  "solar - distributed": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Distributed Solar"
+  },
+  "solar lighting": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Lighting"
+  },
+  "solar water heaters": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Solar Water Heater"
+  },
+  "solid waste separation": {
+    "category": "ghg-management",
+    "project-type-display-name": "Solid Waste Separation"
+  },
+  "sustainable agriculture": {
+    "category": "agriculture",
+    "project-type-display-name": "Sustainable Agriculture"
+  },
+  "sustainable grassland management": {
+    "category": "land-use",
+    "project-type-display-name": "Grassland Management"
+  },
+  "truck stop electrification": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Truck Stop"
+  },
+  "university campus emission reductions": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "University"
+  },
+  "waste diversion": {
+    "category": "ghg-management",
+    "project-type-display-name": "Waste Diversion"
+  },
+  "waste gas recovery": {
+    "category": "ghg-management",
+    "project-type-display-name": "Waste Gas Recovery"
+  },
+  "waste heat recovery": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Waste Heat Recovery"
+  },
+  "waste incineration": {
+    "category": "fuel-switching",
+    "project-type-display-name": "Waste Incineration"
+  },
+  "waste recycling": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Recycling"
+  },
+  "waste reduction": {
+    "category": "ghg-management",
+    "project-type-display-name": "Waste Reduction"
+  },
+  "weatherization": {
+    "category": "energy-efficiency",
+    "project-type-display-name": "Weatherization"
+  },
+  "wetland restoration": {
+    "category": "land-use",
+    "project-type-display-name": "Wetland"
+  },
+  "wind": {
+    "category": "renewable-energy",
+    "project-type-display-name": "Wind"
+  }
 }
