@@ -122,6 +122,7 @@ Project types are determined through a multi-step process:
 1. First, we attempt to infer the project type from protocol information (via {py:obj}`offsets_db_data.projects.infer_project_type`).
 2. We apply manual overrides from curated data sources (via {py:obj}`offsets_db_data.projects.override_project_types`).
    Currently, the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as the authoritative source for project types.
+   The project types from the Berkeley Carbon Trading Project's Voluntary Registry Offsets Database are licensed under a [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
 ## Retirement User Harmonization
 
