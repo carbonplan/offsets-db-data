@@ -257,6 +257,7 @@ def process_gld_projects(
             .add_category(
                 type_category_mapping=type_category_mapping
             )  # must come after types; type -> category
+            .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
             .add_is_compliance_flag()
             .add_missing_columns(schema=project_schema)
             .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])

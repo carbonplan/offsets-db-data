@@ -42,8 +42,8 @@ def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFra
     ----------
     df : pd.DataFrame
         Input DataFrame containing protocol data.
-    protocol_mapping : dict
-        Dictionary mapping protocol strings to categories.
+    type_category_mapping : dict
+        Dictionary mapping types to categories.
 
     Returns
     -------
@@ -53,9 +53,9 @@ def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFra
 
     print('Adding category based on protocol...')
     df['category'] = (
-        df['type']
+        df['project_type']
         .str.lower()
-        .map({key.lower(): value for key, value in type_category_mapping.items()})
+        .map({key.lower(): value['category'] for key, value in type_category_mapping.items()})
         .fillna('unknown')
     )
     return df
@@ -79,12 +79,12 @@ def override_project_types(df: pd.DataFrame, *, override_data_path: str, source_
     Returns
     -------
     pd.DataFrame
-        DataFrame with a 'type' column overridden by all values in override_data.
+        DataFrame with a 'project_type' column overridden by all values in override_data.
     """
 
     override_d = json.load(open(override_data_path))
-    df['type'] = df['project_id'].map(override_d).fillna(df['type'])
-    df.loc[df['project_id'].isin(list(override_d.keys())), 'type_source'] = source_str
+    df['project_type'] = df['project_id'].map(override_d).fillna(df['project_type'])
+    df.loc[df['project_id'].isin(list(override_d.keys())), 'project_type_source'] = source_str
 
     return df
 
@@ -102,33 +102,67 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     Returns
     -------
     pd.DataFrame
-        DataFrame with a new 'type' column, indicating the project's type. Defaults to None
+        DataFrame with a new 'project_type' column, indicating the project's type. Defaults to None
     """
-    df.loc[:, 'type'] = 'unknown'
-    df.loc[:, 'type_source'] = 'carbonplan'
-    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'type'] = 'redd+'
+    df.loc[:, 'project_type'] = 'unknown'
+    df.loc[:, 'project_type_source'] = 'carbonplan'
+    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'project_type'] = 'redd+'
 
-    df.loc[df.apply(lambda x: 'acr-ifm-nonfed' in x['protocol'], axis=1), 'type'] = (
+    df.loc[df.apply(lambda x: 'acr-ifm-nonfed' in x['protocol'], axis=1), 'project_type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'acr-abandoned-wells' in x['protocol'], axis=1), 'type'] = (
+    df.loc[df.apply(lambda x: 'acr-abandoned-wells' in x['protocol'], axis=1), 'project_type'] = (
         'plugging oil & gas wells'
     )
 
-    df.loc[df.apply(lambda x: 'arb-mine-methane' in x['protocol'], axis=1), 'type'] = (
+    df.loc[df.apply(lambda x: 'arb-mine-methane' in x['protocol'], axis=1), 'project_type'] = (
         'mine methane capture'
     )
 
-    df.loc[df.apply(lambda x: 'vm0048' in x['protocol'], axis=1), 'type'] = 'redd+'
-    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'type'] = (
+    df.loc[df.apply(lambda x: 'vm0048' in x['protocol'], axis=1), 'project_type'] = 'redd+'
+    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'project_type'] = (
         'afforestation/reforestation'
     )
-    df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'type'] = (
+    df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'project_type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'type'] = 'agriculture'
-    df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'type'] = 'redd+'
+    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'project_type'] = 'agriculture'
+    df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'project_type'] = 'redd+'
 
+    return df
+
+
+@pf.register_dataframe_method
+def map_project_type_to_display_name(
+    df: pd.DataFrame, *, type_category_mapping: dict
+) -> pd.DataFrame:
+    """
+    Map project types in the DataFrame to display names based on a mapping dictionary.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame containing project data.
+    type_category_mapping : dict
+        Dictionary mapping project type strings to display names.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with a new 'project_type' column, containing mapped display names.
+    """
+
+    print('Mapping project types to display names...')
+    df['project_type'] = (
+        df['project_type']
+        .map(
+            {
+                key.lower(): value['project-type-display-name']
+                for key, value in type_category_mapping.items()
+            }
+        )
+        .fillna('Unknown')
+    )
     return df
 
 
