@@ -26,8 +26,8 @@ project_schema = pa.DataFrameSchema(
     {
         'protocol': pa.Column(pa.Object, nullable=True),  # Array of strings
         'category': pa.Column(pa.String, nullable=True),
-        'project_type': pa.Column(pa.String, nullable=True),
-        'project_type_source': pa.Column(pa.String, nullable=True),
+        'project_type': pa.Column(pa.String, nullable=False),
+        'project_type_source': pa.Column(pa.String, nullable=False),
         'retired': pa.Column(
             pa.Int, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
         ),
