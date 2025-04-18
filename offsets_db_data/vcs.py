@@ -397,9 +397,9 @@ def process_vcs_projects(
         .add_category(
             type_category_mapping=type_category_mapping
         )  # must come after types; type -> category
-        .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
         .add_is_compliance_flag()
         .add_vcs_compliance_projects()
+        .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
         .add_retired_and_issued_totals(credits=credits)
         .add_first_issuance_and_retirement_dates(credits=credits)
         .add_missing_columns(schema=project_schema)
