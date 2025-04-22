@@ -275,8 +275,8 @@ def add_vcs_compliance_projects(df: pd.DataFrame) -> pd.DataFrame:
             'name': 'Corinth Abandoned Mine Methane Recovery Project',
             'protocol': ['arb-mine-methane'],
             'category': 'ghg-management',
-            'type': 'mine methane capture',
-            'type_source': 'carbonplan',
+            'project_type': 'mine methane capture',
+            'project_type_source': 'carbonplan',
             'proponent': 'Keyrock Energy LLC',
             'country': 'United States',
             'status': 'registered',
@@ -289,8 +289,8 @@ def add_vcs_compliance_projects(df: pd.DataFrame) -> pd.DataFrame:
             'name': 'Blue Source-Alford Improved Forest Management Project',
             'protocol': ['arb-forest'],
             'category': 'forest',
-            'type': 'improved forest management',
-            'type_source': 'carbonplan',
+            'project_type': 'improved forest management',
+            'project_type_source': 'carbonplan',
             'proponent': 'Ozark Regional Land Trust',
             'country': 'United States',
             'status': 'registered',
@@ -399,6 +399,7 @@ def process_vcs_projects(
         )  # must come after types; type -> category
         .add_is_compliance_flag()
         .add_vcs_compliance_projects()
+        .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
         .add_retired_and_issued_totals(credits=credits)
         .add_first_issuance_and_retirement_dates(credits=credits)
         .add_missing_columns(schema=project_schema)
