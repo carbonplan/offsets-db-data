@@ -122,15 +122,18 @@ Project types are determined through a multi-step process:
 1. First, we attempt to infer the project type from protocol information (via {py:obj}`offsets_db_data.projects.infer_project_type`).
 2. We apply manual overrides from curated data sources (via {py:obj}`offsets_db_data.projects.override_project_types`).
    Currently, the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as the authoritative source for project types.
+   The project types from the Berkeley Carbon Trading Project's Voluntary Registry Offsets Database are licensed under a [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
-## Retirement Beneficiary Harmonization
+## Retirement User Harmonization
 
 Carbon offset credits are often retired on behalf of a specific entity or organization.
-However, the names of these beneficiaries appear inconsistently across registry data, making it difficult to analyze retirement patterns.
+However, the names of these retirement users are recorded inconsistently across registry data, making it difficult to analyze retirement patterns.
+The following section describes our approach for identifying and harmonizing information about the end-users ("retirement users") of specific offset credits.
 
 ### Harmonization Process
 
-We try to standardize retirement beneficiary information across registries using the following steps:
+The harmonization process attempts to identify specific "retirement users" from publicly disclosed retirement beneficiary information.
+We try to standardize retirement user information across registries using the following steps:
 
 1. **Data merging**: we combine information from four sources into a single _temporary_ field:
 
@@ -139,7 +142,8 @@ We try to standardize retirement beneficiary information across registries using
    - `retirement_note`: short-form text accompanying credit retirement
    - `retirement_reason`: short form note specifying why credits were retired (e.g., compliance purposes). Sometimes similar to a retirement note
 
-   In practice, any one of these fields might contain information useful for relating a transaction to a retirement beneficary.
+   We refer to these fields as "retirement beneficiary data."
+   Any one of these fields might contain information useful for relating a transaction to a retirement user.
 
 2. **Standardization via OpenRefine**: we process this merged information through [OpenRefine](https://openrefine.org/) using a detailed set of transformation rules define in [`offsets-db-data/configs/beneficiary-mappings.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/beneficiary-mappings.json). This includes:
    - text transformations that standardize common company names and entities
@@ -147,11 +151,18 @@ We try to standardize retirement beneficiary information across registries using
 
 Only confident matches are included in the harmonized beneficiary field, `retirement_beneficiary_harmonized`.
 
+The retirement user harmonization process runs daily, along with the rest of OffsetsDB.
+However, the underyling standardization rules (implemented via OpenRefine) are only irregularly updated.
+This means that there might be new retirement data that _could_ be mapped to a known entity but, because of that mapping has not previously been described, that relationship is not reflected in OffsetsDB.
+To account for this, all searches via the database tool return matches across _all available_ retirement beneficiary fields: `retirement_beneficiary`, `retirement_account`, `retirement_note`, `retirement_reason`, _and_ `retirement_beneficiary_harmonized`.
+Thus, searching for known retirement users, like `Delta`, will return all records that contain the substring `delta` anywhere within their retirement beneficiary data.
+Users should carefully examine these unmapped transactions to determine whether or not these unmapped records are relevant to their specific search.
+
 ### Implementation Details
 
-The beneficiary harmonization is implemented in the function {py:obj}`offsets_db_data.credits.harmonize_beneficiary_data`.
+Retirement user harmonization is implemented in the function {py:obj}`offsets_db_data.credits.harmonize_beneficiary_data`.
 This function runs a temporary OpenRefine project using the `offsets-db-data-orcli` command-line tool (which is a wrapper around [`orcli`](https://github.com/opencultureconsulting/orcli), an OpenRefine's command-line interface) to apply the transformations defined in our mapping file.
-The result is a new column, `retirement_beneficiary_harmonized`, that contains the standardized beneficiary names.
+The result is a new column, `retirement_beneficiary_harmonized`, that contains the standardized user names.
 
 ### Examples of Standardization
 
@@ -159,12 +170,12 @@ Our harmonization process unifies many common variations:
 
 - "Delta Air Lines", "Delta Airlines" → "Delta Airlines"
 - "Terpel", "Organizacion Terpel", "Terpel S.A." → "Terpel"
-- "Pangolin;Retired on behalf of Sydney Opera House" → "Sydney Opera House"
+- "Retired on behalf of Sydney Opera House" → "Sydney Opera House"
 
 ### Why This Matters
 
-Without beneficiary harmonization, the same entity might appear under multiple names, making it difficult to accurately analyze which entities are retiring the most credits.
-This harmonization allows for more accurate aggregation of retirement data by beneficiary.
+Without harmonization, the same entity might appear under multiple names, making it difficult to accurately analyze which entities are retiring the most credits.
+This harmonization allows for more accurate aggregation of retirement data by user.
 
 ```{note}
 The harmonizaton process can be toggled on or off via the  `harmonize_beneficiary_info` parameter of the `process_{registry_abbreviation}_credits` functions.
