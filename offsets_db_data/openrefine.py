@@ -58,7 +58,7 @@ def install(
 
 @app.command()
 def run(
-    args: list[str] = typer.Argument(help='The arguments to pass to orcli.'),
+    args: list[str] = typer.Argument(..., help='The arguments to pass to orcli.'),
     binary_path: str | None = typer.Option(
         None, help='The path to the orcli binary.', show_default=True
     ),
