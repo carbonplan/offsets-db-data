@@ -52,6 +52,15 @@ TERMS-OF-DATA-ACCESS.md
 
 ```{toctree}
 ---
+maxdepth: 1
+caption:  Developer guides
+hidden:
+---
+releasing.md
+```
+
+```{toctree}
+---
 maxdepth: 2
 caption: Project links
 hidden:
