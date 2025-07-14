@@ -136,7 +136,6 @@ The harmonization process attempts to identify specific "retirement users" from 
 We try to standardize retirement user information across registries using the following steps:
 
 1. **Data merging**: we combine information from four sources into a single _temporary_ field:
-
    - `retirement_beneficiary`: note specifically designating the entity claiming a credit’s environmental benefits
    - `retirement_account`: name on account from which credits were retired
    - `retirement_note`: short-form text accompanying credit retirement
