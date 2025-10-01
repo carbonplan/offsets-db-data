@@ -43,7 +43,7 @@ jobs:
           role-to-assume: arn:aws:iam::631969445205:role/github-action-role
           role-session-name: offsets-db-etl-role-session
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.10'
           cache: 'pip'
