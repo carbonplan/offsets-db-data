@@ -1,6 +1,6 @@
 """Tests for protocol version extraction functionality"""
+
 import pandas as pd
-import pytest
 
 from offsets_db_data.projects import (
     align_protocol_versions,
@@ -257,4 +257,3 @@ class TestEndToEndIntegration:
         # Note: VM0007 and VM0042 won't extract versions because our pattern
         # looks for specific keywords, but ACM0001 will work
         assert result['protocol_version_raw'].iloc[0] == {'ACM0001': '19.0'}
-

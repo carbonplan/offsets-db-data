@@ -7,6 +7,7 @@ This PR adds a new `protocol_version` field to the projects schema that captures
 ## Motivation
 
 Carbon offset projects use specific versions of methodologies (protocols), and version information is critical for:
+
 - **Tracking methodology evolution**: Different versions have different requirements and credibility
 - **Data analysis**: Researchers need to analyze performance by protocol version
 - **Transparency**: Buyers and analysts want to know which methodology version was used
@@ -24,12 +25,12 @@ Based on analysis of the `all-protocol-mapping.json` file:
 
 ### Version Coverage by Registry:
 
-| Registry Type | Protocols | Version Coverage |
-|---------------|-----------|------------------|
-| CDM (ACM/AMS) | ~180 protocols | ~70-80% |
-| Verra VM | ~50 protocols | ~5% |
-| ACR | ~20 protocols | ~2% |
-| ARB/CAR | ~15 protocols | ~0% |
+| Registry Type | Protocols      | Version Coverage |
+| ------------- | -------------- | ---------------- |
+| CDM (ACM/AMS) | ~180 protocols | ~70-80%          |
+| Verra VM      | ~50 protocols  | ~5%              |
+| ACR           | ~20 protocols  | ~2%              |
+| ARB/CAR       | ~15 protocols  | ~0%              |
 
 **Note**: Limited coverage for Verra VM, ACR, and ARB protocols reflects what's available in source registry data, not a limitation of this implementation.
 
@@ -38,6 +39,7 @@ Based on analysis of the `all-protocol-mapping.json` file:
 ### Schema Changes
 
 **Added to `offsets_db_data/models.py`:**
+
 ```python
 'protocol_version': pa.Column(pa.Object, nullable=True)  # Array of strings (parallel to protocol)
 ```
@@ -45,17 +47,20 @@ Based on analysis of the `all-protocol-mapping.json` file:
 ### Core Functions
 
 **1. `extract_protocol_version_pairs(protocol_string: str)`**
+
 - Extracts protocol name and version pairs from raw registry strings
 - Handles multiple protocols separated by: `; & , and`
 - Version formats supported: `v1.6`, `Version 19.0`, `ver 21`, `version21.0`, `&20.0`
 - Returns: `[(protocol_name, version), ...]`
 
 **2. `extract_protocol_versions(df)`**
+
 - DataFrame method that runs BEFORE protocol harmonization
 - Creates temporary `protocol_version_raw` column with {protocol_name: version} mapping
 - Preserves version info before protocol names are normalized
 
 **3. `align_protocol_versions(df)`**
+
 - DataFrame method that runs AFTER protocol harmonization
 - Matches extracted versions to normalized protocol names
 - Creates final `protocol_version` array parallel to `protocol` array
@@ -78,6 +83,7 @@ data = (
 ## Examples
 
 ### Single Protocol with Version
+
 ```
 Input:  "ACM0001 Version 19.0"
 Output: protocol = ['acm0001']
@@ -85,6 +91,7 @@ Output: protocol = ['acm0001']
 ```
 
 ### Multiple Protocols with Versions
+
 ```
 Input:  "ACM0001: Version 19.0; ACM0022: Version 3.0"
 Output: protocol = ['acm0001', 'acm0022']
@@ -92,6 +99,7 @@ Output: protocol = ['acm0001', 'acm0022']
 ```
 
 ### Protocol without Version
+
 ```
 Input:  "VM0007 REDD+ Framework"
 Output: protocol = ['vm0007']
@@ -99,6 +107,7 @@ Output: protocol = ['vm0007']
 ```
 
 ### Partial Versions
+
 ```
 Input:  "ACM0001 v19.0 and ACM0022"
 Output: protocol = ['acm0001', 'acm0022']
@@ -146,6 +155,7 @@ All tests passing ✅
 ### Why Some Protocols Have No Versions
 
 This reflects **source data limitations**, not implementation gaps:
+
 - Some registries don't report version numbers publicly
 - Some protocols don't use version numbers
 - Some projects predate version tracking systems
@@ -153,6 +163,7 @@ This reflects **source data limitations**, not implementation gaps:
 ## Files Changed
 
 ### Core Implementation
+
 - `offsets_db_data/models.py` - Added `protocol_version` to schema
 - `offsets_db_data/projects.py` - Added extraction and alignment functions
 - `offsets_db_data/vcs.py` - Updated Verra processing pipeline
@@ -160,9 +171,11 @@ This reflects **source data limitations**, not implementation gaps:
 - `offsets_db_data/apx.py` - Updated ACR/CAR/ART processing pipeline
 
 ### Tests
+
 - `tests/test_protocol_version.py` - Comprehensive test suite (new file)
 
 ### Documentation
+
 - `PROTOCOL_VERSION_PR.md` - This PR description (new file)
 
 ## Future Enhancements
@@ -213,4 +226,3 @@ This addresses the need for protocol version tracking mentioned in discussions a
 **Ready for review!** 🚀
 
 Please test with your local data pipelines and provide feedback on the implementation.
-

@@ -28,13 +28,13 @@ def extract_protocol_version_pairs(protocol_string: str) -> list[tuple[str, str 
 
     Examples
     --------
-    >>> extract_protocol_version_pairs("ACM0001 v19.0")
+    >>> extract_protocol_version_pairs('ACM0001 v19.0')
     [('ACM0001', '19.0')]
 
-    >>> extract_protocol_version_pairs("ACM0001: Version 19.0; ACM0022: Version 3.0")
+    >>> extract_protocol_version_pairs('ACM0001: Version 19.0; ACM0022: Version 3.0')
     [('ACM0001', '19.0'), ('ACM0022', '3.0')]
 
-    >>> extract_protocol_version_pairs("VM0007 REDD+ Framework")
+    >>> extract_protocol_version_pairs('VM0007 REDD+ Framework')
     [('VM0007', None)]
     """
     if pd.isna(protocol_string) or not str(protocol_string).strip():
