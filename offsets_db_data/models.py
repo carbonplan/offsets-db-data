@@ -17,6 +17,7 @@ RegistryType = typing.Literal[
 project_schema = pa.DataFrameSchema(
     {
         'protocol': pa.Column(pa.Object, nullable=True),  # Array of strings
+        'protocol_version': pa.Column(pa.Object, nullable=True),  # Array of strings (parallel to protocol)
         'category': pa.Column(pa.String, nullable=True),
         'project_type': pa.Column(pa.String, nullable=False),
         'project_type_source': pa.Column(pa.String, nullable=False),
