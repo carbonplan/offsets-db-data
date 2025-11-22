@@ -224,7 +224,9 @@ def process_gld_projects(
             .add_gld_project_id(prefix=prefix)
             .harmonize_country_names()
             .harmonize_status_codes()
+            .extract_protocol_versions()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
+            .align_protocol_versions()
             .infer_project_type()
             .override_project_types(
                 override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
@@ -250,7 +252,9 @@ def process_gld_projects(
             .add_gld_project_id(prefix=prefix)
             .harmonize_country_names()
             .harmonize_status_codes()
+            .extract_protocol_versions()
             .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
+            .align_protocol_versions()
             .infer_project_type()
             .override_project_types(
                 override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
