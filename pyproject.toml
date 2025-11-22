@@ -1,6 +1,6 @@
 [build-system]
     build-backend = "setuptools.build_meta"
-    requires      = ["setuptools-scm[toml]>=6.2", "setuptools>=64", "wheel"]
+    requires      = ["setuptools-scm>=8", "setuptools>=80"]
 
 [project]
     authors = [{ name = "CarbonPlan", email = "tech@carbonplan.org" }]
@@ -53,8 +53,6 @@
     fallback_version  = "999"
     local_scheme      = "node-and-date"
     version_scheme    = "post-release"
-    write_to          = "offsets_db_data/_version.py"
-    write_to_template = '__version__ = "{version}"'
 
 [tool.coverage.run]
     branch = true
