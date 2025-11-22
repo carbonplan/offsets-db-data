@@ -1,5 +1,6 @@
-import intake
-import pkg_resources
+from importlib.resources import files
 
-catalog_file = pkg_resources.resource_filename('offsets_db_data', 'catalog.yaml')
+import intake
+
+catalog_file = files('offsets_db_data').joinpath('catalog.yaml')
 catalog = intake.open_catalog(catalog_file)
