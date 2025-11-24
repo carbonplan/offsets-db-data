@@ -3,12 +3,9 @@
     requires      = ["setuptools-scm>=8", "setuptools>=80"]
 
 [tool.pixi.workspace]
-    name        = "offsets-db-data"
-    version     = "0.1.0"
-    description = "Monitoring the global carbon market"
-    authors     = ["CarbonPlan <tech@carbonplan.org>"]
     channels    = ["conda-forge"]
     platforms   = ["osx-arm64", "linux-64"]
+    preview     = ["pixi-build"]
 
 [tool.pixi.tasks]
     # Development tasks
@@ -45,6 +42,13 @@
     click               = "==8.1.8" # pin until https://github.com/fastapi/typer/discussions/1215 is resolved
     pip                 = "*"
 
+
+
+# We are using `pixi-build-python` in order to build a Python package
+[tool.pixi.package.build.backend]
+name = "pixi-build-python"
+version = "==0.4.0"
+
 [tool.pixi.feature.dev.dependencies]
     pytest        = ">=7.4,<7.5"
     pytest-cov    = ">=4.1,<4.2"
@@ -70,6 +74,8 @@
     dev     = ["dev"]
     docs    = ["docs"]
     all     = ["dev", "docs"]
+
+
 
 [project]
     authors = [{ name = "CarbonPlan", email = "tech@carbonplan.org" }]
