@@ -1,5 +1,6 @@
 ci:
   autoupdate_schedule: monthly
+exclude: ^pixi\.lock$
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -14,7 +15,7 @@ repos:
       - id: mixed-line-ending
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 'v0.14.3'
+    rev: 'v0.14.6'
     hooks:
       - id: ruff
         args: ['--fix']
