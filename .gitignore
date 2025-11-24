@@ -164,3 +164,6 @@ offsets_db_data/_version.py
 .idea
 .jupyter_cache/
 jupyter_execute/
+
+# Pixi
+.pixi/
