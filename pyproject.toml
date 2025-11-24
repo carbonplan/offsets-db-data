@@ -7,6 +7,9 @@
     platforms   = ["osx-arm64", "linux-64"]
     preview     = ["pixi-build"]
 
+[tool.pixi.pypi-dependencies]
+offsets-db-data = { path = ".", editable = true }
+
 [tool.pixi.tasks]
     # Development tasks
     test         = "pytest -s"
