@@ -87,7 +87,7 @@
         "Topic :: Scientific/Engineering",
     ]
     description = "Monitoring the global carbon market"
-    license = { text = "MIT" }
+    license = "MIT"
     name = "offsets-db-data"
     readme = "README.md"
     requires-python = ">=3.10"

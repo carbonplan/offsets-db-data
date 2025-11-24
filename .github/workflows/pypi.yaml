@@ -51,8 +51,7 @@ jobs:
       - name: Setup Pixi
         uses: prefix-dev/setup-pixi@v0.9.3
         with:
-          cache: true
-          cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          cache: false
 
       - uses: actions/download-artifact@v6
         with:
