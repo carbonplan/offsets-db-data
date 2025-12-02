@@ -7,7 +7,7 @@ intake<2
 pandas>=2.2.2
 pandera>=0.23
 pydantic>=2.10
-pyjanitor>=0.23
+pyjanitor==0.23.*
 requests>=2.31.0
 s3fs>=2025.2.0
 universal_pathlib>=0.1.3
