@@ -1,11 +1,205 @@
 import contextlib
 import json
+import re
 
 import country_converter as coco
 import janitor  # noqa: F401
 import numpy as np
 import pandas as pd
 import pandas_flavor as pf
+
+
+def extract_protocol_version_pairs(protocol_string: str) -> list[tuple[str, str | None]]:
+    """
+    Extract protocol name and version pairs from a raw protocol string.
+
+    Handles multi-protocol strings separated by: ; & , and
+
+    Parameters
+    ----------
+    protocol_string : str
+        Raw protocol string like "ACM0001 v19.0; ACM0022 v3.0"
+
+    Returns
+    -------
+    list[tuple[str, str | None]]
+        List of (protocol_name, version) tuples
+        Example: [("ACM0001", "19.0"), ("ACM0022", "3.0")]
+
+    Examples
+    --------
+    >>> extract_protocol_version_pairs('ACM0001 v19.0')
+    [('ACM0001', '19.0')]
+
+    >>> extract_protocol_version_pairs('ACM0001: Version 19.0; ACM0022: Version 3.0')
+    [('ACM0001', '19.0'), ('ACM0022', '3.0')]
+
+    >>> extract_protocol_version_pairs('VM0007 REDD+ Framework')
+    [('VM0007', None)]
+    """
+    if pd.isna(protocol_string) or not str(protocol_string).strip():
+        return []
+
+    # Regex patterns for version and protocol names
+    version_pattern = r'(?:[vV](?:ersion|er)?\.?\s*|&\s*)(\d+(?:\.\d+)?)'
+    protocol_name_pattern = r'\b([A-Z]+[A-Z0-9\-\.]*[A-Z0-9]+)\b'
+
+    # Normalize version format (remove prefixes, ensure decimal)
+    def normalize_version(version: str) -> str:
+        version = re.sub(r'^[vV](?:ersion|er)?\.?\s*', '', version)
+        if '.' not in version:
+            version = f'{version}.0'
+        return version
+
+    # Split by common separators
+    segments = re.split(r'[;&]|\s+and\s+', protocol_string, flags=re.IGNORECASE)
+
+    pairs = []
+    for segment in segments:
+        segment = segment.strip()
+        if not segment:
+            continue
+
+        # Extract protocol name
+        protocol_match = re.search(protocol_name_pattern, segment, re.IGNORECASE)
+        if not protocol_match:
+            continue
+
+        protocol_name = protocol_match.group(1).upper()
+
+        # Extract version from this segment
+        version_match = re.search(version_pattern, segment, re.IGNORECASE)
+        version = normalize_version(version_match.group(1)) if version_match else None
+
+        pairs.append((protocol_name, version))
+
+    return pairs
+
+
+@pf.register_dataframe_method
+def extract_protocol_versions(
+    df: pd.DataFrame, *, original_protocol_column: str = 'original_protocol'
+) -> pd.DataFrame:
+    """
+    Extract protocol version information from raw protocol strings BEFORE harmonization.
+
+    Creates a 'protocol_version_raw' column with protocol-version mappings that will be
+    aligned to normalized protocol names after map_protocol() runs.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with raw protocol data
+    original_protocol_column : str, optional
+        Column containing raw protocol strings from registry (default is 'original_protocol')
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with new 'protocol_version_raw' column containing dict mapping
+        protocol names to versions
+
+    Examples
+    --------
+    Input: "ACM0001: Version 19.0; ACM0022: Version 3.0"
+    Output: protocol_version_raw = {"ACM0001": "19.0", "ACM0022": "3.0"}
+
+    Input: "VM0007 REDD+ Framework"
+    Output: protocol_version_raw = {"VM0007": None}
+    """
+    print('Extracting protocol versions from raw strings...')
+
+    def extract_to_dict(protocol_string):
+        """Convert protocol string to dict mapping name to version"""
+        if pd.isna(protocol_string):
+            return {}
+
+        pairs = extract_protocol_version_pairs(protocol_string)
+        return {name: version for name, version in pairs}
+
+    try:
+        df['protocol_version_raw'] = df[original_protocol_column].apply(extract_to_dict)
+    except KeyError:
+        # Some registries (like art-trees) don't have protocol column
+        df['protocol_version_raw'] = [{}] * len(df)
+
+    projects_with_versions = sum(df['protocol_version_raw'].apply(bool))
+    print(f'Extracted versions for {projects_with_versions} of {len(df)} projects')
+
+    return df
+
+
+@pf.register_dataframe_method
+def align_protocol_versions(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Align extracted protocol versions with harmonized protocol names.
+
+    This runs AFTER map_protocol() to create a parallel array where
+    protocol[i] corresponds to protocol_version[i].
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        DataFrame with both 'protocol' (normalized) and 'protocol_version_raw' (raw mapping)
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with 'protocol_version' array aligned to 'protocol' array
+
+    Examples
+    --------
+    protocol = ['acm0001', 'acm0022']
+    protocol_version_raw = {'ACM0001': '19.0', 'ACM0022': '3.0'}
+    → protocol_version = ['19.0', '3.0']
+
+    protocol = ['vm0007']
+    protocol_version_raw = {}
+    → protocol_version = [None]
+    """
+    print('Aligning protocol versions with normalized protocol names...')
+
+    def align_versions(row):
+        """Align versions to normalized protocol array"""
+        protocols = row.get('protocol', [])
+        if not isinstance(protocols, list) or not protocols:
+            return [None]
+
+        version_map = row.get('protocol_version_raw', {})
+        if not version_map:
+            return [None] * len(protocols)
+
+        # Match normalized protocol names to raw protocol names
+        aligned_versions = []
+        for normalized_proto in protocols:
+            # Try to find matching raw protocol name (case-insensitive, ignore punctuation)
+            version = None
+            normalized_clean = normalized_proto.lower().replace('-', '').replace('.', '')
+
+            for raw_proto, raw_version in version_map.items():
+                raw_clean = raw_proto.lower().replace('-', '').replace('.', '')
+                if raw_clean == normalized_clean:
+                    version = raw_version
+                    break
+
+            aligned_versions.append(version)
+
+        return aligned_versions
+
+    df['protocol_version'] = df.apply(align_versions, axis=1)
+
+    # Clean up temporary column
+    df = df.drop(columns=['protocol_version_raw'], errors='ignore')
+
+    # Stats
+    versions_found = sum(
+        any(v is not None for v in versions)
+        for versions in df['protocol_version']
+        if isinstance(versions, list)
+    )
+    print(f'Aligned versions for {versions_found} of {len(df)} projects')
+
+    return df
 
 
 @pf.register_dataframe_method
