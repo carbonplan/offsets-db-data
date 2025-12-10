@@ -2,6 +2,7 @@
   "country": {
     "american-carbon-registry": "Project Site Country",
     "art-trees": "Program  Country",
+    "cercarbono": "Country",
     "climate-action-reserve": "Project Site Country",
     "gold-standard": "Country",
     "verra": "Country/Area"
@@ -9,6 +10,7 @@
   "listed_at": {
     "american-carbon-registry": null,
     "art-trees": null,
+    "cercarbono": "Creation date",
     "climate-action-reserve": "Project Listed Date",
     "gold-standard": null,
     "verra": null
@@ -16,6 +18,7 @@
   "name": {
     "american-carbon-registry": "Project Name",
     "art-trees": "Program Name",
+    "cercarbono": "Project Name",
     "climate-action-reserve": "Project Name",
     "gold-standard": "Project Name",
     "verra": "Name"
@@ -23,6 +26,7 @@
   "original_protocol": {
     "american-carbon-registry": "Project Methodology/Protocol",
     "art-trees": null,
+    "cercarbono": "Protocol",
     "climate-action-reserve": "Project Type",
     "gold-standard": "Methodology",
     "verra": "Methodology"
@@ -30,6 +34,7 @@
   "project_id": {
     "american-carbon-registry": "Project ID",
     "art-trees": "Program ID",
+    "cercarbono": "Project ID",
     "climate-action-reserve": "Project ID",
     "gold-standard": "GSID",
     "verra": "ID"
@@ -37,6 +42,7 @@
   "proponent": {
     "american-carbon-registry": null,
     "art-trees": "Sovereign Program Developer",
+    "cercarbono": "Project proponent",
     "climate-action-reserve": "Project Owner",
     "gold-standard": "Project Developer Name",
     "verra": "Proponent"
@@ -44,6 +50,7 @@
   "status": {
     "american-carbon-registry": null,
     "art-trees": "Status",
+    "cercarbono": "Project Stage",
     "climate-action-reserve": "Status",
     "gold-standard": "Status",
     "verra": "Status"
