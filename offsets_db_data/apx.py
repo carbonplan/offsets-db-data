@@ -216,9 +216,14 @@ def process_apx_projects(
     data = df.rename(columns=inverted_column_mapping)
     if registry_name == 'art-trees':
         data['protocol'] = [['art-trees']] * len(data)
+        data['protocol_version'] = [[None]] * len(data)
 
     else:
-        data = data.map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
+        data = (
+            data.extract_protocol_versions()
+            .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
+            .align_protocol_versions()
+        )
 
     if registry_name == 'american-carbon-registry':
         data['status'] = data.apply(harmonize_acr_status, axis=1)
