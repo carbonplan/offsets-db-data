@@ -10,6 +10,8 @@ RegistryType = typing.Literal[
     'art-trees',
     'american-carbon-registry',
     'climate-action-reserve',
+    'isometric',
+    'cercarbono',
     'none',
 ]
 
