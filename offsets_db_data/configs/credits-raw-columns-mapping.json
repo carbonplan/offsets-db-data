@@ -63,6 +63,18 @@
       "vintage": "Vintage"
     }
   },
+  "cercarbono": {
+    "retirements": {
+      "project_id": null,
+      "quantity": null,
+      "retirement_account": null,
+      "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "date",
+      "vintage": "vintage"
+    }
+  },
   "climate-action-reserve": {
     "cancellations": {
       "project_id": "Project ID",

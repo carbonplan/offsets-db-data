@@ -3,7 +3,9 @@ import pandas_flavor as pf
 
 from offsets_db_data.common import (
     BERKELEY_PROJECT_TYPE_UPATH,
+    CREDIT_SCHEMA_UPATH,
     PROJECT_SCHEMA_UPATH,
+    load_column_mapping,
     load_inverted_protocol_mapping,
     load_registry_project_column_mapping,
     load_type_category_mapping,
@@ -13,7 +15,7 @@ from offsets_db_data.credits import (
     filter_and_merge_transactions,  # noqa: F401
     merge_with_arb,  # noqa: F401
 )
-from offsets_db_data.models import project_schema
+from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.projects import (
     add_category,  # noqa: F401
     add_first_issuance_and_retirement_dates,  # noqa: F401
@@ -45,6 +47,62 @@ def add_cercarbono_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
+def process_cercarbono_transactions(
+    projects: pd.DataFrame,
+    retirements: pd.DataFrame,
+    download_type: str = 'retirements',
+    registry_name: str = 'cercarbono',
+) -> pd.DataFrame:
+    """Process Cercarbono transactions dataframe to conform to offsets-db schema.
+
+    Parameters
+    ----------
+    projects : pd.DataFrame
+        Input dataframe containing Cercarbono project data.
+    retirements : pd.DataFrame
+        Input dataframe containing Cercarbono retirement data.
+    download_type : str, optional
+        Type of data to download, by default "retirements"
+    registry_name : str, optional
+        Name of the registry to be added to the dataframe, by default "cercarbono"
+
+    Returns
+    -------
+    pd.DataFrame
+        Processed dataframe conforming to offsets-db schema.
+    """
+    all_issuances = []
+    for idx, row in projects.iterrows():
+        issuances = row['serials']
+        for issuance in issuances:
+            issuance['project_id'] = row['code']
+            issuance['name'] = row['name']
+        all_issuances.extend(issuances)
+
+    issuances = pd.json_normalize(all_issuances).rename(
+        columns={'issued_quantity': 'quantity', 'issuance_date': 'date'}
+    )
+    issuances['transaction_type'] = 'issuance'
+    # add CDC- prefix to project IDs
+    retirements['project_id'] = retirements['project_id'].apply(lambda x: f'CDC-{x}')
+    retirements['transaction_type'] = 'retirement'
+
+    column_mapping = load_column_mapping(
+        registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
+    )
+
+    columns = {v: k for k, v in column_mapping.items()}
+
+    df = pd.concat([issuances, retirements]).reset_index(drop=True).rename(columns=columns)
+    data = (
+        df.set_registry(registry_name=registry_name)
+        .convert_to_datetime(columns=['transaction_date'])
+        .validate(schema=credit_without_id_schema)
+    )
+    return data
+
+
+@pf.register_dataframe_method
 def process_cercarbono_projects(
     df: pd.DataFrame, registry_name: str = 'cercarbono', prefix: str = 'CDC'
 ) -> pd.DataFrame:
@@ -72,7 +130,9 @@ def process_cercarbono_projects(
     type_category_mapping = load_type_category_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
     df = df.copy()
-    df['country'] = df.locations.map(lambda x: x[0]['country'])
+    df['country'] = df.locations.map(
+        lambda x: x[0]['country']
+    )  # extract country from locations by taking first entry
 
     data = (
         df.rename(columns=inverted_column_mapping)
