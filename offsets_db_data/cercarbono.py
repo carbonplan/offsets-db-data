@@ -110,7 +110,10 @@ def process_cercarbono_transactions(
 
 @pf.register_dataframe_method
 def process_cercarbono_projects(
-    df: pd.DataFrame, registry_name: str = 'cercarbono', prefix: str = 'CDC'
+    df: pd.DataFrame,
+    *,
+    credits: pd.DataFrame,
+    registry_name: str = 'cercarbono',
 ) -> pd.DataFrame:
     """Process Cercarbono projects dataframe to conform to offsets-db schema.
 
@@ -120,8 +123,7 @@ def process_cercarbono_projects(
         Input dataframe containing Cercarbono project data.
     registry_name : str, optional
         Name of the registry to be added to the dataframe, by default "cercarbon
-    prefix : str, optional
-        Prefix to standardize project IDs, by default 'CDC'
+
 
     Returns
     -------
@@ -156,6 +158,8 @@ def process_cercarbono_projects(
         )  # must come after types; type -> category
         .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
         .add_is_compliance_flag()
+        .add_retired_and_issued_totals(credits=credits)
+        .add_first_issuance_and_retirement_dates(credits=credits)
         .add_missing_columns(schema=project_schema)
         .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])
         .validate(schema=project_schema)
