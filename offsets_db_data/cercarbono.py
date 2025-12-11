@@ -102,6 +102,7 @@ def process_cercarbono_transactions(
     data = (
         df.set_registry(registry_name=registry_name)
         .convert_to_datetime(columns=['transaction_date'], format='ISO8601')
+        .add_missing_columns(schema=credit_without_id_schema)
         .validate(schema=credit_without_id_schema)
     )
     return data
