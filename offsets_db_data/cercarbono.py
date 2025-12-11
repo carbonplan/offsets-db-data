@@ -26,6 +26,25 @@ from offsets_db_data.projects import (
 
 
 @pf.register_dataframe_method
+def add_cercarbono_project_url(df: pd.DataFrame) -> pd.DataFrame:
+    """Add project URL column for Cercarbono projects.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe containing Cercarbono project data.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe with added project URL column.
+    """
+    base_url = 'https://www.ecoregistry.io/projects'
+    df['project_url'] = df['project_id'].apply(lambda x: f'{base_url}/{x}')
+    return df
+
+
+@pf.register_dataframe_method
 def process_cercarbono_projects(
     df: pd.DataFrame, registry_name: str = 'cercarbono', prefix: str = 'CDC'
 ) -> pd.DataFrame:
@@ -53,10 +72,12 @@ def process_cercarbono_projects(
     type_category_mapping = load_type_category_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
     df = df.copy()
+    df['country'] = df.locations.map(lambda x: x[0]['country'])
 
     data = (
         df.rename(columns=inverted_column_mapping)
         .set_registry(registry_name=registry_name)
+        .add_cercarbono_project_url()
         .harmonize_country_names()
         .harmonize_status_codes()
         .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
