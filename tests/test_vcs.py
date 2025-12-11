@@ -443,9 +443,7 @@ def test_add_vcs_compliance_projects(vcs_projects):
 
 def test_process_vcs_projects(vcs_projects, vcs_transactions):
     vcs_credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
-    df = process_vcs_projects(
-        vcs_projects, credits=vcs_credits, registry_name='verra', download_type='projects'
-    )
+    df = process_vcs_projects(vcs_projects, credits=vcs_credits, registry_name='verra')
 
     assert 'listed_at' in df.columns
     # check project_url series
@@ -477,7 +475,7 @@ def test_process_vcs_projects_with_totals_and_dates(vcs_projects, vcs_transactio
 
     # Process the vcs_projects
     processed_projects = process_vcs_projects(
-        vcs_projects, credits=vcs_credits, registry_name='verra', download_type='projects'
+        vcs_projects, credits=vcs_credits, registry_name='verra'
     )
 
     # Assertions for retired and issued totals, and first issuance/retirement dates
