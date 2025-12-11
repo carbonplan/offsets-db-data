@@ -5,6 +5,7 @@
     "cercarbono": null,
     "climate-action-reserve": "Project Site Country",
     "gold-standard": "Country",
+    "isometric": "location.country_name",
     "verra": "Country/Area"
   },
   "listed_at": {
@@ -13,6 +14,7 @@
     "cercarbono": null,
     "climate-action-reserve": "Project Listed Date",
     "gold-standard": null,
+    "isometric": null,
     "verra": null
   },
   "name": {
@@ -21,6 +23,7 @@
     "cercarbono": "name",
     "climate-action-reserve": "Project Name",
     "gold-standard": "Project Name",
+    "isometric": "name",
     "verra": "Name"
   },
   "original_protocol": {
@@ -29,6 +32,7 @@
     "cercarbono": "evaluation_criteria",
     "climate-action-reserve": "Project Type",
     "gold-standard": "Methodology",
+    "isometric": "protocol_slug",
     "verra": "Methodology"
   },
   "project_id": {
@@ -37,6 +41,7 @@
     "cercarbono": "code",
     "climate-action-reserve": "Project ID",
     "gold-standard": "GSID",
+    "isometric": "short_code",
     "verra": "ID"
   },
   "proponent": {
@@ -45,6 +50,7 @@
     "cercarbono": "owner",
     "climate-action-reserve": "Project Owner",
     "gold-standard": "Project Developer Name",
+    "isometric": "supplier.organisation.name",
     "verra": "Proponent"
   },
   "status": {
@@ -53,6 +59,7 @@
     "cercarbono": "stage",
     "climate-action-reserve": "Status",
     "gold-standard": "Status",
+    "isometric": "status",
     "verra": "Status"
   }
 }
