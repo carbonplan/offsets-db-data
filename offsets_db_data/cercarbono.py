@@ -82,6 +82,11 @@ def process_cercarbono_transactions(
     issuances = pd.json_normalize(all_issuances).rename(
         columns={'issued_quantity': 'quantity', 'issuance_date': 'date'}
     )
+    # Extract vintage year from the last date in vintage_of_credits (format: "YYYY-MM-DD / YYYY-MM-DD")
+    # TODO: @badgley, please confirm this is the correct way to extract vintage year for issuances
+    issuances['vintage'] = (
+        issuances['vintage_of_credits'].str.split(' / ').str[-1].str[:4].astype(int)
+    )
     issuances['transaction_type'] = 'issuance'
     # add CDC- prefix to project IDs
     retirements['project_id'] = retirements['project_id'].apply(lambda x: f'CDC-{x}')
