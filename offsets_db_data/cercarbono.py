@@ -96,7 +96,7 @@ def process_cercarbono_transactions(
     df = pd.concat([issuances, retirements]).reset_index(drop=True).rename(columns=columns)
     data = (
         df.set_registry(registry_name=registry_name)
-        .convert_to_datetime(columns=['transaction_date'])
+        .convert_to_datetime(columns=['transaction_date'], format='ISO8601')
         .validate(schema=credit_without_id_schema)
     )
     return data
