@@ -141,7 +141,7 @@
       "vintage": null
     },
     "retirements": {
-      "project_id": "project_id",
+      "project_id": null,
       "quantity": "credit_batch_size_total.credits",
       "retirement_account": "owner.name",
       "retirement_beneficiary": "beneficiary.name",

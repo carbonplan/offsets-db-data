@@ -1,3 +1,5 @@
+import contextlib
+
 import pandas as pd
 import pandas_flavor as pf
 
@@ -45,6 +47,28 @@ def add_isometric_project_url(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def get_project_id(credit_batches):
+    project_ids = list(
+        set({batch.get('project_id') for batch in credit_batches if batch.get('project_id')})
+    )
+    if len(project_ids) == 1:
+        return project_ids[0]
+    else:
+        raise ValueError(f'found multiple project_ids: {project_ids}')
+
+
+def get_vintage_year(credit_batches):
+    """Extract vintage years from credit batches."""
+    vintage_years = set()
+    for batch in credit_batches:
+        if sequestered_on := batch.get('sequestered_on'):
+            # sequestered_on is in format "2023-12-25"
+            with contextlib.suppress(ValueError, IndexError):
+                year = int(sequestered_on.split('-')[0])
+                vintage_years.add(year)
+    return min(vintage_years, default=None)
+
+
 @pf.register_dataframe_method
 def process_isometric_credits(
     df: pd.DataFrame, *, download_type: str, registry_name: str = 'isometric'
@@ -67,6 +91,10 @@ def process_isometric_credits(
 
     columns = {v: k for k, v in column_mapping.items()}
     df = df.copy()
+
+    if download_type == 'retirements':
+        df['project_id'] = df['credit_batches'].apply(get_project_id)
+        df['vintage'] = df['credit_batches'].apply(get_vintage_year)
 
     if not df.empty:
         data = (
