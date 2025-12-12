@@ -69,7 +69,13 @@ def process_isometric_credits(
     df = df.copy()
 
     if not df.empty:
-        data = df.rename(columns=columns).set_registry(registry_name=registry_name)
+        data = (
+            df.rename(columns=columns)
+            .set_registry(registry_name=registry_name)
+            .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
+            .add_missing_columns(schema=credit_without_id_schema)
+            .validate(schema=credit_without_id_schema)
+        )
 
     else:
         data = (
