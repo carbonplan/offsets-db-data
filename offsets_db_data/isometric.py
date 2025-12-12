@@ -3,7 +3,9 @@ import pandas_flavor as pf
 
 from offsets_db_data.common import (
     BERKELEY_PROJECT_TYPE_UPATH,
+    CREDIT_SCHEMA_UPATH,
     PROJECT_SCHEMA_UPATH,
+    load_column_mapping,
     load_inverted_protocol_mapping,
     load_registry_project_column_mapping,
     load_type_category_mapping,
@@ -13,7 +15,7 @@ from offsets_db_data.credits import (
     filter_and_merge_transactions,  # noqa: F401
     merge_with_arb,  # noqa: F401
 )
-from offsets_db_data.models import project_schema
+from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.projects import (
     add_category,  # noqa: F401
     add_first_issuance_and_retirement_dates,  # noqa: F401
@@ -41,6 +43,43 @@ def add_isometric_project_url(df: pd.DataFrame) -> pd.DataFrame:
     """
     df['project_url'] = df['url']
     return df
+
+
+@pf.register_dataframe_method
+def process_isometric_credits(
+    df: pd.DataFrame, *, download_type: str, registry_name: str = 'isometric'
+) -> pd.DataFrame:
+    """Process Isometric credits dataframe to conform to offsets-db schema.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe containing Isometric credit transactions data.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe conforming to offsets-db credit schema.
+    """
+    column_mapping = load_column_mapping(
+        registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
+    )
+
+    columns = {v: k for k, v in column_mapping.items()}
+    df = df.copy()
+
+    if not df.empty:
+        data = df.rename(columns=columns).set_registry(registry_name=registry_name)
+
+    else:
+        data = (
+            pd.DataFrame(columns=credit_without_id_schema.columns.keys())
+            .add_missing_columns(schema=credit_without_id_schema)
+            .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
+            .add_missing_columns(schema=credit_without_id_schema)
+            .validate(schema=credit_without_id_schema)
+        )
+    return data
 
 
 @pf.register_dataframe_method

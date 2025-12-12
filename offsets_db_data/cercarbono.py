@@ -47,7 +47,7 @@ def add_cercarbono_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def process_cercarbono_transactions(
+def process_cercarbono_credits(
     projects: pd.DataFrame,
     retirements: pd.DataFrame,
     download_type: str = 'retirements',
