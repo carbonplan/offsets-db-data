@@ -63,6 +63,18 @@
       "vintage": "Vintage"
     }
   },
+  "cercarbono": {
+    "retirements": {
+      "project_id": null,
+      "quantity": null,
+      "retirement_account": null,
+      "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "date",
+      "vintage": "vintage"
+    }
+  },
   "climate-action-reserve": {
     "cancellations": {
       "project_id": "Project ID",
@@ -115,6 +127,28 @@
       "retirement_reason": null,
       "transaction_date": "Retirement Date",
       "vintage": "Vintage"
+    }
+  },
+  "isometric": {
+    "issuances": {
+      "project_id": "project_id",
+      "quantity": "credit_batch_size_total.credits",
+      "retirement_account": null,
+      "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "issued_at",
+      "vintage": null
+    },
+    "retirements": {
+      "project_id": null,
+      "quantity": "credit_batch_size_total.credits",
+      "retirement_account": "owner.name",
+      "retirement_beneficiary": "beneficiary.name",
+      "retirement_note": "notes",
+      "retirement_reason": "purposes",
+      "transaction_date": "retired_at",
+      "vintage": null
     }
   },
   "verra": {
