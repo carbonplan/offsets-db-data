@@ -92,12 +92,14 @@ def process_isometric_credits(
     columns = {v: k for k, v in column_mapping.items()}
     df = df.copy()
 
-    if download_type == 'retirements':
-        df['project_id'] = df['credit_batches'].apply(get_project_id)
-        df['vintage'] = df['credit_batches'].apply(get_vintage_year)
-
     if not df.empty:
-        data = (
+        if download_type == 'issuances':
+            df['transaction_type'] = 'issuance'
+        elif download_type == 'retirements':
+            df['project_id'] = df['credit_batches'].apply(get_project_id)
+            df['vintage'] = df['credit_batches'].apply(get_vintage_year)
+            df['transaction_type'] = 'retirement'
+        return (
             df.rename(columns=columns)
             .set_registry(registry_name=registry_name)
             .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
@@ -106,14 +108,13 @@ def process_isometric_credits(
         )
 
     else:
-        data = (
+        return (
             pd.DataFrame(columns=credit_without_id_schema.columns.keys())
             .add_missing_columns(schema=credit_without_id_schema)
             .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
             .add_missing_columns(schema=credit_without_id_schema)
             .validate(schema=credit_without_id_schema)
         )
-    return data
 
 
 @pf.register_dataframe_method
