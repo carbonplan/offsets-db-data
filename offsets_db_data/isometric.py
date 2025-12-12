@@ -165,8 +165,8 @@ def process_isometric_projects(
             type_category_mapping=type_category_mapping
         )  # must come after types; type -> category
         .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
-        # .add_retired_and_issued_totals(credits=credits)
-        # .add_first_issuance_and_retirement_dates(credits=credits)
+        .add_retired_and_issued_totals(credits=credits)
+        .add_first_issuance_and_retirement_dates(credits=credits)
         .add_missing_columns(schema=project_schema)
         .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])
         .validate(schema=project_schema)
