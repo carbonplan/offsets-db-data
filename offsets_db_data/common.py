@@ -54,7 +54,9 @@ def load_inverted_protocol_mapping() -> dict:
     return store
 
 
-def load_column_mapping(*, registry_name: str, download_type: str, mapping_path: str) -> dict:
+def load_column_mapping(
+    *, registry_name: str, download_type: str, mapping_path: upath.UPath | str
+) -> dict:
     with open(mapping_path) as f:
         registry_credit_column_mapping = json.load(f)
     return registry_credit_column_mapping[registry_name][download_type]
