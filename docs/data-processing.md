@@ -77,10 +77,11 @@ Some properties either aren't included in the raw data or inferring their value 
 In these cases, a `null` value is recorded in the column mapping files and the property is populated using registry-specific logic.
 
 ## Project boundaries
+
 OffsetsDB contains information about project boundaries for a subset of forest offset projects, making use of an open source dataset described in [Karnik et al., 2025](https://doi.org/10.1038/s41597-025-04868-2).
 The original dataset includes the boundaries of 537 forest offset projects.
 However, some of those boundaries are i) for projects listed at offset registries not currently included in OffsetsDB or ii) reported as a single geographic point (or collection of points), as opposed to a polygon.
-We exclude those geometries from OffsetsDB, which leaves 500 projects for which we report boundary information.  
+We exclude those geometries from OffsetsDB, which leaves 500 projects for which we report boundary information.
 
 ## Protocol Mapping
 
