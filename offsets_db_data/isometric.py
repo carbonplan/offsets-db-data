@@ -1,5 +1,3 @@
-import contextlib
-
 import pandas as pd
 import pandas_flavor as pf
 
@@ -47,26 +45,24 @@ def add_isometric_project_url(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def get_project_id(credit_batches):
-    project_ids = list(
-        set({batch.get('project_id') for batch in credit_batches if batch.get('project_id')})
-    )
-    if len(project_ids) == 1:
-        return project_ids[0]
-    else:
-        raise ValueError(f'found multiple project_ids: {project_ids}')
+@pf.register_dataframe_method
+def add_isometric_project_id(df: pd.DataFrame, prefix: str = 'ISO') -> pd.DataFrame:
+    """Add project ID column for Isometric credits dataframe.
 
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe containing Isometric credit transactions data.
 
-def get_vintage_year(credit_batches):
-    """Extract vintage years from credit batches."""
-    vintage_years = set()
-    for batch in credit_batches:
-        if sequestered_on := batch.get('sequestered_on'):
-            # sequestered_on is in format "2023-12-25"
-            with contextlib.suppress(ValueError, IndexError):
-                year = int(sequestered_on.split('-')[0])
-                vintage_years.add(year)
-    return min(vintage_years, default=None)
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe with added project ID column.
+    """
+    df = df.copy()
+    df['project_id'] = prefix + df['project_id'].astype(str)
+
+    return df
 
 
 @pf.register_dataframe_method
@@ -96,7 +92,8 @@ def process_isometric_credits(
         if download_type == 'issuances':
             df['transaction_type'] = 'issuance'
         elif download_type == 'retirements':
-            df['vintage'] = df['credit_batches'].apply(get_vintage_year)
+            df = df.convert_to_datetime(columns=['sequestered_on'])
+            df['sequestered_on'] = df['sequestered_on'].dt.year
             df['transaction_type'] = 'retirement'
         return (
             df.rename(columns=columns)
@@ -153,6 +150,7 @@ def process_isometric_projects(
     data = (
         df.rename(columns=inverted_column_mapping)
         .set_registry(registry_name=registry_name)
+        .add_isometric_project_id()
         .add_isometric_project_url()
         .harmonize_country_names()
         .harmonize_status_codes()

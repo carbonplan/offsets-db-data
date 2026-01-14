@@ -41,7 +41,7 @@
     "cercarbono": "code",
     "climate-action-reserve": "Project ID",
     "gold-standard": "GSID",
-    "isometric": "id",
+    "isometric": "short_code",
     "verra": "ID"
   },
   "proponent": {

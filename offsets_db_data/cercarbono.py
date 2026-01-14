@@ -47,6 +47,25 @@ def add_cercarbono_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
+def add_cercarbono_project_id(df: pd.DataFrame, prefix: str = 'CCB') -> pd.DataFrame:
+    """Add project ID column for Cercarbono credits dataframe.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe containing Cercarbono credit transactions data.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe with added project ID column.
+    """
+    df = df.copy()
+    df['project_id'] = prefix + df['project_id'].astype(str).str.split('-').str[-1]
+    return df
+
+
+@pf.register_dataframe_method
 def process_cercarbono_credits(
     projects: pd.DataFrame,
     retirements: pd.DataFrame,
@@ -72,7 +91,7 @@ def process_cercarbono_credits(
         Processed dataframe conforming to offsets-db schema.
     """
     all_issuances = []
-    for idx, row in projects.iterrows():
+    for _, row in projects.iterrows():
         issuances = row['serials']
         for issuance in issuances:
             issuance['project_id'] = row['code']
@@ -145,6 +164,7 @@ def process_cercarbono_projects(
     data = (
         df.rename(columns=inverted_column_mapping)
         .set_registry(registry_name=registry_name)
+        .add_cercarbono_project_id()
         .add_cercarbono_project_url()
         .harmonize_country_names()
         .harmonize_status_codes()

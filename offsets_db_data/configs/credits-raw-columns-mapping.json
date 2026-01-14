@@ -142,13 +142,13 @@
     },
     "retirements": {
       "project_id": "project_id",
-      "quantity": "credit_batch_size_total.credits",
+      "quantity": "size.credits",
       "retirement_account": "owner.name",
       "retirement_beneficiary": "beneficiary.name",
-      "retirement_note": "notes",
-      "retirement_reason": "purposes",
+      "retirement_note": null,
+      "retirement_reason": null,
       "transaction_date": "retired_at",
-      "vintage": null
+      "vintage": "sequestered_on"
     }
   },
   "verra": {
@@ -160,7 +160,7 @@
       "retirement_note": "Retirement Details",
       "retirement_reason": "Retirement Reason",
       "transaction_date": null,
-      "vintage": null
+      "vintage": "null"
     }
   }
 }
