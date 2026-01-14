@@ -96,7 +96,6 @@ def process_isometric_credits(
         if download_type == 'issuances':
             df['transaction_type'] = 'issuance'
         elif download_type == 'retirements':
-            df['project_id'] = df['credit_batches'].apply(get_project_id)
             df['vintage'] = df['credit_batches'].apply(get_vintage_year)
             df['transaction_type'] = 'retirement'
         return (
