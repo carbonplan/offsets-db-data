@@ -12,7 +12,7 @@ from offsets_db_data.common import (
 )
 from offsets_db_data.credits import (
     aggregate_issuance_transactions,  # noqa: F401
-    filter_and_merge_transactions,  # noqa: F401
+    harmonize_beneficiary_data,  # noqa: F401
     merge_with_arb,  # noqa: F401
 )
 from offsets_db_data.models import credit_without_id_schema, project_schema
@@ -72,6 +72,7 @@ def process_cercarbono_credits(
     download_type: str,
     registry_name: str = 'cercarbono',
     prefix: str = 'CCB',
+    harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
     """Process Cercarbono transactions dataframe to conform to offsets-db schema.
 
@@ -115,6 +116,11 @@ def process_cercarbono_credits(
         .add_missing_columns(schema=credit_without_id_schema)
         .validate(schema=credit_without_id_schema)
     )
+
+    if harmonize_beneficiary_info:
+        data = data.pipe(
+            harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
+        )
     return data
 
 
