@@ -98,29 +98,7 @@ def process_isometric_credits(
     if prj_id_to_short_code is not None:
         df['project_id'] = prefix + df['project_id'].map(prj_id_to_short_code)
 
-    if not df.empty:
-        if download_type == 'issuances':
-            df['transaction_type'] = 'issuance'
-        elif download_type == 'retirements':
-            df = df.convert_to_datetime(columns=['sequestered_on'])
-            df['sequestered_on'] = df['sequestered_on'].dt.year
-            df['transaction_type'] = 'retirement'
-        data = (
-            df.rename(columns=columns)
-            .set_registry(registry_name=registry_name)
-            .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
-            .add_missing_columns(schema=credit_without_id_schema)
-            .validate(schema=credit_without_id_schema)
-        )
-
-        if harmonize_beneficiary_info:
-            data = data.pipe(
-                harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
-            )
-
-        return data
-
-    else:
+    if df.empty:
         return (
             pd.DataFrame(columns=credit_without_id_schema.columns.keys())
             .add_missing_columns(schema=credit_without_id_schema)
@@ -128,6 +106,26 @@ def process_isometric_credits(
             .add_missing_columns(schema=credit_without_id_schema)
             .validate(schema=credit_without_id_schema)
         )
+    if download_type == 'issuances':
+        df['transaction_type'] = 'issuance'
+    elif download_type == 'retirements':
+        df = df.convert_to_datetime(columns=['sequestered_on'])
+        df['sequestered_on'] = df['sequestered_on'].dt.year
+        df['transaction_type'] = 'retirement'
+    data = (
+        df.rename(columns=columns)
+        .set_registry(registry_name=registry_name)
+        .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
+        .add_missing_columns(schema=credit_without_id_schema)
+        .validate(schema=credit_without_id_schema)
+    )
+
+    if harmonize_beneficiary_info:
+        data = data.pipe(
+            harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
+        )
+
+    return data
 
 
 @pf.register_dataframe_method
