@@ -67,49 +67,40 @@ def add_cercarbono_project_id(df: pd.DataFrame, prefix: str = 'CCB') -> pd.DataF
 
 @pf.register_dataframe_method
 def process_cercarbono_credits(
-    projects: pd.DataFrame,
-    retirements: pd.DataFrame,
-    download_type: str = 'retirements',
+    df: pd.DataFrame,
+    *,
+    download_type: str,
     registry_name: str = 'cercarbono',
+    prefix: str = 'CCB',
 ) -> pd.DataFrame:
     """Process Cercarbono transactions dataframe to conform to offsets-db schema.
 
     Parameters
     ----------
-    projects : pd.DataFrame
-        Input dataframe containing Cercarbono project data.
-    retirements : pd.DataFrame
-        Input dataframe containing Cercarbono retirement data.
+    df : pd.DataFrame
+        Input dataframe containing Cercarbono credit transactions data.
     download_type : str, optional
-        Type of data to download, by default "retirements"
+        Type of data to download, either 'issuances' or 'retirements'.
     registry_name : str, optional
         Name of the registry to be added to the dataframe, by default "cercarbono"
+    prefix : str, optional
+        Prefix to add to project IDs, by default "CCB"
 
     Returns
     -------
     pd.DataFrame
         Processed dataframe conforming to offsets-db schema.
     """
-    all_issuances = []
-    for _, row in projects.iterrows():
-        issuances = row['serials']
-        for issuance in issuances:
-            issuance['project_id'] = row['code']
-            issuance['name'] = row['name']
-        all_issuances.extend(issuances)
 
-    issuances = pd.json_normalize(all_issuances).rename(
-        columns={'issued_quantity': 'quantity', 'issuance_date': 'date'}
-    )
-    # Extract vintage year from the last date in vintage_of_credits (format: "YYYY-MM-DD / YYYY-MM-DD")
-    # TODO: @badgley, please confirm this is the correct way to extract vintage year for issuances
-    issuances['vintage'] = (
-        issuances['vintage_of_credits'].str.split(' / ').str[-1].str[:4].astype(int)
-    )
-    issuances['transaction_type'] = 'issuance'
-    # add CDC- prefix to project IDs
-    retirements['project_id'] = retirements['project_id'].apply(lambda x: f'CDC-{x}')
-    retirements['transaction_type'] = 'retirement'
+    if download_type == 'issuances':
+        # TODO: @badgley, please confirm this is the correct way to extract vintage year for issuances
+        df['vintage'] = df['vintage_of_credits'].str.split(' / ').str[-1].str[:4].astype(int)
+        df['transaction_type'] = 'issuance'
+        df['project_id'] = prefix + df.serial.str.split('_').str[1]
+
+    else:
+        df['project_id'] = prefix + df['project_id'].astype(str)
+        df['transaction_type'] = 'retirement'
 
     column_mapping = load_column_mapping(
         registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
@@ -117,9 +108,9 @@ def process_cercarbono_credits(
 
     columns = {v: k for k, v in column_mapping.items()}
 
-    df = pd.concat([issuances, retirements]).reset_index(drop=True).rename(columns=columns)
     data = (
-        df.set_registry(registry_name=registry_name)
+        df.rename(columns=columns)
+        .set_registry(registry_name=registry_name)
         .convert_to_datetime(columns=['transaction_date'], format='ISO8601')
         .add_missing_columns(schema=credit_without_id_schema)
         .validate(schema=credit_without_id_schema)

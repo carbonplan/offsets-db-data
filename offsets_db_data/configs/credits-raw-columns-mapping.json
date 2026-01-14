@@ -64,11 +64,21 @@
     }
   },
   "cercarbono": {
-    "retirements": {
+    "issuances": {
       "project_id": null,
-      "quantity": null,
+      "quantity": "issued_quantity",
       "retirement_account": null,
       "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "issuance_date",
+      "vintage": null
+    },
+    "retirements": {
+      "project_id": "project_id",
+      "quantity": "quantity",
+      "retirement_account": null,
+      "retirement_beneficiary": "end_user",
       "retirement_note": null,
       "retirement_reason": null,
       "transaction_date": "date",
