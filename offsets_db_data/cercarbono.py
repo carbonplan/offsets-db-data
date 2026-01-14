@@ -164,8 +164,8 @@ def process_cercarbono_projects(
     data = (
         df.rename(columns=inverted_column_mapping)
         .set_registry(registry_name=registry_name)
+        .add_cercarbono_project_url()  # this must be called before adding project id because the url function uses the original project_id value
         .add_cercarbono_project_id()
-        .add_cercarbono_project_url()
         .harmonize_country_names()
         .harmonize_status_codes()
         .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
