@@ -67,7 +67,12 @@ def add_isometric_project_id(df: pd.DataFrame, prefix: str = 'ISO') -> pd.DataFr
 
 @pf.register_dataframe_method
 def process_isometric_credits(
-    df: pd.DataFrame, *, download_type: str, registry_name: str = 'isometric'
+    df: pd.DataFrame,
+    *,
+    download_type: str,
+    prj_id_to_short_code: dict | None = None,
+    registry_name: str = 'isometric',
+    prefix: str = 'ISO',
 ) -> pd.DataFrame:
     """Process Isometric credits dataframe to conform to offsets-db schema.
 
@@ -87,6 +92,9 @@ def process_isometric_credits(
 
     columns = {v: k for k, v in column_mapping.items()}
     df = df.copy()
+    # Add project ID with prefix using the prj_id_to_short_code mapping if provided
+    if prj_id_to_short_code is not None:
+        df['project_id'] = prefix + df['project_id'].map(prj_id_to_short_code)
 
     if not df.empty:
         if download_type == 'issuances':
