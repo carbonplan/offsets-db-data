@@ -2,50 +2,64 @@
   "country": {
     "american-carbon-registry": "Project Site Country",
     "art-trees": "Program  Country",
+    "cercarbono": null,
     "climate-action-reserve": "Project Site Country",
     "gold-standard": "Country",
+    "isometric": "location.country_name",
     "verra": "Country/Area"
   },
   "listed_at": {
     "american-carbon-registry": null,
     "art-trees": null,
+    "cercarbono": null,
     "climate-action-reserve": "Project Listed Date",
     "gold-standard": null,
+    "isometric": null,
     "verra": null
   },
   "name": {
     "american-carbon-registry": "Project Name",
     "art-trees": "Program Name",
+    "cercarbono": "name",
     "climate-action-reserve": "Project Name",
     "gold-standard": "Project Name",
+    "isometric": "name",
     "verra": "Name"
   },
   "original_protocol": {
     "american-carbon-registry": "Project Methodology/Protocol",
     "art-trees": null,
+    "cercarbono": "evaluation_criteria",
     "climate-action-reserve": "Project Type",
     "gold-standard": "Methodology",
+    "isometric": "protocol_slug",
     "verra": "Methodology"
   },
   "project_id": {
     "american-carbon-registry": "Project ID",
     "art-trees": "Program ID",
+    "cercarbono": "code",
     "climate-action-reserve": "Project ID",
     "gold-standard": "GSID",
+    "isometric": "short_code",
     "verra": "ID"
   },
   "proponent": {
     "american-carbon-registry": null,
     "art-trees": "Sovereign Program Developer",
+    "cercarbono": "owner",
     "climate-action-reserve": "Project Owner",
     "gold-standard": "Project Developer Name",
+    "isometric": "supplier.organisation.name",
     "verra": "Proponent"
   },
   "status": {
     "american-carbon-registry": null,
     "art-trees": "Status",
+    "cercarbono": "stage",
     "climate-action-reserve": "Status",
     "gold-standard": "Status",
+    "isometric": "status",
     "verra": "Status"
   }
 }

@@ -63,6 +63,28 @@
       "vintage": "Vintage"
     }
   },
+  "cercarbono": {
+    "issuances": {
+      "project_id": null,
+      "quantity": "issued_quantity",
+      "retirement_account": null,
+      "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "issuance_date",
+      "vintage": null
+    },
+    "retirements": {
+      "project_id": "project_id",
+      "quantity": "quantity",
+      "retirement_account": null,
+      "retirement_beneficiary": "end_user",
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "date",
+      "vintage": "vintage"
+    }
+  },
   "climate-action-reserve": {
     "cancellations": {
       "project_id": "Project ID",
@@ -117,6 +139,28 @@
       "vintage": "Vintage"
     }
   },
+  "isometric": {
+    "issuances": {
+      "project_id": "project_id",
+      "quantity": "credit_batch_size_total.credits",
+      "retirement_account": null,
+      "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "issued_at",
+      "vintage": null
+    },
+    "retirements": {
+      "project_id": "project_id",
+      "quantity": "size.credits",
+      "retirement_account": "owner.name",
+      "retirement_beneficiary": "beneficiary.name",
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "retired_at",
+      "vintage": "sequestered_on"
+    }
+  },
   "verra": {
     "transactions": {
       "project_id": null,
@@ -126,7 +170,7 @@
       "retirement_note": "Retirement Details",
       "retirement_reason": "Retirement Reason",
       "transaction_date": null,
-      "vintage": null
+      "vintage": "null"
     }
   }
 }
