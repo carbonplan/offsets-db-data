@@ -351,7 +351,6 @@ def process_vcs_projects(
     *,
     credits: pd.DataFrame,
     registry_name: str = 'verra',
-    download_type: str = 'projects',
 ) -> pd.DataFrame:
     """
     Process Verra projects data, including renaming, adding, and validating columns, and merging with credits data.
