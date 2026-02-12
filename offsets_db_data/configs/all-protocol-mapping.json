@@ -211,7 +211,6 @@
   },
   "acm0006": {
     "category": "fuel-switching",
-    "sub-category": "biomass",
     "known-strings": [
       "ACM0002: Grid-connected electricity generation from renewable sources / ACM0006: Electricity and heat generation from biomass",
       "CDM - ACM0006: Electricity and heat generation from biomass",
@@ -221,6 +220,7 @@
       "ACM0006 Large-Scale Consolidated Methodology Electricity and heat generation from biomass [Version: 16.0]"
     ],
     "program": "cdm",
+    "sub-category": "biomass",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0006"
   },
   "acm0007": {
@@ -305,13 +305,13 @@
   },
   "acm0016": {
     "category": "energy-efficiency",
-    "sub-category": "transportation",
     "known-strings": [
       "ACM0016",
       "ACM0016 V5.0 - Mass rapid transit projects",
       "ACM0016: Mass Rapid Transit Projects --- Version 5.0"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "acm0017": {
     "category": "fuel-switching",
@@ -464,12 +464,12 @@
   },
   "acr-idling": {
     "category": "fuel-switching",
-    "sub-category": "transportation",
     "known-strings": [
       "Truck Stop Electrification",
       "Emissions Reductions though Anti-Idling Technologies"
     ],
     "program": "acr",
+    "sub-category": "transportation",
     "url": "https://americancarbonregistry.org/carbon-accounting/standards-methodologies/emission-reductions-through-truck-stop-electrification"
   },
   "acr-ifm-nonfed": {
@@ -645,9 +645,9 @@
   },
   "am0031": {
     "category": "energy-efficiency",
-    "sub-category": "transportation",
     "known-strings": ["AM0031"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "am0034": {
     "category": "ghg-management",
@@ -753,9 +753,9 @@
   },
   "am0090": {
     "category": "energy-efficiency",
-    "sub-category": "transportation",
     "known-strings": ["AM0090"],
     "program": "cdm",
+    "sub-category": "transportation",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AM0090"
   },
   "am0107": {
@@ -1031,9 +1031,9 @@
   },
   "ams-i-k": {
     "category": "renewable-energy",
-    "sub-category": "household",
     "known-strings": ["AMS-I.K. Solar cookers for households"],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "household"
   },
   "ams-i-l": {
     "category": "renewable-energy",
@@ -1162,7 +1162,6 @@
   },
   "ams-iii-aq": {
     "category": "fuel-switching",
-    "sub-category": "transportation",
     "known-strings": [
       "AMS-III.H.; AMS-III.AQ",
       "AMS-I.D.; AMS-III.D.; AMS-III.H.; AMS-III.O.; AMS-III.AQ",
@@ -1171,7 +1170,8 @@
       "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
       "AMS-III.D - Version 21.0, AMS-III.AQ. - Version 2.0"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "ams-iii-ar": {
     "category": "fuel-switching",
@@ -1205,13 +1205,13 @@
   },
   "ams-iii-av": {
     "category": "energy-efficiency",
-    "sub-category": "drinking-water",
     "known-strings": [
       "VMR0006; AMS-III.AV.",
       "AMS-III.AV.",
       "AMS-III.AV. Low greenhouse gas emitting water purification systems"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "drinking-water"
   },
   "ams-iii-b": {
     "category": "fuel-switching",
@@ -1237,12 +1237,12 @@
   },
   "ams-iii-bc": {
     "category": "energy-efficiency",
-    "sub-category": "transportation",
     "known-strings": [
       "AMS-III.BC.",
       "AMS-III.BC.: Emissions Reductions through Improved Efficiency of Vehicle Fleet"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "ams-iii-bd": {
     "category": "energy-efficiency",
@@ -1252,35 +1252,36 @@
   },
   "ams-iii-bg": {
     "category": "energy-efficiency",
-    "sub-category": "biomass",
     "known-strings": [
       "VMR0006; AMS-III.BG",
       "AMS-III.BG Emission reduction through sustainable charcoal production and consumption"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "biomass"
   },
   "ams-iii-bm": {
     "category": "energy-efficiency",
-    "sub-category": "transportation",
     "known-strings": [
       "AMS-III.BM",
       "AMS-III.BM: Lightweight two and three wheeled personal transportation version 1.0"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "ams-iii-c": {
     "category": "energy-efficiency",
-    "sub-category": "transportation",
     "known-strings": [
       "AMS-III.C. Emission reductions by electric and hybrid vehicles",
       "AMS-I.F.; AMS-III.C.",
       "AMS-III.C.; VM0038",
       "AMS-III.C."
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "ams-iii-d": {
     "category": "ghg-management",
+    "is_methane": true,
     "known-strings": [
       "AMS-I.D.; AMS-III.D.; AMS-III.H.; AMS-III.O.; AMS-III.AQ",
       "AMS-III.D. Methane recovery in animal manure management systems",
@@ -1307,7 +1308,6 @@
       "AMS-III.F.: Avoidance of methane emissions through composting - Ver12.0; AMS-III.D: Methane recovery in animal manure management systems Ver 21.0"
     ],
     "program": "cdm",
-    "is_methane": true,
     "sub-category": "livestock-methane",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_D"
   },
@@ -1346,6 +1346,7 @@
   },
   "ams-iii-g": {
     "category": "ghg-management",
+    "is_methane": true,
     "known-strings": [
       "AMS-III.G. Landfill methane recovery",
       "AMS-I.C.; AMS-III.G.",
@@ -1366,7 +1367,6 @@
       "AMS-III.G: “Landfill methane recovery” - Version 10.0; AMS-I.D: “Grid connected renewable electricity generation” - Version 18.0"
     ],
     "program": "cdm",
-    "is_methane": true,
     "sub-category": "landfill-methane"
   },
   "ams-iii-h": {
@@ -1458,21 +1458,21 @@
   },
   "ams-iii-s": {
     "category": "fuel-switching",
-    "sub-category": "transportation",
     "known-strings": [
       "AMS-I.F.; AMS-III.S.",
       "AMS-III.S.",
       "AMS-III.S. Introduction of low-emission vehicles/technologies to commercial vehicle fleets"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "ams-iii-u": {
     "category": "fuel-switching",
-    "sub-category": "transportation",
     "known-strings": [
       "AMS-III.U.: Cable Cars for Mass Rapid Transit System (MRTS)"
     ],
-    "program": "cdm"
+    "program": "cdm",
+    "sub-category": "transportation"
   },
   "ams-iii-y": {
     "category": "ghg-management",
@@ -1779,6 +1779,29 @@
     "sub-category": "waste-management",
     "url": "https://www.climateactionreserve.org/how/protocols/waste/organic-waste-digestion/"
   },
+  "ccb-redd": {
+    "category": "forest",
+    "known-strings": [
+      "CCB - M/LU-REDD+: Methodology for the Implementation of REDD+ Projects Consistent with National Reference Level"
+    ],
+    "program": "ccb",
+    "url": "https://www.cercarbono.com/wp-content/uploads/2023/01/REDD-Methodology-V-1.3.1.pdf"
+  },
+  "ccb-reforest": {
+    "category": "forest",
+    "known-strings": [
+      "CCB - M/UT/F-A01: Methodology To Implement GHG Removal Projects Through Reforestation, Forest Restoration and the Establishment of Woody Crop"
+    ],
+    "program": "ccb",
+    "url": "https://www.cercarbono.com/wp-content/uploads/2021/11/Forest-and-Woody-Crops-Methodology-V.1.1.pdf"
+  },
+  "ccb-renewables": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "CCB - M/E-ER01: Methodology for the realization of GHG emissions reduction projects by the use of renewable energy"
+    ],
+    "program": "ccb"
+  },
   "climate-leaders-landfill": {
     "category": "ghg-management",
     "is_methane": true,
@@ -1804,20 +1827,32 @@
     "program": "acr",
     "sub-category": "industrial-gases"
   },
-  "gs-shipping": {
-    "category": "energy-efficiency",
-    "sub-category": "transportation",
-    "known-strings": [
-      "GS Retrofit Energy Efficiency Measures in Shipping v2",
-      "GS Retrofit Energy Efficiency Measures in Shipping v1"
-    ],
-    "url": "https://globalgoals.goldstandard.org/standards/422_V2.0_EE_Shipping_Retrofit-Energy-Efficiency-Measures-in-Shipping.pdf"
-  },
   "gs-alt-coal": {
     "category": "energy-efficiency",
-    "sub-category": "cooking",
     "known-strings": ["GS Alternative Ignition Coal Fires v1."],
+    "sub-category": "cooking",
     "url": "https://www.goldstandard.org/sites/default/files/documents/alternative_ignition.pdf"
+  },
+  "gs-drinking-water": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "GS Methodology for emission reductions from safe drinking water supply"
+    ],
+    "sub-category": "drinking-water"
+  },
+  "gs-kitchen-cookstoves": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "Methodology for Improved Cook stoves and Kitchen Regimes v1.",
+      "GS Methodology for Improved Cook stoves and Kitchen Regimes v1.",
+      "GS Methodology for Improved Cook stoves and Kitchen Regimes v2."
+    ]
+  },
+  "gs-metered-cookstoves": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "Methodology for Metered & Measured Energy Cooking Devices"
+    ]
   },
   "gs-reforest": {
     "category": "forest",
@@ -1825,6 +1860,23 @@
       "Afforestation/Reforestation GHG Emissions Reduction & Sequestration Methodology"
     ],
     "url": "https://globalgoals.goldstandard.org/standards/403_V2.0_LUF_AR-Methodology-GHGs-emission-reduction-and-Sequestration-Methodology.pdf"
+  },
+  "gs-shipping": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "GS Retrofit Energy Efficiency Measures in Shipping v2",
+      "GS Retrofit Energy Efficiency Measures in Shipping v1"
+    ],
+    "sub-category": "transportation",
+    "url": "https://globalgoals.goldstandard.org/standards/422_V2.0_EE_Shipping_Retrofit-Energy-Efficiency-Measures-in-Shipping.pdf"
+  },
+  "gs-simplified-cookstoves": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "GS MS Simplified Methodology for Efficient Cookstoves v1.",
+      "GS MS Simplified Methodology for Efficient Cookstoves v1.1",
+      "The Gold Standard Simplified Methodology for Clean and Efficient Cookstoves, Version 3.0"
+    ]
   },
   "gs-tpddtec": {
     "category": "energy-efficiency",
@@ -1836,34 +1888,62 @@
       "GS TPDDTEC V4.0: REDUCED EMISSIONS FROM COOKING AND HEATING – TECHNOLOGIES AND PRACTICES TO DISPLACE DECENTRALIZED THERMAL ENERGY CONSUMPTION"
     ]
   },
-  "gs-kitchen-cookstoves": {
-    "category": "energy-efficiency",
-    "known-strings": [
-      "Methodology for Improved Cook stoves and Kitchen Regimes v1.",
-      "GS Methodology for Improved Cook stoves and Kitchen Regimes v1.",
-      "GS Methodology for Improved Cook stoves and Kitchen Regimes v2."
-    ]
+  "iso-bio-burial": {
+    "category": "biomass-cdr",
+    "known-strings": ["subsurface-biomass"],
+    "program": "iso"
   },
-  "gs-drinking-water": {
-    "category": "energy-efficiency",
-    "sub-category": "drinking-water",
-    "known-strings": [
-      "GS Methodology for emission reductions from safe drinking water supply"
-    ]
+  "iso-bio-ccs": {
+    "category": "biomass-cdr",
+    "known-strings": ["biogenic-capture-and-storage"],
+    "program": "iso"
   },
-  "gs-metered-cookstoves": {
-    "category": "energy-efficiency",
-    "known-strings": [
-      "Methodology for Metered & Measured Energy Cooking Devices"
-    ]
+  "iso-bio-geo": {
+    "category": "biomass-cdr",
+    "known-strings": ["biomass-geological-storage"],
+    "program": "iso",
+    "url": "https://isometric.com/pathways/biomass-geological-storage"
   },
-  "gs-simplified-cookstoves": {
-    "category": "energy-efficiency",
-    "known-strings": [
-      "GS MS Simplified Methodology for Efficient Cookstoves v1.",
-      "GS MS Simplified Methodology for Efficient Cookstoves v1.1",
-      "The Gold Standard Simplified Methodology for Clean and Efficient Cookstoves, Version 3.0"
-    ]
+  "iso-bio-oil": {
+    "category": "biomass-cdr",
+    "known-strings": ["bio-oil-geological-storage"],
+    "program": "iso"
+  },
+  "iso-biochar": {
+    "category": "biomass-cdr",
+    "known-strings": ["biochar"],
+    "program": "iso",
+    "url": "https://isometric.com/pathways/biochar"
+  },
+  "iso-dac": {
+    "category": "air-capture",
+    "known-strings": ["direct-air-capture"],
+    "program": "iso"
+  },
+  "iso-erw": {
+    "category": "alkalinity-cdr",
+    "known-strings": ["enhanced-weathering-agriculture"],
+    "program": "iso"
+  },
+  "iso-oae": {
+    "category": "alkalinity-cdr",
+    "known-strings": ["ocean-alkalinity-enhancement"],
+    "program": "iso"
+  },
+  "iso-refor": {
+    "category": "forest",
+    "known-strings": ["reforestation"],
+    "program": "iso"
+  },
+  "iso-river": {
+    "category": "alkalinity-cdr",
+    "known-strings": ["river-alkalinity-enhancement"],
+    "program": "iso"
+  },
+  "iso-wastewater": {
+    "category": "alkalinity-cdr",
+    "known-strings": ["wastewater-alkalinity-enhancement"],
+    "program": "iso"
   },
   "unknown": {
     "category": "unknown",
@@ -1931,9 +2011,9 @@
   },
   "vm0008": {
     "category": "energy-efficiency",
-    "sub-category": "weatherization",
     "known-strings": ["VM0008"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "weatherization"
   },
   "vm0009": {
     "category": "forest",
@@ -2004,9 +2084,9 @@
   },
   "vm0019": {
     "category": "fuel-switching",
-    "sub-category": "transportation",
     "known-strings": ["VM0019"],
-    "program": "vcs"
+    "program": "vcs",
+    "sub-category": "transportation"
   },
   "vm0021": {
     "known-strings": ["AMS-III.F.; VM0021", "VM0021"],
@@ -2066,9 +2146,9 @@
   },
   "vm0038": {
     "category": "fuel-switching",
-    "sub-category": "transportation",
     "known-strings": ["AMS-III.C.; VM0038", "VM0038"],
     "program": "vcs",
+    "sub-category": "transportation",
     "url": "https://verra.org/methodologies/vm0038-methodology-for-electric-vehicle-charging-systems-v1-0/"
   },
   "vm0039": {
@@ -2167,80 +2247,5 @@
     ],
     "program": "vcs",
     "url": "https://verra.org/methodologies/vmr0006-methodology-for-installation-of-high-efficiency-firewood-cookstoves/"
-  },
-  "ccb-redd": {
-    "category": "forest",
-    "known-strings": [
-      "CCB - M/LU-REDD+: Methodology for the Implementation of REDD+ Projects Consistent with National Reference Level"
-    ],
-    "program": "ccb",
-    "url": "https://www.cercarbono.com/wp-content/uploads/2023/01/REDD-Methodology-V-1.3.1.pdf"
-  },
-  "ccb-reforest": {
-    "category": "forest",
-    "known-strings": [
-      "CCB - M/UT/F-A01: Methodology To Implement GHG Removal Projects Through Reforestation, Forest Restoration and the Establishment of Woody Crop"
-    ],
-    "program": "ccb",
-    "url": "https://www.cercarbono.com/wp-content/uploads/2021/11/Forest-and-Woody-Crops-Methodology-V.1.1.pdf"
-  },
-  "ccb-renewables": {
-    "category": "renewable-energy",
-    "known-strings": [
-      "CCB - M/E-ER01: Methodology for the realization of GHG emissions reduction projects by the use of renewable energy"
-    ],
-    "program": "ccb"
-  },
-  "iso-biochar": {
-    "category": "biomass-cdr",
-    "known-strings": ["biochar"],
-    "program": "iso",
-    "url": "https://isometric.com/pathways/biochar"
-  },
-  "iso-erw": {
-    "category": "alkalinity-cdr",
-    "known-strings": ["enhanced-weathering-agriculture"],
-    "program": "iso"
-  },
-  "iso-dac": {
-    "category": "air-capture",
-    "known-strings": ["direct-air-capture"],
-    "program": "iso"
-  },
-  "iso-bio-oil": {
-    "category": "biomass-cdr",
-    "known-strings": ["bio-oil-geological-storage"],
-    "program": "iso"
-  },
-  "iso-bio-geo": {
-    "category": "biomass-cdr",
-    "known-strings": ["biomass-geological-storage"],
-    "program": "iso",
-    "url": "https://isometric.com/pathways/biomass-geological-storage"
-  },
-  "iso-wastewater": {
-    "category": "alkalinity-cdr",
-    "known-strings": ["wastewater-alkalinity-enhancement"],
-    "program": "iso"
-  },
-  "iso-river": {
-    "category": "alkalinity-cdr",
-    "known-strings": ["river-alkalinity-enhancement"],
-    "program": "iso"
-  },
-  "iso-bio-burial": {
-    "category": "biomass-cdr",
-    "known-strings": ["subsurface-biomass"],
-    "program": "iso"
-  },
-  "iso-bio-ccs": {
-    "category": "biomass-cdr",
-    "known-strings": ["biogenic-capture-and-storage"],
-    "program": "iso"
-  },
-  "iso-refor": {
-    "category": "forest",
-    "known-strings": ["reforestation"],
-    "program": "iso"
   }
 }

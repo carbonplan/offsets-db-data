@@ -302,5 +302,41 @@
   "wind": {
     "category": "renewable-energy",
     "project-type-display-name": "Wind"
+  },
+  "bio-oil": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Bio-Oil Storage"
+  },
+  "biomass geological storage": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Biomass Geological Storage"
+  },
+  "biomass burial": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Biomass Burial"
+  },
+  "biogenic ccs": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Biogenic CCS"
+  },
+  "direct air capture": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Direct Air Capture"
+  },
+  "enhanced weathering": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Enhanced Weathering"
+  },
+  "ocean alkalinity enhancement": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Ocean Alkalinity Enhancement"
+  },
+  "wastewater alkalinity enhancement": {
+    "category": "carbon-capture",
+    "project-type-display-name": "Wastewater Alkalinity Enhancement"
+  },
+  "river alkalinity enhancement": {
+    "category": "carbon-capture",
+    "project-type-display-name": "River Alkalinity Enhancement"
   }
 }
