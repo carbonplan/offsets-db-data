@@ -28,6 +28,41 @@ from offsets_db_data.projects import (
 
 
 @pf.register_dataframe_method
+def infer_cercarbono_project_type(df: pd.DataFrame) -> pd.DataFrame:
+    """Infer project types for Cercarbono projects based on protocol.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe containing Cercarbono project data with 'protocol' column.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe with inferred 'project_type' column.
+    """
+    # Mapping from Cercarbono protocol codes to project types
+    ccb_protocol_to_type = {
+        'ccb-redd': 'redd+',
+        'ccb-reforest': 'afforestation/reforestation',
+        'ccb-renewables': 're bundled',
+    }
+
+    df['project_type'] = 'unknown'
+    df['project_type_source'] = 'carbonplan'
+
+    # Map based on first protocol in list (protocols are stored as lists)
+    for idx, row in df.iterrows():
+        protocols = row.get('protocol', [])
+        if isinstance(protocols, list) and len(protocols) > 0:
+            first_protocol = protocols[0]
+            if first_protocol in ccb_protocol_to_type:
+                df.at[idx, 'project_type'] = ccb_protocol_to_type[first_protocol]
+
+    return df
+
+
+@pf.register_dataframe_method
 def add_cercarbono_project_url(df: pd.DataFrame) -> pd.DataFrame:
     """Add project URL column for Cercarbono projects.
 
@@ -166,7 +201,7 @@ def process_cercarbono_projects(
         .harmonize_country_names()
         .harmonize_status_codes()
         .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
-        .infer_project_type()
+        .infer_cercarbono_project_type()  # Use Cercarbono-specific inference
         .override_project_types(
             override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
         )
