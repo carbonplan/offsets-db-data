@@ -2,7 +2,7 @@ import typing
 
 import janitor  # noqa: F401
 import pandas as pd
-import pandera as pa
+import pandera.pandas as pa
 
 RegistryType = typing.Literal[
     'verra',
