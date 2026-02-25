@@ -24,7 +24,7 @@
     "project-type-display-name": "Bicycle"
   },
   "biochar": {
-    "category": "biochar",
+    "category": "biomass-cdr",
     "project-type-display-name": "Biochar"
   },
   "biodigesters": {
@@ -302,5 +302,21 @@
   "wind": {
     "category": "renewable-energy",
     "project-type-display-name": "Wind"
+  },
+  "biomass burial": {
+    "category": "biomass-cdr",
+    "project-type-display-name": "Biomass Burial"
+  },
+  "biomass injection": {
+    "category": "biomass-cdr",
+    "project-type-display-name": "Biomass Injection"
+  },
+  "direct air capture": {
+    "category": "air-capture",
+    "project-type-display-name": "Direct Air Capture"
+  },
+  "enhanced rock weathering": {
+    "category": "alkalinity-cdr",
+    "project-type-display-name": "Rock Weathering"
   }
 }
