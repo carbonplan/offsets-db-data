@@ -2247,5 +2247,80 @@
     ],
     "program": "vcs",
     "url": "https://verra.org/methodologies/vmr0006-methodology-for-installation-of-high-efficiency-firewood-cookstoves/"
+  },
+  "ccb-redd": {
+    "category": "forest",
+    "known-strings": [
+      "CCB - M/LU-REDD+: Methodology for the Implementation of REDD+ Projects Consistent with National Reference Level"
+    ],
+    "program": "ccb",
+    "url": "https://www.cercarbono.com/wp-content/uploads/2023/01/REDD-Methodology-V-1.3.1.pdf"
+  },
+  "ccb-refor": {
+    "category": "forest",
+    "known-strings": [
+      "CCB - M/UT/F-A01: Methodology To Implement GHG Removal Projects Through Reforestation, Forest Restoration and the Establishment of Woody Crop"
+    ],
+    "program": "ccb",
+    "url": "https://www.cercarbono.com/wp-content/uploads/2021/11/Forest-and-Woody-Crops-Methodology-V.1.1.pdf"
+  },
+  "ccb-renewables": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "CCB - M/E-ER01: Methodology for the realization of GHG emissions reduction projects by the use of renewable energy"
+    ],
+    "program": "ccb"
+  },
+  "iso-biochar": {
+    "category": "biomass-cdr",
+    "known-strings": ["biochar"],
+    "program": "iso",
+    "url": "https://isometric.com/pathways/biochar"
+  },
+  "iso-erw": {
+    "category": "alkalinity-cdr",
+    "known-strings": ["enhanced-weathering-agriculture"],
+    "program": "iso"
+  },
+  "iso-dac": {
+    "category": "air-capture",
+    "known-strings": ["direct-air-capture"],
+    "program": "iso"
+  },
+  "iso-bio-oil": {
+    "category": "biomass-cdr",
+    "known-strings": ["bio-oil-geological-storage"],
+    "program": "iso"
+  },
+  "iso-bio-geo": {
+    "category": "biomass-cdr",
+    "known-strings": ["biomass-geological-storage"],
+    "program": "iso",
+    "url": "https://isometric.com/pathways/biomass-geological-storage"
+  },
+  "iso-wastewater": {
+    "category": "alkalinity-cdr",
+    "known-strings": ["wastewater-alkalinity-enhancement"],
+    "program": "iso"
+  },
+  "iso-river": {
+    "category": "alkalinity-cdr",
+    "known-strings": ["river-alkalinity-enhancement"],
+    "program": "iso"
+  },
+  "iso-bio-burial": {
+    "category": "biomass-cdr",
+    "known-strings": ["subsurface-biomass"],
+    "program": "iso"
+  },
+  "iso-bio-ccs": {
+    "category": "biomass-cdr",
+    "known-strings": ["biogenic-capture-and-storage"],
+    "program": "iso"
+  },
+  "iso-refor": {
+    "category": "forest",
+    "known-strings": ["reforestation"],
+    "program": "iso"
   }
 }
