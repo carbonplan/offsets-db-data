@@ -213,7 +213,6 @@ def process_isometric_projects(
         .harmonize_country_names()
         .harmonize_status_codes()
         .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
-        .infer_isometric_project_type()  # Use Isometric-specific inference
         .override_project_types(
             override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
         )
