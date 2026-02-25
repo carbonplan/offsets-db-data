@@ -129,26 +129,48 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'project_type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'project_type'] = 'sustainable agriculture'
+    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'project_type'] = (
+        'sustainable agriculture'
+    )
     df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'project_type'] = 'redd+'
 
     df.loc[df.apply(lambda x: 'acm0001' in x['protocol'], axis=1), 'project_type'] = 'landfill'
     df.loc[df.apply(lambda x: 'acm0002' in x['protocol'], axis=1), 'project_type'] = 'natural gas'
 
-    df.loc[df.apply(lambda x: 'iso-refor' in x['protocol'], axis=1), 'project_type'] = 'afforestation/reforestation'
+    df.loc[df.apply(lambda x: 'iso-refor' in x['protocol'], axis=1), 'project_type'] = (
+        'afforestation/reforestation'
+    )
     df.loc[df.apply(lambda x: 'iso-biochar' in x['protocol'], axis=1), 'project_type'] = 'biochar'
-    df.loc[df.apply(lambda x: 'iso-bio-burial' in x['protocol'], axis=1), 'project_type'] = 'biomass burial'
-    df.loc[df.apply(lambda x: 'iso-bio-geo' in x['protocol'], axis=1), 'project_type'] = 'biomass injection'
-    df.loc[df.apply(lambda x: 'iso-bio-oil' in x['protocol'], axis=1), 'project_type'] = 'biomass injection'
-    df.loc[df.apply(lambda x: 'iso-dac' in x['protocol'], axis=1), 'project_type'] = 'direct air capture'
-    df.loc[df.apply(lambda x: 'iso-erw' in x['protocol'], axis=1), 'project_type'] = 'enhanced rock weathering'
+    df.loc[df.apply(lambda x: 'iso-bio-burial' in x['protocol'], axis=1), 'project_type'] = (
+        'biomass burial'
+    )
+    df.loc[df.apply(lambda x: 'iso-bio-geo' in x['protocol'], axis=1), 'project_type'] = (
+        'biomass injection'
+    )
+    df.loc[df.apply(lambda x: 'iso-bio-oil' in x['protocol'], axis=1), 'project_type'] = (
+        'biomass injection'
+    )
+    df.loc[df.apply(lambda x: 'iso-dac' in x['protocol'], axis=1), 'project_type'] = (
+        'direct air capture'
+    )
+    df.loc[df.apply(lambda x: 'iso-erw' in x['protocol'], axis=1), 'project_type'] = (
+        'enhanced rock weathering'
+    )
 
-    df.loc[df.apply(lambda x: 'ccb-refor' in x['protocol'], axis=1), 'project_type'] = 'afforestation/reforestation'
+    df.loc[df.apply(lambda x: 'ccb-refor' in x['protocol'], axis=1), 'project_type'] = (
+        'afforestation/reforestation'
+    )
     df.loc[df.apply(lambda x: 'ccb-redd' in x['protocol'], axis=1), 'project_type'] = 'redd+'
 
-    df.loc[df.apply(lambda x: 'car-forest-mx' in x['protocol'], axis=1), 'project_type'] = 'improved forest management'
-    df.loc[df.apply(lambda x: 'gs-reforest' in x['protocol'], axis=1), 'project_type'] = 'afforestation/reforestation'
-    df.loc[df.apply(lambda x: 'gs-drinking-water' in x['protocol'], axis=1), 'project_type'] = 'clean water'
+    df.loc[df.apply(lambda x: 'car-forest-mx' in x['protocol'], axis=1), 'project_type'] = (
+        'improved forest management'
+    )
+    df.loc[df.apply(lambda x: 'gs-reforest' in x['protocol'], axis=1), 'project_type'] = (
+        'afforestation/reforestation'
+    )
+    df.loc[df.apply(lambda x: 'gs-drinking-water' in x['protocol'], axis=1), 'project_type'] = (
+        'clean water'
+    )
 
     return df
 
