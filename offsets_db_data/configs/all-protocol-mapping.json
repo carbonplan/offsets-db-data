@@ -1782,7 +1782,7 @@
   "ccb-redd": {
     "category": "forest",
     "known-strings": [
-      "CCB - M/LU-REDD+: Methodology for the Implementation of REDD+ Projects Consistent with National Reference Level"
+      "CCB - M/LU-REDD+: Methodology for the Implementation of REDD+ Projects Consistent with National Reference Levels"
     ],
     "program": "ccb",
     "url": "https://www.cercarbono.com/wp-content/uploads/2023/01/REDD-Methodology-V-1.3.1.pdf"
@@ -1790,7 +1790,7 @@
   "ccb-refor": {
     "category": "forest",
     "known-strings": [
-      "CCB - M/UT/F-A01: Methodology To Implement GHG Removal Projects Through Reforestation, Forest Restoration and the Establishment of Woody Crop"
+      "CCB - M/UT/F-A01: Methodology To Implement GHG Removal Projects Through Reforestation, Forest Restoration and the Establishment of Woody Crops"
     ],
     "program": "ccb",
     "url": "https://www.cercarbono.com/wp-content/uploads/2021/11/Forest-and-Woody-Crops-Methodology-V.1.1.pdf"
