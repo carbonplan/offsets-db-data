@@ -335,6 +335,7 @@
       "ACM0018, Version - 5.0",
       "ACM0018 “Large-scale Consolidated Methodology: Electricity generation from biomass in power-only plants”, Version 5.0",
       "ACM0018",
+      "ACM0018: Electricity generation from biomass in power-only plants",
       "ACM0018 – Electricity generation from biomass in power-only plants version 06.0"
     ],
     "program": "cdm",
@@ -1192,6 +1193,13 @@
     "program": "cdm",
     "sub-category": "biomass"
   },
+  "ams-iii-at": {
+    "category": "energy-efficiency",
+    "known-strings": [
+      "AMS-III.AT.: Transportation energy efficiency activities installing digital tachograph systems to commercial freight transport fleets"
+    ],
+    "program": "cdm",
+  },
   "ams-iii-au": {
     "category": "agriculture",
     "known-strings": [
@@ -1795,10 +1803,26 @@
     "program": "ccb",
     "url": "https://www.cercarbono.com/wp-content/uploads/2021/11/Forest-and-Woody-Crops-Methodology-V.1.1.pdf"
   },
-  "ccb-renewables": {
+  "ccb-renewables-eg": {
     "category": "renewable-energy",
     "known-strings": [
+      ",
+      "M/EE-EG001 Implementation of GHG Emission Reduction Projects Through Renewable Energy Use for Electric Power Generation."
+    ],
+    "program": "ccb"
+  },
+  "ccb-renewables-er": {
+    "category": "renewable-energy",
+    "known-strings": [
+      "
       "CCB - M/E-ER01: Methodology for the realization of GHG emissions reduction projects by the use of renewable energy"
+    ],
+    "program": "ccb"
+  },
+  "ccb-landfills": {
+    "category": "ghg-management",
+    "known-strings": [
+      "Methodology for executing projects that capture, destroy, or use the biogas produced in sanitary landfills"
     ],
     "program": "ccb"
   },
