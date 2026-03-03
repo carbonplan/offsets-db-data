@@ -1198,7 +1198,7 @@
     "known-strings": [
       "AMS-III.AT.: Transportation energy efficiency activities installing digital tachograph systems to commercial freight transport fleets"
     ],
-    "program": "cdm",
+    "program": "cdm"
   },
   "ams-iii-au": {
     "category": "agriculture",
@@ -1787,6 +1787,13 @@
     "sub-category": "waste-management",
     "url": "https://www.climateactionreserve.org/how/protocols/waste/organic-waste-digestion/"
   },
+  "ccb-landfills": {
+    "category": "ghg-management",
+    "known-strings": [
+      "Methodology for executing projects that capture, destroy, or use the biogas produced in sanitary landfills"
+    ],
+    "program": "ccb"
+  },
   "ccb-redd": {
     "category": "forest",
     "known-strings": [
@@ -1806,7 +1813,6 @@
   "ccb-renewables-eg": {
     "category": "renewable-energy",
     "known-strings": [
-      ",
       "M/EE-EG001 Implementation of GHG Emission Reduction Projects Through Renewable Energy Use for Electric Power Generation."
     ],
     "program": "ccb"
@@ -1814,15 +1820,7 @@
   "ccb-renewables-er": {
     "category": "renewable-energy",
     "known-strings": [
-      "
       "CCB - M/E-ER01: Methodology for the realization of GHG emissions reduction projects by the use of renewable energy"
-    ],
-    "program": "ccb"
-  },
-  "ccb-landfills": {
-    "category": "ghg-management",
-    "known-strings": [
-      "Methodology for executing projects that capture, destroy, or use the biogas produced in sanitary landfills"
     ],
     "program": "ccb"
   },
