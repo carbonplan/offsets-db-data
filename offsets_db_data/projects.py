@@ -134,7 +134,9 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     )
     df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'project_type'] = 'redd+'
 
-    df.loc[df.apply(lambda x: 'acm0001' in x['protocol'], axis=1), 'project_type'] = 'landfill methane'
+    df.loc[df.apply(lambda x: 'acm0001' in x['protocol'], axis=1), 'project_type'] = (
+        'landfill methane'
+    )
     df.loc[df.apply(lambda x: 'acm0002' in x['protocol'], axis=1), 'project_type'] = 're bundled'
 
     df.loc[df.apply(lambda x: 'iso-refor' in x['protocol'], axis=1), 'project_type'] = (
