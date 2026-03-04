@@ -29,49 +29,6 @@ from offsets_db_data.projects import (
 
 
 @pf.register_dataframe_method
-def infer_isometric_project_type(df: pd.DataFrame) -> pd.DataFrame:
-    """Infer project types for Isometric projects based on protocol.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input dataframe containing Isometric project data with 'protocol' column.
-
-    Returns
-    -------
-    pd.DataFrame
-        Dataframe with inferred 'project_type' column.
-    """
-    # Mapping from Isometric protocol codes to project types
-    iso_protocol_to_type = {
-        'iso-biochar': 'biochar',
-        'iso-dac': 'direct air capture',
-        'iso-bio-oil': 'bio-oil',
-        'iso-bio-geo': 'biomass geological storage',
-        'iso-erw': 'enhanced weathering',
-        'iso-oae': 'ocean alkalinity enhancement',
-        'iso-wastewater': 'wastewater alkalinity enhancement',
-        'iso-river': 'river alkalinity enhancement',
-        'iso-bio-burial': 'biomass burial',
-        'iso-bio-ccs': 'biogenic ccs',
-        'iso-refor': 'afforestation/reforestation',
-    }
-
-    df['project_type'] = 'unknown'
-    df['project_type_source'] = 'carbonplan'
-
-    # Map based on first protocol in list (protocols are stored as lists)
-    for idx, row in df.iterrows():
-        protocols = row.get('protocol', [])
-        if isinstance(protocols, list) and len(protocols) > 0:
-            first_protocol = protocols[0]
-            if first_protocol in iso_protocol_to_type:
-                df.at[idx, 'project_type'] = iso_protocol_to_type[first_protocol]
-
-    return df
-
-
-@pf.register_dataframe_method
 def add_isometric_project_url(df: pd.DataFrame) -> pd.DataFrame:
     """Add project URL column for Isometric projects.
 
