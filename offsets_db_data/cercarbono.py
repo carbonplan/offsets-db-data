@@ -62,7 +62,11 @@ def add_cercarbono_project_id(df: pd.DataFrame, prefix: str = 'CCB') -> pd.DataF
         Dataframe with added project ID column.
     """
     df = df.copy()
-    df['project_id'] = prefix + df['project_id'].astype(str).str.split('-').str[-1]
+    # Prepend CCB prefix to the full code to create unique project_id
+    # Note: Cercarbono uses different code prefixes (CDC, CP, CGS, CDB, CBA) each with
+    # their own numbering sequence. Preserving the full code prevents collisions
+    # (e.g., CDC-1, CP-1, CGS-1 would all become CCB1 if we only took the numeric part)
+    df['project_id'] = prefix + df['project_id'].astype(str)
     return df
 
 
