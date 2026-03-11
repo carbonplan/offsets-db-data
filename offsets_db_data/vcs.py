@@ -8,6 +8,7 @@ from offsets_db_data.common import (
     PROJECT_SCHEMA_UPATH,
     load_column_mapping,
     load_inverted_protocol_mapping,
+    load_protocol_mapping,
     load_registry_project_column_mapping,
     load_type_category_mapping,
 )
@@ -351,7 +352,6 @@ def process_vcs_projects(
     *,
     credits: pd.DataFrame,
     registry_name: str = 'verra',
-    download_type: str = 'projects',
 ) -> pd.DataFrame:
     """
     Process Verra projects data, including renaming, adding, and validating columns, and merging with credits data.
@@ -381,6 +381,7 @@ def process_vcs_projects(
     inverted_column_mapping = {value: key for key, value in registry_project_column_mapping.items()}
     type_category_mapping = load_type_category_mapping()
     inverted_protocol_mapping = load_inverted_protocol_mapping()
+    protocol_mapping = load_protocol_mapping()
 
     data = (
         df.rename(columns=inverted_column_mapping)
@@ -395,8 +396,9 @@ def process_vcs_projects(
             override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
         )
         .add_category(
-            type_category_mapping=type_category_mapping
-        )  # must come after types; type -> category
+            type_category_mapping=type_category_mapping,
+            protocol_mapping=protocol_mapping,
+        )  # category derived from protocol; project_type is independent
         .add_is_compliance_flag()
         .add_vcs_compliance_projects()
         .map_project_type_to_display_name(type_category_mapping=type_category_mapping)

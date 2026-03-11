@@ -34,16 +34,26 @@ def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country'
 
 
 @pf.register_dataframe_method
-def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFrame:
+def add_category(
+    df: pd.DataFrame, *, type_category_mapping: dict, protocol_mapping: dict | None = None
+) -> pd.DataFrame:
     """
     Add a category to each record in the DataFrame based on its protocol.
+
+    Category is derived directly from the protocol via protocol_mapping when available,
+    falling back to type_category_mapping via project_type. This keeps category and
+    project_type independent of each other.
 
     Parameters
     ----------
     df : pd.DataFrame
         Input DataFrame containing protocol data.
     type_category_mapping : dict
-        Dictionary mapping types to categories.
+        Dictionary mapping project_type strings to categories (fallback).
+    protocol_mapping : dict, optional
+        The full protocol mapping (from all-protocol-mapping.json). When provided,
+        category is read directly from the matched protocol's 'category' field,
+        which decouples it from project_type.
 
     Returns
     -------
@@ -52,12 +62,25 @@ def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFra
     """
 
     print('Adding category based on protocol...')
-    df['category'] = (
-        df['project_type']
-        .str.lower()
-        .map({key.lower(): value['category'] for key, value in type_category_mapping.items()})
-        .fillna('unknown')
-    )
+
+    if protocol_mapping is not None:
+
+        def _category_from_protocol(protocol_list: list) -> str:
+            for p in protocol_list:
+                cat = protocol_mapping.get(p, {}).get('category')
+                if cat and cat != 'unknown':
+                    return cat
+            return 'unknown'
+
+        df['category'] = df['protocol'].apply(_category_from_protocol)
+    else:
+        # Legacy fallback: derive category from project_type via type_category_mapping
+        df['category'] = (
+            df['project_type']
+            .str.lower()
+            .map({key.lower(): value['category'] for key, value in type_category_mapping.items()})
+            .fillna('unknown')
+        )
     return df
 
 
@@ -134,8 +157,10 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     )
     df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'project_type'] = 'redd+'
 
-    df.loc[df.apply(lambda x: 'acm0001' in x['protocol'], axis=1), 'project_type'] = 'landfill'
-    df.loc[df.apply(lambda x: 'acm0002' in x['protocol'], axis=1), 'project_type'] = 'natural gas'
+    df.loc[df.apply(lambda x: 'acm0001' in x['protocol'], axis=1), 'project_type'] = (
+        'landfill methane'
+    )
+    df.loc[df.apply(lambda x: 'acm0002' in x['protocol'], axis=1), 'project_type'] = 're bundled'
 
     df.loc[df.apply(lambda x: 'iso-refor' in x['protocol'], axis=1), 'project_type'] = (
         'afforestation/reforestation'

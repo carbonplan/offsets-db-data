@@ -5,7 +5,7 @@ from collections import defaultdict
 import numpy as np
 import pandas as pd
 import pandas_flavor as pf
-import pandera as pa
+import pandera.pandas as pa
 import upath
 
 CREDIT_SCHEMA_UPATH = (
@@ -54,7 +54,9 @@ def load_inverted_protocol_mapping() -> dict:
     return store
 
 
-def load_column_mapping(*, registry_name: str, download_type: str, mapping_path: str) -> dict:
+def load_column_mapping(
+    *, registry_name: str, download_type: str, mapping_path: upath.UPath | str
+) -> dict:
     with open(mapping_path) as f:
         registry_credit_column_mapping = json.load(f)
     return registry_credit_column_mapping[registry_name][download_type]
