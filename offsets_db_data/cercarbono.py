@@ -62,11 +62,10 @@ def add_cercarbono_project_id(df: pd.DataFrame, prefix: str = 'CCB') -> pd.DataF
         Dataframe with added project ID column.
     """
     df = df.copy()
-    # Prepend CCB prefix to the full code to create unique project_id
-    # Note: Cercarbono uses different code prefixes (CDC, CP, CGS, CDB, CBA) each with
-    # their own numbering sequence. Preserving the full code prevents collisions
-    # (e.g., CDC-1, CP-1, CGS-1 would all become CCB1 if we only took the numeric part)
-    df['project_id'] = prefix + df['project_id'].astype(str)
+    # Use the globally unique numeric id (not the per-prefix code number) to avoid collisions.
+    # Different code prefixes (CDC, CP, CGS, CDB, CBA) share numeric suffixes (e.g. CDC-1,
+    # CP-1, CGS-1) but each project has a distinct id across the whole registry.
+    df['project_id'] = prefix + df['id'].astype(str)
     return df
 
 
@@ -75,7 +74,6 @@ def process_cercarbono_credits(
     df: pd.DataFrame,
     *,
     download_type: str,
-    projects: pd.DataFrame | None = None,
     registry_name: str = 'cercarbono',
     prefix: str = 'CCB',
     harmonize_beneficiary_info: bool = False,
@@ -88,10 +86,6 @@ def process_cercarbono_credits(
         Input dataframe containing Cercarbono credit transactions data.
     download_type : str, optional
         Type of data to download, either 'issuances' or 'retirements'.
-    projects : pd.DataFrame, optional
-        Raw projects dataframe containing 'id' and 'code' columns for mapping numeric IDs
-        to project codes. Required to prevent duplicate project_ids when different code
-        prefixes (CDC, CP, CGS, CDB, CBA) share the same numeric suffix.
     registry_name : str, optional
         Name of the registry to be added to the dataframe, by default "cercarbono"
     prefix : str, optional
@@ -107,32 +101,17 @@ def process_cercarbono_credits(
         # TODO: @badgley, please confirm this is the correct way to extract vintage year for issuances
         df['vintage'] = df['vintage_of_credits'].str.split(' / ').str[-1].str[:4].astype(int)
         df['transaction_type'] = 'issuance'
-        # Extract numeric project ID from serial
-        # Standard format: CDC_1_... → ID at index 1
-        # Revised format: CDC_R_16_... → ID at index 2 (R indicates revision)
+        # Extract numeric project ID from serial — this is the globally unique id.
+        # Standard format: CDC_1_... → id at index 1
+        # Revised format: CDC_R_16_... → id at index 2 (R indicates revision)
         parts = df.serial.str.split('_')
         numeric_id = parts.str[1].where(parts.str[1] != 'R', parts.str[2])
-
-        if projects is not None:
-            # Map numeric ID to code (e.g., 1 → CDC-1), then add prefix
-            id_to_code = dict(zip(projects['id'], projects['code']))
-            df['project_id'] = numeric_id.astype(int).map(id_to_code)
-            df['project_id'] = prefix + df['project_id'].astype(str)
-        else:
-            # Fallback: use numeric ID directly (may create duplicates)
-            df['project_id'] = prefix + numeric_id
+        df['project_id'] = prefix + numeric_id
 
     else:
         df['transaction_type'] = 'retirement'
-
-        if projects is not None:
-            # Map numeric ID to code (e.g., 1 → CDC-1), then add prefix
-            id_to_code = dict(zip(projects['id'], projects['code']))
-            df['project_id'] = df['project_id'].astype(int).map(id_to_code)
-            df['project_id'] = prefix + df['project_id'].astype(str)
-        else:
-            # Fallback: use numeric ID directly (may create duplicates)
-            df['project_id'] = prefix + df['project_id'].astype(str)
+        # project_id in the raw retirements data is the numeric id
+        df['project_id'] = prefix + df['project_id'].astype(str)
 
     column_mapping = load_column_mapping(
         registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
