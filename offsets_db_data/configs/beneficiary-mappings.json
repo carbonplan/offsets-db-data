@@ -100,10 +100,7 @@
         "to": "4AIR clients"
       },
       {
-        "from": [
-          ";%;%;%;%;%;%Other",
-          ";%;%_;%;%;%Other"
-        ],
+        "from": [";%;%;%;%;%;%Other", ";%;%_;%;%;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -139,10 +136,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%;%;%;%",
-          ""
-        ],
+        "from": [";%;%;%;%;%;%;%", ""],
         "fromBlank": false,
         "fromError": false,
         "to": "0"
@@ -1305,10 +1299,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "4AIR clients",
-          "4Air clients"
-        ],
+        "from": ["4AIR clients", "4Air clients"],
         "fromBlank": false,
         "fromError": false,
         "to": "4AIR clients"
@@ -1439,10 +1430,7 @@
         "to": "3Degrees Group clients"
       },
       {
-        "from": [
-          "Lupe Technology",
-          ";%;%;%;%Lupe technology;%;%"
-        ],
+        "from": ["Lupe Technology", ";%;%;%;%Lupe technology;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Lupe Technology"
@@ -1619,10 +1607,7 @@
         "to": "Bonnier Books"
       },
       {
-        "from": [
-          ";%;%;%;%for 2011;%Other",
-          ";%;%;%;%For 2011;%Other"
-        ],
+        "from": [";%;%;%;%for 2011;%Other", ";%;%;%;%For 2011;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -2055,10 +2040,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "GroenBalans",
-          ";%;%;%;%Groenbalans;%;%"
-        ],
+        "from": ["GroenBalans", ";%;%;%;%Groenbalans;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "GroenBalans"
@@ -4167,9 +4149,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Organizcion Terpel S.A.;%;%;%Compliance Requirements"
-        ],
+        "from": [";%;%Organizcion Terpel S.A.;%;%;%Compliance Requirements"],
         "fromBlank": false,
         "fromError": false,
         "to": "Terpel"
@@ -4456,9 +4436,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired against Delta Air Lines EY 2017;%;%"
-        ],
+        "from": [";%;%;%;%Retired against Delta Air Lines EY 2017;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Delta Airlines"
@@ -4576,9 +4554,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "4AIR, LLC;%;%;%Sun Air Jets;%On Behalf of Third Party"
-        ],
+        "from": ["4AIR, LLC;%;%;%Sun Air Jets;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": "Sun Air Jets"
@@ -4816,9 +4792,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "4AIR, LLC;%;%;%Tradewind Aviation;%On Behalf of Third Party"
-        ],
+        "from": ["4AIR, LLC;%;%;%Tradewind Aviation;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": "Tradewind Aviation"
@@ -4966,9 +4940,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "4AIR, LLC;%;%;%4AIR Client;%On Behalf of Third Party"
-        ],
+        "from": ["4AIR, LLC;%;%;%4AIR Client;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": "4AIR clients"
@@ -6471,9 +6443,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%CHEVRON PETROLEUM COMPANY;%CARBONO NEUTRALIDAD;%Other"
-        ],
+        "from": [";%;%CHEVRON PETROLEUM COMPANY;%CARBONO NEUTRALIDAD;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Chevron"
@@ -7488,9 +7458,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Shell;%Retired by Shell;%Environmental Benefit"
-        ],
+        "from": [";%;%Shell;%Retired by Shell;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": "Shell"
@@ -7792,9 +7760,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Shell;%Retired by Shell;%Other"
-        ],
+        "from": [";%;%Shell;%Retired by Shell;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Shell"
@@ -8963,9 +8929,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Chevrolet - CO2 Reduction Program;%Other"
-        ],
+        "from": [";%;%;%;%Chevrolet - CO2 Reduction Program;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Chevrolet"
@@ -9030,9 +8994,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Lyft;%Confirm #4 - 2020;%Environmental Benefit"
-        ],
+        "from": [";%;%Lyft;%Confirm #4 - 2020;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": "Lyft"
@@ -11153,9 +11115,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Exxon Mobil de Colombia SA;%;%;%Compliance Requirements"
-        ],
+        "from": [";%;%Exxon Mobil de Colombia SA;%;%;%Compliance Requirements"],
         "fromBlank": false,
         "fromError": false,
         "to": "Exxon Mobil"
@@ -11280,9 +11240,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired for Shell;%;%"
-        ],
+        "from": [";%;%;%;%Retired for Shell;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Shell"
@@ -11541,9 +11499,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Nespresso Offsetting 2022;%;%"
-        ],
+        "from": [";%;%;%;%Nespresso Offsetting 2022;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Nespresso"
@@ -11943,9 +11899,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Nespresso;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Nespresso;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Nespresso"
@@ -14796,9 +14750,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%;%;%Retirement for Person or Organization"
-        ],
+        "from": [";%;%;%;%;%;%Retirement for Person or Organization"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -15533,9 +15485,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Netflix, Inc.;%;%;%;%;%Environmental Benefit"
-        ],
+        "from": ["Netflix, Inc.;%;%;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": "Netflix"
@@ -15734,9 +15684,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Netflix Inc.;%;%"
-        ],
+        "from": [";%;%;%;%Netflix Inc.;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Netflix"
@@ -15868,9 +15816,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Netflix;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Netflix;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Netflix"
@@ -16069,9 +16015,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Netflix International B.V.;%;%"
-        ],
+        "from": [";%;%;%;%Netflix International B.V.;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Netflix"
@@ -16136,9 +16080,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Netflix Streaming Services International B.V.;%;%"
-        ],
+        "from": [";%;%;%;%Netflix Streaming Services International B.V.;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Netflix"
@@ -16270,9 +16212,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Lidl Stiftung & Co. KG;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Lidl Stiftung & Co. KG;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Lidl Stiftung and Company"
@@ -19865,9 +19805,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Natura Cosméticos S.A.;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Natura Cosméticos S.A.;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Natura Cosméticos"
@@ -20682,9 +20620,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of NATURA COSMÉTICOS S.A.;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of NATURA COSMÉTICOS S.A.;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Natura Cosméticos"
@@ -21374,9 +21310,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Brisbane City Council;%For FY 2018-19;%NCOS Programme"
-        ],
+        "from": [";%;%Brisbane City Council;%For FY 2018-19;%NCOS Programme"],
         "fromBlank": false,
         "fromError": false,
         "to": "Brisbane City Council"
@@ -21508,9 +21442,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Brisbane City Council;%for 2017-18;%NCOS Programme"
-        ],
+        "from": [";%;%Brisbane City Council;%for 2017-18;%NCOS Programme"],
         "fromBlank": false,
         "fromError": false,
         "to": "Brisbane City Council"
@@ -22111,9 +22043,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Air Canada.;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Air Canada.;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Air Canada"
@@ -22379,9 +22309,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of Qantas Airways Limited;%;%"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of Qantas Airways Limited;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Qantas Airways"
@@ -22706,9 +22634,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%On behalf of Patch's buyer;%;%"
-        ],
+        "from": [";%;%;%;%On behalf of Patch's buyer;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Patch clients"
@@ -22916,9 +22842,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%On behalf of a Patch buyer;%;%"
-        ],
+        "from": [";%;%;%;%On behalf of a Patch buyer;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Patch clients"
@@ -23378,9 +23302,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Patch buyers;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Patch buyers;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Patch clients"
@@ -23630,9 +23552,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Autodesk;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Autodesk;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Autodesk"
@@ -23840,9 +23760,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "839;%;%;%On behalf of Autodesk;%On Behalf of Third Party"
-        ],
+        "from": ["839;%;%;%On behalf of Autodesk;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": "Autodesk"
@@ -24598,9 +24516,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%eprimo GmbH;%Other"
-        ],
+        "from": [";%;%;%;%eprimo GmbH;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "eprimo"
@@ -26050,9 +25966,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Anew Environmental, LLC;%;%;%;%;%On Behalf of Third Party"
-        ],
+        "from": ["Anew Environmental, LLC;%;%;%;%;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -26134,9 +26048,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of the Hess Corporation;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of the Hess Corporation;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Hess Corporation"
@@ -26858,9 +26770,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of eBay Inc.;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of eBay Inc.;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "eBay"
@@ -27194,9 +27104,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%GP-19;%GP-19;%Retirement for Person or Organization"
-        ],
+        "from": [";%;%GP-19;%GP-19;%Retirement for Person or Organization"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -27236,9 +27144,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%GP-2;%GP-2;%Retirement for Person or Organization"
-        ],
+        "from": [";%;%GP-2;%GP-2;%Retirement for Person or Organization"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -27670,9 +27576,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Salesforce;%;%;%Retirement for Person or Organization"
-        ],
+        "from": [";%;%Salesforce;%;%;%Retirement for Person or Organization"],
         "fromBlank": false,
         "fromError": false,
         "to": "Salesforce"
@@ -27719,9 +27623,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Salesforce Inc.;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Salesforce Inc.;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Salesforce"
@@ -28328,9 +28230,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of 2016 Salesforce;%;%"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of 2016 Salesforce;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Salesforce"
@@ -29157,9 +29057,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Lenovo;%Lenovo;%Environmental Benefit"
-        ],
+        "from": [";%;%Lenovo;%Lenovo;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": "Lenovo"
@@ -29745,9 +29643,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Microsoft;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Microsoft;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Microsoft"
@@ -30186,9 +30082,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "3Degrees Group, Inc;%;%;%;%;%On Behalf of Third Party"
-        ],
+        "from": ["3Degrees Group, Inc;%;%;%;%;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -30333,9 +30227,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Seattle City Light;%;%;%;%;%Environmental Benefit"
-        ],
+        "from": ["Seattle City Light;%;%;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -31014,9 +30906,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%FY13-14 Flight Offset; City of Sydney;%;%"
-        ],
+        "from": [";%;%;%;%FY13-14 Flight Offset; City of Sydney;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "City of Sydney"
@@ -31063,9 +30953,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%FY11-12 Flight Offset; City of Sydney;%;%"
-        ],
+        "from": [";%;%;%;%FY11-12 Flight Offset; City of Sydney;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "City of Sydney"
@@ -31112,9 +31000,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%FY12-13 Flight Offset; City of Sydney;%;%"
-        ],
+        "from": [";%;%;%;%FY12-13 Flight Offset; City of Sydney;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "City of Sydney"
@@ -31161,9 +31047,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Flight Emissions Jul-Sep 11; City of Sydney;%;%"
-        ],
+        "from": [";%;%;%;%Flight Emissions Jul-Sep 11; City of Sydney;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "City of Sydney"
@@ -31210,9 +31094,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Flight Emissions Oct10-Jun11; City of Sydney;%;%"
-        ],
+        "from": [";%;%;%;%Flight Emissions Oct10-Jun11; City of Sydney;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "City of Sydney"
@@ -31455,9 +31337,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Gucci;%Retired on behalf of Gucci;%Other"
-        ],
+        "from": [";%;%Gucci;%Retired on behalf of Gucci;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Gucci"
@@ -31553,9 +31433,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Gucci;%retired on behalf of Gucci;%Other"
-        ],
+        "from": [";%;%Gucci;%retired on behalf of Gucci;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Gucci"
@@ -31602,9 +31480,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Gucci SpA;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Gucci SpA;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Gucci"
@@ -31651,9 +31527,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Gucci;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Gucci;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Gucci"
@@ -31896,9 +31770,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Anonymous;%;%;%Retirement for Person or Organization"
-        ],
+        "from": [";%;%Anonymous;%;%;%Retirement for Person or Organization"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -32533,9 +32405,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%EXXONMOBIL CORPORATION;%;%;%Environmental Benefit"
-        ],
+        "from": [";%;%EXXONMOBIL CORPORATION;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": "Exxon Mobil"
@@ -32911,9 +32781,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "LSB Industries, Inc.;%;%;%;%;%On Behalf of Third Party"
-        ],
+        "from": ["LSB Industries, Inc.;%;%;%;%;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -33646,9 +33514,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of Allianz SE;%Other"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of Allianz SE;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": ";%;%;%;%Retirement on behalf of Allianz SE;%Other"
@@ -33793,9 +33659,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of Allianz SE;%Other"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of Allianz SE;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Allianz"
@@ -33989,9 +33853,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of Allianz SE jet;%Other"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of Allianz SE jet;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Allianz"
@@ -34038,9 +33900,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of Allianz SE car fleet;%Other"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of Allianz SE car fleet;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Allianz"
@@ -34178,9 +34038,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Element Markets, LLC;%;%;%;%;%On Behalf of Third Party"
-        ],
+        "from": ["Element Markets, LLC;%;%;%;%;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -34329,9 +34187,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Pachama Inc.;%;%;%Shopify;%On Behalf of Third Party"
-        ],
+        "from": ["Pachama Inc.;%;%;%Shopify;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": "Shopify"
@@ -34802,9 +34658,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Tradewater, LLC;%;%;%AirBnB;%On Behalf of Third Party"
-        ],
+        "from": ["Tradewater, LLC;%;%;%AirBnB;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": "Airbnb"
@@ -35078,9 +34932,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Transaction Reference 13298;%;%;%Environmental Benefit"
-        ],
+        "from": [";%;%Transaction Reference 13298;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -35136,9 +34988,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "PDI Technologies;%;%;%GP-2;%On Behalf of Third Party"
-        ],
+        "from": ["PDI Technologies;%;%;%GP-2;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -35194,9 +35044,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "487;%;%;%2023 emissions offsets;%Environmental Benefit"
-        ],
+        "from": ["487;%;%;%2023 emissions offsets;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -35252,9 +35100,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Transaction Reference 10219;%;%;%Environmental Benefit"
-        ],
+        "from": [";%;%Transaction Reference 10219;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -36550,9 +36396,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%HSBC; HSBC Carbon Neutral Programme Q4 2005;%;%"
-        ],
+        "from": [";%;%;%;%HSBC; HSBC Carbon Neutral Programme Q4 2005;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "HSBC"
@@ -36898,9 +36742,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Biomax Biocombustibles SA;%;%;%Environmental Benefit"
-        ],
+        "from": [";%;%Biomax Biocombustibles SA;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": "Biomax"
@@ -37092,9 +36934,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "PDI Technologies;%;%;%GP - 3;%On Behalf of Third Party"
-        ],
+        "from": ["PDI Technologies;%;%;%GP - 3;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -37399,9 +37239,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%GP-4;%;%"
-        ],
+        "from": [";%;%;%;%GP-4;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -37447,9 +37285,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%GP-5;%;%"
-        ],
+        "from": [";%;%;%;%GP-5;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -37543,9 +37379,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "ClimateSeed;%;%;%;%;%Environmental Benefit"
-        ],
+        "from": ["ClimateSeed;%;%;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -37591,9 +37425,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Feb+Mar 2014;%;%"
-        ],
+        "from": [";%;%;%;%Feb+Mar 2014;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -37639,9 +37471,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Cool Effect;%;%;%;%;%Environmental Benefit"
-        ],
+        "from": ["Cool Effect;%;%;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -37687,9 +37517,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%compliance 2013;%;%"
-        ],
+        "from": [";%;%;%;%compliance 2013;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -37776,9 +37604,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Cool Effect;%;%;%;%;%On Behalf of Third Party"
-        ],
+        "from": ["Cool Effect;%;%;%;%;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -38215,9 +38041,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of market.southpole clients;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of market.southpole clients;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "South Pole clients"
@@ -38424,9 +38248,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of UBS;%;%"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of UBS;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "UBS"
@@ -38502,9 +38324,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Bulb Energy Ltd;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Bulb Energy Ltd;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Bulb Energy"
@@ -38612,9 +38432,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%SHELL;%Retired for Tokyo Gas Co., Ltd.;%Other"
-        ],
+        "from": [";%;%SHELL;%Retired for Tokyo Gas Co., Ltd.;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Tokyo Gas"
@@ -38754,9 +38572,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Offsets (2011);%Other"
-        ],
+        "from": [";%;%;%;%Offsets (2011);%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -38793,9 +38609,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Transaction Reference 10220;%;%;%Environmental Benefit"
-        ],
+        "from": [";%;%Transaction Reference 10220;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -39091,9 +38905,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%“On behalf of UBS”;%;%"
-        ],
+        "from": [";%;%;%;%“On behalf of UBS”;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "UBS"
@@ -39130,9 +38942,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Off-setting Swiss Re operations 2011;%Other"
-        ],
+        "from": [";%;%;%;%Off-setting Swiss Re operations 2011;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Swiss Re"
@@ -39208,9 +39018,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Cancellation 2018;%;%"
-        ],
+        "from": [";%;%;%;%Cancellation 2018;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -39559,9 +39367,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Credit Suisse;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Credit Suisse;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Credit Suisse"
@@ -39598,9 +39404,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Ben & Jerry's;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Ben & Jerry's;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Ben & Jerry's"
@@ -39754,9 +39558,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Cancellation 2019;%;%"
-        ],
+        "from": [";%;%;%;%Cancellation 2019;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -39825,9 +39627,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "532;%;%;%On behalf of Third Party;%On Behalf of Third Party"
-        ],
+        "from": ["532;%;%;%On behalf of Third Party;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -40212,9 +40012,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Q3 2014 retirement FIFA;%Other"
-        ],
+        "from": [";%;%;%;%Q3 2014 retirement FIFA;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "FIFA"
@@ -40260,9 +40058,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Q3 2014 Remaining FIFA retirement;%Other"
-        ],
+        "from": [";%;%;%;%Q3 2014 Remaining FIFA retirement;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "FIFA"
@@ -40493,9 +40289,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%On behalf of Lufthansa Group;%;%"
-        ],
+        "from": [";%;%;%;%On behalf of Lufthansa Group;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Lufthansa"
@@ -41206,9 +41000,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Carbon Footprint Offset; Rabobank Nederland;%;%"
-        ],
+        "from": [";%;%;%;%Carbon Footprint Offset; Rabobank Nederland;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Rabobank"
@@ -41254,9 +41046,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Klimaatkaart Rabobank Nederland;%;%"
-        ],
+        "from": [";%;%;%;%Klimaatkaart Rabobank Nederland;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Rabobank"
@@ -41302,9 +41092,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Rabobank Nederland offset footprint;%Other"
-        ],
+        "from": [";%;%;%;%Rabobank Nederland offset footprint;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Rabobank"
@@ -41432,9 +41220,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%CO2 footprint Rabobank 2014;%Other"
-        ],
+        "from": [";%;%;%;%CO2 footprint Rabobank 2014;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Radobank"
@@ -41528,9 +41314,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Rabobank Nederland 2012;%Other"
-        ],
+        "from": [";%;%;%;%Rabobank Nederland 2012;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Rabobank"
@@ -41576,9 +41360,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%Rabobank;%;%;%Other"
-        ],
+        "from": [";%;%Rabobank;%;%;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Rabobank"
@@ -42261,9 +42043,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf Barclays Bank PLC;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf Barclays Bank PLC;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Barclays Bank"
@@ -42405,9 +42185,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired for Barclays 2016;%Other"
-        ],
+        "from": [";%;%;%;%Retired for Barclays 2016;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Barclays Bank"
@@ -43097,9 +42875,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of BNP Paribas;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of BNP Paribas;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "BNP Paribas"
@@ -43755,9 +43531,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired against Scope 1 Emissions RY2023;%;%"
-        ],
+        "from": [";%;%;%;%Retired against Scope 1 Emissions RY2023;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -44132,9 +43906,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired by Cool Effect on behalf of Google LLC;%;%"
-        ],
+        "from": [";%;%;%;%Retired by Cool Effect on behalf of Google LLC;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Google"
@@ -44954,9 +44726,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Surrendered on behalf of BrewDog;%;%"
-        ],
+        "from": [";%;%;%;%Surrendered on behalf of BrewDog;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "BrewDog"
@@ -45194,9 +44964,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%PwC 2019 Carbon Offset Purchase;%;%"
-        ],
+        "from": [";%;%;%;%PwC 2019 Carbon Offset Purchase;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "PwC"
@@ -45242,9 +45010,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%PwC 2018 Carbon Offset Purchase;%;%"
-        ],
+        "from": [";%;%;%;%PwC 2018 Carbon Offset Purchase;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "PwC"
@@ -45290,9 +45056,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%PwC FY22 carbon purchase;%;%"
-        ],
+        "from": [";%;%;%;%PwC FY22 carbon purchase;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "PwC"
@@ -45619,9 +45383,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Open Grid Europe GHG offset;%;%"
-        ],
+        "from": [";%;%;%;%Open Grid Europe GHG offset;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Open Grid Europe"
@@ -45667,9 +45429,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement for Open Grid Europe GmbH;%Other"
-        ],
+        "from": [";%;%;%;%Retirement for Open Grid Europe GmbH;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Open Grid Europe"
@@ -45715,9 +45475,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement Open Grid Europe GmbH;%Other"
-        ],
+        "from": [";%;%;%;%Retirement Open Grid Europe GmbH;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Open Grid Europe"
@@ -46263,9 +46021,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%ExtraEnergie GmbH, klimaneutrales Erdgas;%Other"
-        ],
+        "from": [";%;%;%;%ExtraEnergie GmbH, klimaneutrales Erdgas;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "ExtraEnergie"
@@ -48056,9 +47812,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%BHP;%BHP - Carbon Offsets Retired in FY2021;%Other"
-        ],
+        "from": [";%;%BHP;%BHP - Carbon Offsets Retired in FY2021;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "BHP"
@@ -48134,9 +47888,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%;%;%Retail Program Requirements"
-        ],
+        "from": [";%;%;%;%;%;%Retail Program Requirements"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -48173,9 +47925,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of ERGO;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of ERGO;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "ERGO"
@@ -48536,9 +48286,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Australian Paper 2014 Carbon Offset Purchase;%Other"
-        ],
+        "from": [";%;%;%;%Australian Paper 2014 Carbon Offset Purchase;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Australian Paper"
@@ -49550,9 +49298,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired by Shell;%;%"
-        ],
+        "from": [";%;%;%;%Retired by Shell;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Shell"
@@ -50977,9 +50723,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%for Swire Oilfield Services;%;%"
-        ],
+        "from": [";%;%;%;%for Swire Oilfield Services;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Swire Pacific"
@@ -51087,9 +50831,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Ecosecurities retires on behalf of NetJets;%Other"
-        ],
+        "from": [";%;%;%;%Ecosecurities retires on behalf of NetJets;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "NetJets"
@@ -52577,9 +52319,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Butagaz;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Butagaz;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Butagaz"
@@ -54539,9 +54279,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "REMOVALL;%;%;%CMA CGM;%On Behalf of Third Party"
-        ],
+        "from": ["REMOVALL;%;%;%CMA CGM;%On Behalf of Third Party"],
         "fromBlank": false,
         "fromError": false,
         "to": "CMA CGM"
@@ -54713,9 +54451,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Klimaneutrales Erdgas, Stadtwerke Rostock AG;%Other"
-        ],
+        "from": [";%;%;%;%Klimaneutrales Erdgas, Stadtwerke Rostock AG;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Stadtwerke Rostock"
@@ -54908,9 +54644,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%PL 2021_R6;%;%"
-        ],
+        "from": [";%;%;%;%PL 2021_R6;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -55259,9 +54993,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "ALLCOT AG;%;%;%Anonymous;%Environmental Benefit"
-        ],
+        "from": ["ALLCOT AG;%;%;%Anonymous;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": ""
@@ -55454,9 +55186,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%AT Kearney;%;%;%Environmental Benefit"
-        ],
+        "from": [";%;%AT Kearney;%;%;%Environmental Benefit"],
         "fromBlank": false,
         "fromError": false,
         "to": "AT Kearney"
@@ -55493,9 +55223,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of AT Kearney;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of AT Kearney;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "AT Kearney"
@@ -56330,9 +56058,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Stadtwerke Detmold „Detmolder KlimaGas“;%Other"
-        ],
+        "from": [";%;%;%;%Stadtwerke Detmold „Detmolder KlimaGas“;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Stadtwerke Detmold"
@@ -56486,9 +56212,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%offsetting; Retired on behalf of Credit Suisse;%;%"
-        ],
+        "from": [";%;%;%;%offsetting; Retired on behalf of Credit Suisse;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Credit Suisse"
@@ -56642,9 +56366,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of Credit Suisse;%;%"
-        ],
+        "from": [";%;%;%;%Retired on behalf of Credit Suisse;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Credit Suisse"
@@ -56720,9 +56442,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement on behalf of Credit Suisse USA;%;%"
-        ],
+        "from": [";%;%;%;%Retirement on behalf of Credit Suisse USA;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Credit Suisse"
@@ -57855,9 +57575,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Stadtwerke Dueren GmbH, Oekogas PLUS;%Other"
-        ],
+        "from": [";%;%;%;%Stadtwerke Dueren GmbH, Oekogas PLUS;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "Stadtwerke Dueren"
@@ -58256,9 +57974,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Offsetting CO2-Neutral Enyaq;%;%"
-        ],
+        "from": [";%;%;%;%Offsetting CO2-Neutral Enyaq;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Skoda"
@@ -59324,9 +59040,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Zalando Carbon Emissions 2020;%;%"
-        ],
+        "from": [";%;%;%;%Zalando Carbon Emissions 2020;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Zalando"
@@ -59874,9 +59588,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Klimaneutrales Erdgas, ESWE Versorgungs AG;%Other"
-        ],
+        "from": [";%;%;%;%Klimaneutrales Erdgas, ESWE Versorgungs AG;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "ESWE Versorgungs"
@@ -59913,9 +59625,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Oekogas, ESWE Versorgungs AG;%Other"
-        ],
+        "from": [";%;%;%;%Oekogas, ESWE Versorgungs AG;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "ESWE Versorgungs"
@@ -61101,9 +60811,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retirement for E.ON Ruhrgas AG;%Other"
-        ],
+        "from": [";%;%;%;%Retirement for E.ON Ruhrgas AG;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "E.ON"
@@ -61548,9 +61256,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Friedrich Scharr KG\nScharr blue;%;%"
-        ],
+        "from": [";%;%;%;%Friedrich Scharr KG\nScharr blue;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Friedrich Scharr"
@@ -61587,9 +61293,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Friedrich Scharr KG;%;%"
-        ],
+        "from": [";%;%;%;%Friedrich Scharr KG;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Friedrich Scharr"
@@ -61690,9 +61394,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%On behalf of Lhoist;%;%"
-        ],
+        "from": [";%;%;%;%On behalf of Lhoist;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Lhoist"
@@ -61729,9 +61431,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Lhoist on behalf of its clients;%;%"
-        ],
+        "from": [";%;%;%;%Lhoist on behalf of its clients;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Lhoist"
@@ -62712,9 +62412,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Kyocera Document Solutions Austria;%;%"
-        ],
+        "from": [";%;%;%;%Kyocera Document Solutions Austria;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "KYOCERA"
@@ -63145,9 +62843,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Retired on behalf of A.T. Kearney;%Other"
-        ],
+        "from": [";%;%;%;%Retired on behalf of A.T. Kearney;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "AT Kearney"
@@ -63184,9 +62880,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%A.T. Kearney;%Retired on behalf of A.T. Kearney;%Other"
-        ],
+        "from": [";%;%A.T. Kearney;%Retired on behalf of A.T. Kearney;%Other"],
         "fromBlank": false,
         "fromError": false,
         "to": "AT Kearney"
@@ -63759,9 +63453,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          ";%;%;%;%Enercity AG - Produkt: enercity OekoGas Premium;%;%"
-        ],
+        "from": [";%;%;%;%Enercity AG - Produkt: enercity OekoGas Premium;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "EnerCity"
@@ -66505,9 +66197,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Block;%;%;%;%"
-        ],
+        "from": ["Watershed;%Block;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Block"
@@ -66553,9 +66243,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Shopify;%Shopify;%;%;%;%"
-        ],
+        "from": ["Shopify;%Shopify;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Shopify"
@@ -66601,9 +66289,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "JPMorganChase;%JPMorganChase;%;%;%;%"
-        ],
+        "from": ["JPMorganChase;%JPMorganChase;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "JPMorganChase"
@@ -66649,9 +66335,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Yelp Inc.;%;%;%;%"
-        ],
+        "from": ["Watershed;%Yelp Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Yelp"
@@ -66697,9 +66381,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Supercritical;%BlackRock, Inc.;%;%;%;%"
-        ],
+        "from": ["Supercritical;%BlackRock, Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Blackrock"
@@ -66745,9 +66427,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Marsh;%;%;%;%"
-        ],
+        "from": ["Patch;%Marsh;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Marsh"
@@ -66841,9 +66521,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Workday;%Workday;%;%;%;%"
-        ],
+        "from": ["Workday;%Workday;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Workday"
@@ -66889,9 +66567,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Figma;%;%;%;%"
-        ],
+        "from": ["Watershed;%Figma;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Figma"
@@ -66937,9 +66613,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Autodesk;%Autodesk;%;%;%;%"
-        ],
+        "from": ["Autodesk;%Autodesk;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Autodesk"
@@ -66985,9 +66659,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Zendesk, Inc.;%;%;%;%"
-        ],
+        "from": ["Watershed;%Zendesk, Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Zendesk"
@@ -67033,9 +66705,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "ClimeFi;%Boston Consulting Group;%;%;%;%"
-        ],
+        "from": ["ClimeFi;%Boston Consulting Group;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Boston Consulting Group"
@@ -67081,9 +66751,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Samsara Inc.;%;%;%;%"
-        ],
+        "from": ["Watershed;%Samsara Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Samsara"
@@ -67129,9 +66797,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Rubicon Carbon;%Cisco Systems, Inc.;%;%;%;%"
-        ],
+        "from": ["Rubicon Carbon;%Cisco Systems, Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Cisco Systems"
@@ -67177,9 +66843,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Wise Payments Ltd;%;%;%;%"
-        ],
+        "from": ["Watershed;%Wise Payments Ltd;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Wise Payments"
@@ -67225,9 +66889,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Rubicon Carbon;%GitLab Inc. ;%;%;%;%"
-        ],
+        "from": ["Rubicon Carbon;%GitLab Inc. ;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "GitLab"
@@ -67273,9 +66935,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Opna;%Wise Payments Ltd;%;%;%;%"
-        ],
+        "from": ["Opna;%Wise Payments Ltd;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Wise Payments"
@@ -67321,9 +66981,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Rubicon Carbon;%Jefferies Financial Group Inc;%;%;%;%"
-        ],
+        "from": ["Rubicon Carbon;%Jefferies Financial Group Inc;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Jefferies Financial Group"
@@ -67369,9 +67027,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Rubicon Carbon;%Bumble Inc.;%;%;%;%"
-        ],
+        "from": ["Rubicon Carbon;%Bumble Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Bumble"
@@ -67417,9 +67073,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%Terraset;%;%;%;%"
-        ],
+        "from": ["Stripe;%Terraset;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Terraset"
@@ -67465,9 +67119,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Patch;%;%;%;%"
-        ],
+        "from": ["Patch;%Patch;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Patch"
@@ -67513,9 +67165,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Versa;%;%;%;%"
-        ],
+        "from": ["Patch;%Versa;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Versa"
@@ -67561,9 +67211,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Dayforce US, Inc.;%;%;%;%"
-        ],
+        "from": ["Watershed;%Dayforce US, Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Dayforce US"
@@ -67609,9 +67257,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%Coatue;%;%;%;%"
-        ],
+        "from": ["Stripe;%Coatue;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Coatue"
@@ -67657,9 +67303,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Skyscanner Limited;%;%;%;%"
-        ],
+        "from": ["Watershed;%Skyscanner Limited;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Skyscanner"
@@ -67705,9 +67349,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Wren;%Union Square Ventures;%;%;%;%"
-        ],
+        "from": ["Wren;%Union Square Ventures;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Union Square Ventures"
@@ -67753,9 +67395,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Aledade, Inc.;%;%;%;%"
-        ],
+        "from": ["Watershed;%Aledade, Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Aledade"
@@ -67801,9 +67441,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Skims Body, Inc.;%;%;%;%"
-        ],
+        "from": ["Watershed;%Skims Body, Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Skims Body"
@@ -67849,9 +67487,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Canva Pty Ltd;%;%;%;%"
-        ],
+        "from": ["Watershed;%Canva Pty Ltd;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Canva"
@@ -67897,9 +67533,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Coatue;%;%;%;%"
-        ],
+        "from": ["Patch;%Coatue;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Coatue"
@@ -67945,9 +67579,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Watershed;%Match Group Holdings I, LLC;%;%;%;%"
-        ],
+        "from": ["Watershed;%Match Group Holdings I, LLC;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Match Group"
@@ -67993,9 +67625,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Typeform S.L.;%;%;%;%"
-        ],
+        "from": ["Patch;%Typeform S.L.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Typeform"
@@ -68041,9 +67671,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%Quang Nguyen;%;%;%;%"
-        ],
+        "from": ["Stripe;%Quang Nguyen;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Quang Nguyen"
@@ -68089,9 +67717,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%Raritan Valley Community College;%;%;%;%"
-        ],
+        "from": ["Stripe;%Raritan Valley Community College;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Raritan Valley Community College"
@@ -68137,9 +67763,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%CarbonCure Technologies Inc.;%;%;%;%"
-        ],
+        "from": ["Patch;%CarbonCure Technologies Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "CarbonCure"
@@ -68185,9 +67809,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%Stanford University;%;%;%;%"
-        ],
+        "from": ["Stripe;%Stanford University;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Stanford University"
@@ -68233,9 +67855,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%Tomorro;%;%;%;%"
-        ],
+        "from": ["Stripe;%Tomorro;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Tomorro"
@@ -68281,9 +67901,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Wren;%New Mountain Capital ;%;%;%;%"
-        ],
+        "from": ["Wren;%New Mountain Capital ;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "New Mountain Capital"
@@ -68329,9 +67947,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Bain & Company;%;%;%;%"
-        ],
+        "from": ["Patch;%Bain & Company;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Bain & Company"
@@ -68377,9 +67993,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Wren;%Molten Ventures;%;%;%;%"
-        ],
+        "from": ["Wren;%Molten Ventures;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Molten Ventures"
@@ -68425,9 +68039,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Rubicon Carbon;%Genesys Cloud Services, Inc.;%;%;%;%"
-        ],
+        "from": ["Rubicon Carbon;%Genesys Cloud Services, Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Genesys Cloud Services"
@@ -68473,9 +68085,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Piva Capital;%;%;%;%"
-        ],
+        "from": ["Patch;%Piva Capital;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Piva Capital"
@@ -68521,9 +68131,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Princeville Capital;%;%;%;%"
-        ],
+        "from": ["Patch;%Princeville Capital;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Princeville Capital"
@@ -68569,9 +68177,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Patch;%Future Energy Ventures Management GmbH;%;%;%;%"
-        ],
+        "from": ["Patch;%Future Energy Ventures Management GmbH;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Future Energy Ventures Management"
@@ -68617,9 +68223,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%CaptureNow;%;%;%;%"
-        ],
+        "from": ["Stripe;%CaptureNow;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "CaptureNow"
@@ -68665,9 +68269,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%Own Your Beliefs Inc.;%;%;%;%"
-        ],
+        "from": ["Stripe;%Own Your Beliefs Inc.;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "Own Your Beliefs"
@@ -68713,9 +68315,7 @@
     "expression": "value",
     "edits": [
       {
-        "from": [
-          "Stripe;%DeliverOne;%;%;%;%"
-        ],
+        "from": ["Stripe;%DeliverOne;%;%;%;%"],
         "fromBlank": false,
         "fromError": false,
         "to": "DeliverOne"
