@@ -1,7 +1,10 @@
+from unittest.mock import patch
+
 import numpy as np
 import pandas as pd
 import pytest
 
+from offsets_db_data.models import credit_without_id_schema
 from offsets_db_data.vcs import (
     add_vcs_compliance_projects,
     add_vcs_project_id,
@@ -438,6 +441,28 @@ def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_transactions):
 
 
 # ── add_vcs_project_id / add_vcs_project_url (real sample data) ───────────────
+
+
+@patch('offsets_db_data.vcs.harmonize_beneficiary_data')
+def test_process_vcs_credits_harmonize_beneficiary(mock_harmonize, raw_vcs_transactions):
+    """harmonize_beneficiary_info=True invokes harmonize_beneficiary_data."""
+    mock_harmonize.side_effect = lambda df, **_: df
+    process_vcs_credits(raw_vcs_transactions, harmonize_beneficiary_info=True)
+    mock_harmonize.assert_called_once()
+
+
+def test_process_vcs_credits_with_arb(subtests, raw_vcs_transactions, arb):
+    """process_vcs_credits with non-empty arb triggers the merge_with_arb branch."""
+    result = process_vcs_credits(
+        raw_vcs_transactions,
+        harmonize_beneficiary_info=False,
+        arb=arb,
+    )
+    credit_without_id_schema.validate(result)
+    with subtests.test('schema_valid'):
+        assert set(result.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('non_negative_quantities'):
+        assert (result['quantity'] >= 0).all()
 
 
 def test_add_vcs_project_id(subtests, raw_vcs_projects):

@@ -11,9 +11,14 @@ from offsets_db_data.pipeline_utils import (
     summarize,
     to_parquet,
     transform_registry_data,
+    validate,
+    validate_credits,
     validate_data,
+    validate_projects,
     write_latest_production,
 )
+
+_VALIDATION_FAIL_MSG = 'Validation failed for either 1, 2, 3, or 4 days back'
 
 
 @pytest.fixture
@@ -45,6 +50,56 @@ def sample_projects():
             'type_source': ['carbonplan', 'berkeley', 'carbonplan', 'carbonplan'],
         }
     )
+
+
+@patch('offsets_db_data.pipeline_utils.validate_data')
+def test_validate_wrappers(mock_validate_data, sample_credits, sample_projects):
+    """validate_credits, validate_projects, and validate all delegate to validate_data."""
+    as_of = datetime(2023, 1, 1)
+
+    validate_credits(new_credits=sample_credits, as_of=as_of)
+    mock_validate_data.assert_called_once()
+
+    mock_validate_data.reset_mock()
+    validate_projects(new_projects=sample_projects, as_of=as_of)
+    mock_validate_data.assert_called_once()
+
+    mock_validate_data.reset_mock()
+    validate(new_credits=sample_credits, new_projects=sample_projects, as_of=as_of)
+    assert mock_validate_data.call_count == 2
+
+
+@patch('offsets_db_data.pipeline_utils.catalog')
+def test_validate_data_all_retries_fail(mock_catalog, sample_credits):
+    """When all 4 retry attempts fail, validate_data raises ValueError."""
+    mock_catalog.__getitem__.return_value = MagicMock(side_effect=Exception('S3 unavailable'))
+
+    with pytest.raises(ValueError, match=_VALIDATION_FAIL_MSG):
+        validate_data(
+            new_data=sample_credits,
+            as_of=datetime(2023, 1, 1),
+            data_type='credits',
+            quantity_column='quantity',
+            aggregation_func=sum,
+        )
+
+
+@patch('offsets_db_data.pipeline_utils.catalog')
+def test_validate_data_quantity_regression(mock_catalog, sample_credits):
+    """When new quantity < 99% of old, the retry loop catches it and eventually raises."""
+    old_data = sample_credits.copy()
+    old_data['quantity'] = old_data['quantity'] * 1000  # old >> new → always fails
+    mock_read = MagicMock(read=lambda: old_data)
+    mock_catalog.__getitem__.return_value = MagicMock(return_value=mock_read)
+
+    with pytest.raises(ValueError, match=_VALIDATION_FAIL_MSG):
+        validate_data(
+            new_data=sample_credits,
+            as_of=datetime(2023, 1, 1),
+            data_type='credits',
+            quantity_column='quantity',
+            aggregation_func=sum,
+        )
 
 
 @patch('offsets_db_data.pipeline_utils.catalog')
@@ -80,6 +135,38 @@ def test_summarize(subtests, sample_credits, sample_projects, capsys):
         captured = capsys.readouterr()
         assert 'Summary Statistics for projects (in Millions)' in captured.out
         assert 'Summary Statistics for credits (in Millions)' in captured.out
+
+    with subtests.test('single_registry_empty_projects'):
+        summarize(credits=sample_credits, projects=pd.DataFrame(), registry_name='verra')
+        captured = capsys.readouterr()
+        assert 'No projects found for verra' in captured.out
+
+    with subtests.test('single_registry_empty_credits'):
+        summarize(credits=pd.DataFrame(), projects=sample_projects, registry_name='verra')
+        captured = capsys.readouterr()
+        assert 'No credits found for verra' in captured.out
+
+    with subtests.test('multi_registry_empty_projects'):
+        summarize(credits=sample_credits, projects=pd.DataFrame())
+        captured = capsys.readouterr()
+        assert 'No projects found' in captured.out
+
+    with subtests.test('multi_registry_empty_credits'):
+        summarize(credits=pd.DataFrame(), projects=sample_projects)
+        captured = capsys.readouterr()
+        assert 'No credits found' in captured.out
+
+
+def test_create_data_zip_buffer_unknown_format(sample_credits, sample_projects):
+    """Unknown format_type: only terms file is written, no data files."""
+    buffer = _create_data_zip_buffer(
+        credits=sample_credits,
+        projects=sample_projects,
+        format_type='json',
+        terms_content='Test terms',
+    )
+    with zipfile.ZipFile(buffer, 'r') as zf:
+        assert zf.namelist() == ['TERMS_OF_DATA_ACCESS.txt']
 
 
 def test_create_data_zip_buffer(subtests, sample_credits, sample_projects):
@@ -135,6 +222,29 @@ def test_write_latest_production(
     mock_fsspec_fs.assert_called_once_with('s3', anon=False)
     assert mock_fsspec_open.call_count == 2
     assert mock_file.write.call_count == 2
+
+
+@patch('offsets_db_data.pipeline_utils.to_parquet')
+@patch('offsets_db_data.pipeline_utils.summarize')
+def test_transform_registry_data_no_registry_name(
+    mock_summarize, mock_to_parquet, sample_credits, sample_projects, capsys
+):
+    process_credits_fn = MagicMock(return_value=sample_credits)
+    process_projects_fn = MagicMock(return_value=sample_projects)
+    output_paths = {'credits': 'path/to/credits', 'projects': 'path/to/projects'}
+
+    transform_registry_data(
+        process_credits_fn=process_credits_fn,
+        process_projects_fn=process_projects_fn,
+        output_paths=output_paths,
+    )
+
+    captured = capsys.readouterr()
+    assert 'processed credits:' in captured.out
+    assert 'processed projects:' in captured.out
+    mock_summarize.assert_called_once_with(
+        credits=sample_credits, projects=sample_projects, registry_name=None
+    )
 
 
 @patch('offsets_db_data.pipeline_utils.to_parquet')

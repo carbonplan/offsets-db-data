@@ -3,6 +3,8 @@
 All tests use real sample data from tests/data/ via conftest fixtures.
 """
 
+from unittest.mock import patch
+
 import pandas as pd
 
 from offsets_db_data.gld import (
@@ -129,3 +131,41 @@ def test_process_gld_projects_empty_projects():
     result = process_gld_projects(pd.DataFrame(), credits=pd.DataFrame())
     project_schema.validate(result)
     assert result.empty
+
+
+@patch('offsets_db_data.gld.harmonize_beneficiary_data')
+def test_process_gld_credits_harmonize_beneficiary(mock_harmonize, raw_gld_retirements):
+    """harmonize_beneficiary_info=True invokes harmonize_beneficiary_data."""
+    mock_harmonize.side_effect = lambda df, **_: df
+    process_gld_credits(
+        raw_gld_retirements,
+        download_type='retirements',
+        harmonize_beneficiary_info=True,
+    )
+    mock_harmonize.assert_called_once()
+
+
+def test_process_gld_credits_with_arb(raw_gld_retirements):
+    """process_gld_credits with non-empty arb triggers the merge_with_arb branch."""
+    dummy_arb = pd.DataFrame(
+        {
+            'project_id': ['GLD1'],
+            'quantity': [999],
+            'vintage': [2020],
+            'transaction_date': pd.to_datetime(['2021-01-01'], utc=True),
+            'transaction_type': ['retirement'],
+            'retirement_account': [None],
+            'retirement_reason': [None],
+            'retirement_note': [None],
+            'retirement_beneficiary': [None],
+            'retirement_beneficiary_harmonized': [None],
+        }
+    )
+    result = process_gld_credits(
+        raw_gld_retirements,
+        download_type='retirements',
+        harmonize_beneficiary_info=False,
+        arb=dummy_arb,
+    )
+    credit_without_id_schema.validate(result)
+    assert (result['quantity'] >= 0).all()

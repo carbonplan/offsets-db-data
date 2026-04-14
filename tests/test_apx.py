@@ -5,7 +5,10 @@ Covers: american-carbon-registry (ACR), art-trees (ART),
 All tests use real sample data loaded from tests/data/ via conftest fixtures.
 """
 
+from unittest.mock import patch
+
 import pandas as pd
+import pytest
 
 from offsets_db_data.apx import (
     add_project_url,
@@ -114,6 +117,12 @@ def test_add_project_url(subtests, raw_acr_projects, raw_art_projects, raw_car_p
             assert suffix.str.isnumeric().all()
 
 
+def test_add_project_url_invalid_registry(raw_acr_projects):
+    df = raw_acr_projects.rename(columns={'Project ID': 'project_id'})
+    with pytest.raises(ValueError, match='Unknown registry name'):
+        add_project_url(df, registry_name='unknown-registry')
+
+
 # ── process_apx_credits ────────────────────────────────────────────────────────
 
 
@@ -212,3 +221,33 @@ def test_process_apx_projects(
             assert result['project_id'].str.startswith(prefix).all()
             assert (result['registry'] == registry).all()
             assert result['project_url'].str.startswith('https://').all()
+
+
+@patch('offsets_db_data.apx.harmonize_beneficiary_data')
+def test_process_apx_credits_harmonize_beneficiary(mock_harmonize, raw_acr_retirements):
+    """harmonize_beneficiary_info=True invokes harmonize_beneficiary_data."""
+    mock_harmonize.side_effect = lambda df, **_: df
+    process_apx_credits(
+        raw_acr_retirements,
+        download_type='retirements',
+        registry_name='american-carbon-registry',
+        harmonize_beneficiary_info=True,
+    )
+    mock_harmonize.assert_called_once()
+
+
+def test_process_apx_credits_with_arb(subtests, raw_acr_issuances, arb):
+    """process_apx_credits with non-empty arb triggers the merge_with_arb branch."""
+    acr_arb = arb[arb['project_id'].str.startswith('ACR')]
+    result = process_apx_credits(
+        raw_acr_issuances,
+        download_type='issuances',
+        registry_name='american-carbon-registry',
+        harmonize_beneficiary_info=False,
+        arb=acr_arb,
+    )
+    credit_without_id_schema.validate(result)
+    with subtests.test('schema_valid'):
+        assert set(result.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('non_negative_quantities'):
+        assert (result['quantity'] >= 0).all()
