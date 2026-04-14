@@ -24,46 +24,52 @@ Utilities for cleaning, and processing data for the [OffsetsDB web tool](https:/
 
 ## installation
 
-To install the package, you can use pip:
+This project uses [Pixi](https://pixi.sh) for environment and dependency management.
 
-```bash
-python -m pip install git+https://github.com/carbonplan/offsets-db-data.git
-```
+1. Install Pixi: follow the [installation instructions](https://pixi.sh/latest/#installation)
 
-You can also install the package locally by cloning the repository and running:
+2. Clone and set up:
 
 ```bash
 git clone https://github.com/carbonplan/offsets-db-data.git
 cd offsets-db-data
-python -m pip install -e .
+pixi install
 ```
 
-To install the dependencies for development, you can use pip:
+Common tasks:
 
 ```bash
-python -m pip install -e ".[all]"
+pixi run test              # Run unit tests
+pixi run test-cov          # Run unit tests with coverage
+pixi run test-integration  # Run integration tests (requires S3 + OpenRefine)
+pixi run test-all          # Run unit + integration tests
+pixi run lint              # Run linting
+pixi run format            # Format code
+pixi run format-check      # Check formatting without modifying files
+pixi run docs-build        # Build documentation
+```
 
-# or
+Activate an interactive shell with all dependencies:
 
+```bash
+pixi shell
+```
+
+### pip (alternative)
+
+```bash
+python -m pip install offsets-db-data
+# or editable install with dev deps:
 python -m pip install -e ".[dev]"
-
 ```
 
 ## building the documentation
 
-To build the documentation locally, you can use [sphinx](https://www.sphinx-doc.org/en/master/). You can install the documentation dependencies by running:
-
 ```bash
-python -m pip install -e ".[docs]"
+pixi run docs-build
 ```
 
-Then, you can build the documentation by running:
-
-```bash
-sphinx-build docs docs/_build
-```
-
-You can view the documentation by opening `docs/_build/index.html` in your browser.
+Open `docs/_build/index.html` in your browser to view the result.
 
 ## license
 
