@@ -60,5 +60,8 @@ jobs:
       - name: Show CLI help
         run: pixi run offsets-db-data-orcli --help
 
-      - name: Run tests
+      - name: Run unit tests
         run: pixi run test-cov
+
+      - name: Run integration tests
+        run: pixi run test-integration

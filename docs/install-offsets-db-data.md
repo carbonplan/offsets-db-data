@@ -55,12 +55,14 @@ To contribute to offsets-db-data, clone the repository and set up the full devel
 
         .. code:: bash
 
-            $ pixi run test          # run tests
-            $ pixi run test-cov      # run tests with coverage
-            $ pixi run lint          # lint
-            $ pixi run format        # format code
-            $ pixi run format-check  # check formatting
-            $ pixi run docs-build    # build documentation
+            $ pixi run test              # run unit tests
+            $ pixi run test-cov          # run unit tests with coverage
+            $ pixi run test-integration  # run integration tests (requires S3 + OpenRefine)
+            $ pixi run test-all          # run unit + integration tests
+            $ pixi run lint              # lint
+            $ pixi run format            # format code
+            $ pixi run format-check      # check formatting
+            $ pixi run docs-build        # build documentation
 
         Activate an interactive shell with all dependencies:
 

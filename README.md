@@ -39,12 +39,14 @@ pixi install
 Common tasks:
 
 ```bash
-pixi run test          # Run tests
-pixi run test-cov      # Run tests with coverage
-pixi run lint          # Run linting
-pixi run format        # Format code
-pixi run format-check  # Check formatting without modifying files
-pixi run docs-build    # Build documentation
+pixi run test              # Run unit tests
+pixi run test-cov          # Run unit tests with coverage
+pixi run test-integration  # Run integration tests (requires S3 + OpenRefine)
+pixi run test-all          # Run unit + integration tests
+pixi run lint              # Run linting
+pixi run format            # Format code
+pixi run format-check      # Check formatting without modifying files
+pixi run docs-build        # Build documentation
 ```
 
 Activate an interactive shell with all dependencies:
