@@ -15,7 +15,7 @@
     format-check     = "ruff format --check ."
     lint             = "ruff check ."
     test             = "pytest --ignore=tests/test_integration.py"
-    test-cov         = "pytest --ignore=tests/test_integration.py --cov=./ --cov-report=xml --cov-report=term-missing"
+    test-cov         = "pytest --ignore=tests/test_integration.py --cov=./offsets_db_data --cov-report=xml --cov-report=term-missing"
     test-integration = "pytest tests/test_integration.py"
     test-all         = "pytest --ignore=tests/test_integration.py && pytest tests/test_integration.py"
 
