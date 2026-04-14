@@ -7,23 +7,8 @@ from offsets_db_data.gld import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.vcs import *  # noqa: F403
 
-
-@pytest.fixture
-def date() -> str:
-    return '2024-08-27'
-
-
-@pytest.fixture
-def bucket() -> str:
-    return 's3://carbonplan-offsets-db/raw'
-
-
-@pytest.fixture
-def arb() -> pd.DataFrame:
-    data = pd.read_excel(
-        's3://carbonplan-offsets-db/raw/2024-08-27/arb/nc-arboc_issuance.xlsx', sheet_name=3
-    )
-    return data.process_arb()
+# `date` and `bucket` fixtures are provided by conftest.py
+# `arb` fixture is provided by conftest.py (processes raw_arb from local sample)
 
 
 @pytest.mark.parametrize(
@@ -81,11 +66,7 @@ def test_apx(date, bucket, arb, registry, download_types, prefix):
     'harmonize_beneficiary_info',
     [True, False],
 )
-def test_gld(
-    date,
-    bucket,
-    harmonize_beneficiary_info,
-):
+def test_gld(date, bucket, harmonize_beneficiary_info):
     registry = 'gold-standard'
     download_types = ['issuances', 'retirements']
     prefix = 'GLD'
@@ -107,7 +88,6 @@ def test_gld(
     df_projects = projects.process_gld_projects(credits=df_credits)
     project_schema.validate(df_projects)
 
-    # check if all project_id use the same prefix
     assert df_projects['project_id'].str.startswith(prefix).all()
     assert df_credits['project_id'].str.startswith(prefix).all()
 
@@ -118,35 +98,20 @@ def test_gld(
         pd.DataFrame().process_gld_credits(
             download_type='issuances', harmonize_beneficiary_info=True
         ),
-        pd.concat(
-            [
-                pd.read_csv(
-                    's3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/issuances.csv.gz'
-                ).process_gld_credits(download_type='issuances', harmonize_beneficiary_info=True),
-                pd.read_csv(
-                    's3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/retirements.csv.gz'
-                ).process_gld_credits(download_type='retirements', harmonize_beneficiary_info=True),
-            ]
-        ),
     ],
 )
 @pytest.mark.parametrize(
     'projects',
-    [
-        pd.DataFrame(),
-        pd.read_csv('s3://carbonplan-offsets-db/raw/2024-08-27/gold-standard/projects.csv.gz'),
-    ],
+    [pd.DataFrame()],
 )
 def test_gld_empty(df_credits, projects):
     prefix = 'GLD'
 
     credit_without_id_schema.validate(df_credits)
-
     assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
 
     df_projects = projects.process_gld_projects(credits=df_credits)
     project_schema.validate(df_projects)
 
-    # check if all project_id use the same prefix
     assert df_projects['project_id'].str.startswith(prefix).all()
     assert df_credits['project_id'].str.startswith(prefix).all()
