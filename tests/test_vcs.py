@@ -4,6 +4,8 @@ import pytest
 
 from offsets_db_data.vcs import (
     add_vcs_compliance_projects,
+    add_vcs_project_id,
+    add_vcs_project_url,
     calculate_vcs_issuances,
     calculate_vcs_retirements,
     determine_vcs_transaction_type,
@@ -433,3 +435,36 @@ def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_transactions):
         assert isinstance(row['first_issuance_at'], pd.Timestamp)
     with subtests.test('first_retirement_at_type'):
         assert isinstance(row['first_retirement_at'], pd.Timestamp)
+
+
+# ── add_vcs_project_id / add_vcs_project_url (real sample data) ───────────────
+
+
+def test_add_vcs_project_id(subtests, raw_vcs_projects):
+    # Mirror the pipeline: rename 'ID' -> 'project_id' before calling add_vcs_project_id
+    df = raw_vcs_projects.rename(columns={'ID': 'project_id'}).copy()
+    result = add_vcs_project_id(df)
+
+    with subtests.test('prefix_added'):
+        assert result['project_id'].str.startswith('VCS').all()
+    with subtests.test('numeric_suffix'):
+        assert result['project_id'].str[3:].str.isnumeric().all()
+    with subtests.test('original_ids_preserved'):
+        original = raw_vcs_projects['ID'].astype(str)
+        assert (result['project_id'].str[3:] == original).all()
+
+
+def test_add_vcs_project_url(subtests, raw_vcs_projects):
+    # Mirror the pipeline: rename then prefix, then build URL
+    df = raw_vcs_projects.rename(columns={'ID': 'project_id'}).copy()
+    df = add_vcs_project_id(df)
+    result = add_vcs_project_url(df)
+
+    base = 'https://registry.verra.org/app/projectDetail/VCS/'
+    with subtests.test('url_column_exists'):
+        assert 'project_url' in result.columns
+    with subtests.test('url_base'):
+        assert result['project_url'].str.startswith(base).all()
+    with subtests.test('url_suffix_matches_id'):
+        suffix = result['project_url'].str.removeprefix(base)
+        assert (suffix == result['project_id'].str[3:]).all()
