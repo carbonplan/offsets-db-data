@@ -24,13 +24,11 @@ Utilities for cleaning, and processing data for the [OffsetsDB web tool](https:/
 
 ## installation
 
-### Using Pixi (Recommended)
+This project uses [Pixi](https://pixi.sh) for environment and dependency management.
 
-This project uses [Pixi](https://pixi.sh) for environment and dependency management. To get started:
+1. Install Pixi: follow the [installation instructions](https://pixi.sh/latest/#installation)
 
-1. Install Pixi by following the [installation instructions](https://pixi.sh/latest/#installation)
-
-2. Clone the repository and set up the environment:
+2. Clone and set up:
 
 ```bash
 git clone https://github.com/carbonplan/offsets-db-data.git
@@ -38,54 +36,38 @@ cd offsets-db-data
 pixi install
 ```
 
-The default environment includes all development dependencies. You can run commands using:
+Common tasks:
 
 ```bash
 pixi run test          # Run tests
 pixi run test-cov      # Run tests with coverage
 pixi run lint          # Run linting
 pixi run format        # Format code
+pixi run format-check  # Check formatting without modifying files
 pixi run docs-build    # Build documentation
 ```
 
-To activate the environment in your shell:
+Activate an interactive shell with all dependencies:
 
 ```bash
 pixi shell
 ```
 
-### Using pip
-
-You can also install the package using pip:
+### pip (alternative)
 
 ```bash
-python -m pip install git+https://github.com/carbonplan/offsets-db-data.git
-```
-
-Or install locally with development dependencies:
-
-```bash
-git clone https://github.com/carbonplan/offsets-db-data.git
-cd offsets-db-data
+python -m pip install offsets-db-data
+# or editable install with dev deps:
 python -m pip install -e ".[dev]"
 ```
 
 ## building the documentation
 
-With Pixi:
-
 ```bash
 pixi run docs-build
 ```
 
-Or with pip after installing documentation dependencies:
-
-```bash
-python -m pip install -e ".[docs]"
-sphinx-build docs docs/_build
-```
-
-You can view the documentation by opening `docs/_build/index.html` in your browser.
+Open `docs/_build/index.html` in your browser to view the result.
 
 ## license
 
