@@ -124,10 +124,12 @@ def process_arb(df: pd.DataFrame) -> pd.DataFrame:
     ].copy()
     # add a prefix to the project_id to indicate the source
     data['project_id'] = data.opr_id.apply(
-        lambda item: item
-        if isinstance(item, str)
-        and (item.startswith('CAR') or item.startswith('ACR') or item.startswith('VCS'))
-        else f'VCS{item}'
+        lambda item: (
+            item
+            if isinstance(item, str)
+            and (item.startswith('CAR') or item.startswith('ACR') or item.startswith('VCS'))
+            else f'VCS{item}'
+        )
     )
     data['registry'] = data.project_id.apply(_get_registry)
     data['vintage'] = data['vintage'].astype(int)

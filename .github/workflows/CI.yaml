@@ -39,7 +39,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v5
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: arn:aws:iam::631969445205:role/github-action-role
           role-session-name: offsets-db-etl-role-session
