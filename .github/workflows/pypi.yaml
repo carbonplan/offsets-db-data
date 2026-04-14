@@ -47,11 +47,6 @@ jobs:
     needs: build-artifacts
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Pixi
-        uses: prefix-dev/setup-pixi@v0.9.3
-        with:
-          cache: false
-
       - uses: actions/download-artifact@v8
         with:
           name: releases
@@ -65,8 +60,8 @@ jobs:
       - name: Verify the built dist/wheel is valid
         if: github.event_name == 'push'
         run: |
-          pixi run pip install dist/offsets_db_data*.whl
-          pixi run python -c "import offsets_db_data; print(offsets_db_data.__version__)"
+          pip install --no-deps dist/offsets_db_data*.whl
+          python -c "import offsets_db_data; print(offsets_db_data.__version__)"
 
   upload-to-pypi:
     needs: test-built-dist
