@@ -15,8 +15,9 @@ from offsets_db_data.vcs import (
 )
 
 
+@pytest.fixture
 def vcs_projects() -> pd.DataFrame:
-    df = pd.DataFrame(
+    return pd.DataFrame(
         [
             {
                 'ID': 75,
@@ -96,16 +97,10 @@ def vcs_projects() -> pd.DataFrame:
         ]
     )
 
-    return df
 
-
-@pytest.fixture(name='vcs_projects')
-def fixture_vcs_projects() -> pd.DataFrame:
-    return vcs_projects()
-
-
+@pytest.fixture
 def vcs_transactions() -> pd.DataFrame:
-    df = pd.DataFrame(
+    return pd.DataFrame(
         [
             {
                 'Issuance Date': '08/03/2022',
@@ -299,28 +294,34 @@ def vcs_transactions() -> pd.DataFrame:
             },
         ]
     )
-    return df
 
 
-@pytest.fixture(name='vcs_transactions')
-def fixture_vcs_transactions() -> pd.DataFrame:
-    return vcs_transactions()
+@pytest.fixture
+def processed_vcs_transactions(vcs_transactions) -> pd.DataFrame:
+    """Intermediate processing state shared by issuance and retirement tests."""
+    return (
+        vcs_transactions.set_registry(registry_name='verra')
+        .generate_vcs_project_ids(prefix='VCS')
+        .determine_vcs_transaction_type(date_column='Retirement/Cancellation Date')
+        .set_vcs_transaction_dates(
+            date_column='Retirement/Cancellation Date', fallback_column='Issuance Date'
+        )
+        .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
+        .set_vcs_vintage_year(date_column='Vintage End')
+        .convert_to_datetime(columns=['transaction_date'], dayfirst=True)
+    )
 
 
-def test_determine_vcs_transaction_type(vcs_transactions):
+def test_determine_vcs_transaction_type(subtests, vcs_transactions):
     df = determine_vcs_transaction_type(
         vcs_transactions, date_column='Retirement/Cancellation Date'
     )
-
-    # Check if the 'transaction_type' column is created
     assert 'transaction_type' in df.columns
 
-    # Check that the function correctly assigns 'retirement/cancellation' or 'issuance'
     for i, row in df.iterrows():
-        if pd.notnull(row['Retirement/Cancellation Date']):
-            assert row['transaction_type'] == 'retirement'
-        else:
-            assert row['transaction_type'] == 'issuance'
+        expected = 'retirement' if pd.notnull(row['Retirement/Cancellation Date']) else 'issuance'
+        with subtests.test(row=i):
+            assert row['transaction_type'] == expected
 
 
 def test_set_vcs_transaction_dates(vcs_transactions):
@@ -329,169 +330,106 @@ def test_set_vcs_transaction_dates(vcs_transactions):
         date_column='Retirement/Cancellation Date',
         fallback_column='Issuance Date',
     )
-
-    # Check if the 'transaction_date' column is created
     assert 'transaction_date' in df.columns
-
-    # Create a series for expected transaction_date values
-    expected_transaction_date = vcs_transactions['Retirement/Cancellation Date'].where(
-        vcs_transactions['Retirement/Cancellation Date'].notnull(),
-        vcs_transactions['Issuance Date'],
+    expected = (
+        vcs_transactions['Retirement/Cancellation Date']
+        .where(
+            vcs_transactions['Retirement/Cancellation Date'].notnull(),
+            vcs_transactions['Issuance Date'],
+        )
+        .rename('transaction_date')
     )
-
-    expected_transaction_date.name = (
-        'transaction_date'  # Set the name of the Series to match the DataFrame column
-    )
-
-    # Use assert_series_equal to compare the entire series
-    pd.testing.assert_series_equal(df['transaction_date'], expected_transaction_date)
+    pd.testing.assert_series_equal(df['transaction_date'], expected)
 
 
 def test_set_vcs_vintage_year(vcs_transactions):
     df = set_vcs_vintage_year(vcs_transactions, date_column='Issuance Date')
-
-    # Check if the 'vintage' column is created
     assert 'vintage' in df.columns
-
-    # Convert 'Issuance Date' in the original DataFrame to datetime for comparison
-    expected_vintage = pd.to_datetime(
+    expected = pd.to_datetime(
         vcs_transactions['Issuance Date'], dayfirst=True, utc=True
-    ).dt.year
-    expected_vintage.name = 'vintage'  # Set the name of the Series to match the DataFrame column
-
-    # Use assert_series_equal to compare the 'vintage' column with the expected result
-    pd.testing.assert_series_equal(df['vintage'], expected_vintage)
+    ).dt.year.rename('vintage')
+    pd.testing.assert_series_equal(df['vintage'], expected)
 
 
-def test_calculate_vcs_issuances(vcs_transactions):
-    # Process the vcs_transactions similar to process_vcs_credits
-    processed_data = (
-        vcs_transactions.set_registry(registry_name='verra')
-        .generate_vcs_project_ids(prefix='VCS')
-        .determine_vcs_transaction_type(date_column='Retirement/Cancellation Date')
-        .set_vcs_transaction_dates(
-            date_column='Retirement/Cancellation Date', fallback_column='Issuance Date'
-        )
-        .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
-        .set_vcs_vintage_year(date_column='Vintage End')
-        .convert_to_datetime(columns=['transaction_date'], dayfirst=True)
-    )
+def test_calculate_vcs_issuances(subtests, processed_vcs_transactions):
+    issuances = calculate_vcs_issuances(processed_vcs_transactions)
 
-    # Apply calculate_vcs_issuances
-    issuances = calculate_vcs_issuances(processed_data)
-
-    # Assertions
-    # Ensure duplicates are removed based on the specified columns
-    assert issuances.duplicated(subset=['vintage', 'project_id', 'quantity']).sum() == 0
-
-    # Ensure the 'quantity' column is correctly populated
-    assert 'quantity' in issuances.columns
-
-    # Ensure 'transaction_type' is set to 'issuance'
-    assert all(issuances['transaction_type'] == 'issuance')
+    with subtests.test('no_duplicates'):
+        assert issuances.duplicated(subset=['vintage', 'project_id', 'quantity']).sum() == 0
+    with subtests.test('quantity_column'):
+        assert 'quantity' in issuances.columns
+    with subtests.test('all_issuances'):
+        assert (issuances['transaction_type'] == 'issuance').all()
 
 
-def test_calculate_vcs_retirements(vcs_transactions):
-    # Process the vcs_transactions similar to process_vcs_credits
-    processed_data = (
-        vcs_transactions.set_registry(registry_name='verra')
-        .generate_vcs_project_ids(prefix='VCS')
-        .determine_vcs_transaction_type(date_column='Retirement/Cancellation Date')
-        .set_vcs_transaction_dates(
-            date_column='Retirement/Cancellation Date', fallback_column='Issuance Date'
-        )
-        .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
-        .set_vcs_vintage_year(date_column='Vintage End')
-        .convert_to_datetime(columns=['transaction_date'], dayfirst=True)
-    )
+def test_calculate_vcs_retirements(subtests, processed_vcs_transactions):
+    retirements = calculate_vcs_retirements(processed_vcs_transactions)
 
-    # Apply calculate_vcs_retirements
-    retirements = calculate_vcs_retirements(processed_data)
-
-    # Assertions
-    # Check if 'retirement' and 'cancellation' types are present and 'issuance' types are filtered out
-    assert all(retirements['transaction_type'].str.contains('retirement'))
-
-    # Ensure the 'quantity' column is correctly renamed
-    assert 'quantity' in retirements.columns
-    assert 'Quantity Issued' not in retirements.columns
+    with subtests.test('all_retirements'):
+        assert retirements['transaction_type'].str.contains('retirement').all()
+    with subtests.test('quantity_column'):
+        assert 'quantity' in retirements.columns
+    with subtests.test('raw_column_removed'):
+        assert 'Quantity Issued' not in retirements.columns
 
 
 def test_generate_vcs_project_ids(vcs_projects):
-    df = vcs_projects
-    df = generate_vcs_project_ids(df, prefix='VCS')
-    assert df['project_id'].tolist() == [
-        'VCS75',
-        'VCS2498',
-        'VCS101',
-        'VCS3408',
-        'VCS1223',
-    ]
+    df = generate_vcs_project_ids(vcs_projects, prefix='VCS')
+    assert df['project_id'].tolist() == ['VCS75', 'VCS2498', 'VCS101', 'VCS3408', 'VCS1223']
 
 
-def test_add_vcs_compliance_projects(vcs_projects):
-    original_length = len(vcs_projects)
+def test_add_vcs_compliance_projects(subtests, vcs_projects):
+    original_len = len(vcs_projects)
     df = add_vcs_compliance_projects(vcs_projects)
 
-    # Check if two new rows are added
-    assert len(df) == original_length + 2
-
-    # Optionally, check for the presence of specific project details
-    assert 'VCSOPR2' in df['project_id'].values
-    assert 'VCSOPR10' in df['project_id'].values
+    with subtests.test('two_rows_added'):
+        assert len(df) == original_len + 2
+    with subtests.test('compliance_ids_present'):
+        assert {'VCSOPR2', 'VCSOPR10'}.issubset(df['project_id'].values)
 
 
-def test_process_vcs_projects(vcs_projects, vcs_transactions):
-    vcs_credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
+def test_process_vcs_projects(subtests, vcs_projects, vcs_transactions):
+    credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
     df = process_vcs_projects(
-        vcs_projects, credits=vcs_credits, registry_name='verra', download_type='projects'
+        vcs_projects, credits=credits, registry_name='verra', download_type='projects'
     )
 
-    assert 'listed_at' in df.columns
-    # check project_url series
-    assert df['project_url'].tolist() == [
-        'https://registry.verra.org/app/projectDetail/VCS/75',
-        'https://registry.verra.org/app/projectDetail/VCS/2498',
-        'https://registry.verra.org/app/projectDetail/VCS/101',
-        'https://registry.verra.org/app/projectDetail/VCS/3408',
-        'https://registry.verra.org/app/projectDetail/VCS/1223',
-        'https://registry.verra.org/app/projectDetail/VCS/2265',  # From add_vcs_compliance_projects
-        'https://registry.verra.org/app/projectDetail/VCS/2271',  # From add_vcs_compliance_projects
-    ]
-    # check project_id series
-    assert df['project_id'].tolist() == [
-        'VCS75',
-        'VCS2498',
-        'VCS101',
-        'VCS3408',
-        'VCS1223',
-        'VCSOPR2',  # From add_vcs_compliance_projects
-        'VCSOPR10',  # From add_vcs_compliance_projects
-    ]
+    with subtests.test('listed_at_column'):
+        assert 'listed_at' in df.columns
+    with subtests.test('project_urls'):
+        assert df['project_url'].tolist() == [
+            'https://registry.verra.org/app/projectDetail/VCS/75',
+            'https://registry.verra.org/app/projectDetail/VCS/2498',
+            'https://registry.verra.org/app/projectDetail/VCS/101',
+            'https://registry.verra.org/app/projectDetail/VCS/3408',
+            'https://registry.verra.org/app/projectDetail/VCS/1223',
+            'https://registry.verra.org/app/projectDetail/VCS/2265',
+            'https://registry.verra.org/app/projectDetail/VCS/2271',
+        ]
+    with subtests.test('project_ids'):
+        assert df['project_id'].tolist() == [
+            'VCS75',
+            'VCS2498',
+            'VCS101',
+            'VCS3408',
+            'VCS1223',
+            'VCSOPR2',
+            'VCSOPR10',
+        ]
 
 
-def test_process_vcs_projects_with_totals_and_dates(vcs_projects, vcs_transactions):
-    # Process the vcs_transactions as per your existing pipeline
-    # Assuming process_vcs_credits or similar functions are in place
-    vcs_credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
-
-    # Process the vcs_projects
-    processed_projects = process_vcs_projects(
-        vcs_projects, credits=vcs_credits, registry_name='verra', download_type='projects'
+def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_transactions):
+    credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
+    df = process_vcs_projects(
+        vcs_projects, credits=credits, registry_name='verra', download_type='projects'
     )
+    row = df[df['project_id'] == 'VCS2498'].iloc[0]
 
-    # Assertions for retired and issued totals, and first issuance/retirement dates
-    # You need to know expected values for at least one project based on your test data
-    project_id = 'VCS2498'
-
-    # Extract the row for the specific project
-    project_data = processed_projects[processed_projects['project_id'] == project_id]
-
-    # Assert the total issued and retired quantities
-    expected_total_issued = 435078  # Calculate this based on  vcs_transactions fixture
-    expected_total_retired = 19549  # Calculate this based on  vcs_transactions fixture
-    assert project_data['issued'].iloc[0] == expected_total_issued
-    assert project_data['retired'].iloc[0] == expected_total_retired
-
-    assert isinstance(project_data['first_issuance_at'].iloc[0], pd.Timestamp)
-    assert isinstance(project_data['first_retirement_at'].iloc[0], pd.Timestamp)
+    with subtests.test('total_issued'):
+        assert row['issued'] == 435078
+    with subtests.test('total_retired'):
+        assert row['retired'] == 19549
+    with subtests.test('first_issuance_at_type'):
+        assert isinstance(row['first_issuance_at'], pd.Timestamp)
+    with subtests.test('first_retirement_at_type'):
+        assert isinstance(row['first_retirement_at'], pd.Timestamp)

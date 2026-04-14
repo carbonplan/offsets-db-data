@@ -18,7 +18,6 @@ from offsets_db_data.pipeline_utils import (
 
 @pytest.fixture
 def sample_credits():
-    """Sample credits dataframe for testing."""
     return pd.DataFrame(
         {
             'project_id': ['VCS123', 'VCS124', 'ACR456', 'CAR789'],
@@ -34,7 +33,6 @@ def sample_credits():
 
 @pytest.fixture
 def sample_projects():
-    """Sample projects dataframe for testing."""
     return pd.DataFrame(
         {
             'project_id': ['VCS123', 'VCS124', 'ACR456', 'CAR789'],
@@ -51,15 +49,11 @@ def sample_projects():
 
 @patch('offsets_db_data.pipeline_utils.catalog')
 def test_validate_data_success(mock_catalog, sample_credits):
-    """Test validate_data when data passes validation criteria."""
-    # Mock old data with 90% of new data quantity
-    mock_old_data = sample_credits.copy()
-    mock_old_data['quantity'] = mock_old_data['quantity'] * 0.9
-
+    mock_old = sample_credits.copy()
+    mock_old['quantity'] = mock_old['quantity'] * 0.9
     mock_catalog.__getitem__.return_value = MagicMock()
-    mock_catalog.__getitem__.return_value.read.return_value = mock_old_data
+    mock_catalog.__getitem__.return_value.read.return_value = mock_old
 
-    # Should not raise exception
     validate_data(
         new_data=sample_credits,
         as_of=datetime(2023, 1, 1),
@@ -68,83 +62,45 @@ def test_validate_data_success(mock_catalog, sample_credits):
         aggregation_func=sum,
     )
 
-    # Verify catalog was called properly
     mock_catalog.__getitem__.assert_called_with('credits')
 
 
-def test_summarize_single_registry(sample_credits, sample_projects, capsys):
-    """Test summarize function with a single registry."""
-    registry_name = 'verra'
+def test_summarize(subtests, sample_credits, sample_projects, capsys):
+    with subtests.test('single_registry'):
+        registry = 'verra'
+        verra_projects = sample_projects[sample_projects['registry'] == registry]
+        verra_credits = sample_credits[sample_credits['project_id'].str.startswith('VCS')]
+        summarize(credits=verra_credits, projects=verra_projects, registry_name=registry)
+        captured = capsys.readouterr()
+        assert f'Retired and Issued (in Millions) summary for {registry}' in captured.out
+        assert f'Credits summary (in Millions) for {registry}' in captured.out
 
-    # Filter data for verra registry
-    verra_projects = sample_projects[sample_projects['registry'] == registry_name]
-    verra_credits = sample_credits[sample_credits['project_id'].str.startswith('VCS')]
-
-    summarize(
-        credits=verra_credits,
-        projects=verra_projects,
-        registry_name=registry_name,
-    )
-
-    captured = capsys.readouterr()
-
-    assert f'Retired and Issued (in Millions) summary for {registry_name}' in captured.out
-    assert f'Credits summary (in Millions) for {registry_name}' in captured.out
+    with subtests.test('multi_registry'):
+        summarize(credits=sample_credits, projects=sample_projects)
+        captured = capsys.readouterr()
+        assert 'Summary Statistics for projects (in Millions)' in captured.out
+        assert 'Summary Statistics for credits (in Millions)' in captured.out
 
 
-def test_summarize_multi_registry(sample_credits, sample_projects, capsys):
-    """Test summarize function across multiple registries."""
-
-    summarize(
-        credits=sample_credits,
-        projects=sample_projects,
-    )
-
-    captured = capsys.readouterr()
-
-    assert 'Summary Statistics for projects (in Millions)' in captured.out
-    assert 'Summary Statistics for credits (in Millions)' in captured.out
-
-
-def test_create_data_zip_buffer_csv(sample_credits, sample_projects):
-    """Test _create_data_zip_buffer with CSV format."""
-
-    buffer = _create_data_zip_buffer(
-        credits=sample_credits,
-        projects=sample_projects,
-        format_type='csv',
-        terms_content='Test terms content',
-    )
-
-    # Test the buffer contains a valid ZIP
-    with zipfile.ZipFile(buffer, 'r') as zip_ref:
-        filenames = zip_ref.namelist()
-
-        # Check expected files exist
-        assert 'TERMS_OF_DATA_ACCESS.txt' in filenames
-        assert 'credits.csv' in filenames
-        assert 'projects.csv' in filenames
-
-        # Check terms content
-        assert zip_ref.read('TERMS_OF_DATA_ACCESS.txt').decode('utf-8') == 'Test terms content'
-
-
-def test_create_data_zip_buffer_parquet(sample_credits, sample_projects):
-    """Test _create_data_zip_buffer with Parquet format."""
-    buffer = _create_data_zip_buffer(
-        credits=sample_credits,
-        projects=sample_projects,
-        format_type='parquet',
-        terms_content='Test terms content',
-    )
-
-    # Test the buffer contains a valid ZIP
-    with zipfile.ZipFile(buffer, 'r') as zip_ref:
-        filenames = zip_ref.namelist()
-
-        assert 'TERMS_OF_DATA_ACCESS.txt' in filenames
-        assert 'credits.parquet' in filenames
-        assert 'projects.parquet' in filenames
+def test_create_data_zip_buffer(subtests, sample_credits, sample_projects):
+    formats = {
+        'csv': ['TERMS_OF_DATA_ACCESS.txt', 'credits.csv', 'projects.csv'],
+        'parquet': ['TERMS_OF_DATA_ACCESS.txt', 'credits.parquet', 'projects.parquet'],
+    }
+    for fmt, expected_files in formats.items():
+        with subtests.test(format=fmt):
+            buffer = _create_data_zip_buffer(
+                credits=sample_credits,
+                projects=sample_projects,
+                format_type=fmt,
+                terms_content='Test terms content',
+            )
+            with zipfile.ZipFile(buffer, 'r') as zf:
+                names = zf.namelist()
+                for fname in expected_files:
+                    assert fname in names
+                if fmt == 'csv':
+                    assert zf.read('TERMS_OF_DATA_ACCESS.txt').decode() == 'Test terms content'
 
 
 @patch('fsspec.filesystem')
@@ -157,49 +113,37 @@ def test_write_latest_production(
     sample_credits,
     sample_projects,
 ):
-    """Test write_latest_production function."""
-    # Setup mocks
     mock_fs = MagicMock()
     mock_fs.read_text.return_value = 'Test terms content'
     mock_fsspec_fs.return_value = mock_fs
-
-    # Create a new buffer for each call
     mock_create_buffer.side_effect = [
         io.BytesIO(b'test csv data'),
         io.BytesIO(b'test parquet data'),
     ]
-
     mock_file = MagicMock()
     mock_context = MagicMock()
     mock_context.__enter__.return_value = mock_file
     mock_fsspec_open.return_value = mock_context
 
-    # Call function
     write_latest_production(
         credits=sample_credits,
         projects=sample_projects,
         bucket='s3://test-bucket',
     )
 
-    # Assert mocks called correctly
-    assert mock_create_buffer.call_count == 2  # Called for CSV and Parquet
+    assert mock_create_buffer.call_count == 2
     mock_fsspec_fs.assert_called_once_with('s3', anon=False)
     assert mock_fsspec_open.call_count == 2
-
-    # Verify write calls
     assert mock_file.write.call_count == 2
 
 
 @patch('offsets_db_data.pipeline_utils.to_parquet')
 @patch('offsets_db_data.pipeline_utils.summarize')
 def test_transform_registry_data(mock_summarize, mock_to_parquet, sample_credits, sample_projects):
-    """Test transform_registry_data function."""
-    # Setup mock functions
     process_credits_fn = MagicMock(return_value=sample_credits)
     process_projects_fn = MagicMock(return_value=sample_projects)
     output_paths = {'credits': 'path/to/credits', 'projects': 'path/to/projects'}
 
-    # Call function
     result_credits, result_projects = transform_registry_data(
         process_credits_fn=process_credits_fn,
         process_projects_fn=process_projects_fn,
@@ -207,33 +151,22 @@ def test_transform_registry_data(mock_summarize, mock_to_parquet, sample_credits
         registry_name='test-registry',
     )
 
-    # Verify calls and returns
     process_credits_fn.assert_called_once()
     process_projects_fn.assert_called_once_with(credits=sample_credits)
     mock_summarize.assert_called_once_with(
         credits=sample_credits, projects=sample_projects, registry_name='test-registry'
     )
     mock_to_parquet.assert_called_once()
-
-    # Verify return values
     assert result_credits.equals(sample_credits)
     assert result_projects.equals(sample_projects)
 
 
 @patch('tempfile.NamedTemporaryFile')
 def test_to_parquet(mock_temp_file, sample_credits, sample_projects):
-    """Test to_parquet function."""
-    # Setup mock
     mock_temp = MagicMock()
     mock_temp_file.return_value.__enter__.return_value = mock_temp
+    output_paths = {'credits': 'path/to/credits', 'projects': 'path/to/projects'}
 
-    # Setup output paths
-    output_paths = {
-        'credits': 'path/to/credits',
-        'projects': 'path/to/projects',
-    }
-
-    # Patch pandas to_parquet to prevent actual file writing
     with patch.object(pd.DataFrame, 'to_parquet') as mock_to_parquet:
         to_parquet(
             credits=sample_credits,
@@ -241,6 +174,4 @@ def test_to_parquet(mock_temp_file, sample_credits, sample_projects):
             output_paths=output_paths,
             registry_name='test-registry',
         )
-
-        # Assert to_parquet called for all three dataframes
         assert mock_to_parquet.call_count == 2
