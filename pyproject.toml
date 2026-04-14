@@ -29,13 +29,13 @@
 [tool.pixi.dependencies]
 
 [tool.pixi.feature.dev.dependencies]
-    hypothesis    = ">=6.111,<6.112"
+    hypothesis    = ">=6.111"
     openpyxl      = "*"
-    pytest        = ">=7.4,<7.5"
-    pytest-cov    = ">=4.1,<4.2"
-    pytest-mock   = ">=3.10,<3.11"
-    pytest-xdist  = ">=3.3,<3.4"
-    requests-mock = ">=1.11,<1.12"
+    pytest        = ">=9.0"
+    pytest-cov    = ">=6.0"
+    pytest-mock   = ">=3.14"
+    pytest-xdist  = ">=3.6"
+    requests-mock = ">=1.11"
     ruff          = "*"
 
 [tool.pixi.feature.publish.dependencies]
@@ -105,13 +105,13 @@
 [project.optional-dependencies]
     all = ["offsets-db-data[dev,docs]"]
     dev = [
-        "hypothesis>=6.111,<6.112",
+        "hypothesis>=6.111",
         "openpyxl",
-        "pytest-cov>=4.1,<4.2",
-        "pytest-mock>=3.10,<3.11",
-        "pytest-xdist>=3.3,<3.4",
-        "pytest>=7.4,<7.5",
-        "requests-mock>=1.11,<1.12",
+        "pytest-cov>=6.0",
+        "pytest-mock>=3.14",
+        "pytest-xdist>=3.6",
+        "pytest>=9.0",
+        "requests-mock>=1.11",
         "ruff",
     ]
     docs = [
