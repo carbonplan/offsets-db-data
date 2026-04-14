@@ -1,6 +1,6 @@
 # Install offsets-db-data
 
-offsets-db-data Python package can be installed in two ways:
+## Installing the package
 
 ```{eval-rst}
 
@@ -8,20 +8,71 @@ offsets-db-data Python package can be installed in two ways:
 
     .. tab-item:: pip
 
-        Using the `pip <https://pypi.org/project/pip/>`__ package manager:
-
         .. code:: bash
 
             $ python -m pip install offsets-db-data
 
+    .. tab-item:: pixi
 
-    .. tab-item:: Development version
+        Add to an existing Pixi project:
 
-        To install a development version from source:
+        .. code:: bash
+
+            $ pixi add --pypi offsets-db-data
+
+    .. tab-item:: uv
+
+        Add to an existing uv project:
+
+        .. code:: bash
+
+            $ uv add offsets-db-data
+
+        Or install directly into a virtual environment:
+
+        .. code:: bash
+
+            $ uv pip install offsets-db-data
+```
+
+## Development setup
+
+To contribute to offsets-db-data, clone the repository and set up the full development environment using [Pixi](https://pixi.sh). Install Pixi first by following the [installation instructions](https://pixi.sh/latest/#installation).
+
+```{eval-rst}
+
+.. tab-set::
+
+    .. tab-item:: Pixi (recommended)
 
         .. code:: bash
 
             $ git clone https://github.com/carbonplan/offsets-db-data
             $ cd offsets-db-data
-            $ python -m pip install -e .
+            $ pixi install
+
+        Run common tasks with ``pixi run <task>``:
+
+        .. code:: bash
+
+            $ pixi run test          # run tests
+            $ pixi run test-cov      # run tests with coverage
+            $ pixi run lint          # lint
+            $ pixi run format        # format code
+            $ pixi run format-check  # check formatting
+            $ pixi run docs-build    # build documentation
+
+        Activate an interactive shell with all dependencies:
+
+        .. code:: bash
+
+            $ pixi shell
+
+    .. tab-item:: pip
+
+        .. code:: bash
+
+            $ git clone https://github.com/carbonplan/offsets-db-data
+            $ cd offsets-db-data
+            $ python -m pip install -e ".[dev]"
 ```
