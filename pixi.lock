@@ -4261,8 +4261,8 @@ packages:
   requires_python: '>=3.11'
 - pypi: ./
   name: offsets-db-data
-  version: 2025.12.2.post20+ga10919a62.d20260414
-  sha256: fd32cd8166ec1a546c972309d53f7d0ff4c43bbc1947b097af0a6516d7b5bc6e
+  version: 2025.12.2.post21+gee2961ec3.d20260414
+  sha256: 986cde8465ba58aaf0ee56dd0de3d3900bdbc71f1a0546b29090f2dc8bb1e276
   requires_dist:
   - country-converter==1.0.0
   - dask>=2025.2.0

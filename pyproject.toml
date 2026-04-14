@@ -15,7 +15,7 @@
     format-check = "ruff format --check ."
     lint         = "ruff check ."
     test         = "pytest -s"
-    test-cov     = "pytest -n auto --cov=./ --cov-report=xml --cov-report=term-missing --verbose"
+    test-cov     = "pytest --cov=./ --cov-report=xml --cov-report=term-missing --verbose"
 
     # Documentation tasks
     docs-build = "sphinx-build docs docs/_build"
@@ -220,5 +220,5 @@
     keep-runtime-typing = true
 
 [tool.pytest.ini_options]
-    addopts              = "-n auto --cov=./ --cov-report=xml  --cov-report=term-missing --verbose"
+    addopts              = "-n 2 --cov=./ --cov-report=xml  --cov-report=term-missing --verbose"
     console_output_style = "count"
