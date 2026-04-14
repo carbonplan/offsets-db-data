@@ -88,7 +88,7 @@
         "intake-parquet>=0.3.0",
         "intake<2",
         "numpy>=2",
-        "pandas>=2.2.2",
+        "pandas>=2.2.2,<3.0",
         "pandera>=0.23",
         "pydantic>=2.10",
         "pyjanitor==0.23.*",
