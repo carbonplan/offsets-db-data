@@ -7,6 +7,10 @@ Usage:
 
 The script downloads small slices of each registry's raw files and writes
 them as plain CSV into tests/data/. Requires S3 read access.
+
+Note: Cercarbono and Isometric data live in the scratch bucket
+  (s3://carbonplan-scratch/offsets-db-test/raw/) until they are promoted
+  to the production bucket (s3://carbonplan-offsets-db/raw/).
 """
 
 import argparse
@@ -17,12 +21,14 @@ import pandas as pd
 import s3fs
 
 BASE_S3 = 's3://carbonplan-offsets-db/raw'
+SCRATCH_S3 = 's3://carbonplan-scratch/offsets-db-test/raw'
 OUT_DIR = Path(__file__).parent.parent / 'data'
 
 
 def main(date: str) -> None:
     fs = s3fs.S3FileSystem(anon=False)
     base = f'{BASE_S3}/{date}'
+    scratch_base = f'{SCRATCH_S3}/{date}'
     print(f'Refreshing sample data from {base}')
 
     # ── Verra ─────────────────────────────────────────────────────────────────
@@ -74,6 +80,21 @@ def main(date: str) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(out, index=False)
     print(f'  {out.relative_to(OUT_DIR.parent)}  ({len(df)} rows)')
+
+    # ── Cercarbono (scratch bucket) ────────────────────────────────────────────
+    print(f'Refreshing Cercarbono + Isometric from {scratch_base}')
+    for key in ('projects', 'issuances', 'retirements'):
+        _csv(
+            f'{scratch_base}/cercarbono/{key}.csv.gz',
+            OUT_DIR / 'cercarbono' / f'{key}.csv',
+        )
+
+    # ── Isometric (scratch bucket) ─────────────────────────────────────────────
+    for key in ('projects', 'issuances', 'retirements'):
+        _csv(
+            f'{scratch_base}/isometric/{key}.csv.gz',
+            OUT_DIR / 'isometric' / f'{key}.csv',
+        )
 
     print('Done.')
 
