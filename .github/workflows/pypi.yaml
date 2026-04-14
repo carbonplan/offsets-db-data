@@ -19,18 +19,17 @@ jobs:
         with:
           cache: true
           cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          environments: publish
 
       - name: Build tarball and wheels
         run: |
           git clean -xdf
           git restore -SW .
-          pixi run pip install build
-          pixi run python -m build --sdist --wheel .
+          pixi run -e publish python -m build --sdist --wheel .
 
       - name: Check built artifacts
         run: |
-          pixi run pip install twine check-manifest
-          pixi run python -m twine check dist/*
+          pixi run -e publish python -m twine check dist/*
           pwd
           if [ -f dist/offsets-db-data-unknown.tar.gz ]; then
             echo "❌ INVALID VERSION NUMBER"

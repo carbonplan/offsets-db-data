@@ -36,6 +36,11 @@
     requests-mock = ">=1.11,<1.12"
     ruff          = "*"
 
+[tool.pixi.feature.publish.dependencies]
+    check-manifest = "*"
+    python-build   = "*"
+    twine          = "*"
+
 [tool.pixi.feature.docs.dependencies]
     # jupyterlab          = "*"
     # myst-nb             = "*"
@@ -51,6 +56,7 @@
     default = ["dev"]
     dev     = ["dev"]
     docs    = ["docs"]
+    publish = ["publish"]
 
 [project]
     authors = [{ name = "CarbonPlan", email = "tech@carbonplan.org" }]
