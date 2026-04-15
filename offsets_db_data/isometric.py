@@ -109,6 +109,7 @@ def process_isometric_credits(
         )
     if download_type == 'issuances':
         df['transaction_type'] = 'issuance'
+        df['transaction_url'] = 'https://registry.isometric.com/issuances/' + df['id'].astype(str)
     elif download_type == 'retirements':
         df = df.convert_to_datetime(columns=['sequestered_on'])
         df['sequestered_on'] = df['sequestered_on'].dt.year
