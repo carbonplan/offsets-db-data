@@ -113,6 +113,12 @@ def process_isometric_credits(
         df = df.convert_to_datetime(columns=['sequestered_on'])
         df['sequestered_on'] = df['sequestered_on'].dt.year
         df['transaction_type'] = 'retirement'
+        # purposes is a list[str] from the API — flatten to comma-joined string
+        df['purposes'] = df['purposes'].apply(
+            lambda x: ', '.join(x) if isinstance(x, list) and x else None
+        )
+        # notes arrives as empty string when unset — normalise to None
+        df['notes'] = df['notes'].replace('', None)
     data = (
         df.rename(columns=columns)
         .set_registry(registry_name=registry_name)

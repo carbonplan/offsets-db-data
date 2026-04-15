@@ -152,11 +152,11 @@
     },
     "retirements": {
       "project_id": "project_id",
-      "quantity": "size.credits",
+      "quantity": "credit_batch_size_total.credits",
       "retirement_account": "owner.name",
       "retirement_beneficiary": "beneficiary.name",
-      "retirement_note": null,
-      "retirement_reason": null,
+      "retirement_note": "notes",
+      "retirement_reason": "purposes",
       "transaction_date": "retired_at",
       "vintage": "sequestered_on"
     }
