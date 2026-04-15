@@ -85,7 +85,7 @@
     dependencies = [
         "country_converter==1.0.0",
         "dask>=2025.2.0",
-        "fastparquet>=2024.11",
+        "pyarrow>=16.0",
         "fsspec>=2025.2.0",
         "intake-parquet>=0.3.0",
         "intake<2",

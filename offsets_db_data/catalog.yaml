@@ -36,7 +36,7 @@ sources:
     args:
       urlpath: 's3://carbonplan-offsets-db/final/{{ date }}/credits-augmented.parquet'
       storage_options: { 'anon': True }
-      engine: 'fastparquet'
+      engine: 'pyarrow'
 
   projects:
     description: OffsetsDB processed and transformed data
@@ -49,7 +49,7 @@ sources:
     args:
       urlpath: 's3://carbonplan-offsets-db/final/{{ date }}/projects-augmented.parquet'
       storage_options: { 'anon': True }
-      engine: 'fastparquet'
+      engine: 'pyarrow'
 
   raw_projects:
     description: Raw projects data downloaded from the registries on a daily basis
