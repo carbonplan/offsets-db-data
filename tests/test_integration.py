@@ -122,16 +122,16 @@ def test_gld_empty(df_credits, projects):
 
 
 @pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
-def test_cercarbono(date, scratch_bucket, harmonize_beneficiary_info):
+def test_cercarbono(scratch_date, scratch_bucket, harmonize_beneficiary_info):
     registry = 'cercarbono'
     prefix = 'CCB'
 
-    projects = pd.read_csv(f'{scratch_bucket}/{date}/{registry}/projects.csv.gz')
+    projects = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/projects.csv.gz')
     projects['locations'] = projects['locations'].map(ast.literal_eval)
 
     dfs = []
     for key in ('issuances', 'retirements'):
-        credits = pd.read_csv(f'{scratch_bucket}/{date}/{registry}/{key}.csv.gz')
+        credits = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/{key}.csv.gz')
         dfs.append(
             credits.process_cercarbono_credits(
                 download_type=key, harmonize_beneficiary_info=harmonize_beneficiary_info
@@ -150,16 +150,16 @@ def test_cercarbono(date, scratch_bucket, harmonize_beneficiary_info):
 
 @pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
 def test_isometric(
-    date, scratch_bucket, isometric_prj_id_to_short_code, harmonize_beneficiary_info
+    scratch_date, scratch_bucket, isometric_prj_id_to_short_code, harmonize_beneficiary_info
 ):
     registry = 'isometric'
     prefix = 'ISO'
 
-    projects = pd.read_csv(f'{scratch_bucket}/{date}/{registry}/projects.csv.gz')
+    projects = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/projects.csv.gz')
 
     dfs = []
     for key in ('issuances', 'retirements'):
-        credits = pd.read_csv(f'{scratch_bucket}/{date}/{registry}/{key}.csv.gz')
+        credits = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/{key}.csv.gz')
         dfs.append(
             credits.process_isometric_credits(
                 download_type=key,

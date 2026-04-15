@@ -2,7 +2,7 @@
 
 Sample data in tests/data/ was extracted from:
   s3://carbonplan-offsets-db/raw/2026-04-14/      (verra, acr, art, car, gld, arb)
-  s3://carbonplan-scratch/offsets-db-test/raw/2026-04-14/  (cercarbono, isometric)
+  s3://carbonplan-scratch/offsets-db-test/raw/2026-04-15/  (cercarbono, isometric)
 
 To refresh samples, run:
   python tests/scripts/refresh_sample_data.py
@@ -18,6 +18,7 @@ DATA_DIR = Path(__file__).parent / 'data'
 
 # S3 coordinates that match the local sample data
 RAW_DATE = '2026-04-14'
+SCRATCH_DATE = '2026-04-15'
 RAW_BUCKET = 's3://carbonplan-offsets-db/raw'
 SCRATCH_BUCKET = 's3://carbonplan-scratch/offsets-db-test/raw'
 
@@ -35,6 +36,11 @@ def pytest_collection_modifyitems(items):
 @pytest.fixture
 def date() -> str:
     return RAW_DATE
+
+
+@pytest.fixture
+def scratch_date() -> str:
+    return SCRATCH_DATE
 
 
 @pytest.fixture
