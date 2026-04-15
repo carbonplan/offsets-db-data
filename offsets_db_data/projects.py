@@ -1,5 +1,6 @@
 import contextlib
 import json
+from decimal import Decimal
 
 import country_converter as coco
 import janitor  # noqa: F401
@@ -470,9 +471,19 @@ def add_retired_and_issued_totals(projects: pd.DataFrame, *, credits: pd.DataFra
 
     # # filter out the projects that are not in the credits data
     # credits = credits[credits['project_id'].isin(projects['project_id'].unique())]
-    # groupd and sum
+    # infer source precision and round after sum to avoid float64 representation errors
+    # (e.g. 153.89 + 235.53 = 389.41999... in binary float)
+    source_precision = int(
+        credits['quantity']
+        .dropna()
+        .apply(lambda x: max(0, -Decimal(repr(x)).as_tuple().exponent))
+        .max()
+    )
     credit_totals = (
-        credits.groupby(['project_id', 'transaction_type'])['quantity'].sum().reset_index()
+        credits.groupby(['project_id', 'transaction_type'])['quantity']
+        .sum()
+        .round(source_precision)
+        .reset_index()
     )
     # pivot the table
     credit_totals_pivot = credit_totals.pivot(
