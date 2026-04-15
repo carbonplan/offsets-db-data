@@ -44,9 +44,9 @@ jobs:
       - name: Run unit tests
         run: pixi run test-cov
 
-  integration-test:
-    # needs: unit-test
+  integration:
     runs-on: ubuntu-latest
+    needs: unit-test
     timeout-minutes: 120
     defaults:
       run:
@@ -71,7 +71,7 @@ jobs:
         uses: prefix-dev/setup-pixi@v0.9.3
         with:
           cache: true
-          cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          cache-write: false
 
       - name: List packages
         run: pixi list

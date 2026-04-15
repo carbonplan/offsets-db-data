@@ -168,16 +168,12 @@ def to_parquet(
     registry_name : str, optional
             The name of the registry for logging purposes.
     """
-    credits.to_parquet(
-        output_paths['credits'], index=False, compression='gzip', engine='fastparquet'
-    )
+    credits.to_parquet(output_paths['credits'], index=False, compression='gzip', engine='pyarrow')
 
     prefix = f'{registry_name} ' if registry_name else ''
     print(f'Wrote {prefix} credits to {output_paths["credits"]}...')
 
-    projects.to_parquet(
-        output_paths['projects'], index=False, compression='gzip', engine='fastparquet'
-    )
+    projects.to_parquet(output_paths['projects'], index=False, compression='gzip', engine='pyarrow')
     print(f'Wrote {prefix} projects to {output_paths["projects"]}...')
 
 
@@ -223,12 +219,12 @@ def _create_data_zip_buffer(
         elif format_type == 'parquet':
             # Write Parquet files to temporary files
             with tempfile.NamedTemporaryFile(suffix='.parquet') as temp_credits:
-                credits.to_parquet(temp_credits.name, index=False, engine='fastparquet')
+                credits.to_parquet(temp_credits.name, index=False, engine='pyarrow')
                 temp_credits.seek(0)
                 zf.writestr('credits.parquet', temp_credits.read())
 
             with tempfile.NamedTemporaryFile(suffix='.parquet') as temp_projects:
-                projects.to_parquet(temp_projects.name, index=False, engine='fastparquet')
+                projects.to_parquet(temp_projects.name, index=False, engine='pyarrow')
                 temp_projects.seek(0)
                 zf.writestr('projects.parquet', temp_projects.read())
 

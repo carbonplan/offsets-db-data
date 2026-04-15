@@ -4255,12 +4255,12 @@ packages:
   requires_python: '>=3.11'
 - pypi: ./
   name: offsets-db-data
-  version: 2025.12.2.post12+g033b388c6.d20260414
-  sha256: 4a10d8d71e40739a2d7841f882cf7e609ea11fa9849af6824436469e5dbfa3d1
+  version: 2025.12.2.post13+g5dcc6e4b5
+  sha256: 47e6d8e38903c03273aec4951909a9ab2306d153ca5309e15601c6c200da2a26
   requires_dist:
   - country-converter==1.0.0
   - dask>=2025.2.0
-  - fastparquet>=2024.11
+  - pyarrow>=16.0
   - fsspec>=2025.2.0
   - intake-parquet>=0.3.0
   - intake<2
