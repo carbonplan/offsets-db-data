@@ -23,8 +23,30 @@ env:
   AWS_DEFAULT_REGION: us-west-2
 
 jobs:
-  test:
+  unit-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Pixi
+        uses: prefix-dev/setup-pixi@v0.9.3
+        with:
+          cache: true
+          cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+
+      - name: List packages
+        run: pixi list
+
+      - name: Run unit tests
+        run: pixi run test-cov
+
+  integration:
+    runs-on: ubuntu-latest
+    needs: unit-test
     timeout-minutes: 120
     defaults:
       run:
@@ -49,7 +71,7 @@ jobs:
         uses: prefix-dev/setup-pixi@v0.9.3
         with:
           cache: true
-          cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          cache-write: false
 
       - name: List packages
         run: pixi list
@@ -59,9 +81,6 @@ jobs:
 
       - name: Show CLI help
         run: pixi run offsets-db-data-orcli --help
-
-      - name: Run unit tests
-        run: pixi run test-cov
 
       - name: Run integration tests
         run: pixi run test-integration
