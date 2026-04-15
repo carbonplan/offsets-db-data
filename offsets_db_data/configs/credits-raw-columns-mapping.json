@@ -162,7 +162,7 @@
       "retirement_reason": null,
       "transaction_date": "issued_at",
       "transaction_url": null,
-      "vintage": null
+      "vintage": "sequestered_on"
     },
     "retirements": {
       "project_id": "project_id",
