@@ -19,7 +19,7 @@ from offsets_db_data.vcs import *  # noqa: F403
     'harmonize_beneficiary_info',
     [True, False],
 )
-def test_verra(date, bucket, arb, harmonize_beneficiary_info):
+def test_verra(subtests, date, bucket, arb, harmonize_beneficiary_info):
     prefix = 'VCS'
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
     credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
@@ -27,13 +27,18 @@ def test_verra(date, bucket, arb, harmonize_beneficiary_info):
         arb=arb[arb.project_id.str.startswith(prefix)],
         harmonize_beneficiary_info=harmonize_beneficiary_info,
     )
-    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
     df_projects = projects.process_vcs_projects(credits=df_credits)
-    project_schema.validate(df_projects)
-    credit_without_id_schema.validate(df_credits)
 
-    assert df_projects['project_id'].str.startswith(prefix).all()
-    assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('credits_schema'):
+        credit_without_id_schema.validate(df_credits)
+    with subtests.test('credits_columns'):
+        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('credits_project_id_prefix'):
+        assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('projects_schema'):
+        project_schema.validate(df_projects)
+    with subtests.test('projects_project_id_prefix'):
+        assert df_projects['project_id'].str.startswith(prefix).all()
 
 
 @pytest.mark.parametrize(
@@ -44,7 +49,7 @@ def test_verra(date, bucket, arb, harmonize_beneficiary_info):
         ('climate-action-reserve', ['issuances', 'retirements', 'cancellations'], 'CAR'),
     ],
 )
-def test_apx(date, bucket, arb, registry, download_types, prefix):
+def test_apx(subtests, date, bucket, arb, registry, download_types, prefix):
     dfs = []
     for key in download_types:
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
@@ -54,46 +59,52 @@ def test_apx(date, bucket, arb, registry, download_types, prefix):
         dfs.append(p)
 
     df_credits = pd.concat(dfs).merge_with_arb(arb=arb[arb.project_id.str.startswith(prefix)])
-    credit_without_id_schema.validate(df_credits)
-
-    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
-
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
     df_projects = projects.process_apx_projects(credits=df_credits, registry_name=registry)
-    project_schema.validate(df_projects)
 
-    assert df_projects['project_id'].str.startswith(prefix).all()
-    assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('credits_schema'):
+        credit_without_id_schema.validate(df_credits)
+    with subtests.test('credits_columns'):
+        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('credits_project_id_prefix'):
+        assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('projects_schema'):
+        project_schema.validate(df_projects)
+    with subtests.test('projects_project_id_prefix'):
+        assert df_projects['project_id'].str.startswith(prefix).all()
 
 
 @pytest.mark.parametrize(
     'harmonize_beneficiary_info',
     [True, False],
 )
-def test_gld(date, bucket, harmonize_beneficiary_info):
+def test_gld(subtests, date, bucket, harmonize_beneficiary_info):
     registry = 'gold-standard'
-    download_types = ['issuances', 'retirements']
     prefix = 'GLD'
 
     dfs = []
-    for key in download_types:
+    for key in ('issuances', 'retirements'):
         credits = pd.read_csv(f'{bucket}/{date}/{registry}/{key}.csv.gz')
-        p = credits.process_gld_credits(
-            download_type=key, harmonize_beneficiary_info=harmonize_beneficiary_info
+        dfs.append(
+            credits.process_gld_credits(
+                download_type=key, harmonize_beneficiary_info=harmonize_beneficiary_info
+            )
         )
-        dfs.append(p)
 
     df_credits = pd.concat(dfs)
-    credit_without_id_schema.validate(df_credits)
-
-    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
-
     projects = pd.read_csv(f'{bucket}/{date}/{registry}/projects.csv.gz')
     df_projects = projects.process_gld_projects(credits=df_credits)
-    project_schema.validate(df_projects)
 
-    assert df_projects['project_id'].str.startswith(prefix).all()
-    assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('credits_schema'):
+        credit_without_id_schema.validate(df_credits)
+    with subtests.test('credits_columns'):
+        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('credits_project_id_prefix'):
+        assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('projects_schema'):
+        project_schema.validate(df_projects)
+    with subtests.test('projects_project_id_prefix'):
+        assert df_projects['project_id'].str.startswith(prefix).all()
 
 
 @pytest.mark.parametrize(
@@ -108,21 +119,25 @@ def test_gld(date, bucket, harmonize_beneficiary_info):
     'projects',
     [pd.DataFrame()],
 )
-def test_gld_empty(df_credits, projects):
+def test_gld_empty(subtests, df_credits, projects):
     prefix = 'GLD'
 
-    credit_without_id_schema.validate(df_credits)
-    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
-
     df_projects = projects.process_gld_projects(credits=df_credits)
-    project_schema.validate(df_projects)
 
-    assert df_projects['project_id'].str.startswith(prefix).all()
-    assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('credits_schema'):
+        credit_without_id_schema.validate(df_credits)
+    with subtests.test('credits_columns'):
+        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('credits_project_id_prefix'):
+        assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('projects_schema'):
+        project_schema.validate(df_projects)
+    with subtests.test('projects_project_id_prefix'):
+        assert df_projects['project_id'].str.startswith(prefix).all()
 
 
 @pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
-def test_cercarbono(scratch_date, scratch_bucket, harmonize_beneficiary_info):
+def test_cercarbono(subtests, scratch_date, scratch_bucket, harmonize_beneficiary_info):
     registry = 'cercarbono'
     prefix = 'CCB'
 
@@ -139,18 +154,27 @@ def test_cercarbono(scratch_date, scratch_bucket, harmonize_beneficiary_info):
         )
 
     df_credits = pd.concat(dfs)
-    credit_without_id_schema.validate(df_credits)
-    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
-    assert df_credits['project_id'].str.startswith(prefix).all()
-
     df_projects = projects.process_cercarbono_projects(credits=df_credits)
-    project_schema.validate(df_projects)
-    assert df_projects['project_id'].str.startswith(prefix).all()
+
+    with subtests.test('credits_schema'):
+        credit_without_id_schema.validate(df_credits)
+    with subtests.test('credits_columns'):
+        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('credits_project_id_prefix'):
+        assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('projects_schema'):
+        project_schema.validate(df_projects)
+    with subtests.test('projects_project_id_prefix'):
+        assert df_projects['project_id'].str.startswith(prefix).all()
 
 
 @pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
 def test_isometric(
-    scratch_date, scratch_bucket, isometric_prj_id_to_short_code, harmonize_beneficiary_info
+    subtests,
+    scratch_date,
+    scratch_bucket,
+    isometric_prj_id_to_short_code,
+    harmonize_beneficiary_info,
 ):
     registry = 'isometric'
     prefix = 'ISO'
@@ -169,10 +193,15 @@ def test_isometric(
         )
 
     df_credits = pd.concat(dfs)
-    credit_without_id_schema.validate(df_credits)
-    assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
-    assert df_credits['project_id'].str.startswith(prefix).all()
-
     df_projects = projects.process_isometric_projects(credits=df_credits)
-    project_schema.validate(df_projects)
-    assert df_projects['project_id'].str.startswith(prefix).all()
+
+    with subtests.test('credits_schema'):
+        credit_without_id_schema.validate(df_credits)
+    with subtests.test('credits_columns'):
+        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('credits_project_id_prefix'):
+        assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('projects_schema'):
+        project_schema.validate(df_projects)
+    with subtests.test('projects_project_id_prefix'):
+        assert df_projects['project_id'].str.startswith(prefix).all()
