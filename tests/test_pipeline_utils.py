@@ -158,21 +158,39 @@ def test_summarize(subtests, sample_credits, sample_projects, capsys):
 
 
 def test_create_data_zip_buffer_unknown_format(sample_credits, sample_projects):
-    """Unknown format_type: only terms file is written, no data files."""
+    """Unknown format_type: only terms + metadata files are written, no data files."""
+    import json
+    from datetime import timezone
+
+    ts = datetime(2024, 1, 15, 12, 0, 0, tzinfo=timezone.utc)
     buffer = _create_data_zip_buffer(
         credits=sample_credits,
         projects=sample_projects,
         format_type='json',
         terms_content='Test terms',
+        generated_at=ts,
     )
     with zipfile.ZipFile(buffer, 'r') as zf:
-        assert zf.namelist() == ['TERMS_OF_DATA_ACCESS.txt']
+        assert set(zf.namelist()) == {'TERMS_OF_DATA_ACCESS.txt', 'metadata.json'}
+        meta = json.loads(zf.read('metadata.json'))
+        assert meta['generated_at'] == ts.isoformat()
 
 
 def test_create_data_zip_buffer(subtests, sample_credits, sample_projects):
+    import json
+    from datetime import timezone
+
+    import pyarrow.parquet as pq
+
+    ts = datetime(2024, 6, 1, 0, 0, 0, tzinfo=timezone.utc)
     formats = {
-        'csv': ['TERMS_OF_DATA_ACCESS.txt', 'credits.csv', 'projects.csv'],
-        'parquet': ['TERMS_OF_DATA_ACCESS.txt', 'credits.parquet', 'projects.parquet'],
+        'csv': ['TERMS_OF_DATA_ACCESS.txt', 'metadata.json', 'credits.csv', 'projects.csv'],
+        'parquet': [
+            'TERMS_OF_DATA_ACCESS.txt',
+            'metadata.json',
+            'credits.parquet',
+            'projects.parquet',
+        ],
     }
     for fmt, expected_files in formats.items():
         with subtests.test(format=fmt):
@@ -181,13 +199,19 @@ def test_create_data_zip_buffer(subtests, sample_credits, sample_projects):
                 projects=sample_projects,
                 format_type=fmt,
                 terms_content='Test terms content',
+                generated_at=ts,
             )
             with zipfile.ZipFile(buffer, 'r') as zf:
                 names = zf.namelist()
                 for fname in expected_files:
                     assert fname in names
-                if fmt == 'csv':
-                    assert zf.read('TERMS_OF_DATA_ACCESS.txt').decode() == 'Test terms content'
+                assert zf.read('TERMS_OF_DATA_ACCESS.txt').decode() == 'Test terms content'
+                meta = json.loads(zf.read('metadata.json'))
+                assert meta['generated_at'] == ts.isoformat()
+                if fmt == 'parquet':
+                    for parquet_file in ('credits.parquet', 'projects.parquet'):
+                        table = pq.read_table(io.BytesIO(zf.read(parquet_file)))
+                        assert table.schema.metadata[b'generated_at'] == ts.isoformat().encode()
 
 
 @patch('fsspec.filesystem')
