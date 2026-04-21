@@ -1,11 +1,13 @@
 import datetime
 import io
-import tempfile
+import json
 import zipfile
 from collections.abc import Callable
 
 import fsspec
 import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 
 from offsets_db_data.data import catalog
 from offsets_db_data.registry import get_registry_from_project_id
@@ -177,12 +179,26 @@ def to_parquet(
     print(f'Wrote {prefix} projects to {output_paths["projects"]}...')
 
 
+def _write_parquet_with_metadata(df: pd.DataFrame, generated_at: datetime.datetime) -> bytes:
+    """Return parquet bytes for df with generated_at embedded in file-level metadata."""
+    table = pa.Table.from_pandas(df, preserve_index=False)
+    existing = table.schema.metadata or {}
+    table = table.replace_schema_metadata(
+        {**existing, b'generated_at': generated_at.isoformat().encode()}
+    )
+    buf = io.BytesIO()
+    pq.write_table(table, buf)
+    buf.seek(0)
+    return buf.read()
+
+
 def _create_data_zip_buffer(
     *,
     credits: pd.DataFrame,
     projects: pd.DataFrame,
     format_type: str,
     terms_content: str,
+    generated_at: datetime.datetime,
 ) -> io.BytesIO:
     """
     Create a zip buffer containing data files in the specified format with terms of access.
@@ -193,12 +209,12 @@ def _create_data_zip_buffer(
         DataFrame containing credit data.
     projects : pd.DataFrame
         DataFrame containing project data.
-    project_types : pd.DataFrame
-        DataFrame containing project type data.
     format_type : str
         Format type, either 'csv' or 'parquet'.
     terms_content : str
         Content of the terms of access file.
+    generated_at : datetime.datetime
+        UTC timestamp when this dataset was generated.
 
     Returns
     -------
@@ -206,9 +222,11 @@ def _create_data_zip_buffer(
         Buffer containing the zip file.
     """
     zip_buffer = io.BytesIO()
+    metadata = json.dumps({'generated_at': generated_at.isoformat()})
 
     with zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED, False) as zf:
         zf.writestr('TERMS_OF_DATA_ACCESS.txt', terms_content)
+        zf.writestr('metadata.json', metadata)
 
         if format_type == 'csv':
             with zf.open('credits.csv', 'w') as buffer:
@@ -217,18 +235,9 @@ def _create_data_zip_buffer(
                 projects.to_csv(buffer, index=False)
 
         elif format_type == 'parquet':
-            # Write Parquet files to temporary files
-            with tempfile.NamedTemporaryFile(suffix='.parquet') as temp_credits:
-                credits.to_parquet(temp_credits.name, index=False, engine='pyarrow')
-                temp_credits.seek(0)
-                zf.writestr('credits.parquet', temp_credits.read())
+            zf.writestr('credits.parquet', _write_parquet_with_metadata(credits, generated_at))
+            zf.writestr('projects.parquet', _write_parquet_with_metadata(projects, generated_at))
 
-            with tempfile.NamedTemporaryFile(suffix='.parquet') as temp_projects:
-                projects.to_parquet(temp_projects.name, index=False, engine='pyarrow')
-                temp_projects.seek(0)
-                zf.writestr('projects.parquet', temp_projects.read())
-
-    # Move to the beginning of the BytesIO buffer
     zip_buffer.seek(0)
     return zip_buffer
 
@@ -259,6 +268,8 @@ def write_latest_production(
         'parquet': f'{bucket}/production/latest/offsets-db.parquet.zip',
     }
 
+    generated_at = datetime.datetime.now(tz=datetime.timezone.utc)
+
     # Get terms content once
     fs = fsspec.filesystem('s3', anon=False)
     terms_content = fs.read_text(terms_url)
@@ -270,6 +281,7 @@ def write_latest_production(
             projects=projects,
             format_type=format_type,
             terms_content=terms_content,
+            generated_at=generated_at,
         )
 
         # Write buffer to S3
