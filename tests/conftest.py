@@ -2,13 +2,12 @@
 
 Sample data in tests/data/ was extracted from:
   s3://carbonplan-offsets-db/raw/2026-04-14/      (verra, acr, art, car, gld, arb)
-  s3://carbonplan-scratch/offsets-db-test/raw/2026-04-15/  (cercarbono, isometric)
+  s3://carbonplan-scratch/offsets-db-test/raw/2026-04-15/  (isometric)
 
 To refresh samples, run:
   python tests/scripts/refresh_sample_data.py
 """
 
-import ast
 from pathlib import Path
 
 import pandas as pd
@@ -146,24 +145,6 @@ def raw_gld_issuances() -> pd.DataFrame:
 @pytest.fixture
 def raw_gld_retirements() -> pd.DataFrame:
     return pd.read_csv(DATA_DIR / 'gold-standard' / 'retirements.csv')
-
-
-@pytest.fixture
-def raw_cercarbono_projects() -> pd.DataFrame:
-    df = pd.read_csv(DATA_DIR / 'cercarbono' / 'projects.csv')
-    # 'locations' is stored as a stringified Python list of dicts in the CSV
-    df['locations'] = df['locations'].map(ast.literal_eval)
-    return df
-
-
-@pytest.fixture
-def raw_cercarbono_issuances() -> pd.DataFrame:
-    return pd.read_csv(DATA_DIR / 'cercarbono' / 'issuances.csv')
-
-
-@pytest.fixture
-def raw_cercarbono_retirements() -> pd.DataFrame:
-    return pd.read_csv(DATA_DIR / 'cercarbono' / 'retirements.csv')
 
 
 @pytest.fixture

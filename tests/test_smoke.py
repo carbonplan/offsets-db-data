@@ -10,7 +10,6 @@ import pandas as pd
 
 from offsets_db_data.apx import *  # noqa: F403
 from offsets_db_data.arb import *  # noqa: F403
-from offsets_db_data.cercarbono import *  # noqa: F403
 from offsets_db_data.gld import *  # noqa: F403
 from offsets_db_data.isometric import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
@@ -160,38 +159,6 @@ def test_arb_pipeline(subtests, arb):
     with subtests.test('transaction_types'):
         types = set(arb['transaction_type'].unique())
         assert {'issuance', 'retirement'} <= types
-
-
-def test_cercarbono_pipeline(
-    subtests,
-    raw_cercarbono_projects,
-    raw_cercarbono_issuances,
-    raw_cercarbono_retirements,
-):
-    credits = pd.concat(
-        [
-            raw_cercarbono_issuances.process_cercarbono_credits(
-                download_type='issuances', harmonize_beneficiary_info=False
-            ),
-            raw_cercarbono_retirements.process_cercarbono_credits(
-                download_type='retirements', harmonize_beneficiary_info=False
-            ),
-        ]
-    )
-
-    with subtests.test('credits_schema'):
-        credit_without_id_schema.validate(credits)
-        assert set(credits.columns) == set(credit_without_id_schema.columns.keys())
-        assert credits['project_id'].str.startswith('CCB').all()
-
-    with subtests.test('credits_transaction_types'):
-        types = set(credits['transaction_type'].unique())
-        assert {'issuance', 'retirement'} <= types
-
-    with subtests.test('projects_schema'):
-        projects = raw_cercarbono_projects.process_cercarbono_projects(credits=credits)
-        project_schema.validate(projects)
-        assert projects['project_id'].str.startswith('CCB').all()
 
 
 def test_isometric_pipeline(

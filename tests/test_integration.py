@@ -1,11 +1,8 @@
-import ast
-
 import pandas as pd
 import pytest
 
 from offsets_db_data.apx import *  # noqa: F403
 from offsets_db_data.arb import *  # noqa: F403
-from offsets_db_data.cercarbono import *  # noqa: F403
 from offsets_db_data.gld import *  # noqa: F403
 from offsets_db_data.isometric import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
@@ -123,38 +120,6 @@ def test_gld_empty(subtests, df_credits, projects):
     prefix = 'GLD'
 
     df_projects = projects.process_gld_projects(credits=df_credits)
-
-    with subtests.test('credits_schema'):
-        credit_without_id_schema.validate(df_credits)
-    with subtests.test('credits_columns'):
-        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
-    with subtests.test('credits_project_id_prefix'):
-        assert df_credits['project_id'].str.startswith(prefix).all()
-    with subtests.test('projects_schema'):
-        project_schema.validate(df_projects)
-    with subtests.test('projects_project_id_prefix'):
-        assert df_projects['project_id'].str.startswith(prefix).all()
-
-
-@pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
-def test_cercarbono(subtests, scratch_date, scratch_bucket, harmonize_beneficiary_info):
-    registry = 'cercarbono'
-    prefix = 'CCB'
-
-    projects = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/projects.csv.gz')
-    projects['locations'] = projects['locations'].map(ast.literal_eval)
-
-    dfs = []
-    for key in ('issuances', 'retirements'):
-        credits = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/{key}.csv.gz')
-        dfs.append(
-            credits.process_cercarbono_credits(
-                download_type=key, harmonize_beneficiary_info=harmonize_beneficiary_info
-            )
-        )
-
-    df_credits = pd.concat(dfs)
-    df_projects = projects.process_cercarbono_projects(credits=df_credits)
 
     with subtests.test('credits_schema'):
         credit_without_id_schema.validate(df_credits)
