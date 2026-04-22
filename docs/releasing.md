@@ -22,3 +22,13 @@ The `publish` Pixi environment is defined in `pyproject.toml` and includes `pyth
 ## 3. Verify the Release on PyPI
 
 After the workflow completes, verify the package is available at [pypi.org/project/offsets-db-data](https://pypi.org/project/offsets-db-data/).
+
+## 4. Sync Terms of Data Access to S3
+
+After any change to `TERMS_OF_DATA_ACCESS`, upload the latest version to S3 so that data consumers can access it programmatically:
+
+```bash
+pixi run python scripts/upload-terms-of-data-access.py
+```
+
+This fetches the file from the `main` branch on GitHub and writes it to `s3://carbonplan-offsets-db/TERMS_OF_DATA_ACCESS.txt`. Requires AWS credentials with write access to the bucket.
