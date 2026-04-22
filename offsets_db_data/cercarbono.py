@@ -119,7 +119,11 @@ def process_cercarbono_credits(
 
     columns = {v: k for k, v in column_mapping.items()}
 
-    data = df.rename(columns=columns).set_registry(registry_name=registry_name)
+    data = (
+        df.rename(columns=columns)
+        .set_registry(registry_name=registry_name)
+        .add_missing_columns(schema=credit_without_id_schema)
+    )
 
     if harmonize_beneficiary_info:
         data = data.pipe(
