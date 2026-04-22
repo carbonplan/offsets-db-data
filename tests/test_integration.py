@@ -7,6 +7,7 @@ from offsets_db_data.apx import *  # noqa: F403
 from offsets_db_data.arb import *  # noqa: F403
 from offsets_db_data.cercarbono import *  # noqa: F403
 from offsets_db_data.gld import *  # noqa: F403
+from offsets_db_data.isometric import *  # noqa: F403
 from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.vcs import *  # noqa: F403
 
@@ -154,6 +155,45 @@ def test_cercarbono(subtests, scratch_date, scratch_bucket, harmonize_beneficiar
 
     df_credits = pd.concat(dfs)
     df_projects = projects.process_cercarbono_projects(credits=df_credits)
+
+    with subtests.test('credits_schema'):
+        credit_without_id_schema.validate(df_credits)
+    with subtests.test('credits_columns'):
+        assert set(df_credits.columns) == set(credit_without_id_schema.columns.keys())
+    with subtests.test('credits_project_id_prefix'):
+        assert df_credits['project_id'].str.startswith(prefix).all()
+    with subtests.test('projects_schema'):
+        project_schema.validate(df_projects)
+    with subtests.test('projects_project_id_prefix'):
+        assert df_projects['project_id'].str.startswith(prefix).all()
+
+
+@pytest.mark.parametrize('harmonize_beneficiary_info', [True, False])
+def test_isometric(
+    subtests,
+    scratch_date,
+    scratch_bucket,
+    isometric_prj_id_to_short_code,
+    harmonize_beneficiary_info,
+):
+    registry = 'isometric'
+    prefix = 'ISO'
+
+    projects = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/projects.csv.gz')
+
+    dfs = []
+    for key in ('issuances', 'retirements'):
+        credits = pd.read_csv(f'{scratch_bucket}/{scratch_date}/{registry}/{key}.csv.gz')
+        dfs.append(
+            credits.process_isometric_credits(
+                download_type=key,
+                prj_id_to_short_code=isometric_prj_id_to_short_code,
+                harmonize_beneficiary_info=harmonize_beneficiary_info,
+            )
+        )
+
+    df_credits = pd.concat(dfs)
+    df_projects = projects.process_isometric_projects(credits=df_credits)
 
     with subtests.test('credits_schema'):
         credit_without_id_schema.validate(df_credits)
