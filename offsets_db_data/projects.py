@@ -66,7 +66,9 @@ def add_category(
 
     if protocol_mapping is not None:
 
-        def _category_from_protocol(protocol_list: list) -> str:
+        def _category_from_protocol(protocol_list: list | None) -> str:
+            if not protocol_list:
+                return 'unknown'
             for p in protocol_list:
                 cat = protocol_mapping.get(p, {}).get('category')
                 if cat and cat != 'unknown':
@@ -128,75 +130,61 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         DataFrame with a new 'project_type' column, indicating the project's type. Defaults to None
     """
+
+    def _has_protocol(pid: str):
+        return lambda x: x['protocol'] is not None and pid in x['protocol']
+
     df.loc[:, 'project_type'] = 'unknown'
     df.loc[:, 'project_type_source'] = 'carbonplan'
-    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'project_type'] = 'redd+'
+    df.loc[df.apply(_has_protocol('art-trees'), axis=1), 'project_type'] = 'redd+'
 
-    df.loc[df.apply(lambda x: 'acr-ifm-nonfed' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('acr-ifm-nonfed'), axis=1), 'project_type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'acr-refridge' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('acr-refridge'), axis=1), 'project_type'] = (
         'advanced refrigerants'
     )
-    df.loc[df.apply(lambda x: 'acr-abandoned-wells' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('acr-abandoned-wells'), axis=1), 'project_type'] = (
         'plugging oil & gas wells'
     )
 
-    df.loc[df.apply(lambda x: 'arb-mine-methane' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('arb-mine-methane'), axis=1), 'project_type'] = (
         'mine methane capture'
     )
 
-    df.loc[df.apply(lambda x: 'vm0048' in x['protocol'], axis=1), 'project_type'] = 'redd+'
-    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('vm0048'), axis=1), 'project_type'] = 'redd+'
+    df.loc[df.apply(_has_protocol('vm0047'), axis=1), 'project_type'] = (
         'afforestation/reforestation'
     )
-    df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('vm0045'), axis=1), 'project_type'] = 'improved forest management'
+    df.loc[df.apply(_has_protocol('vm0042'), axis=1), 'project_type'] = 'sustainable agriculture'
+    df.loc[df.apply(_has_protocol('vm0007'), axis=1), 'project_type'] = 'redd+'
+
+    df.loc[df.apply(_has_protocol('acm0001'), axis=1), 'project_type'] = 'landfill methane'
+    df.loc[df.apply(_has_protocol('acm0002'), axis=1), 'project_type'] = 're bundled'
+
+    df.loc[df.apply(_has_protocol('iso-refor'), axis=1), 'project_type'] = (
+        'afforestation/reforestation'
+    )
+    df.loc[df.apply(_has_protocol('iso-biochar'), axis=1), 'project_type'] = 'biochar'
+    df.loc[df.apply(_has_protocol('iso-bio-burial'), axis=1), 'project_type'] = 'biomass burial'
+    df.loc[df.apply(_has_protocol('iso-bio-geo'), axis=1), 'project_type'] = 'biomass injection'
+    df.loc[df.apply(_has_protocol('iso-bio-oil'), axis=1), 'project_type'] = 'biomass injection'
+    df.loc[df.apply(_has_protocol('iso-dac'), axis=1), 'project_type'] = 'direct air capture'
+    df.loc[df.apply(_has_protocol('iso-erw'), axis=1), 'project_type'] = 'enhanced rock weathering'
+
+    df.loc[df.apply(_has_protocol('ccb-refor'), axis=1), 'project_type'] = (
+        'afforestation/reforestation'
+    )
+    df.loc[df.apply(_has_protocol('ccb-redd'), axis=1), 'project_type'] = 'redd+'
+
+    df.loc[df.apply(_has_protocol('car-forest-mx'), axis=1), 'project_type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'project_type'] = (
-        'sustainable agriculture'
-    )
-    df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'project_type'] = 'redd+'
-
-    df.loc[df.apply(lambda x: 'acm0001' in x['protocol'], axis=1), 'project_type'] = (
-        'landfill methane'
-    )
-    df.loc[df.apply(lambda x: 'acm0002' in x['protocol'], axis=1), 'project_type'] = 're bundled'
-
-    df.loc[df.apply(lambda x: 'iso-refor' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('gs-reforest'), axis=1), 'project_type'] = (
         'afforestation/reforestation'
     )
-    df.loc[df.apply(lambda x: 'iso-biochar' in x['protocol'], axis=1), 'project_type'] = 'biochar'
-    df.loc[df.apply(lambda x: 'iso-bio-burial' in x['protocol'], axis=1), 'project_type'] = (
-        'biomass burial'
-    )
-    df.loc[df.apply(lambda x: 'iso-bio-geo' in x['protocol'], axis=1), 'project_type'] = (
-        'biomass injection'
-    )
-    df.loc[df.apply(lambda x: 'iso-bio-oil' in x['protocol'], axis=1), 'project_type'] = (
-        'biomass injection'
-    )
-    df.loc[df.apply(lambda x: 'iso-dac' in x['protocol'], axis=1), 'project_type'] = (
-        'direct air capture'
-    )
-    df.loc[df.apply(lambda x: 'iso-erw' in x['protocol'], axis=1), 'project_type'] = (
-        'enhanced rock weathering'
-    )
-
-    df.loc[df.apply(lambda x: 'ccb-refor' in x['protocol'], axis=1), 'project_type'] = (
-        'afforestation/reforestation'
-    )
-    df.loc[df.apply(lambda x: 'ccb-redd' in x['protocol'], axis=1), 'project_type'] = 'redd+'
-
-    df.loc[df.apply(lambda x: 'car-forest-mx' in x['protocol'], axis=1), 'project_type'] = (
-        'improved forest management'
-    )
-    df.loc[df.apply(lambda x: 'gs-reforest' in x['protocol'], axis=1), 'project_type'] = (
-        'afforestation/reforestation'
-    )
-    df.loc[df.apply(lambda x: 'gs-drinking-water' in x['protocol'], axis=1), 'project_type'] = (
-        'clean water'
-    )
+    df.loc[df.apply(_has_protocol('gs-drinking-water'), axis=1), 'project_type'] = 'clean water'
 
     return df
 
@@ -253,7 +241,10 @@ def add_is_compliance_flag(df: pd.DataFrame) -> pd.DataFrame:
 
     print('Adding is_compliance flag...')
     df['is_compliance'] = df.apply(
-        lambda row: np.any([protocol_str.startswith('arb-') for protocol_str in row['protocol']]),
+        lambda row: (
+            row['protocol'] is not None
+            and np.any([protocol_str.startswith('arb-') for protocol_str in row['protocol']])
+        ),
         axis=1,
     )
     return df
@@ -286,14 +277,16 @@ def map_protocol(
 
     print('Mapping protocol based on known string...')
     try:
-        df['protocol'] = df[original_protocol_column].apply(
+        results = df[original_protocol_column].apply(
             lambda item: find_protocol(
                 search_string=item, inverted_protocol_mapping=inverted_protocol_mapping
             )
         )
+        df['protocol'] = [r[0] for r in results]
+        df['protocol_unassigned'] = [r[1] for r in results]
     except KeyError:
-        # art-trees doesnt have protocol column
-        df['protocol'] = [['unknown']] * len(df)  # protocol column is nested list
+        df['protocol'] = [None] * len(df)
+        df['protocol_unassigned'] = [None] * len(df)
 
     return df
 
@@ -352,17 +345,23 @@ def harmonize_status_codes(df: pd.DataFrame, *, status_column: str = 'status') -
 
 def find_protocol(
     *, search_string: str, inverted_protocol_mapping: dict[str, list[str]]
-) -> list[str]:
-    """Match known strings of project methodologies to internal topology
+) -> tuple[list[str] | None, list[str] | None]:
+    """Match known strings of project methodologies to internal topology.
 
-    Unmatched strings are passed through to the database, until such time that we update mapping data.
+    Returns a ``(mapped, unmatched)`` tuple:
+
+    * ``mapped`` — list of normalised protocol IDs when the string is recognised, else ``None``.
+    * ``unmatched`` — list containing the raw string when it is present but unrecognised, else ``None``.
+
+    NaN, empty, and whitespace-only strings yield ``(None, None)``.
     """
-    if pd.isna(search_string):  # handle nan case, which crops up in verra data right now
-        return ['unknown']
-    if known_match := inverted_protocol_mapping.get(search_string.strip()):
-        return known_match  # inverted_mapping returns lst
+    if pd.isna(search_string) or not str(search_string).strip():
+        return None, None
+    stripped = search_string.strip()
+    if known_match := inverted_protocol_mapping.get(stripped):
+        return known_match, None
     print(f"'{search_string}' is unmapped in full protocol mapping")
-    return [search_string]
+    return None, [search_string]
 
 
 def get_protocol_category(*, protocol_strs: list[str] | str, protocol_mapping: dict) -> list[str]:
