@@ -271,7 +271,7 @@ def write_latest_production(
     generated_at = datetime.datetime.now(tz=datetime.timezone.utc)
 
     # Get terms content once
-    fs = fsspec.filesystem('s3', anon=False)
+    fs = fsspec.filesystem('https')
     terms_content = fs.read_text(terms_url)
 
     for format_type, path in paths.items():
