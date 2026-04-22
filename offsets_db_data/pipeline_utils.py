@@ -247,7 +247,7 @@ def write_latest_production(
     credits: pd.DataFrame,
     projects: pd.DataFrame,
     bucket: str,
-    terms_url: str = 's3://carbonplan-offsets-db/TERMS_OF_DATA_ACCESS.txt',
+    terms_url: str = 'https://raw.githubusercontent.com/carbonplan/offsets-db-data/refs/heads/main/TERMS_OF_DATA_ACCESS',
 ):
     """
     Write the latest production data to S3 as zip archives containing CSV and Parquet files.
