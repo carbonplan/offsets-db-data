@@ -4,7 +4,6 @@ REGISTRY_ABBR_MAP = {
     'acr': 'american-carbon-registry',
     'art': 'art-trees',
     'gld': 'gold-standard',
-    'iso': 'isometric',
     'ccb': 'cercarbono',
 }
 
