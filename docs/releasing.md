@@ -11,10 +11,12 @@ Go to the GitHub repository and create a new release. Navigate to the ["Releases
 Publishing the release triggers the GitHub Actions workflow defined in [`.github/workflows/pypi.yaml`](https://github.com/carbonplan/offsets-db-data/blob/main/.github/workflows/pypi.yaml). The workflow:
 
 1. **Builds artifacts** using Pixi's `publish` environment:
+
    ```bash
    pixi run -e publish python -m build --sdist --wheel .
    pixi run -e publish python -m twine check dist/*
    ```
+
 2. **Publishes to PyPI** using the [`pypa/gh-action-pypi-publish`](https://github.com/pypa/gh-action-pypi-publish) action via OIDC (no API token required).
 
 The `publish` Pixi environment is defined in `pyproject.toml` and includes `python-build`, `twine`, and `check-manifest`.
