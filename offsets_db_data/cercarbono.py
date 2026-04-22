@@ -119,18 +119,19 @@ def process_cercarbono_credits(
 
     columns = {v: k for k, v in column_mapping.items()}
 
-    data = (
-        df.rename(columns=columns)
-        .set_registry(registry_name=registry_name)
-        .convert_to_datetime(columns=['transaction_date'], format='ISO8601')
-        .add_missing_columns(schema=credit_without_id_schema)
-        .validate(schema=credit_without_id_schema)
-    )
+    data = df.rename(columns=columns).set_registry(registry_name=registry_name)
 
     if harmonize_beneficiary_info:
         data = data.pipe(
             harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
         )
+
+    data = (
+        data.add_missing_columns(schema=credit_without_id_schema)
+        .convert_to_datetime(columns=['transaction_date'], format='ISO8601')
+        .validate(schema=credit_without_id_schema)
+    )
+
     return data
 
 
