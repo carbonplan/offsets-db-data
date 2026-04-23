@@ -205,6 +205,7 @@ For voluntary projects, we report voluntary status.
 ### Cercarbono
 
 #### Vintage Date
+
 Occasionally, Cercarbono reports issuance events that span multiple vintage years.
 We assign all credits from these multi-vintage issuances to the earliest reported vintage year.
 
@@ -243,7 +244,8 @@ Any analysis involving Verra retirement data should clearly specify that Verra's
 ```
 
 #### Vintage Date
- Verra allows for the simultaneous issuance of multiple vintages.
+
+Verra allows for the simultaneous issuance of multiple vintages.
 We assign all credits from these multi-vintage issuances to the earliest reported vintage year.
 
 ### California Compliance Projects
