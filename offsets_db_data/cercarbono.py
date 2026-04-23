@@ -98,7 +98,6 @@ def process_cercarbono_credits(
     """
 
     if download_type == 'issuances':
-        # TODO: @badgley, please confirm this is the correct way to extract vintage year for issuances
         df['vintage'] = df['vintage_of_credits'].str.split(' / ').str[-1].str[:4].astype(int)
         df['transaction_type'] = 'issuance'
         # Extract numeric project ID from serial — this is the globally unique id.
