@@ -8,6 +8,9 @@ import numpy as np
 import pandas as pd
 import pandas_flavor as pf
 
+from offsets_db_data.common import convert_to_datetime, validate
+from offsets_db_data.models import project_schema
+
 _REGISTRY_PROJECT_URLS = {
     'verra': 'https://registry.verra.org/app/projectDetail/VCS/',
     'gold-standard': 'https://registry.goldstandard.org/projects?q=gs',
@@ -617,4 +620,6 @@ def add_placeholder_projects(
             }
         )
 
-    return pd.concat([projects, pd.DataFrame(rows)], ignore_index=True)
+    data = pd.concat([projects, pd.DataFrame(rows)], ignore_index=True)
+    data = convert_to_datetime(data, columns=['first_issuance_at', 'first_retirement_at'])
+    return validate(data, schema=project_schema)
