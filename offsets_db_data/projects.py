@@ -8,6 +8,15 @@ import numpy as np
 import pandas as pd
 import pandas_flavor as pf
 
+_REGISTRY_PROJECT_URLS = {
+    'verra': 'https://registry.verra.org/app/projectDetail/VCS/',
+    'gold-standard': 'https://registry.goldstandard.org/projects?q=gs',
+    'american-carbon-registry': 'https://acr2.apx.com/mymodule/reg/prjView.asp?id1=',
+    'climate-action-reserve': 'https://thereserve2.apx.com/mymodule/reg/prjView.asp?id1=',
+    'art-trees': 'https://art.apx.com/mymodule/reg/prjView.asp?id1=',
+    'cercarbono': 'https://www.ecoregistry.io/projects/CDC-',
+}
+
 
 @pf.register_dataframe_method
 def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country') -> pd.DataFrame:
@@ -507,3 +516,103 @@ def add_retired_and_issued_totals(projects: pd.DataFrame, *, credits: pd.DataFra
     projects_combined[['issued', 'retired']] = projects_combined[['issued', 'retired']].fillna(0)
 
     return projects_combined
+
+
+def add_placeholder_projects(
+    *,
+    credits: pd.DataFrame,
+    projects: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Append placeholder project rows for any project IDs found in credits but absent from projects.
+
+    Computes issued/retired totals and first issuance/retirement dates from credit data so that
+    placeholder rows arrive in the database with correct summary stats rather than zeroed-out
+    defaults.  Call this on the combined (all-registry) DataFrames before writing to parquet.
+
+    Parameters
+    ----------
+    credits : pd.DataFrame
+        Combined credits DataFrame (all registries).
+    projects : pd.DataFrame
+        Combined projects DataFrame (all registries).
+
+    Returns
+    -------
+    pd.DataFrame
+        Projects DataFrame with placeholder rows appended for orphan project IDs.
+    """
+    from offsets_db_data.registry import get_registry_from_project_id
+
+    orphan_ids = set(credits['project_id'].unique()) - set(projects['project_id'].unique())
+
+    if not orphan_ids:
+        return projects
+
+    print(f'Found {len(orphan_ids)} project IDs in credits with no project record: {orphan_ids}')
+
+    orphan_credits = credits[credits['project_id'].isin(orphan_ids)]
+
+    issued = (
+        orphan_credits[orphan_credits['transaction_type'] == 'issuance']
+        .groupby('project_id')['quantity']
+        .sum()
+        .rename('issued')
+    )
+    retired = (
+        orphan_credits[orphan_credits['transaction_type'].str.contains('retirement', na=False)]
+        .groupby('project_id')['quantity']
+        .sum()
+        .rename('retired')
+    )
+    first_issuance_at = (
+        orphan_credits[orphan_credits['transaction_type'] == 'issuance']
+        .groupby('project_id')['transaction_date']
+        .min()
+        .rename('first_issuance_at')
+    )
+    first_retirement_at = (
+        orphan_credits[orphan_credits['transaction_type'].str.contains('retirement', na=False)]
+        .groupby('project_id')['transaction_date']
+        .min()
+        .rename('first_retirement_at')
+    )
+
+    stats = pd.concat(
+        [issued, retired, first_issuance_at, first_retirement_at], axis=1
+    ).reset_index()
+    stats[['issued', 'retired']] = stats[['issued', 'retired']].fillna(0)
+
+    rows = []
+    for _, row in stats.iterrows():
+        project_id = row['project_id']
+        try:
+            registry = get_registry_from_project_id(project_id)
+        except KeyError:
+            registry = 'unknown'
+        base_url = _REGISTRY_PROJECT_URLS.get(registry)
+        project_url = f'{base_url}{project_id[3:]}' if base_url else None
+        rows.append(
+            {
+                'project_id': project_id,
+                'registry': registry,
+                'project_type': 'Unknown',
+                'project_type_source': 'carbonplan',
+                'category': 'unknown',
+                'protocol': None,
+                'protocol_unassigned': None,
+                'issued': row.get('issued', 0.0),
+                'retired': row.get('retired', 0.0),
+                'first_issuance_at': row.get('first_issuance_at'),
+                'first_retirement_at': row.get('first_retirement_at'),
+                'is_compliance': False,
+                'project_url': project_url,
+                'name': None,
+                'proponent': None,
+                'status': None,
+                'country': None,
+                'listed_at': None,
+            }
+        )
+
+    return pd.concat([projects, pd.DataFrame(rows)], ignore_index=True)

@@ -10,6 +10,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from offsets_db_data.data import catalog
+from offsets_db_data.projects import add_placeholder_projects
 from offsets_db_data.registry import get_registry_from_project_id
 
 
@@ -326,6 +327,8 @@ def transform_registry_data(
         print(f'projects for {registry_name}: {projects.head()}')
     else:
         print(f'processed projects: {projects.head()}')
+
+    projects = add_placeholder_projects(projects=projects, credits=credits)
 
     # Summarize data
     summarize(credits=credits, projects=projects, registry_name=registry_name)
