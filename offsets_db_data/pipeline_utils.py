@@ -9,6 +9,7 @@ import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from offsets_db_data.common import convert_to_datetime  # noqa: F401
 from offsets_db_data.data import catalog
 from offsets_db_data.models import project_schema
 from offsets_db_data.projects import add_placeholder_projects
@@ -331,7 +332,7 @@ def transform_registry_data(
 
     projects = (
         add_placeholder_projects(projects=projects, credits=credits)
-        .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])
+        .convert_to_datetime(columns=['first_issuance_at', 'first_retirement_at'])
         .validate(schema=project_schema)
     )
 
