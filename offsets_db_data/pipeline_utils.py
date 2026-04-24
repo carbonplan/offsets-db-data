@@ -10,6 +10,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from offsets_db_data.data import catalog
+from offsets_db_data.models import project_schema
 from offsets_db_data.projects import add_placeholder_projects
 from offsets_db_data.registry import get_registry_from_project_id
 
@@ -328,7 +329,11 @@ def transform_registry_data(
     else:
         print(f'processed projects: {projects.head()}')
 
-    projects = add_placeholder_projects(projects=projects, credits=credits)
+    projects = (
+        add_placeholder_projects(projects=projects, credits=credits)
+        .convert_to_datetime(columns=['listed_at', 'first_issuance_at', 'first_retirement_at'])
+        .validate(schema=project_schema)
+    )
 
     # Summarize data
     summarize(credits=credits, projects=projects, registry_name=registry_name)
