@@ -621,5 +621,7 @@ def add_placeholder_projects(
         )
 
     data = pd.concat([projects, pd.DataFrame(rows)], ignore_index=True)
-    data = convert_to_datetime(data, columns=['first_issuance_at', 'first_retirement_at'])
+    data = convert_to_datetime(
+        data, columns=['first_issuance_at', 'first_retirement_at', 'listed_at']
+    )
     return validate(data, schema=project_schema)
