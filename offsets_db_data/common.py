@@ -115,9 +115,11 @@ def convert_to_datetime(
         if column not in df.columns:
             raise KeyError(f"The column '{column}' is missing.")
         try:
-            df[column] = pd.to_datetime(df[column], utc=utc, **kwargs).dt.normalize()
+            df[column] = (
+                pd.to_datetime(df[column], utc=utc, **kwargs).dt.normalize().dt.as_unit('ns')
+            )
         except ValueError:
-            df[column] = pd.to_datetime(df[column], utc=utc).dt.normalize()
+            df[column] = pd.to_datetime(df[column], utc=utc).dt.normalize().dt.as_unit('ns')
     return df
 
 

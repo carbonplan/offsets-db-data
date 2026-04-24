@@ -570,12 +570,14 @@ def add_placeholder_projects(
         .groupby('project_id')['transaction_date']
         .min()
         .rename('first_issuance_at')
+        .dt.as_unit('ns')
     )
     first_retirement_at = (
         orphan_credits[orphan_credits['transaction_type'].str.contains('retirement', na=False)]
         .groupby('project_id')['transaction_date']
         .min()
         .rename('first_retirement_at')
+        .dt.as_unit('ns')
     )
 
     stats = pd.concat(
