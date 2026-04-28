@@ -39,6 +39,15 @@ def test_find_protocol_empty_string():
         assert unmatched is None
 
 
+def test_find_protocol_null_sentinel():
+    """Strings mapped to ['unknown'] yield (None, [raw_string]), not (['unknown'], None)."""
+    mapping = {'Not defined': ['unknown'], 'Other': ['unknown']}
+    for s in ('Not defined', 'Other'):
+        mapped, unmatched = find_protocol(search_string=s, inverted_protocol_mapping=mapping)
+        assert mapped is None
+        assert unmatched == [s]
+
+
 # ── map_protocol ──────────────────────────────────────────────────────────────
 
 

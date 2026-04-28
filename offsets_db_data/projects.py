@@ -371,6 +371,8 @@ def find_protocol(
         return None, None
     stripped = search_string.strip()
     if known_match := inverted_protocol_mapping.get(stripped):
+        if known_match == ['unknown']:
+            return None, [search_string]
         return known_match, None
     print(f"'{search_string}' is unmapped in full protocol mapping")
     return None, [search_string]
