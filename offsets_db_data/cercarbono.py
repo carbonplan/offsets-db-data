@@ -139,6 +139,59 @@ def process_cercarbono_credits(
 
 
 @pf.register_dataframe_method
+def add_cercarbono_missing_projects(df: pd.DataFrame) -> pd.DataFrame:
+    """Add manually curated rows for Cercarbono projects absent from the public API.
+
+    CDC-106 and CDC-107 were migrated from BioCarbon Registry and lack protocol
+    metadata that the ecoregistry.io API requires, so they are excluded from the
+    standard API export.  Credits for both projects exist in the registry, so
+    adding them here ensures the pipeline produces complete project records with
+    proper issued/retired totals.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input dataframe containing Cercarbono project data.
+
+    Returns
+    -------
+    pd.DataFrame
+        Dataframe with CDC-106 and CDC-107 appended.
+    """
+    missing = [
+        {
+            'project_id': 'CCB106',
+            'name': 'Aire de Vida “FIIVO JAAGAVA KOMUYA JAG+Y+”Monochoa REDD+',
+            'protocol': ['ccb-redd'],
+            'category': 'forest',
+            'project_type': 'redd+',
+            'project_type_source': 'carbonplan',
+            'country': 'Colombia',
+            'status': 'registered',
+            'is_compliance': False,
+            'registry': 'cercarbono',
+            'project_url': 'https://www.ecoregistry.io/projects/CDC-106',
+            'listed_at': '2022-06-04',
+        },
+        {
+            'project_id': 'CCB107',
+            'name': 'Proyecto Nuestro Aire Vida “Kai KOMUYAJAG+Y+” REDD+ Puerto Zábalo y Los Monos',
+            'protocol': ['ccb-redd'],
+            'category': 'forest',
+            'project_type': 'redd+',
+            'project_type_source': 'carbonplan',
+            'country': 'Colombia',
+            'status': 'registered',
+            'is_compliance': False,
+            'registry': 'cercarbono',
+            'project_url': 'https://www.ecoregistry.io/projects/CDC-107',
+            'listed_at': '2022-06-04',
+        },
+    ]
+    return pd.concat([df, pd.DataFrame(missing)], ignore_index=True)
+
+
+@pf.register_dataframe_method
 def process_cercarbono_projects(
     df: pd.DataFrame,
     *,
@@ -189,8 +242,9 @@ def process_cercarbono_projects(
             type_category_mapping=type_category_mapping,
             protocol_mapping=protocol_mapping,
         )  # category derived from protocol; project_type is independent
-        .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
         .add_is_compliance_flag()
+        .add_cercarbono_missing_projects()
+        .map_project_type_to_display_name(type_category_mapping=type_category_mapping)
         .add_retired_and_issued_totals(credits=credits)
         .add_first_issuance_and_retirement_dates(credits=credits)
         .add_missing_columns(schema=project_schema)
