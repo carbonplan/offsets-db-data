@@ -8,7 +8,7 @@ Usage:
 The script downloads small slices of each registry's raw files and writes
 them as plain CSV into tests/data/. Requires S3 read access.
 
-Note: Cercarbono data lives in the scratch bucket
+Note: Cercarbono and Isometric data live in the scratch bucket
   (s3://carbonplan-scratch/offsets-db-test/raw/) until promoted
   to the production bucket (s3://carbonplan-offsets-db/raw/).
 """
@@ -87,6 +87,14 @@ def main(date: str) -> None:
         _csv(
             f'{scratch_base}/cercarbono/{key}.csv.gz',
             OUT_DIR / 'cercarbono' / f'{key}.csv',
+        )
+
+    # ── Isometric (scratch bucket) ─────────────────────────────────────────────
+    print(f'Refreshing Isometric from {scratch_base}')
+    for key in ('projects', 'issuances', 'retirements'):
+        _csv(
+            f'{scratch_base}/isometric/{key}.csv.gz',
+            OUT_DIR / 'isometric' / f'{key}.csv',
         )
 
     print('Done.')

@@ -2,7 +2,7 @@
 
 Sample data in tests/data/ was extracted from:
   s3://carbonplan-offsets-db/raw/2026-04-14/      (verra, acr, art, car, gld, arb)
-  s3://carbonplan-scratch/offsets-db-test/raw/2026-04-15/  (cercarbono)
+  s3://carbonplan-scratch/offsets-db-test/raw/2026-04-28/  (cercarbono, isometric)
 
 To refresh samples, run:
   python tests/scripts/refresh_sample_data.py
@@ -164,6 +164,27 @@ def raw_cercarbono_issuances() -> pd.DataFrame:
 @pytest.fixture
 def raw_cercarbono_retirements() -> pd.DataFrame:
     return pd.read_csv(DATA_DIR / 'cercarbono' / 'retirements.csv')
+
+
+@pytest.fixture
+def raw_isometric_projects() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'isometric' / 'projects.csv')
+
+
+@pytest.fixture
+def raw_isometric_issuances() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'isometric' / 'issuances.csv')
+
+
+@pytest.fixture
+def raw_isometric_retirements() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'isometric' / 'retirements.csv')
+
+
+@pytest.fixture
+def isometric_prj_id_to_short_code(raw_isometric_projects) -> dict:
+    """Map Isometric project UUID → short code, used by process_isometric_credits."""
+    return dict(zip(raw_isometric_projects['id'], raw_isometric_projects['short_code']))
 
 
 # ── Processed fixtures ─────────────────────────────────────────────────────────

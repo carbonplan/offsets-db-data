@@ -5,6 +5,7 @@ REGISTRY_ABBR_MAP = {
     'art': 'art-trees',
     'gld': 'gold-standard',
     'ccb': 'cercarbono',
+    'iso': 'isometric',
 }
 
 
