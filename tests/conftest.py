@@ -18,7 +18,7 @@ DATA_DIR = Path(__file__).parent / 'data'
 
 # S3 coordinates that match the local sample data
 RAW_DATE = '2026-04-14'
-SCRATCH_DATE = '2026-04-28'
+SCRATCH_DATE = '2026-05-04'
 RAW_BUCKET = 's3://carbonplan-offsets-db/raw'
 SCRATCH_BUCKET = 's3://carbonplan-scratch/offsets-db-test/raw'
 
