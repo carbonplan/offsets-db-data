@@ -8,6 +8,7 @@ To refresh samples, run:
   python tests/scripts/refresh_sample_data.py
 """
 
+import ast
 from pathlib import Path
 
 import pandas as pd
