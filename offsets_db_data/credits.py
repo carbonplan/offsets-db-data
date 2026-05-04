@@ -158,15 +158,22 @@ def harmonize_beneficiary_data(
         data = credits.copy()
         data['retirement_beneficiary_harmonized'] = pd.Series(dtype='str')
         return data
+    datetime_cols = [
+        col for col in credits.columns if pd.api.types.is_datetime64_any_dtype(credits[col])
+    ]
     credits.to_csv(temp_path, index=False)
 
     project_name = f'{registry_name}-{download_type}-beneficiary-harmonization-{datetime.datetime.now().strftime("%Y%m%d%H%M%S")}-{uuid.uuid4()}'
     output_path = pathlib.Path(tempdir) / f'{project_name}.csv'
 
     try:
-        return _extract_harmonized_beneficiary_data_via_openrefine(
+        data = _extract_harmonized_beneficiary_data_via_openrefine(
             temp_path, project_name, str(BENEFICIARY_MAPPING_UPATH), str(output_path)
         )
+        for col in datetime_cols:
+            if col in data.columns:
+                data[col] = pd.to_datetime(data[col], utc=True).dt.normalize().dt.as_unit('ns')
+        return data
 
     except subprocess.CalledProcessError as e:
         raise ValueError(
@@ -240,10 +247,10 @@ def _extract_harmonized_beneficiary_data_via_openrefine(
     print(result.stdout)
 
     data = pd.read_csv(output_path)
-    data['merged_beneficiary'] = data['merged_beneficiary'].fillna('').astype(str)
+    merged = data['merged_beneficiary'].fillna('').astype(str)
     data['retirement_beneficiary_harmonized'] = np.where(
-        data['merged_beneficiary'].notnull() & (~data['merged_beneficiary'].str.contains(';%')),
-        data['merged_beneficiary'],
+        merged.notnull() & (~merged.str.contains(';%')),
+        merged,
         np.nan,
     )
-    return data
+    return data.drop(columns=['merged_beneficiary'], errors='ignore')
