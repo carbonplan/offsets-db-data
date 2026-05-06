@@ -395,9 +395,7 @@ def test_add_vcs_compliance_projects(subtests, vcs_projects):
 
 def test_process_vcs_projects(subtests, vcs_projects, vcs_transactions):
     credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
-    df = process_vcs_projects(
-        vcs_projects, credits=credits, registry_name='verra', download_type='projects'
-    )
+    df = process_vcs_projects(vcs_projects, credits=credits, registry_name='verra')
 
     with subtests.test('listed_at_column'):
         assert 'listed_at' in df.columns
@@ -425,9 +423,7 @@ def test_process_vcs_projects(subtests, vcs_projects, vcs_transactions):
 
 def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_transactions):
     credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
-    df = process_vcs_projects(
-        vcs_projects, credits=credits, registry_name='verra', download_type='projects'
-    )
+    df = process_vcs_projects(vcs_projects, credits=credits, registry_name='verra')
     row = df[df['project_id'] == 'VCS2498'].iloc[0]
 
     with subtests.test('total_issued'):

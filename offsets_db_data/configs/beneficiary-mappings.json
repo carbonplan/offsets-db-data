@@ -64074,5 +64074,4301 @@
       }
     ],
     "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Not public;%;%;%;%\", \"\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Not public;%;%;%;%\", \"\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Delta Air Lines For DL 2021 Carbon Neutrality;%;%;%;%\", \"Delta Air Lines\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Delta Air Lines For DL 2021 Carbon Neutrality;%;%;%;%\", \"Delta Air Lines\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Primax Colombia S.A;%;%;%;%\", \"Primax\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Primax Colombia S.A;%;%;%;%\", \"Primax\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%CHEVRON PETROLEUM COMPANY;%;%;%;%\", \"Chevron\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%CHEVRON PETROLEUM COMPANY;%;%;%;%\", \"Chevron\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Guacolda Energía SpA;%;%;%;%\", \"Guacolda Energía\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Guacolda Energía SpA;%;%;%;%\", \"Guacolda Energía\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ENGIE Energía Chile S.A;%;%;%;%\", \"ENGIE\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ENGIE Energía Chile S.A;%;%;%;%\", \"ENGIE\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Ecopetrol S.A.;%;%;%;%\", \"Ecopetrol\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Ecopetrol S.A.;%;%;%;%\", \"Ecopetrol\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\"%;%ECOPETROL S.A.;%;%;%;%\", \"Ecopetrol\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\"%;%ECOPETROL S.A.;%;%;%;%\", \"Ecopetrol\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%OLEODUCTO CENTRAL S.A.;%;%;%;%\", \"Oleoducto Central\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%OLEODUCTO CENTRAL S.A.;%;%;%;%\", \"Oleoducto Central\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ENGIE Energía Chile S.A.;%;%;%;%\", \"ENGIE\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ENGIE Energía Chile S.A.;%;%;%;%\", \"ENGIE\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ACCIONA, S.A.;%;%;%;%\", \"ACCIONA\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ACCIONA, S.A.;%;%;%;%\", \"ACCIONA\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Tecnoglass Inc;%;%;%;%\", \"Tecnoglass\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Tecnoglass Inc;%;%;%;%\", \"Tecnoglass\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%PETROLEOS DEL MILENIO S.A.;%;%;%;%\", \"Petromil\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%PETROLEOS DEL MILENIO S.A.;%;%;%;%\", \"Petromil\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%PLUS+ ENERGY S.A.S;%;%;%;%\", \"Plus+ Energy\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%PLUS+ ENERGY S.A.S;%;%;%;%\", \"Plus+ Energy\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%PUMA ENERGY COLOMBIA COMBUSTIBLES S.A.S.;%;%;%;%\", \"Puma Energy Colombia Combustibles\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%PUMA ENERGY COLOMBIA COMBUSTIBLES S.A.S.;%;%;%;%\", \"Puma Energy Colombia Combustibles\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ESENTTIA S.A.;%;%;%;%\", \"Esenttia\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ESENTTIA S.A.;%;%;%;%\", \"Esenttia\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Enel Generación Chile S.A.;%;%;%;%\", \"Enel Generación\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Enel Generación Chile S.A.;%;%;%;%\", \"Enel Generación\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ECOPETROL S.A;%;%;%;%\", \"Ecopetrol\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ECOPETROL S.A;%;%;%;%\", \"Ecopetrol\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Masser S.A.S.;%;%;%;%\", \"Masser\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Masser S.A.S.;%;%;%;%\", \"Masser\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Fast Colombia SAS;%;%;%;%\", \"Fast Colombia\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Fast Colombia SAS;%;%;%;%\", \"Fast Colombia\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ESENTTIA MASTERBATCH LTDA;%;%;%;%\", \"Esenttia\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ESENTTIA MASTERBATCH LTDA;%;%;%;%\", \"Esenttia\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%SIEMENS ENERGY S.A.S;%;%;%;%\", \"Siemens Energy\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%SIEMENS ENERGY S.A.S;%;%;%;%\", \"Siemens Energy\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Transportadora de Gas Internacional S.A. ESP;%;%;%;%\", \"Transportadora de Gas Internacional\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Transportadora de Gas Internacional S.A. ESP;%;%;%;%\", \"Transportadora de Gas Internacional\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Guacolda Energía SpA.;%;%;%;%\", \"Guacolda Energía\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Guacolda Energía SpA.;%;%;%;%\", \"Guacolda Energía\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Petrobras Colombia Combustibles S.A.;%;%;%;%\", \"Petrobras\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Petrobras Colombia Combustibles S.A.;%;%;%;%\", \"Petrobras\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%AEROVIAS DEL CONTINENTE AMERICANO S.A.;%;%;%;%\", \"Avianca\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%AEROVIAS DEL CONTINENTE AMERICANO S.A.;%;%;%;%\", \"Avianca\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ENEL GENERACIÓN CHILE S.A.;%;%;%;%\", \"Enel Generación\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ENEL GENERACIÓN CHILE S.A.;%;%;%;%\", \"Enel Generación\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%AEROSUCRE S.A.;%;%;%;%\", \"Aerosucre\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%AEROSUCRE S.A.;%;%;%;%\", \"Aerosucre\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%GASEOSAS POSADA TOBON S.A.;%;%;%;%\", \"Postobón\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%GASEOSAS POSADA TOBON S.A.;%;%;%;%\", \"Postobón\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Postobon S.A.;%;%;%;%\", \"Postobón\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Postobon S.A.;%;%;%;%\", \"Postobón\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%POSTOBON S.A.;%;%;%;%\", \"Postobón\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%POSTOBON S.A.;%;%;%;%\", \"Postobón\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%GREENLAND INVESTMENTS S.A.S.;%;%;%;%\", \"Greenland Investments\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%GREENLAND INVESTMENTS S.A.S.;%;%;%;%\", \"Greenland Investments\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Cabify Matriz S.L.;%;%;%;%\", \"Cabify\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Cabify Matriz S.L.;%;%;%;%\", \"Cabify\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%GASEOSAS LUX S.A.S.;%;%;%;%\", \"Gaseosas Lux\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%GASEOSAS LUX S.A.S.;%;%;%;%\", \"Gaseosas Lux\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": "cenit",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%CENIT TRANSPORTE Y LOGISTICA DE HIDROCARBUROS S.A.S;%;%;%;%\", \"Cenit\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%CENIT TRANSPORTE Y LOGISTICA DE HIDROCARBUROS S.A.S;%;%;%;%\", \"Cenit\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": "cenit",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": true
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%GASEOSAS LUX SAS;%;%;%;%\", \" Gaseosas Lux\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%GASEOSAS LUX SAS;%;%;%;%\", \" Gaseosas Lux\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": "gaseo",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%GASEOSAS COLOMBIANAS S.A.S.;%;%;%;%\", \"Gaseosas Colombianas\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%GASEOSAS COLOMBIANAS S.A.S.;%;%;%;%\", \"Gaseosas Colombianas\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": "gaseo",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Gaseosas Colombianas S.A.S.;%;%;%;%\", \"Gaseosas Colombianas\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Gaseosas Colombianas S.A.S.;%;%;%;%\", \"Gaseosas Colombianas\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": "gaseo",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%GASEOSAS COLOMBIANAS S.A.S;%;%;%;%\", \"Gaseosas Colombianas\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%GASEOSAS COLOMBIANAS S.A.S;%;%;%;%\", \"Gaseosas Colombianas\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Minera Escondida Ltda;%;%;%;%\", \"Minera Escondida\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Minera Escondida Ltda;%;%;%;%\", \"Minera Escondida\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Sodimac Colombia S.A.;%;%;%;%\", \"Sodimac\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Sodimac Colombia S.A.;%;%;%;%\", \"Sodimac\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%Proquinal S.A.S;%;%;%;%\", \"Proquinal\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%Proquinal S.A.S;%;%;%;%\", \"Proquinal\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%ORIZON S A;%;%;%;%\", \"Orizon\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%ORIZON S A;%;%;%;%\", \"Orizon\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%FRONTERA ENERGY COLOMBIA CORP., SUCURSAL COLOMBIA.;%;%;%;%\", \"Frontera Energy\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%FRONTERA ENERGY COLOMBIA CORP., SUCURSAL COLOMBIA.;%;%;%;%\", \"Frontera Energy\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%GUARDIAN INDUSTRIES VP;%;%;%;%\", \"Guardian Industries\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%GUARDIAN INDUSTRIES VP;%;%;%;%\", \"Guardian Industries\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%EGTC Infra S.A;%;%;%;%\", \"EGTC Infra\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%EGTC Infra S.A;%;%;%;%\", \"EGTC Infra\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%INVESMAR INTERNATIONAL INVESTMENTS S.A.;%;%;%;%\", \"Invesmar International Investments\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%INVESMAR INTERNATIONAL INVESTMENTS S.A.;%;%;%;%\", \"Invesmar International Investments\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%CENTRALES ELÉCTRICAS DEL NORTE DE SANTANDER S.A. E.S.P.;%;%;%;%\", \"Centrales Eléctricas de Norte de Santander\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%CENTRALES ELÉCTRICAS DEL NORTE DE SANTANDER S.A. E.S.P.;%;%;%;%\", \"Centrales Eléctricas de Norte de Santander\")"
+  },
+  {
+    "op": "core/text-transform",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "grel:value.replace(\";%;%OLEODUCTO DE LOS LLANOS ORIENTALES S.A.;%;%;%;%\", \"Oleoducto de los Llanos Orientales\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10,
+    "description": "Text transform on cells in column merged_beneficiary using expression grel:value.replace(\";%;%OLEODUCTO DE LOS LLANOS ORIENTALES S.A.;%;%;%;%\", \"Oleoducto de los Llanos Orientales\")"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "cc",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          ";%;%FABRICA DE LICORES Y ALCOHOLES DE ANTIOQUIA EICE;%;%;%;%"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Fabrica de Licores y Alcoholes de Antioquia"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Block;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Block"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Shopify;%Shopify;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Shopify"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["JPMorganChase;%JPMorganChase;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "JPMorganChase"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Yelp Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Yelp"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Supercritical;%BlackRock, Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Blackrock"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Marsh;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Marsh"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "Harvard Management Company;%Harvard Management Company;%;%;%;%"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Harvard Management Company"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Workday;%Workday;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Workday"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Figma;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Figma"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Autodesk;%Autodesk;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Autodesk"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Zendesk, Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Zendesk"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["ClimeFi;%Boston Consulting Group;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Boston Consulting Group"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Samsara Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Samsara"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Rubicon Carbon;%Cisco Systems, Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Cisco Systems"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Wise Payments Ltd;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Wise Payments"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Rubicon Carbon;%GitLab Inc. ;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "GitLab"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Opna;%Wise Payments Ltd;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Wise Payments"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Rubicon Carbon;%Jefferies Financial Group Inc;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Jefferies Financial Group"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Rubicon Carbon;%Bumble Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Bumble"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%Terraset;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Terraset"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Patch;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Patch"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Versa;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Versa"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Dayforce US, Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Dayforce US"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%Coatue;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Coatue"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Skyscanner Limited;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Skyscanner"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Wren;%Union Square Ventures;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Union Square Ventures"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Aledade, Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Aledade"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Skims Body, Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Skims Body"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Canva Pty Ltd;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Canva"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Coatue;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Coatue"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Watershed;%Match Group Holdings I, LLC;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Match Group"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Typeform S.L.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Typeform"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%Quang Nguyen;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Quang Nguyen"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%Raritan Valley Community College;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Raritan Valley Community College"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%CarbonCure Technologies Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CarbonCure"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%Stanford University;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Stanford University"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%Tomorro;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Tomorro"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Wren;%New Mountain Capital ;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "New Mountain Capital"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Bain & Company;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Bain & Company"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Wren;%Molten Ventures;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Molten Ventures"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Rubicon Carbon;%Genesys Cloud Services, Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Genesys Cloud Services"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Piva Capital;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Piva Capital"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Princeville Capital;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Princeville Capital"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Patch;%Future Energy Ventures Management GmbH;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Future Energy Ventures Management"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%CaptureNow;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "CaptureNow"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%Own Your Beliefs Inc.;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Own Your Beliefs"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": ["Stripe;%DeliverOne;%;%;%;%"],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "DeliverOne"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "transaction_type",
+          "columnName": "transaction_type",
+          "query": "retir",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "project_id",
+          "columnName": "project_id",
+          "query": "iso",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        },
+        {
+          "type": "text",
+          "name": "merged_beneficiary",
+          "columnName": "merged_beneficiary",
+          "query": ";%",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "merged_beneficiary",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "CEEZER;%Deutscher Verband für Negative Emissionen e.V.;%;%;%;%"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "Deutscher Verband für Negative Emissionen"
+      }
+    ],
+    "description": "Mass edit cells in column merged_beneficiary"
   }
 ]

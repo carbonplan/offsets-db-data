@@ -1,12 +1,14 @@
 """Shared test fixtures for offsets-db-data tests.
 
 Sample data in tests/data/ was extracted from:
-  s3://carbonplan-offsets-db/raw/2026-04-14/
+  s3://carbonplan-offsets-db/raw/2026-04-14/      (verra, acr, art, car, gld, arb)
+  s3://carbonplan-scratch/offsets-db-test/raw/2026-04-28/  (cercarbono, isometric)
 
 To refresh samples, run:
   python tests/scripts/refresh_sample_data.py
 """
 
+import ast
 from pathlib import Path
 
 import pandas as pd
@@ -16,7 +18,9 @@ DATA_DIR = Path(__file__).parent / 'data'
 
 # S3 coordinates that match the local sample data
 RAW_DATE = '2026-04-14'
+SCRATCH_DATE = '2026-05-04'
 RAW_BUCKET = 's3://carbonplan-offsets-db/raw'
+SCRATCH_BUCKET = 's3://carbonplan-scratch/offsets-db-test/raw'
 
 
 def pytest_collection_modifyitems(items):
@@ -35,8 +39,18 @@ def date() -> str:
 
 
 @pytest.fixture
+def scratch_date() -> str:
+    return SCRATCH_DATE
+
+
+@pytest.fixture
 def bucket() -> str:
     return RAW_BUCKET
+
+
+@pytest.fixture
+def scratch_bucket() -> str:
+    return SCRATCH_BUCKET
 
 
 # ── Raw data fixtures (load from local sample files) ──────────────────────────
@@ -132,6 +146,45 @@ def raw_gld_issuances() -> pd.DataFrame:
 @pytest.fixture
 def raw_gld_retirements() -> pd.DataFrame:
     return pd.read_csv(DATA_DIR / 'gold-standard' / 'retirements.csv')
+
+
+@pytest.fixture
+def raw_cercarbono_projects() -> pd.DataFrame:
+    df = pd.read_csv(DATA_DIR / 'cercarbono' / 'projects.csv')
+    # 'locations' is stored as a stringified Python list of dicts in the CSV
+    df['locations'] = df['locations'].map(ast.literal_eval)
+    return df
+
+
+@pytest.fixture
+def raw_cercarbono_issuances() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'cercarbono' / 'issuances.csv')
+
+
+@pytest.fixture
+def raw_cercarbono_retirements() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'cercarbono' / 'retirements.csv')
+
+
+@pytest.fixture
+def raw_isometric_projects() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'isometric' / 'projects.csv')
+
+
+@pytest.fixture
+def raw_isometric_issuances() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'isometric' / 'issuances.csv')
+
+
+@pytest.fixture
+def raw_isometric_retirements() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'isometric' / 'retirements.csv')
+
+
+@pytest.fixture
+def isometric_prj_id_to_short_code(raw_isometric_projects) -> dict:
+    """Map Isometric project UUID → short code, used by process_isometric_credits."""
+    return dict(zip(raw_isometric_projects['id'], raw_isometric_projects['short_code']))
 
 
 # ── Processed fixtures ─────────────────────────────────────────────────────────

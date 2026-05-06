@@ -1,11 +1,24 @@
 import contextlib
 import json
+from decimal import Decimal
 
 import country_converter as coco
 import janitor  # noqa: F401
 import numpy as np
 import pandas as pd
 import pandas_flavor as pf
+
+from offsets_db_data.common import convert_to_datetime, validate
+from offsets_db_data.models import project_schema
+
+_REGISTRY_PROJECT_URLS = {
+    'verra': 'https://registry.verra.org/app/projectDetail/VCS/',
+    'gold-standard': 'https://registry.goldstandard.org/projects?q=gs',
+    'american-carbon-registry': 'https://acr2.apx.com/mymodule/reg/prjView.asp?id1=',
+    'climate-action-reserve': 'https://thereserve2.apx.com/mymodule/reg/prjView.asp?id1=',
+    'art-trees': 'https://art.apx.com/mymodule/reg/prjView.asp?id1=',
+    'cercarbono': 'https://www.ecoregistry.io/projects/CDC-',
+}
 
 
 @pf.register_dataframe_method
@@ -34,16 +47,26 @@ def harmonize_country_names(df: pd.DataFrame, *, country_column: str = 'country'
 
 
 @pf.register_dataframe_method
-def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFrame:
+def add_category(
+    df: pd.DataFrame, *, type_category_mapping: dict, protocol_mapping: dict | None = None
+) -> pd.DataFrame:
     """
     Add a category to each record in the DataFrame based on its protocol.
+
+    Category is derived directly from the protocol via protocol_mapping when available,
+    falling back to type_category_mapping via project_type. This keeps category and
+    project_type independent of each other.
 
     Parameters
     ----------
     df : pd.DataFrame
         Input DataFrame containing protocol data.
     type_category_mapping : dict
-        Dictionary mapping types to categories.
+        Dictionary mapping project_type strings to categories (fallback).
+    protocol_mapping : dict, optional
+        The full protocol mapping (from all-protocol-mapping.json). When provided,
+        category is read directly from the matched protocol's 'category' field,
+        which decouples it from project_type.
 
     Returns
     -------
@@ -52,12 +75,27 @@ def add_category(df: pd.DataFrame, *, type_category_mapping: dict) -> pd.DataFra
     """
 
     print('Adding category based on protocol...')
-    df['category'] = (
-        df['project_type']
-        .str.lower()
-        .map({key.lower(): value['category'] for key, value in type_category_mapping.items()})
-        .fillna('unknown')
-    )
+
+    if protocol_mapping is not None:
+
+        def _category_from_protocol(protocol_list: list | None) -> str:
+            if not protocol_list:
+                return 'unknown'
+            for p in protocol_list:
+                cat = protocol_mapping.get(p, {}).get('category')
+                if cat and cat != 'unknown':
+                    return cat
+            return 'unknown'
+
+        df['category'] = df['protocol'].apply(_category_from_protocol)
+    else:
+        # Legacy fallback: derive category from project_type via type_category_mapping
+        df['category'] = (
+            df['project_type']
+            .str.lower()
+            .map({key.lower(): value['category'] for key, value in type_category_mapping.items()})
+            .fillna('unknown')
+        )
     return df
 
 
@@ -104,73 +142,61 @@ def infer_project_type(df: pd.DataFrame) -> pd.DataFrame:
     pd.DataFrame
         DataFrame with a new 'project_type' column, indicating the project's type. Defaults to None
     """
+
+    def _has_protocol(pid: str):
+        return lambda x: x['protocol'] is not None and pid in x['protocol']
+
     df.loc[:, 'project_type'] = 'unknown'
     df.loc[:, 'project_type_source'] = 'carbonplan'
-    df.loc[df.apply(lambda x: 'art-trees' in x['protocol'], axis=1), 'project_type'] = 'redd+'
+    df.loc[df.apply(_has_protocol('art-trees'), axis=1), 'project_type'] = 'redd+'
 
-    df.loc[df.apply(lambda x: 'acr-ifm-nonfed' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('acr-ifm-nonfed'), axis=1), 'project_type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'acr-refridge' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('acr-refridge'), axis=1), 'project_type'] = (
         'advanced refrigerants'
     )
-    df.loc[df.apply(lambda x: 'acr-abandoned-wells' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('acr-abandoned-wells'), axis=1), 'project_type'] = (
         'plugging oil & gas wells'
     )
 
-    df.loc[df.apply(lambda x: 'arb-mine-methane' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('arb-mine-methane'), axis=1), 'project_type'] = (
         'mine methane capture'
     )
 
-    df.loc[df.apply(lambda x: 'vm0048' in x['protocol'], axis=1), 'project_type'] = 'redd+'
-    df.loc[df.apply(lambda x: 'vm0047' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('vm0048'), axis=1), 'project_type'] = 'redd+'
+    df.loc[df.apply(_has_protocol('vm0047'), axis=1), 'project_type'] = (
         'afforestation/reforestation'
     )
-    df.loc[df.apply(lambda x: 'vm0045' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('vm0045'), axis=1), 'project_type'] = 'improved forest management'
+    df.loc[df.apply(_has_protocol('vm0042'), axis=1), 'project_type'] = 'sustainable agriculture'
+    df.loc[df.apply(_has_protocol('vm0007'), axis=1), 'project_type'] = 'redd+'
+
+    df.loc[df.apply(_has_protocol('acm0001'), axis=1), 'project_type'] = 'landfill methane'
+    df.loc[df.apply(_has_protocol('acm0002'), axis=1), 'project_type'] = 're bundled'
+
+    df.loc[df.apply(_has_protocol('iso-refor'), axis=1), 'project_type'] = (
+        'afforestation/reforestation'
+    )
+    df.loc[df.apply(_has_protocol('iso-biochar'), axis=1), 'project_type'] = 'biochar'
+    df.loc[df.apply(_has_protocol('iso-bio-burial'), axis=1), 'project_type'] = 'biomass burial'
+    df.loc[df.apply(_has_protocol('iso-bio-geo'), axis=1), 'project_type'] = 'biomass injection'
+    df.loc[df.apply(_has_protocol('iso-bio-oil'), axis=1), 'project_type'] = 'biomass injection'
+    df.loc[df.apply(_has_protocol('iso-dac'), axis=1), 'project_type'] = 'direct air capture'
+    df.loc[df.apply(_has_protocol('iso-erw'), axis=1), 'project_type'] = 'enhanced rock weathering'
+
+    df.loc[df.apply(_has_protocol('ccb-refor'), axis=1), 'project_type'] = (
+        'afforestation/reforestation'
+    )
+    df.loc[df.apply(_has_protocol('ccb-redd'), axis=1), 'project_type'] = 'redd+'
+
+    df.loc[df.apply(_has_protocol('car-forest-mx'), axis=1), 'project_type'] = (
         'improved forest management'
     )
-    df.loc[df.apply(lambda x: 'vm0042' in x['protocol'], axis=1), 'project_type'] = (
-        'sustainable agriculture'
-    )
-    df.loc[df.apply(lambda x: 'vm0007' in x['protocol'], axis=1), 'project_type'] = 'redd+'
-
-    df.loc[df.apply(lambda x: 'acm0001' in x['protocol'], axis=1), 'project_type'] = 'landfill'
-    df.loc[df.apply(lambda x: 'acm0002' in x['protocol'], axis=1), 'project_type'] = 'natural gas'
-
-    df.loc[df.apply(lambda x: 'iso-refor' in x['protocol'], axis=1), 'project_type'] = (
+    df.loc[df.apply(_has_protocol('gs-reforest'), axis=1), 'project_type'] = (
         'afforestation/reforestation'
     )
-    df.loc[df.apply(lambda x: 'iso-biochar' in x['protocol'], axis=1), 'project_type'] = 'biochar'
-    df.loc[df.apply(lambda x: 'iso-bio-burial' in x['protocol'], axis=1), 'project_type'] = (
-        'biomass burial'
-    )
-    df.loc[df.apply(lambda x: 'iso-bio-geo' in x['protocol'], axis=1), 'project_type'] = (
-        'biomass injection'
-    )
-    df.loc[df.apply(lambda x: 'iso-bio-oil' in x['protocol'], axis=1), 'project_type'] = (
-        'biomass injection'
-    )
-    df.loc[df.apply(lambda x: 'iso-dac' in x['protocol'], axis=1), 'project_type'] = (
-        'direct air capture'
-    )
-    df.loc[df.apply(lambda x: 'iso-erw' in x['protocol'], axis=1), 'project_type'] = (
-        'enhanced rock weathering'
-    )
-
-    df.loc[df.apply(lambda x: 'ccb-refor' in x['protocol'], axis=1), 'project_type'] = (
-        'afforestation/reforestation'
-    )
-    df.loc[df.apply(lambda x: 'ccb-redd' in x['protocol'], axis=1), 'project_type'] = 'redd+'
-
-    df.loc[df.apply(lambda x: 'car-forest-mx' in x['protocol'], axis=1), 'project_type'] = (
-        'improved forest management'
-    )
-    df.loc[df.apply(lambda x: 'gs-reforest' in x['protocol'], axis=1), 'project_type'] = (
-        'afforestation/reforestation'
-    )
-    df.loc[df.apply(lambda x: 'gs-drinking-water' in x['protocol'], axis=1), 'project_type'] = (
-        'clean water'
-    )
+    df.loc[df.apply(_has_protocol('gs-drinking-water'), axis=1), 'project_type'] = 'clean water'
 
     return df
 
@@ -227,7 +253,10 @@ def add_is_compliance_flag(df: pd.DataFrame) -> pd.DataFrame:
 
     print('Adding is_compliance flag...')
     df['is_compliance'] = df.apply(
-        lambda row: np.any([protocol_str.startswith('arb-') for protocol_str in row['protocol']]),
+        lambda row: (
+            row['protocol'] is not None
+            and np.any([protocol_str.startswith('arb-') for protocol_str in row['protocol']])
+        ),
         axis=1,
     )
     return df
@@ -260,14 +289,16 @@ def map_protocol(
 
     print('Mapping protocol based on known string...')
     try:
-        df['protocol'] = df[original_protocol_column].apply(
+        results = df[original_protocol_column].apply(
             lambda item: find_protocol(
                 search_string=item, inverted_protocol_mapping=inverted_protocol_mapping
             )
         )
+        df['protocol'] = [r[0] for r in results]
+        df['protocol_unassigned'] = [r[1] for r in results]
     except KeyError:
-        # art-trees doesnt have protocol column
-        df['protocol'] = [['unknown']] * len(df)  # protocol column is nested list
+        df['protocol'] = [None] * len(df)
+        df['protocol_unassigned'] = [None] * len(df)
 
     return df
 
@@ -326,17 +357,25 @@ def harmonize_status_codes(df: pd.DataFrame, *, status_column: str = 'status') -
 
 def find_protocol(
     *, search_string: str, inverted_protocol_mapping: dict[str, list[str]]
-) -> list[str]:
-    """Match known strings of project methodologies to internal topology
+) -> tuple[list[str] | None, list[str] | None]:
+    """Match known strings of project methodologies to internal topology.
 
-    Unmatched strings are passed through to the database, until such time that we update mapping data.
+    Returns a ``(mapped, unmatched)`` tuple:
+
+    * ``mapped`` — list of normalised protocol IDs when the string is recognised, else ``None``.
+    * ``unmatched`` — list containing the raw string when it is present but unrecognised, else ``None``.
+
+    NaN, empty, and whitespace-only strings yield ``(None, None)``.
     """
-    if pd.isna(search_string):  # handle nan case, which crops up in verra data right now
-        return ['unknown']
-    if known_match := inverted_protocol_mapping.get(search_string.strip()):
-        return known_match  # inverted_mapping returns lst
+    if pd.isna(search_string) or not str(search_string).strip():
+        return None, None
+    stripped = search_string.strip()
+    if known_match := inverted_protocol_mapping.get(stripped):
+        if known_match == ['unknown']:
+            return None, [search_string]
+        return known_match, None
     print(f"'{search_string}' is unmapped in full protocol mapping")
-    return [search_string]
+    return None, [search_string]
 
 
 def get_protocol_category(*, protocol_strs: list[str] | str, protocol_mapping: dict) -> list[str]:
@@ -445,9 +484,19 @@ def add_retired_and_issued_totals(projects: pd.DataFrame, *, credits: pd.DataFra
 
     # # filter out the projects that are not in the credits data
     # credits = credits[credits['project_id'].isin(projects['project_id'].unique())]
-    # groupd and sum
+    # infer source precision and round after sum to avoid float64 representation errors
+    # (e.g. 153.89 + 235.53 = 389.41999... in binary float)
+    source_precision = int(
+        credits['quantity']
+        .dropna()
+        .apply(lambda x: max(0, -Decimal(repr(x)).as_tuple().exponent))
+        .max()
+    )
     credit_totals = (
-        credits.groupby(['project_id', 'transaction_type'])['quantity'].sum().reset_index()
+        credits.groupby(['project_id', 'transaction_type'])['quantity']
+        .sum()
+        .round(source_precision)
+        .reset_index()
     )
     # pivot the table
     credit_totals_pivot = credit_totals.pivot(
@@ -472,3 +521,109 @@ def add_retired_and_issued_totals(projects: pd.DataFrame, *, credits: pd.DataFra
     projects_combined[['issued', 'retired']] = projects_combined[['issued', 'retired']].fillna(0)
 
     return projects_combined
+
+
+def add_placeholder_projects(
+    *,
+    credits: pd.DataFrame,
+    projects: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Append placeholder project rows for any project IDs found in credits but absent from projects.
+
+    Computes issued/retired totals and first issuance/retirement dates from credit data so that
+    placeholder rows arrive in the database with correct summary stats rather than zeroed-out
+    defaults.  Call this on the combined (all-registry) DataFrames before writing to parquet.
+
+    Parameters
+    ----------
+    credits : pd.DataFrame
+        Combined credits DataFrame (all registries).
+    projects : pd.DataFrame
+        Combined projects DataFrame (all registries).
+
+    Returns
+    -------
+    pd.DataFrame
+        Projects DataFrame with placeholder rows appended for orphan project IDs.
+    """
+    from offsets_db_data.registry import get_registry_from_project_id
+
+    orphan_ids = set(credits['project_id'].unique()) - set(projects['project_id'].unique())
+
+    if not orphan_ids:
+        return projects
+
+    print(f'Found {len(orphan_ids)} project IDs in credits with no project record: {orphan_ids}')
+
+    orphan_credits = credits[credits['project_id'].isin(orphan_ids)]
+
+    issued = (
+        orphan_credits[orphan_credits['transaction_type'] == 'issuance']
+        .groupby('project_id')['quantity']
+        .sum()
+        .rename('issued')
+    )
+    retired = (
+        orphan_credits[orphan_credits['transaction_type'].str.contains('retirement', na=False)]
+        .groupby('project_id')['quantity']
+        .sum()
+        .rename('retired')
+    )
+    first_issuance_at = (
+        orphan_credits[orphan_credits['transaction_type'] == 'issuance']
+        .groupby('project_id')['transaction_date']
+        .min()
+        .rename('first_issuance_at')
+        .dt.as_unit('ns')
+    )
+    first_retirement_at = (
+        orphan_credits[orphan_credits['transaction_type'].str.contains('retirement', na=False)]
+        .groupby('project_id')['transaction_date']
+        .min()
+        .rename('first_retirement_at')
+        .dt.as_unit('ns')
+    )
+
+    stats = pd.concat(
+        [issued, retired, first_issuance_at, first_retirement_at], axis=1
+    ).reset_index()
+    stats[['issued', 'retired']] = stats[['issued', 'retired']].fillna(0)
+
+    rows = []
+    for _, row in stats.iterrows():
+        project_id = row['project_id']
+        try:
+            registry = get_registry_from_project_id(project_id)
+        except KeyError:
+            registry = 'unknown'
+        base_url = _REGISTRY_PROJECT_URLS.get(registry)
+        project_url = f'{base_url}{project_id[3:]}' if base_url else None
+        rows.append(
+            {
+                'project_id': project_id,
+                'registry': registry,
+                'project_type': 'Unknown',
+                'project_type_source': 'carbonplan',
+                'category': 'unknown',
+                'protocol': None,
+                'protocol_unassigned': None,
+                'issued': row.get('issued', 0.0),
+                'retired': row.get('retired', 0.0),
+                'first_issuance_at': row.get('first_issuance_at'),
+                'first_retirement_at': row.get('first_retirement_at'),
+                'is_compliance': False,
+                'project_url': project_url,
+                'name': None,
+                'proponent': None,
+                'status': None,
+                'country': None,
+                'listed_at': None,
+            }
+        )
+
+    data = pd.concat([projects, pd.DataFrame(rows)], ignore_index=True)
+    data = convert_to_datetime(
+        data, columns=['first_issuance_at', 'first_retirement_at', 'listed_at']
+    )
+    return validate(data, schema=project_schema)

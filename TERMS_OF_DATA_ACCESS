@@ -1,4 +1,4 @@
-# TERMS OF DATA ACCESS
+ # TERMS OF DATA ACCESS
 
 ## OffsetsDB
 
@@ -8,8 +8,12 @@ credit retirements published by the following carbon offset registries:
 
 - American Carbon Registry (ACR)
 - ART TREES (ART)
+- Cercarbono (CCB); Data sourced from EcoRegistry (www.ecoregistry.io).
+EcoRegistry is a carbon credit registration and accounting platform
+operated by EcoRegistry LLC.
 - Climate Action Reserve (CAR)
 - Gold Standard (GLD)
+- Isometric (ISO); Source: Isometric Registry (registry.isometric.com)
 - Verra (VCS)
 
 Carbon offset information has historically been scattered across multiple
@@ -22,19 +26,21 @@ visualizing, validating, and cross-checking offsets. We hope you find it useful!
 
 By downloading, copying, or using this project, and/or any associated content
 or data, you agree to CarbonPlan’s Terms Of Use, which can be found here:
-[https://carbonplan.org/terms](https://carbonplan.org/terms). As further
-explained in the Terms of Use, CarbonPlan makes its projects — including
-OffsetsDB — available strictly on an “as-is” and “as-available” basis, without
-warranty of any kind, including without limitation the warranties of
-merchantability, fitness for a particular purpose, and noninfringement.
+[https://carbonplan.org/terms](https://carbonplan.org/terms). As further explain
+ed in the Terms of Use, data provided by CarbonPlan may originate from third par
+ties and CarbonPlan makes its projects — including OffsetsDB — available strictl
+y on an “as-is” and “as-available” basis, without warranty of any kind. By way o
+f example, CarbonPlan makes no warranty as to accuracy, completeness, merchantab
+ility, fitness for a particular purpose, or noninfringement.
 
 ## Intellectual Property Rights
 
-Because OffsetsDB consists of purely factual information concerning carbon
-offsets that has been made publicly available by the above-referenced
-registries, CarbonPlan does not claim copyright in this data.
+Because OffsetsDB consists of purely factual information concerning carbon offse
+ts that has been made publicly available by the above-referenced registries, Car
+bonPlan does not claim copyright in this data.
 
 However, please note that CarbonPlan does not make any representation as to
-whether any of the above-referenced registries may claim any rights in the data
-they have published. If you have any questions or concerns about this, please
-reach out to the registries directly.
+whether any of the above-referenced registries may claim rights in the data
+they have published. Any use you may wish to make of such data may be subject to
+the respective registry’s terms and conditions or may require a license. If you
+have any questions or concerns about this, please reach out to the registries directly.

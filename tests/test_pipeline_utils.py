@@ -239,11 +239,11 @@ def test_write_latest_production(
     write_latest_production(
         credits=sample_credits,
         projects=sample_projects,
-        bucket='s3://test-bucket',
+        bucket='https://test-bucket',
     )
 
     assert mock_create_buffer.call_count == 2
-    mock_fsspec_fs.assert_called_once_with('s3', anon=False)
+    mock_fsspec_fs.assert_called_once_with('https')
     assert mock_fsspec_open.call_count == 2
     assert mock_file.write.call_count == 2
 

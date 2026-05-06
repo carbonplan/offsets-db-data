@@ -10,6 +10,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from offsets_db_data.data import catalog
+from offsets_db_data.projects import add_placeholder_projects
 from offsets_db_data.registry import get_registry_from_project_id
 
 
@@ -271,7 +272,7 @@ def write_latest_production(
     generated_at = datetime.datetime.now(tz=datetime.timezone.utc)
 
     # Get terms content once
-    fs = fsspec.filesystem('s3', anon=False)
+    fs = fsspec.filesystem('https')
     terms_content = fs.read_text(terms_url)
 
     for format_type, path in paths.items():
@@ -326,6 +327,8 @@ def transform_registry_data(
         print(f'projects for {registry_name}: {projects.head()}')
     else:
         print(f'processed projects: {projects.head()}')
+
+    projects = add_placeholder_projects(projects=projects, credits=credits)
 
     # Summarize data
     summarize(credits=credits, projects=projects, registry_name=registry_name)

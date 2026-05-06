@@ -2,7 +2,7 @@ import typing
 
 import janitor  # noqa: F401
 import pandas as pd
-import pandera as pa
+import pandera.pandas as pa
 
 RegistryType = typing.Literal[
     'verra',
@@ -18,15 +18,18 @@ RegistryType = typing.Literal[
 
 project_schema = pa.DataFrameSchema(
     {
-        'protocol': pa.Column(pa.Object, nullable=True),  # Array of strings
+        'protocol': pa.Column(pa.Object, nullable=True),  # Array of mapped protocol IDs
+        'protocol_unassigned': pa.Column(
+            pa.Object, nullable=True
+        ),  # Array of unrecognised raw strings
         'category': pa.Column(pa.String, nullable=True),
         'project_type': pa.Column(pa.String, nullable=False),
         'project_type_source': pa.Column(pa.String, nullable=False),
         'retired': pa.Column(
-            pa.Int, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
+            pa.Float64, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
         ),
         'issued': pa.Column(
-            pa.Int, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
+            pa.Float64, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
         ),
         'project_id': pa.Column(pa.String, nullable=False),
         'name': pa.Column(pa.String, nullable=True),
@@ -46,7 +49,7 @@ project_schema = pa.DataFrameSchema(
 credit_without_id_schema = pa.DataFrameSchema(
     {
         'quantity': pa.Column(
-            pa.Int, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
+            pa.Float64, pa.Check.greater_than_or_equal_to(0), nullable=True, coerce=True
         ),
         'project_id': pa.Column(pa.String, nullable=False),
         'vintage': pa.Column(pa.Int, nullable=True, coerce=True),
@@ -57,6 +60,7 @@ credit_without_id_schema = pa.DataFrameSchema(
         'retirement_note': pa.Column(pa.String, nullable=True),
         'retirement_beneficiary': pa.Column(pa.String, nullable=True),
         'retirement_beneficiary_harmonized': pa.Column(pa.String, nullable=True),
+        'transaction_url': pa.Column(pa.String, nullable=True),
     }
 )
 

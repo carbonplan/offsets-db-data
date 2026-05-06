@@ -90,7 +90,7 @@ These rules specify things like when measurements must be made and what paperwor
 Unfortunately, there is no standardized way of referring to the exact protocol (or protocol version) used to develop an offset project.
 Even within the domain of a single registry, references to the exact protocol used to develop a project are often inconsistent.
 Take for example the Clean Development Mechanism protocol AMS-III.D., "Methane recovery in animal manure management systems".
-Across all five registries included in OffsetsDB, we identified twenty-two unique ways of referring to this one protocol.
+Across all registries included in OffsetsDB, we identified twenty-two unique ways of referring to this one protocol.
 
 OffsetsDB addresses this problem by manually assigning every known protocol string to a common schema.
 Continuing with the AMS-III.D. example, we map all twenty-two "known strings" that describe the same protocol to a single, unified reference, `ams-iii-d`.
@@ -202,6 +202,13 @@ Project status: When processing ACR projects, we combine two status properties p
 For compliance projects, we report compliance program status.
 For voluntary projects, we report voluntary status.
 
+### Cercarbono
+
+#### Vintage Date
+
+Occasionally, Cercarbono reports issuance events that span multiple vintage years.
+We assign all credits from these multi-vintage issuances to the earliest reported vintage year.
+
 ### Gold Standard
 
 #### Planned Emission Reductions
@@ -236,7 +243,9 @@ Because we know the majority of Verra `retirement/cancellation` events are in fa
 Any analysis involving Verra retirement data should clearly specify that Verra's raw data does not currently distinguish between retirement and cancellation events.
 ```
 
-Vintage Date: Verra allows for the simultaneous issuance of multiple vintages.
+#### Vintage Date
+
+Verra allows for the simultaneous issuance of multiple vintages.
 We assign all credits from these multi-vintage issuances to the earliest reported vintage year.
 
 ### California Compliance Projects
