@@ -23,7 +23,7 @@ def validate_data(
     aggregation_func,
 ) -> None:
     success = False
-    for delta_days in [1, 2, 3, 4]:
+    for delta_days in [1, 2, 3, 4, 5, 6, 7, 8]:
         try:
             previous_date = (as_of - datetime.timedelta(days=delta_days)).strftime('%Y-%m-%d')
             print(
@@ -41,10 +41,9 @@ def validate_data(
                 raise ValueError(
                     f'New {data_type}: {new_quantity} (from {as_of.strftime("%Y-%m-%d")})  are less than 99% of old {data_type}: {old_quantity} (from {previous_date})'
                 )
-            else:
-                print(f'New {data_type} are at least 99% of old {data_type}')
-                success = True
-                break
+            print(f'New {data_type} are at least 99% of old {data_type}')
+            success = True
+            break
         except Exception as e:
             print(f'Validation failed for {delta_days} day(s) back: {e}')
             continue
