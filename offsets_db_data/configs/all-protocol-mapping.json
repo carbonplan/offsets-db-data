@@ -1484,14 +1484,14 @@
   },
   "ams-iii-j": {
     "category": "fuel-switching",
-    "known-string": ["AMS-III.J.", "AMS-III.J."],
+    "known-strings": ["AMS-III.J.", "AMS-III.J."],
     "program": "cdm",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_J"
   },
   "ams-iii-l": {
     "category": "ghg-management",
     "is_methane": true,
-    "known-string": ["AMS-III.L.", "AMS-III.L."],
+    "known-strings": ["AMS-III.L.", "AMS-III.L."],
     "program": "cdm",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#AMS_III_L"
   },
@@ -2440,7 +2440,7 @@
   },
   "vmr0007": {
     "category": "fuel-switching",
-    "known-string": [
+    "known-strings": [
       "AMS-III.D.; AMS-III.F.; VMR0007",
       "VMR0007",
       "VMR0007; VMR0008"
@@ -2449,12 +2449,12 @@
   },
   "vmr0008": {
     "category": "energy-efficiency",
-    "known-string": ["VMR0008", "VMR0007; VMR0008"],
+    "known-strings": ["VMR0008", "VMR0007; VMR0008"],
     "program": "verra"
   },
   "vmr0014": {
     "category": "energy-efficiency",
-    "known-string": [
+    "known-strings": [
       "AMS-I.F.; VMR0014; AMS-III.C; VM0038",
       "AMS-I.F.; VMR0014; VM0038",
       "VMR0014; VM0038",
