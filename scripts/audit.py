@@ -122,9 +122,7 @@ def audit_methodologies(
         print(f'  {n_projects} project(s) have unrecognised methodology strings:\n')
         for s, reg_counts in sorted(string_registries.items()):
             total = sum(reg_counts.values())
-            reg_summary = ', '.join(
-                f'{reg} ({count})' for reg, count in sorted(reg_counts.items())
-            )
+            reg_summary = ', '.join(f'{reg} ({count})' for reg, count in sorted(reg_counts.items()))
             print(f'    {s!r}  —  {total} project(s)  [{reg_summary}]')
 
     return n_projects
