@@ -131,6 +131,16 @@ Project types are determined through a multi-step process:
    Currently, the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as the authoritative source for project types.
    The project types from the Berkeley Carbon Trading Project's Voluntary Registry Offsets Database are licensed under a [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
+## Auditing Mapping Coverage
+
+When adding a new registry or updating protocol strings, check for unmapped methodology strings and unresolved project types by running:
+
+```bash
+pixi run audit
+```
+
+This scans `tests/data/` (or a directory specified via `--data-dir`) against the current mapping configs and prints a gap report covering both protocol mapping and project type assignment. The same check runs automatically in CI against the full dataset; `tests/data/` contains only a representative subset.
+
 ## Retirement User Harmonization
 
 Carbon offset credits are often retired on behalf of a specific entity or organization.
