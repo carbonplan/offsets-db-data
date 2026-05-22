@@ -47,6 +47,7 @@ pixi run lint              # Run linting
 pixi run format            # Format code
 pixi run format-check      # Check formatting without modifying files
 pixi run docs-build        # Build documentation
+pixi run audit-protocols   # Audit protocol mapping coverage
 ```
 
 Activate an interactive shell with all dependencies:

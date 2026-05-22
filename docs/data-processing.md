@@ -95,7 +95,7 @@ Across all registries included in OffsetsDB, we identified twenty-two unique way
 OffsetsDB addresses this problem by manually assigning every known protocol string to a common schema.
 Continuing with the AMS-III.D. example, we map all twenty-two "known strings" that describe the same protocol to a single, unified reference, `ams-iii-d`.
 We repeat this manual unification of dissimilar strings for all protocols across all registries.
-The results of the mapping are contained within [`offsets-db-data/configs/all-protocol-mapping.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/all-protocol-mapping.json).
+The results of the mapping are contained within [`offsets-db-data/configs/all-protocol-mapping.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/all-protocol-mapping.json). See [Unmapped Protocols](unmapped-protocols.md) for a report of protocol strings that have not yet been manually mapped.
 
 ## Project Type & Categorization
 
@@ -130,6 +130,16 @@ Project types are determined through a multi-step process:
 2. We apply manual overrides from curated data sources (via {py:obj}`offsets_db_data.projects.override_project_types`).
    Currently, the [Berkeley Carbon Trading Project](https://gspp.berkeley.edu/research-and-impact/centers/cepp/projects/berkeley-carbon-trading-project) data in [`offsets-db-data/configs/berkeley-project-types.json`](https://github.com/carbonplan/offsets-db-data/blob/main/offsets_db_data/configs/berkeley-project-types.json) serves as the authoritative source for project types.
    The project types from the Berkeley Carbon Trading Project's Voluntary Registry Offsets Database are licensed under a [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
+
+## Auditing Mapping Coverage
+
+When adding a new registry or updating protocol strings, check for unmapped protocol strings and unresolved project types by running:
+
+```bash
+pixi run audit-protocols
+```
+
+This scans `tests/data/` (or a directory specified via `--data-dir`) against the current mapping configs and prints a gap report covering both protocol mapping and project type assignment. The same check runs automatically in CI against the full dataset; `tests/data/` contains only a representative subset.
 
 ## Retirement User Harmonization
 

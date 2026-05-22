@@ -5,15 +5,17 @@ import pandas_flavor as pf
 
 from offsets_db_data.common import convert_to_datetime  # noqa: F401
 from offsets_db_data.models import credit_without_id_schema
+from offsets_db_data.registry import ACR_PREFIX, ART_PREFIX, CAR_PREFIX, VCS_PREFIX
 
 
 def _get_registry(item):
     registry_map = {
-        'CAR': 'climate-action-reserve',
-        'ACR': 'american-carbon-registry',
-        'VCS': 'verra',
-        'ART': 'art-trees',
+        CAR_PREFIX: 'climate-action-reserve',
+        ACR_PREFIX: 'american-carbon-registry',
+        VCS_PREFIX: 'verra',
+        ART_PREFIX: 'art-trees',
     }
+
     prefix = item[:3]
     return registry_map.get(prefix)
 

@@ -27,6 +27,7 @@ from offsets_db_data.projects import (
     harmonize_status_codes,  # noqa: F401
     map_protocol,  # noqa: F401
 )
+from offsets_db_data.registry import ISO_PREFIX
 
 
 @pf.register_dataframe_method
@@ -48,7 +49,7 @@ def add_isometric_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def add_isometric_project_id(df: pd.DataFrame, prefix: str = 'ISO') -> pd.DataFrame:
+def add_isometric_project_id(df: pd.DataFrame, prefix: str = ISO_PREFIX) -> pd.DataFrame:
     """Add project ID column for Isometric credits dataframe.
 
     Parameters
@@ -74,7 +75,7 @@ def process_isometric_credits(
     download_type: str,
     prj_id_to_short_code: dict | None = None,
     registry_name: str = 'isometric',
-    prefix: str = 'ISO',
+    prefix: str = ISO_PREFIX,
     harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
     """Process Isometric credits dataframe to conform to offsets-db schema.

@@ -1,11 +1,19 @@
+ACR_PREFIX = 'ACR'
+ART_PREFIX = 'ART'
+CAR_PREFIX = 'CAR'
+CCB_PREFIX = 'CCB'
+GLD_PREFIX = 'GLD'
+ISO_PREFIX = 'ISO'
+VCS_PREFIX = 'VCS'
+
 REGISTRY_ABBR_MAP = {
-    'vcs': 'verra',
-    'car': 'climate-action-reserve',
-    'acr': 'american-carbon-registry',
-    'art': 'art-trees',
-    'gld': 'gold-standard',
-    'ccb': 'cercarbono',
-    'iso': 'isometric',
+    ACR_PREFIX.lower(): 'american-carbon-registry',
+    ART_PREFIX.lower(): 'art-trees',
+    CAR_PREFIX.lower(): 'climate-action-reserve',
+    CCB_PREFIX.lower(): 'cercarbono',
+    GLD_PREFIX.lower(): 'gold-standard',
+    ISO_PREFIX.lower(): 'isometric',
+    VCS_PREFIX.lower(): 'verra',
 }
 
 
