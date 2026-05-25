@@ -51,7 +51,7 @@ def validate_data(
 
     if not success:
         raise ValueError(
-            f'Validation failed for either {", ".join(map(str, delta_days_list))} days back. Please make sure the data is available for either 1, 2, 3 or 4 days back.'
+            f'Validation failed for either {", ".join(map(str, delta_days_list))} days back. Please make sure the data is available for either {", ".join(map(str, delta_days_list))} days back.'
         )
 
 
