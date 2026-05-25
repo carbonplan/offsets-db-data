@@ -23,7 +23,8 @@ def validate_data(
     aggregation_func,
 ) -> None:
     success = False
-    for delta_days in [1, 2, 3, 4, 5, 6, 7, 8]:
+    delta_days_list = [1, 2, 3, 4, 5, 6, 7, 8]
+    for delta_days in delta_days_list:
         try:
             previous_date = (as_of - datetime.timedelta(days=delta_days)).strftime('%Y-%m-%d')
             print(
@@ -50,7 +51,7 @@ def validate_data(
 
     if not success:
         raise ValueError(
-            'Validation failed for either 1, 2, 3, or 4 days back. Please make sure the data is available for either 1, 2, 3 or 4 days back.'
+            f'Validation failed for either {", ".join(map(str, delta_days_list))} days back. Please make sure the data is available for either 1, 2, 3 or 4 days back.'
         )
 
 
