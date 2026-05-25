@@ -18,7 +18,7 @@ from offsets_db_data.pipeline_utils import (
     write_latest_production,
 )
 
-_VALIDATION_FAIL_MSG = 'Validation failed for either 1, 2, 3, or 4 days back'
+_VALIDATION_FAIL_MSG = 'Validation failed for either 1, 2, 3, 4, 5, 6, 7, 8 days back'
 
 
 @pytest.fixture
