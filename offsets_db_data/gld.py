@@ -12,6 +12,7 @@ from offsets_db_data.common import (
     load_registry_project_column_mapping,
     load_type_category_mapping,
 )
+from offsets_db_data.registry import GLD_PREFIX
 from offsets_db_data.credits import aggregate_issuance_transactions  # noqa: F401
 from offsets_db_data.credits import filter_and_merge_transactions  # noqa: F401
 from offsets_db_data.credits import merge_with_arb  # noqa: F401
@@ -77,7 +78,7 @@ def process_gld_credits(
     *,
     download_type: str,
     registry_name: str = 'gold-standard',
-    prefix: str = 'GLD',
+    prefix: str = GLD_PREFIX,
     arb: pd.DataFrame | None = None,
     harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
@@ -184,7 +185,7 @@ def process_gld_projects(
     *,
     credits: pd.DataFrame,
     registry_name: str = 'gold-standard',
-    prefix: str = 'GLD',
+    prefix: str = GLD_PREFIX,
 ) -> pd.DataFrame:
     """
     Process Gold Standard projects data, including renaming, adding, and validating columns, harmonizing statuses,

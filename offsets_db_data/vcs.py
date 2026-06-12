@@ -16,6 +16,7 @@ from offsets_db_data.credits import *  # noqa: F403
 from offsets_db_data.credits import harmonize_beneficiary_data
 from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.projects import *  # noqa: F403
+from offsets_db_data.registry import VCS_PREFIX
 
 
 @pf.register_dataframe_method
@@ -176,7 +177,7 @@ def process_vcs_credits(
     *,
     download_type: str = 'transactions',
     registry_name: str = 'verra',
-    prefix: str = 'VCS',
+    prefix: str = VCS_PREFIX,
     arb: pd.DataFrame | None = None,
     harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:

@@ -26,6 +26,7 @@ from offsets_db_data.projects import (
     harmonize_status_codes,  # noqa: F401
     map_protocol,  # noqa: F401
 )
+from offsets_db_data.registry import CCB_PREFIX
 
 
 @pf.register_dataframe_method
@@ -48,7 +49,7 @@ def add_cercarbono_project_url(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @pf.register_dataframe_method
-def add_cercarbono_project_id(df: pd.DataFrame, prefix: str = 'CCB') -> pd.DataFrame:
+def add_cercarbono_project_id(df: pd.DataFrame, prefix: str = CCB_PREFIX) -> pd.DataFrame:
     """Add project ID column for Cercarbono credits dataframe.
 
     Parameters
@@ -75,7 +76,7 @@ def process_cercarbono_credits(
     *,
     download_type: str,
     registry_name: str = 'cercarbono',
-    prefix: str = 'CCB',
+    prefix: str = CCB_PREFIX,
     harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
     """Process Cercarbono transactions dataframe to conform to offsets-db schema.
