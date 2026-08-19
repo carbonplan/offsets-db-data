@@ -1,5 +1,12 @@
 # Overview
 
+:::{warning}
+We're actively in the process of trying to handle recent changes in upstream data access.
+These involve both technical and non-technical considerations. In the meantime, we've paused
+updating OffsetsDB. We just now added a
+[notice to this effect](https://github.com/carbonplan/offsets-db-web/pull/82).
+:::
+
 ```{rubric} Offsets-DB Data
 
 ```
