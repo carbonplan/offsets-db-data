@@ -83,7 +83,6 @@ html_title = 'offsets-db-data'
 announcement = (
     '⚠️ Updates to OffsetsDB are currently paused while we work through recent changes '
     'in upstream data access. '
-    '<a href="https://github.com/carbonplan/offsets-db-web/pull/82">Read the notice</a>.'
 )
 
 html_theme_options = {
