@@ -235,7 +235,10 @@ This made our processed Verra data slightly incompatiable with data from other r
 Simple queries, like "give me all the retirements", suddenly required writing code that look like this:
 
 ```python
-credits[(credits['transaction_type'] == 'retirement') | (credits['transaction_type'] == 'retirement/cancellation')]
+credits[
+    (credits['transaction_type'] == 'retirement')
+    | (credits['transaction_type'] == 'retirement/cancellation')
+]
 ```
 
 ```{warning}
