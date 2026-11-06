@@ -1,8 +1,9 @@
 """Shared test fixtures for offsets-db-data tests.
 
 Sample data in tests/data/ was extracted from:
-  s3://carbonplan-offsets-db/raw/2026-04-14/      (verra, acr, art, car, gld, arb)
+  s3://carbonplan-offsets-db/raw/2026-04-14/      (verra projects, acr, art, car, gld, arb)
   s3://carbonplan-scratch/offsets-db-test/raw/2026-04-28/  (cercarbono, isometric)
+  Verra's registry API on 2026-11-05              (verra issuances, retirements, cancellations)
 
 To refresh samples, run:
   python tests/scripts/refresh_sample_data.py
@@ -64,8 +65,18 @@ def raw_vcs_projects() -> pd.DataFrame:
 
 
 @pytest.fixture
-def raw_vcs_transactions() -> pd.DataFrame:
-    return pd.read_csv(DATA_DIR / 'verra' / 'transactions.csv')
+def raw_vcs_issuances() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'verra' / 'issuances.csv')
+
+
+@pytest.fixture
+def raw_vcs_retirements() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'verra' / 'retirements.csv')
+
+
+@pytest.fixture
+def raw_vcs_cancellations() -> pd.DataFrame:
+    return pd.read_csv(DATA_DIR / 'verra' / 'cancellations.csv')
 
 
 @pytest.fixture

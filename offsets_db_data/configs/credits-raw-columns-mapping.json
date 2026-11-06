@@ -177,6 +177,39 @@
     }
   },
   "verra": {
+    "cancellations": {
+      "project_id": "vcsProjectId",
+      "quantity": "holdingQuantity",
+      "retirement_account": null,
+      "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "cancellation_date",
+      "transaction_url": null,
+      "vintage": "vintage"
+    },
+    "issuances": {
+      "project_id": "vcsProjectId",
+      "quantity": "holdingQuantity",
+      "retirement_account": null,
+      "retirement_beneficiary": null,
+      "retirement_note": null,
+      "retirement_reason": null,
+      "transaction_date": "issueDate",
+      "transaction_url": null,
+      "vintage": "vintage"
+    },
+    "retirements": {
+      "project_id": "vcsProjectId",
+      "quantity": "holdingQuantity",
+      "retirement_account": null,
+      "retirement_beneficiary": "publicBeneficialOwner",
+      "retirement_note": "publicRetirementReasonDetails",
+      "retirement_reason": "publicRetirementReason",
+      "transaction_date": "retiredDate",
+      "transaction_url": null,
+      "vintage": "vintage"
+    },
     "transactions": {
       "project_id": null,
       "quantity": null,

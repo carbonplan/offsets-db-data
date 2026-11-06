@@ -6,7 +6,7 @@
     "climate-action-reserve": "Project Site Country",
     "gold-standard": "Country",
     "isometric": "location.country_name",
-    "verra": "Country/Area"
+    "verra": "countryName"
   },
   "listed_at": {
     "american-carbon-registry": null,
@@ -24,7 +24,7 @@
     "climate-action-reserve": "Project Name",
     "gold-standard": "Project Name",
     "isometric": "name",
-    "verra": "Name"
+    "verra": "projectName"
   },
   "original_protocol": {
     "american-carbon-registry": "Project Methodology/Protocol",
@@ -33,7 +33,7 @@
     "climate-action-reserve": "Project Type",
     "gold-standard": "Methodology",
     "isometric": "protocol_slug",
-    "verra": "Methodology"
+    "verra": "methodologies"
   },
   "project_id": {
     "american-carbon-registry": "Project ID",
@@ -42,7 +42,7 @@
     "climate-action-reserve": "Project ID",
     "gold-standard": "GSID",
     "isometric": "short_code",
-    "verra": "ID"
+    "verra": "vcsProjectId"
   },
   "proponent": {
     "american-carbon-registry": null,
@@ -51,7 +51,7 @@
     "climate-action-reserve": "Project Owner",
     "gold-standard": "Project Developer Name",
     "isometric": "supplier.organisation.name",
-    "verra": "Proponent"
+    "verra": "proponents"
   },
   "status": {
     "american-carbon-registry": null,
@@ -60,6 +60,6 @@
     "climate-action-reserve": "Status",
     "gold-standard": "Status",
     "isometric": "status",
-    "verra": "Status"
+    "verra": "stateCode"
   }
 }

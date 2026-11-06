@@ -37,20 +37,20 @@ These functions contain the registry-specific logic needed to map Verra's raw da
 ### An Example
 
 In practice, replicating the behavior of OffsetsDB should be simple.
-Here's an example of using `offsets_db_data` to transform the raw transactions data from Verra into a normalized, analysis ready file:
+Here's an example of using `offsets_db_data` to transform Verra's raw retirements data into a normalized, analysis ready file:
 
 ```python
 import pandas as pd
 pd.options.display.max_columns = 5
 from offsets_db_data import vcs
 
-archive_fname = {{ path to local copy of Verra transaction data }}
+archive_fname = {{ path to local copy of Verra retirements data }}
 raw_credits =  pd.read_csv(archive_fname)
-processed_credits =  vcs.process_vcs_credits(raw_credits)
+processed_credits =  vcs.process_vcs_credits(raw_credits, download_type='retirements')
 ```
 
 ```{note}
-Running the above example requires first downloading [a copy of Verra's transaction data](https://registry.verra.org/app/search/VCS) and changing the above code to reference the location of that data on your local machine.
+Running the above example requires first downloading [a copy of Verra's retirements data](https://registry.verra.org/verra/public/program/VCS) and changing the above code to reference the location of that data on your local machine.
 ```
 
 Invoking single transformation functions, like {py:obj}`offsets_db_data.vcs.set_vcs_vintage_year` is even more straightforward.
@@ -58,7 +58,7 @@ Let's say you want to understand more about how OffsetsDB assigns Verra credits 
 You can explore the behavior of this single transformation function by calling:
 
 ```python
-raw_credits.set_vcs_vintage_year(date_column='Vintage End').head()
+raw_credits.set_vcs_vintage_year().head()
 ```
 
 It's worth noting that we've wrapped all transformation functions using the [`pandas_flavor.register_dataframe_method`](https://github.com/pyjanitor-devs/pandas_flavor) decorator.
@@ -143,6 +143,7 @@ The harmonization process attempts to identify specific "retirement users" from 
 We try to standardize retirement user information across registries using the following steps:
 
 1. **Data merging**: we combine information from four sources into a single _temporary_ field:
+
    - `retirement_beneficiary`: note specifically designating the entity claiming a credit’s environmental benefits
    - `retirement_account`: name on account from which credits were retired
    - `retirement_note`: short-form text accompanying credit retirement
@@ -222,34 +223,22 @@ OffsetsDB includes all issued PERs when reporting vintage and project level cred
 
 #### Issuance
 
-Verra allows "rolling" credit issuance. This allows projects to complete the paperwork and verificaiton processes for credit issuance, but delay the actual issuance event.
-This results in ambiguities around the precise timing of credit issuance events, as credits that are eligible to be issued but have not yet been issued, are not publicly reported in the Verra crediting data.
-We handle this ambiguity by assuming that the first crediting event, be it an issuance, retirement, or cancellation, on a per-project, per-vintage basis results in issuance of 100 percent of credits eligible to be issued for that project-vintage.
+Verra's registry publishes issuances, retirements and cancellations as separate reports.
+We take issuances from the issuances report as reported.
+As for other registries, issuances of the same project and vintage on the same day are summed into one issuance.
 
 #### Retirements vs. Cancellations
 
-Verra's publicly available data does not distinguish between retirement events and cancellation events.
-We report all Verra retirements and cancellations as `retirement`.
-We originally contemplated tagging every Verra retirement or cancellation as `retirement/cancellation`.
-This made our processed Verra data slightly incompatiable with data from other registries.
-Simple queries, like "give me all the retirements", suddenly required writing code that look like this:
+We label credits from Verra's retirements report as `retirement` and credits from its cancellations report as `cancellation`, as we do for other registries.
 
-```python
-credits[
-    (credits['transaction_type'] == 'retirement')
-    | (credits['transaction_type'] == 'retirement/cancellation')
-]
-```
-
-```{warning}
-Because we know the majority of Verra `retirement/cancellation` events are in fact `retirement`, we opted for this more ergonomic representation of the data.
-Any analysis involving Verra retirement data should clearly specify that Verra's raw data does not currently distinguish between retirement and cancellation events.
+```{note}
+Earlier versions of OffsetsDB reported all Verra cancellations as `retirement`, because the data Verra published at the time did not distinguish retirements from cancellations.
 ```
 
 #### Vintage Date
 
-Verra allows for the simultaneous issuance of multiple vintages.
-We assign all credits from these multi-vintage issuances to the earliest reported vintage year.
+Verra reports a vintage as one year, or as a range of years such as `2010 - 2011`.
+We assign credits with a range of years to the last year of the range.
 
 ### California Compliance Projects
 
@@ -514,15 +503,15 @@ Table 1 provides the mapping from the raw column names found in downloaded regis
 
 |                  | **verra**                      | **climate-action-reserve**     | **american-carbon-registry**           | **gold-standard**              | **art-trees**                  |
 | ---------------- | ------------------------------ | ------------------------------ | -------------------------------------- | ------------------------------ | ------------------------------ |
-| **project_id**   | ID                             | Project ID                     | Project ID                             | id                             | Program ID                     |
-| **name**         | Name                           | Project Name                   | Project Name                           | name                           | Program Name                   |
-| **protocol**     | Methodology                    | Project Type                   | Project Methodology/Protocol           | methodology                    | \-                             |
+| **project_id**   | vcsProjectId                   | Project ID                     | Project ID                             | id                             | Program ID                     |
+| **name**         | projectName                    | Project Name                   | Project Name                           | name                           | Program Name                   |
+| **protocol**     | methodologies                  | Project Type                   | Project Methodology/Protocol           | methodology                    | \-                             |
 | **category**     | inferred from protocol or type | inferred from protocol or type | inferred from protocol                 | inferred from protocol or type | inferred from protocol or type |
 | **proejct_type** | manually assigned              | manually assigned              | manually assigned                      | manually assigned              | manually assigned              |
-| **proponent**    | Proponent                      | Project Owner                  | Project Developer                      | project_developer              | Sovereign Program Developer    |
-| **country**      | Country/Area                   | Project Site Country           | Project Site Country                   | country                        | Program Country                |
-| **status**       | Status                         | Status                         | Derived: voluntary + compliance status | status                         | Status                         |
-| **listed_at**    | Project Listed Date            | \-                             | \-                                     | \-                             | \-                             |
+| **proponent**    | proponents                     | Project Owner                  | Project Developer                      | project_developer              | Sovereign Program Developer    |
+| **country**      | countryName                    | Project Site Country           | Project Site Country                   | country                        | Program Country                |
+| **status**       | stateCode                      | Status                         | Derived: voluntary + compliance status | status                         | Status                         |
+| **listed_at**    | \-                             | \-                             | \-                                     | \-                             | \-                             |
 
 ### Credits
 
