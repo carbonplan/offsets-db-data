@@ -234,7 +234,7 @@ def add_vcs_project_id(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# TODO(Grayson): fill in the placeholders and confirm the mapping
+# TODO(@badgley): fill in the "unknown" placeholders and confirm the mapping
 VERRA_STATE_CODES = {
     # old table
     'REGISTERED': 'registered',
@@ -331,20 +331,15 @@ def _find_vcs_methodology(code: str, inverted_protocol_mapping: dict) -> list[st
     return None
 
 
-# TODO(Grayson): Verra lists some afforestation methodologies without their 'AR-' prefix, such as
-# 'ACM0003' for 'AR-ACM0003' ('ACM0003' is fuel switching in cement), so these projects get the
-# wrong protocol and category. Projects with land use as their only scope, November 2026:
-#   'ACM0003': VCS1332, VCS1361, VCS1930, VCS3318, VCS3896, VCS3976, VCS4632, VCS4801, VCS4935
-#   'AM0014' (perhaps 'AR-AM0014', mangrove planting): VCS2395
-# Decide how to remap them.
-#
-# TODO(Grayson): these codes have no protocol in all-protocol-mapping.json, so they end up in
-# 'protocol_unassigned'. Add a protocol, with a category, for each. Projects per code, November
-# 2026: VMR0017 (29), VMR0016 (10), AMS-III.AK. (3), VMR0009 (3), AMS-II.S. (2), CAR - USLP (2),
-# VMR0012 (2), VMR0015 (2), and 1 each for ACM0004, ACM0021, AM0047, AM0057, AM0086, AR-AM0010,
-# VM0024, VM0035, VM0040, VMD0049, VMD0051, VMD0054, VMD0055, VMR0004, VT0008.
-# Also give a category to 'am0123' (none, 5 projects) and 'vm0033' ('unknown', 62 projects).
-# 'Methodology Under Development' (27 projects) is not a code and should stay unassigned.
+# TODO(@badgley): remap these projects; Verra lists their methodology without 'AR-':
+#   ACM0003 -> AR-ACM0003: VCS1332, VCS1361, VCS1930, VCS3318, VCS3896, VCS3976, VCS4632,
+#     VCS4801, VCS4935
+#   AM0014 -> AR-AM0014: VCS2395
+# TODO(@badgley): add protocols, with categories, to all-protocol-mapping.json for:
+#   ACM0004, ACM0021, AM0047, AM0057, AM0086, AMS-II.S., AMS-III.AK., AR-AM0010, CAR - USLP,
+#   VM0024, VM0035, VM0040, VMD0047, VMD0049, VMD0051, VMD0054, VMD0055, VMR0004, VMR0009,
+#   VMR0012, VMR0015, VMR0016, VMR0017, VT0008
+# TODO(@badgley): set categories for am0123 (none) and vm0033 ('unknown').
 @pf.register_dataframe_method
 def map_vcs_protocol(df: pd.DataFrame, *, inverted_protocol_mapping: dict) -> pd.DataFrame:
     """
