@@ -345,7 +345,7 @@
   },
   "acm0019": {
     "category": "ghg-management",
-    "known-strings": ["AM0028; AM0034; ACM0019", "AM0034; ACM0019"],
+    "known-strings": ["AM0028; AM0034; ACM0019", "AM0034; ACM0019", "ACM0019"],
     "program": "cdm",
     "url": "https://cdm.unfccc.int/methodologies/documentation/meth_booklet.pdf#ACM0019"
   },
@@ -1217,7 +1217,8 @@
       "AMS-III.AO.; AMS-III.AQ",
       "AM0073; AMS-III.AQ",
       "AMS-III.D.; AMS-III.AO.; AMS-III.AQ",
-      "AMS-III.D - Version 21.0, AMS-III.AQ. - Version 2.0"
+      "AMS-III.D - Version 21.0, AMS-III.AQ. - Version 2.0",
+      "AMS-III.AQ."
     ],
     "program": "cdm",
     "sub-category": "transportation"
@@ -1314,7 +1315,8 @@
     "category": "energy-efficiency",
     "known-strings": [
       "VMR0006; AMS-III.BG",
-      "AMS-III.BG Emission reduction through sustainable charcoal production and consumption"
+      "AMS-III.BG Emission reduction through sustainable charcoal production and consumption",
+      "AMS-III.BG."
     ],
     "program": "cdm",
     "sub-category": "biomass"
@@ -2420,7 +2422,7 @@
   },
   "vmr0003": {
     "category": "ghg-management",
-    "known-strings": ["AMS-III.Y; VMR0003"],
+    "known-strings": ["AMS-III.Y; VMR0003", "VMR0003"],
     "program": "vcs"
   },
   "vmr0006": {

@@ -191,6 +191,7 @@ def test_map_vcs_protocol_matches_each_code(subtests, known_strings):
             None,
         ),
         ('trailing_dot', 'AMS-III.AU. (Version NA)', ['ams-iii-au'], None),
+        ('bare_code', 'AMS-III.AQ. (Version 2.0)', ['ams-iii-aq'], None),
         ('some_unknown', 'VM0042 (Version 2.0), VMR0017 (Version 1.0)', ['vm0042'], ['VMR0017']),
         (
             'known_as_unknown',
