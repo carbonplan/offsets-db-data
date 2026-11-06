@@ -9,13 +9,8 @@ from offsets_db_data.vcs import (
     add_vcs_compliance_projects,
     add_vcs_project_id,
     add_vcs_project_url,
-    calculate_vcs_issuances,
-    calculate_vcs_retirements,
-    determine_vcs_transaction_type,
-    generate_vcs_project_ids,
     process_vcs_credits,
     process_vcs_projects,
-    set_vcs_transaction_dates,
     set_vcs_vintage_year,
 )
 
@@ -104,283 +99,87 @@ def vcs_projects() -> pd.DataFrame:
 
 
 @pytest.fixture
-def vcs_transactions() -> pd.DataFrame:
-    return pd.DataFrame(
-        [
-            {
-                'Issuance Date': '08/03/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/01/2020',
-                'Vintage End': '19/11/2020',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '99,870',
-                'Quantity Issued': '84,773',
-                'Serial Number': '12629-421604735-421689507-VCS-VCU-576-VER-PY-14-2498-01012020-19112020-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': np.nan,
-                'Retirement Beneficiary': np.nan,
-                'Retirement Reason': np.nan,
-                'Retirement Details': np.nan,
-            },
-            {
-                'Issuance Date': '29/11/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/01/2017',
-                'Vintage End': '31/12/2017',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '82,455',
-                'Quantity Issued': '5,000',
-                'Serial Number': '14121-556418249-556423248-VCS-VCU-576-VER-PY-14-2498-01012017-31122017-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '26/12/2022',
-                'Retirement Beneficiary': 'DNV AS',
-                'Retirement Reason': 'Environmental Benefit',
-                'Retirement Details': 'VCUs 2022 for DNV',
-            },
-            {
-                'Issuance Date': '24/06/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '13/01/2016',
-                'Vintage End': '31/12/2016',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '55,805',
-                'Quantity Issued': '1,788',
-                'Serial Number': '13378-495669005-495670792-VCS-VCU-576-VER-PY-14-2498-13012016-31122016-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '11/09/2022',
-                'Retirement Beneficiary': np.nan,
-                'Retirement Reason': np.nan,
-                'Retirement Details': np.nan,
-            },
-            {
-                'Issuance Date': '27/07/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/01/2020',
-                'Vintage End': '19/11/2020',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '99,870',
-                'Quantity Issued': '725',
-                'Serial Number': '13488-505972385-505973109-VCS-VCU-576-VER-PY-14-2498-01012020-19112020-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '27/07/2022',
-                'Retirement Beneficiary': 'Jebsen & Jessen (GmbH & Co.) KG',
-                'Retirement Reason': 'Environmental Benefit',
-                'Retirement Details': 'Retired on behalf of Jebsen & Jessen 2022',
-            },
-            {
-                'Issuance Date': '11/09/2009',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/04/2006',
-                'Vintage End': '18/03/2007',
-                'ID': 101,
-                'Name': 'Bagasse based Co-generation Power Project at Khatauli',
-                'Country/Area': 'India',
-                'Project Type': 'Energy industries (renewable/non-renewable sources)',
-                'Methodology': 'ACM0006',
-                'Total Vintage Quantity': '62,796',
-                'Quantity Issued': '25,433',
-                'Serial Number': '240-7863589-7889021-VCU-003-APX-IN-1-101-01042006-18032007-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '17/06/2015',
-                'Retirement Beneficiary': np.nan,
-                'Retirement Reason': np.nan,
-                'Retirement Details': np.nan,
-            },
-            {
-                'Issuance Date': '04/11/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/01/2019',
-                'Vintage End': '31/12/2019',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '99,871',
-                'Quantity Issued': '1,413',
-                'Serial Number': '13969-543072663-543074075-VCS-VCU-576-VER-PY-14-2498-01012019-31122019-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '26/12/2022',
-                'Retirement Beneficiary': 'DNV AS',
-                'Retirement Reason': 'Environmental Benefit',
-                'Retirement Details': 'VCUs 2022 for DNV',
-            },
-            {
-                'Issuance Date': '27/07/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/01/2020',
-                'Vintage End': '19/11/2020',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '99,870',
-                'Quantity Issued': '297',
-                'Serial Number': '13488-505982056-505982352-VCS-VCU-576-VER-PY-14-2498-01012020-19112020-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '26/12/2022',
-                'Retirement Beneficiary': 'DNV AS',
-                'Retirement Reason': 'Environmental Benefit',
-                'Retirement Details': 'VCUs 2022 for DNV',
-            },
-            {
-                'Issuance Date': '27/07/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/01/2018',
-                'Vintage End': '31/12/2018',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '97,077',
-                'Quantity Issued': '1,380',
-                'Serial Number': '13487-505962385-505963764-VCS-VCU-576-VER-PY-14-2498-01012018-31122018-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '20/10/2022',
-                'Retirement Beneficiary': 'Implement Consulting Group',
-                'Retirement Reason': 'Environmental Benefit',
-                'Retirement Details': 'Retirement of 1380t in the name of Implement Consulting Group, for flights 2021',
-            },
-            {
-                'Issuance Date': '27/07/2022',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/01/2020',
-                'Vintage End': '19/11/2020',
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Country/Area': 'Paraguay',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'Methodology': 'AR-ACM0003',
-                'Total Vintage Quantity': '99,870',
-                'Quantity Issued': '8,946',
-                'Serial Number': '13488-505973110-505982055-VCS-VCU-576-VER-PY-14-2498-01012020-19112020-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '01/12/2022',
-                'Retirement Beneficiary': np.nan,
-                'Retirement Reason': np.nan,
-                'Retirement Details': np.nan,
-            },
-            {
-                'Issuance Date': '11/09/2009',
-                'Sustainable Development Goals': np.nan,
-                'Vintage Start': '01/04/2006',
-                'Vintage End': '18/03/2007',
-                'ID': 101,
-                'Name': 'Bagasse based Co-generation Power Project at Khatauli',
-                'Country/Area': 'India',
-                'Project Type': 'Energy industries (renewable/non-renewable sources)',
-                'Methodology': 'ACM0006',
-                'Total Vintage Quantity': '62,796',
-                'Quantity Issued': '1,466',
-                'Serial Number': '240-7889022-7890487-VCU-003-APX-IN-1-101-01042006-18032007-0',
-                'Additional Certifications': np.nan,
-                'Retirement/Cancellation Date': '18/06/2015',
-                'Retirement Beneficiary': np.nan,
-                'Retirement Reason': np.nan,
-                'Retirement Details': np.nan,
-            },
-        ]
-    )
+def raw_vcs_reports(raw_vcs_issuances, raw_vcs_retirements, raw_vcs_cancellations) -> dict:
+    return {
+        'issuances': raw_vcs_issuances,
+        'retirements': raw_vcs_retirements,
+        'cancellations': raw_vcs_cancellations,
+    }
 
 
 @pytest.fixture
-def processed_vcs_transactions(vcs_transactions) -> pd.DataFrame:
-    """Intermediate processing state shared by issuance and retirement tests."""
-    return (
-        vcs_transactions.set_registry(registry_name='verra')
-        .generate_vcs_project_ids(prefix='VCS')
-        .determine_vcs_transaction_type(date_column='Retirement/Cancellation Date')
-        .set_vcs_transaction_dates(
-            date_column='Retirement/Cancellation Date', fallback_column='Issuance Date'
-        )
-        .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
-        .set_vcs_vintage_year(date_column='Vintage End')
-        .convert_to_datetime(columns=['transaction_date'], dayfirst=True)
+def vcs_credits(raw_vcs_reports) -> pd.DataFrame:
+    return pd.concat(
+        [process_vcs_credits(raw, download_type=key) for key, raw in raw_vcs_reports.items()],
+        ignore_index=True,
     )
 
 
-def test_determine_vcs_transaction_type(subtests, vcs_transactions):
-    df = determine_vcs_transaction_type(
-        vcs_transactions, date_column='Retirement/Cancellation Date'
+def test_process_vcs_credits_keeps_every_credit_of_each_report(subtests, raw_vcs_reports):
+    transaction_types = {
+        'issuances': 'issuance',
+        'retirements': 'retirement',
+        'cancellations': 'cancellation',
+    }
+    for download_type, raw in raw_vcs_reports.items():
+        credits = process_vcs_credits(raw, download_type=download_type)
+        with subtests.test(case=download_type):
+            credit_without_id_schema.validate(credits)
+            assert credits['quantity'].sum() == raw['holdingQuantity'].sum()
+            assert (credits['transaction_type'] == transaction_types[download_type]).all()
+            assert credits['project_id'].str.fullmatch(r'VCS\d+').all()
+            dates = credits['transaction_date']
+            assert (dates == dates.dt.normalize()).all(), 'a time of day is left'
+
+
+def test_process_vcs_credits_sums_issuances_of_one_project_vintage_and_day(raw_vcs_issuances):
+    credits = process_vcs_credits(raw_vcs_issuances, download_type='issuances')
+    assert not credits.duplicated(['project_id', 'vintage', 'transaction_date']).any()
+    assert len(credits) < len(raw_vcs_issuances), 'the sample has no issuances to sum'
+
+
+def test_process_vcs_credits_takes_retirement_details_from_public_fields(
+    subtests, raw_vcs_retirements
+):
+    credits = process_vcs_credits(raw_vcs_retirements, download_type='retirements')
+    for column, raw_column in [
+        ('retirement_beneficiary', 'publicBeneficialOwner'),
+        ('retirement_reason', 'publicRetirementReason'),
+        ('retirement_note', 'publicRetirementReasonDetails'),
+    ]:
+        with subtests.test(case=column):
+            expected = raw_vcs_retirements[raw_column].fillna('').tolist()
+            assert credits[column].fillna('').tolist() == expected
+
+
+def test_set_vcs_vintage_year_keeps_the_last_year(subtests):
+    for case, vintage, expected in [
+        ('range', '2010 - 2011', 2011),
+        ('year', '2015', 2015),
+        ('integer', 2015, 2015),
+        ('float', 2015.0, 2015),
+    ]:
+        with subtests.test(case=case):
+            df = set_vcs_vintage_year(pd.DataFrame({'vintage': [vintage]}))
+            assert df['vintage'].tolist() == [expected]
+    with subtests.test(case='missing'):
+        df = set_vcs_vintage_year(pd.DataFrame({'vintage': [None]}))
+        assert df['vintage'].isna().all()
+
+
+@patch('offsets_db_data.vcs.harmonize_beneficiary_data')
+def test_process_vcs_credits_harmonizes_beneficiaries_when_asked(
+    mock_harmonize, raw_vcs_retirements
+):
+    mock_harmonize.side_effect = lambda df, **_: df
+    process_vcs_credits(
+        raw_vcs_retirements, download_type='retirements', harmonize_beneficiary_info=True
     )
-    assert 'transaction_type' in df.columns
-
-    for i, row in df.iterrows():
-        expected = 'retirement' if pd.notnull(row['Retirement/Cancellation Date']) else 'issuance'
-        with subtests.test(row=i):
-            assert row['transaction_type'] == expected
-
-
-def test_set_vcs_transaction_dates(vcs_transactions):
-    df = set_vcs_transaction_dates(
-        vcs_transactions,
-        date_column='Retirement/Cancellation Date',
-        fallback_column='Issuance Date',
-    )
-    assert 'transaction_date' in df.columns
-    expected = (
-        vcs_transactions['Retirement/Cancellation Date']
-        .where(
-            vcs_transactions['Retirement/Cancellation Date'].notnull(),
-            vcs_transactions['Issuance Date'],
-        )
-        .rename('transaction_date')
-    )
-    pd.testing.assert_series_equal(df['transaction_date'], expected)
-
-
-def test_set_vcs_vintage_year(vcs_transactions):
-    df = set_vcs_vintage_year(vcs_transactions, date_column='Issuance Date')
-    assert 'vintage' in df.columns
-    expected = pd.to_datetime(
-        vcs_transactions['Issuance Date'], dayfirst=True, utc=True
-    ).dt.year.rename('vintage')
-    pd.testing.assert_series_equal(df['vintage'], expected)
-
-
-def test_calculate_vcs_issuances(subtests, processed_vcs_transactions):
-    issuances = calculate_vcs_issuances(processed_vcs_transactions)
-
-    with subtests.test('no_duplicates'):
-        assert issuances.duplicated(subset=['vintage', 'project_id', 'quantity']).sum() == 0
-    with subtests.test('quantity_column'):
-        assert 'quantity' in issuances.columns
-    with subtests.test('all_issuances'):
-        assert (issuances['transaction_type'] == 'issuance').all()
-
-
-def test_calculate_vcs_retirements(subtests, processed_vcs_transactions):
-    retirements = calculate_vcs_retirements(processed_vcs_transactions)
-
-    with subtests.test('all_retirements'):
-        assert retirements['transaction_type'].str.contains('retirement').all()
-    with subtests.test('quantity_column'):
-        assert 'quantity' in retirements.columns
-    with subtests.test('raw_column_removed'):
-        assert 'Quantity Issued' not in retirements.columns
-
-
-def test_generate_vcs_project_ids(vcs_projects):
-    df = generate_vcs_project_ids(vcs_projects, prefix='VCS')
-    assert df['project_id'].tolist() == ['VCS75', 'VCS2498', 'VCS101', 'VCS3408', 'VCS1223']
+    mock_harmonize.assert_called_once()
+    assert mock_harmonize.call_args.kwargs == {
+        'registry_name': 'verra',
+        'download_type': 'retirements',
+    }
 
 
 def test_add_vcs_compliance_projects(subtests, vcs_projects):
@@ -393,9 +192,8 @@ def test_add_vcs_compliance_projects(subtests, vcs_projects):
         assert {'VCSOPR2', 'VCSOPR10'}.issubset(df['project_id'].values)
 
 
-def test_process_vcs_projects(subtests, vcs_projects, vcs_transactions):
-    credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
-    df = process_vcs_projects(vcs_projects, credits=credits, registry_name='verra')
+def test_process_vcs_projects(subtests, vcs_projects, vcs_credits):
+    df = process_vcs_projects(vcs_projects, credits=vcs_credits, registry_name='verra')
 
     with subtests.test('listed_at_column'):
         assert 'listed_at' in df.columns
@@ -421,15 +219,14 @@ def test_process_vcs_projects(subtests, vcs_projects, vcs_transactions):
         ]
 
 
-def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_transactions):
-    credits = process_vcs_credits(vcs_transactions, harmonize_beneficiary_info=False)
-    df = process_vcs_projects(vcs_projects, credits=credits, registry_name='verra')
+def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_credits):
+    df = process_vcs_projects(vcs_projects, credits=vcs_credits, registry_name='verra')
     row = df[df['project_id'] == 'VCS2498'].iloc[0]
 
     with subtests.test('total_issued'):
         assert row['issued'] == 435078
     with subtests.test('total_retired'):
-        assert row['retired'] == 19549
+        assert row['retired'] == 186511
     with subtests.test('first_issuance_at_type'):
         assert isinstance(row['first_issuance_at'], pd.Timestamp)
     with subtests.test('first_retirement_at_type'):
@@ -437,28 +234,6 @@ def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_transactions):
 
 
 # ── add_vcs_project_id / add_vcs_project_url (real sample data) ───────────────
-
-
-@patch('offsets_db_data.vcs.harmonize_beneficiary_data')
-def test_process_vcs_credits_harmonize_beneficiary(mock_harmonize, raw_vcs_transactions):
-    """harmonize_beneficiary_info=True invokes harmonize_beneficiary_data."""
-    mock_harmonize.side_effect = lambda df, **_: df
-    process_vcs_credits(raw_vcs_transactions, harmonize_beneficiary_info=True)
-    mock_harmonize.assert_called_once()
-
-
-def test_process_vcs_credits_with_arb(subtests, raw_vcs_transactions, arb):
-    """process_vcs_credits with non-empty arb triggers the merge_with_arb branch."""
-    result = process_vcs_credits(
-        raw_vcs_transactions,
-        harmonize_beneficiary_info=False,
-        arb=arb,
-    )
-    credit_without_id_schema.validate(result)
-    with subtests.test('schema_valid'):
-        assert set(result.columns) == set(credit_without_id_schema.columns.keys())
-    with subtests.test('non_negative_quantities'):
-        assert (result['quantity'] >= 0).all()
 
 
 def test_add_vcs_project_id(subtests, raw_vcs_projects):

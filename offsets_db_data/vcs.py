@@ -19,183 +19,84 @@ from offsets_db_data.projects import *  # noqa: F403
 
 
 @pf.register_dataframe_method
-def generate_vcs_project_ids(df: pd.DataFrame, *, prefix: str) -> pd.DataFrame:
+def set_vcs_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.DataFrame:
     """
-    Generate Verra project IDs by concatenating a specified prefix with the 'ID' column of the DataFrame.
+    Set the transaction type from the Verra report the rows come from.
+
+    Verra publishes issuances, retirements and cancellations as separate reports, so every row of
+    one report has the same transaction type.
 
     Parameters
     ----------
     df : pd.DataFrame
-        Input DataFrame containing Verra project data.
-    prefix : str
-        Prefix string to prepend to each project ID.
+        Input DataFrame with the rows of one Verra report.
+    download_type : str
+        The report: 'issuances', 'retirements' or 'cancellations'.
 
     Returns
     -------
     pd.DataFrame
-        DataFrame with a new 'project_id' column, containing the generated project IDs.
+        DataFrame with a 'transaction_type' column.
     """
 
-    df['project_id'] = prefix + df['ID'].astype(str)
+    transaction_types = {
+        'issuances': 'issuance',
+        'retirements': 'retirement',
+        'cancellations': 'cancellation',
+    }
+    df['transaction_type'] = transaction_types[download_type]
     return df
 
 
 @pf.register_dataframe_method
-def determine_vcs_transaction_type(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
+def set_vcs_vintage_year(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Determine the transaction type for Verra transactions based on a specified date column.
-    Transactions with non-null date values are labeled as 'retirement', else as 'issuance'.
+    Keep the last year of each Verra vintage.
+
+    Verra reports a vintage as one year ('2015') or as a range of years ('2010 - 2011').
+    OffsetsDB stores one year per credit, the last year of the range.
 
     Parameters
     ----------
     df : pd.DataFrame
-        Input DataFrame with transaction data.
-    date_column : str
-        Name of the column in the DataFrame used to determine the transaction type.
+        Input DataFrame with a 'vintage' column.
 
     Returns
     -------
     pd.DataFrame
-        DataFrame with a new 'transaction_type' column indicating the type of each transaction.
+        DataFrame with 'vintage' as a year. A missing vintage stays missing.
     """
 
-    # Verra doesn't have a transaction type column, and doesn't differentitate between retirements and cancelattions
-    # So we'll use the date column to determine whether a transaction is a retirement or issuance and set the
-    # transaction type accordingly
-    df['transaction_type'] = df[date_column].apply(
-        lambda x: 'retirement' if pd.notnull(x) else 'issuance'
-    )
+    last_year = df['vintage'].astype(str).str.findall(r'\d{4}').str[-1]
+    df['vintage'] = pd.to_numeric(last_year).astype('Int64')
     return df
-
-
-@pf.register_dataframe_method
-def set_vcs_transaction_dates(
-    df: pd.DataFrame, *, date_column: str, fallback_column: str
-) -> pd.DataFrame:
-    """
-    Set the transaction dates in a DataFrame, using a primary date column and a fallback column.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame with transaction data.
-    date_column : str
-        Primary column to use for transaction dates.
-    fallback_column : str
-        Column to use as fallback for transaction dates when primary column is null.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with a new 'transaction_date' column, containing the determined dates.
-    """
-
-    df['transaction_date'] = df[date_column].where(df[date_column].notnull(), df[fallback_column])
-    return df
-
-
-@pf.register_dataframe_method
-def set_vcs_vintage_year(df: pd.DataFrame, *, date_column: str) -> pd.DataFrame:
-    """
-    Set the vintage year for Verra transactions based on a date column formatted as '%d/%m/%Y'.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame with transaction data.
-    date_column : str
-        Name of the column containing date information to extract the vintage year from.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with a new 'vintage' column, containing the vintage year of each transaction.
-    """
-
-    try:
-        df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y', utc=True)
-    except ValueError:
-        df[date_column] = pd.to_datetime(df[date_column], utc=True)
-    df['vintage'] = df[date_column].dt.year
-    return df
-
-
-@pf.register_dataframe_method
-def calculate_vcs_issuances(df: pd.DataFrame) -> pd.DataFrame:
-    """Logic to calculate verra transactions from prepocessed transaction data
-
-    Verra allows rolling/partial issuances. This requires inferring vintage issuance from `Total Vintage Quantity`
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame with preprocessed transaction data.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame containing only issuance transactions with deduplicated and renamed columns.
-    """
-
-    df_issuance = df.sort_values('transaction_date').drop_duplicates(
-        ['vintage', 'project_id', 'Total Vintage Quantity'], keep='first'
-    )
-
-    df_issuance = df_issuance.rename(columns={'Total Vintage Quantity': 'quantity'})
-
-    df_issuance['transaction_type'] = 'issuance'
-
-    return df_issuance
-
-
-@pf.register_dataframe_method
-def calculate_vcs_retirements(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Calculate retirements and cancellations for Verra transactions. The data does not allow
-    distinguishing between retirements and cancellations.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame with Verra transaction data.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame containing only retirement transactions with renamed columns.
-    """
-
-    retirements = df[df['transaction_type'] != 'issuance']
-    retirements = retirements.rename(columns={'Quantity Issued': 'quantity'})
-    return retirements
 
 
 @pf.register_dataframe_method
 def process_vcs_credits(
     df: pd.DataFrame,
     *,
-    download_type: str = 'transactions',
+    download_type: str,
     registry_name: str = 'verra',
-    prefix: str = 'VCS',
-    arb: pd.DataFrame | None = None,
     harmonize_beneficiary_info: bool = False,
 ) -> pd.DataFrame:
     """
-    Process Verra credits data, including generation of project IDs, determination of transaction types,
-    setting transaction dates, and various data transformations and validations.
+    Process one report of Verra credits data: issuances, retirements or cancellations.
+
+    Renames the mapped columns, sets the registry, transaction type, project ID and vintage year,
+    keeps only the date of each transaction, sums issuances of the same project and vintage on the
+    same day, and validates the result.
 
     Parameters
     ----------
     df : pd.DataFrame
-        Input DataFrame with raw credits data.
-    download_type : str, optional
-        Type of download operation performed (default is 'transactions').
+        Input DataFrame with one raw Verra report.
+    download_type : str
+        The report: 'issuances', 'retirements' or 'cancellations'.
     registry_name : str, optional
         Name of the registry (default is 'verra').
-    prefix : str, optional
-        Prefix for generating project IDs (default is 'VCS').
-    arb : pd.DataFrame | None, optional
-        DataFrame for additional data merging (default is None).
+    harmonize_beneficiary_info : bool, optional
+        Whether to harmonize retirement beneficiaries with OpenRefine (default is False).
 
     Returns
     -------
@@ -203,54 +104,39 @@ def process_vcs_credits(
         Processed DataFrame with Verra credits data.
     """
 
-    df = df.copy()
-    data = (
-        df.set_registry(registry_name=registry_name)
-        .generate_vcs_project_ids(prefix=prefix)
-        .determine_vcs_transaction_type(date_column='Retirement/Cancellation Date')
-        .set_vcs_transaction_dates(
-            date_column='Retirement/Cancellation Date', fallback_column='Issuance Date'
-        )
-        .clean_and_convert_numeric_columns(columns=['Total Vintage Quantity', 'Quantity Issued'])
-        .set_vcs_vintage_year(date_column='Vintage End')
-        .convert_to_datetime(columns=['transaction_date'], dayfirst=True)
-    )
-
-    issuances = data.calculate_vcs_issuances()
-    retirements = data.calculate_vcs_retirements()
-
     column_mapping = load_column_mapping(
         registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
     )
+    columns = {raw: column for column, raw in column_mapping.items() if raw}
 
-    columns = {v: k for k, v in column_mapping.items()}
-
-    merged_df = pd.concat([issuances, retirements]).reset_index(drop=True).rename(columns=columns)
-
-    issuances = merged_df.aggregate_issuance_transactions()
-    retirements = merged_df[merged_df['transaction_type'].str.contains('retirement')]
+    # Select the mapped columns before renaming, so no raw column can share a name with a new one
     data = (
-        pd.concat([issuances, retirements])
-        .reset_index(drop=True)
-        .add_missing_columns(schema=credit_without_id_schema)
-        .validate(schema=credit_without_id_schema)
+        df[list(columns)]
+        .rename(columns=columns)
+        .set_registry(registry_name=registry_name)
+        .set_vcs_transaction_type(download_type=download_type)
+        .add_vcs_project_id()
+        .set_vcs_vintage_year()
+        .convert_to_datetime(columns=['transaction_date'], format='ISO8601')
     )
 
-    if arb is not None and not arb.empty:
-        data = data.merge_with_arb(arb=arb)
+    if download_type == 'issuances':
+        data = data.aggregate_issuance_transactions()
+
+    data = data.add_missing_columns(schema=credit_without_id_schema).validate(
+        schema=credit_without_id_schema
+    )
 
     if harmonize_beneficiary_info:
         data = data.pipe(
             harmonize_beneficiary_data, registry_name=registry_name, download_type=download_type
         )
 
-    data = (
+    return (
         data.add_missing_columns(schema=credit_without_id_schema)
         .convert_to_datetime(columns=['transaction_date'], format='%Y-%m-%d')
         .validate(schema=credit_without_id_schema)
     )
-
-    return data
 
 
 @pf.register_dataframe_method

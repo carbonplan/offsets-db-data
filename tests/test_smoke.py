@@ -17,10 +17,17 @@ from offsets_db_data.models import credit_without_id_schema, project_schema
 from offsets_db_data.vcs import *  # noqa: F403
 
 
-def test_vcs_pipeline(subtests, raw_vcs_projects, raw_vcs_transactions, arb):
-    credits = raw_vcs_transactions.process_vcs_credits(
-        arb=arb[arb.project_id.str.startswith('VCS')],
-        harmonize_beneficiary_info=False,
+def test_vcs_pipeline(
+    subtests, raw_vcs_projects, raw_vcs_issuances, raw_vcs_retirements, raw_vcs_cancellations
+):
+    reports = {
+        'issuances': raw_vcs_issuances,
+        'retirements': raw_vcs_retirements,
+        'cancellations': raw_vcs_cancellations,
+    }
+    credits = pd.concat(
+        [raw.process_vcs_credits(download_type=key) for key, raw in reports.items()],
+        ignore_index=True,
     )
 
     with subtests.test('credits_schema'):
@@ -30,7 +37,7 @@ def test_vcs_pipeline(subtests, raw_vcs_projects, raw_vcs_transactions, arb):
 
     with subtests.test('credits_transaction_types'):
         types = set(credits['transaction_type'].unique())
-        assert {'issuance', 'retirement'} <= types
+        assert types == {'issuance', 'retirement', 'cancellation'}
 
     with subtests.test('projects_schema'):
         projects = raw_vcs_projects.process_vcs_projects(credits=credits)

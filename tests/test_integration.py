@@ -15,17 +15,25 @@ from offsets_db_data.vcs import *  # noqa: F403
 # `arb` fixture is provided by conftest.py (processes raw_arb from local sample)
 
 
+@pytest.mark.skip(
+    reason='S3 has no raw Verra issuances, retirements or cancellations from the new registry yet. '
+    'Re-enable, with a date that has them, once offsets-db-download writes them.'
+)
 @pytest.mark.parametrize(
     'harmonize_beneficiary_info',
     [True, False],
 )
-def test_verra(subtests, date, bucket, arb, harmonize_beneficiary_info):
+def test_verra(subtests, date, bucket, harmonize_beneficiary_info):
     prefix = 'VCS'
     projects = pd.read_csv(f'{bucket}/{date}/verra/projects.csv.gz')
-    credits = pd.read_csv(f'{bucket}/{date}/verra/transactions.csv.gz')
-    df_credits = credits.process_vcs_credits(
-        arb=arb[arb.project_id.str.startswith(prefix)],
-        harmonize_beneficiary_info=harmonize_beneficiary_info,
+    df_credits = pd.concat(
+        [
+            pd.read_csv(f'{bucket}/{date}/verra/{key}.csv.gz').process_vcs_credits(
+                download_type=key, harmonize_beneficiary_info=harmonize_beneficiary_info
+            )
+            for key in ['issuances', 'retirements', 'cancellations']
+        ],
+        ignore_index=True,
     )
     df_projects = projects.process_vcs_projects(credits=df_credits)
 

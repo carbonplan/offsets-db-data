@@ -34,15 +34,12 @@ def main(date: str) -> None:
     # ── Verra ─────────────────────────────────────────────────────────────────
     _csv(f'{base}/verra/projects.csv.gz', OUT_DIR / 'verra' / 'projects.csv', nrows=50)
 
-    # transactions: balanced mix of issuances and retirements
-    txn = pd.read_csv(f'{base}/verra/transactions.csv.gz', nrows=5000)
-    has_ret = txn[txn['Retirement/Cancellation Date'].notna()].head(100)
-    no_ret = txn[txn['Retirement/Cancellation Date'].isna()].head(100)
-    out = OUT_DIR / 'verra' / 'transactions.csv'
-    pd.concat([has_ret, no_ret]).to_csv(out, index=False)
-    print(
-        f'  {out.relative_to(OUT_DIR.parent)}  ({len(has_ret)} retirements + {len(no_ret)} issuances)'
-    )
+    for key in ('issuances', 'retirements', 'cancellations'):
+        report = pd.read_csv(f'{base}/verra/{key}.csv.gz', low_memory=False)
+        out = OUT_DIR / 'verra' / f'{key}.csv'
+        sample = verra_credit_sample(report, key)
+        sample.to_csv(out, index=False)
+        print(f'  {out.relative_to(OUT_DIR.parent)}  ({len(sample)} rows)')
 
     # ── American Carbon Registry ───────────────────────────────────────────────
     for key in ('projects', 'issuances', 'retirements', 'cancellations'):
@@ -98,6 +95,37 @@ def main(date: str) -> None:
         )
 
     print('Done.')
+
+
+# Projects 101 and 2498 are in the Verra project fixtures in tests/test_vcs.py
+VERRA_SAMPLE_PROJECTS = [101, 2498]
+VERRA_DATE_COLUMNS = {
+    'issuances': 'issueDate',
+    'retirements': 'retiredDate',
+    'cancellations': 'cancellation_date',
+}
+
+
+def verra_credit_sample(report: pd.DataFrame, key: str) -> pd.DataFrame:
+    """Every row of the sample projects, plus rows that exercise the transform's edge cases."""
+    dates = pd.to_datetime(report[VERRA_DATE_COLUMNS[key]], format='ISO8601')
+    picks = [
+        report[report['vcsProjectId'].isin(VERRA_SAMPLE_PROJECTS)],
+        report[dates != dates.dt.normalize()].head(1),  # a timestamp with a time of day
+        report.head(5),
+    ]
+    if key == 'issuances':  # issuances of one project and vintage on one day, which get summed
+        day = dates.dt.normalize().rename('day')
+        group_size = report.groupby(['vcsProjectId', 'vintage', day])['id'].transform('size')
+        first = report[group_size > 1].head(1)
+        picks.append(
+            report[
+                report['vcsProjectId'].isin(first['vcsProjectId'])
+                & report['vintage'].isin(first['vintage'])
+                & day.isin(day[first.index])
+            ]
+        )
+    return pd.concat(picks).drop_duplicates('id').sort_values('id')
 
 
 def _csv(src: str, dst: Path, nrows: int = 100) -> None:
