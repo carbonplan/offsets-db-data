@@ -16,8 +16,8 @@ from offsets_db_data.vcs import *  # noqa: F403
 
 
 @pytest.mark.skip(
-    reason='S3 has no raw Verra issuances, retirements or cancellations from the new registry yet. '
-    'Re-enable, with a date that has them, once offsets-db-download writes them.'
+    reason='S3 has no raw Verra data from the new registry yet. '
+    'Re-enable, with a date that has it, once offsets-db-download writes it.'
 )
 @pytest.mark.parametrize(
     'harmonize_beneficiary_info',

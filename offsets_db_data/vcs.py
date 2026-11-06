@@ -269,8 +269,11 @@ def process_vcs_projects(
     inverted_protocol_mapping = load_inverted_protocol_mapping()
     protocol_mapping = load_protocol_mapping()
 
+    # Select the mapped columns before renaming: the raw report has its own 'status' column,
+    # which would clash with 'stateCode' renamed to 'status'
     data = (
-        df.rename(columns=inverted_column_mapping)
+        df[list(inverted_column_mapping)]
+        .rename(columns=inverted_column_mapping)
         .set_registry(registry_name=registry_name)
         .add_vcs_project_id()
         .add_vcs_project_url()

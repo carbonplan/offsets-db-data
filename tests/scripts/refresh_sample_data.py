@@ -32,14 +32,20 @@ def main(date: str) -> None:
     print(f'Refreshing sample data from {base}')
 
     # ── Verra ─────────────────────────────────────────────────────────────────
-    _csv(f'{base}/verra/projects.csv.gz', OUT_DIR / 'verra' / 'projects.csv', nrows=50)
-
+    credit_samples = []
     for key in ('issuances', 'retirements', 'cancellations'):
         report = pd.read_csv(f'{base}/verra/{key}.csv.gz', low_memory=False)
         out = OUT_DIR / 'verra' / f'{key}.csv'
         sample = verra_credit_sample(report, key)
         sample.to_csv(out, index=False)
+        credit_samples.append(sample)
         print(f'  {out.relative_to(OUT_DIR.parent)}  ({len(sample)} rows)')
+
+    report = pd.read_csv(f'{base}/verra/projects.csv.gz', low_memory=False)
+    out = OUT_DIR / 'verra' / 'projects.csv'
+    sample = verra_project_sample(report, credit_samples)
+    sample.to_csv(out, index=False)
+    print(f'  {out.relative_to(OUT_DIR.parent)}  ({len(sample)} rows)')
 
     # ── American Carbon Registry ───────────────────────────────────────────────
     for key in ('projects', 'issuances', 'retirements', 'cancellations'):
@@ -97,8 +103,8 @@ def main(date: str) -> None:
     print('Done.')
 
 
-# Projects 101 and 2498 are in the Verra project fixtures in tests/test_vcs.py
-VERRA_SAMPLE_PROJECTS = [101, 2498]
+# Projects the Verra tests in tests/test_vcs.py look up by ID
+VERRA_SAMPLE_PROJECTS = [75, 101, 1223, 2498, 3408]
 VERRA_DATE_COLUMNS = {
     'issuances': 'issueDate',
     'retirements': 'retiredDate',
@@ -126,6 +132,12 @@ def verra_credit_sample(report: pd.DataFrame, key: str) -> pd.DataFrame:
             ]
         )
     return pd.concat(picks).drop_duplicates('id').sort_values('id')
+
+
+def verra_project_sample(report: pd.DataFrame, credit_samples: list[pd.DataFrame]) -> pd.DataFrame:
+    """The sample projects, plus every project in the credit samples."""
+    ids = set(VERRA_SAMPLE_PROJECTS).union(*(sample['vcsProjectId'] for sample in credit_samples))
+    return report[report['vcsProjectId'].isin(ids)].sort_values('vcsProjectId')
 
 
 def _csv(src: str, dst: Path, nrows: int = 100) -> None:

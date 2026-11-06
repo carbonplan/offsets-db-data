@@ -503,15 +503,15 @@ Table 1 provides the mapping from the raw column names found in downloaded regis
 
 |                  | **verra**                      | **climate-action-reserve**     | **american-carbon-registry**           | **gold-standard**              | **art-trees**                  |
 | ---------------- | ------------------------------ | ------------------------------ | -------------------------------------- | ------------------------------ | ------------------------------ |
-| **project_id**   | ID                             | Project ID                     | Project ID                             | id                             | Program ID                     |
-| **name**         | Name                           | Project Name                   | Project Name                           | name                           | Program Name                   |
-| **protocol**     | Methodology                    | Project Type                   | Project Methodology/Protocol           | methodology                    | \-                             |
+| **project_id**   | vcsProjectId                   | Project ID                     | Project ID                             | id                             | Program ID                     |
+| **name**         | projectName                    | Project Name                   | Project Name                           | name                           | Program Name                   |
+| **protocol**     | methodologies                  | Project Type                   | Project Methodology/Protocol           | methodology                    | \-                             |
 | **category**     | inferred from protocol or type | inferred from protocol or type | inferred from protocol                 | inferred from protocol or type | inferred from protocol or type |
 | **proejct_type** | manually assigned              | manually assigned              | manually assigned                      | manually assigned              | manually assigned              |
-| **proponent**    | Proponent                      | Project Owner                  | Project Developer                      | project_developer              | Sovereign Program Developer    |
-| **country**      | Country/Area                   | Project Site Country           | Project Site Country                   | country                        | Program Country                |
-| **status**       | Status                         | Status                         | Derived: voluntary + compliance status | status                         | Status                         |
-| **listed_at**    | Project Listed Date            | \-                             | \-                                     | \-                             | \-                             |
+| **proponent**    | proponents                     | Project Owner                  | Project Developer                      | project_developer              | Sovereign Program Developer    |
+| **country**      | countryName                    | Project Site Country           | Project Site Country                   | country                        | Program Country                |
+| **status**       | stateCode                      | Status                         | Derived: voluntary + compliance status | status                         | Status                         |
+| **listed_at**    | \-                             | \-                             | \-                                     | \-                             | \-                             |
 
 ### Credits
 

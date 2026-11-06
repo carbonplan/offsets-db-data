@@ -1,6 +1,5 @@
 from unittest.mock import patch
 
-import numpy as np
 import pandas as pd
 import pytest
 
@@ -13,89 +12,6 @@ from offsets_db_data.vcs import (
     process_vcs_projects,
     set_vcs_vintage_year,
 )
-
-
-@pytest.fixture
-def vcs_projects() -> pd.DataFrame:
-    return pd.DataFrame(
-        [
-            {
-                'ID': 75,
-                'Name': '5.4 MW Grouped Wind Power Project in Gujarat & Maharashtra (India) by Rohan Builders (India) Pvt Ltd.',
-                'Proponent': 'Rohan Builders (India)',
-                'Project Type': 'Energy industries (renewable/non-renewable sources)',
-                'AFOLU Activities': np.nan,
-                'Methodology': 'AMS-I.D.',
-                'Status': 'Registered',
-                'Country/Area': 'India',
-                'Estimated Annual Emission Reductions': '9,143',
-                'Region': 'Asia',
-                'Project Registration Date': '2009-06-15',
-                'Crediting Period Start Date': np.nan,
-                'Crediting Period End Date': np.nan,
-            },
-            {
-                'ID': 2498,
-                'Name': 'Afforestation of degraded grasslands in Caazapa and Guairá',
-                'Proponent': 'Miller Forest Investment AG',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'AFOLU Activities': 'ARR',
-                'Methodology': 'AR-ACM0003',
-                'Status': 'Registered',
-                'Country/Area': 'Paraguay',
-                'Estimated Annual Emission Reductions': '204,819',
-                'Region': 'Latin America',
-                'Project Registration Date': '2022-01-14',
-                'Crediting Period Start Date': '2016-01-13',
-                'Crediting Period End Date': '2046-01-12',
-            },
-            {
-                'ID': 101,
-                'Name': 'Bagasse based Co-generation Power Project at Khatauli',
-                'Proponent': 'Triveni Engineering and Industries Limited (TEIL)',
-                'Project Type': 'Energy industries (renewable/non-renewable sources)',
-                'AFOLU Activities': np.nan,
-                'Methodology': 'ACM0006',
-                'Status': 'Registered',
-                'Country/Area': 'India',
-                'Estimated Annual Emission Reductions': '86,808',
-                'Region': 'Asia',
-                'Project Registration Date': '2009-07-15',
-                'Crediting Period Start Date': np.nan,
-                'Crediting Period End Date': np.nan,
-            },
-            {
-                'ID': 3408,
-                'Name': 'Mianning1 Water Management with Rice Cultivation',
-                'Proponent': 'Yunnan Ruihan Agricultural Technology Development Co., Ltd.',
-                'Project Type': 'Agriculture Forestry and Other Land Use',
-                'AFOLU Activities': 'ALM',
-                'Methodology': 'AMS-III.AU',
-                'Status': 'Under development',
-                'Country/Area': 'China',
-                'Estimated Annual Emission Reductions': '55,497',
-                'Region': 'Asia',
-                'Project Registration Date': np.nan,
-                'Crediting Period Start Date': '2018-04-06',
-                'Crediting Period End Date': '2025-04-05',
-            },
-            {
-                'ID': 1223,
-                'Name': 'Yanhe, Dejiang, and Yinjiang Rural Methane Digesters Project in Guizhou Province, China',
-                'Proponent': 'Guizhou Black Carbon Energy Tech Prom & App Co. Lt',
-                'Project Type': 'Energy industries (renewable/non-renewable sources)',
-                'AFOLU Activities': np.nan,
-                'Methodology': 'AMS-I.C.; AMS-III.R.',
-                'Status': 'Under validation',
-                'Country/Area': 'China',
-                'Estimated Annual Emission Reductions': '53,247',
-                'Region': 'Asia',
-                'Project Registration Date': np.nan,
-                'Crediting Period Start Date': np.nan,
-                'Crediting Period End Date': np.nan,
-            },
-        ]
-    )
 
 
 @pytest.fixture
@@ -182,9 +98,9 @@ def test_process_vcs_credits_harmonizes_beneficiaries_when_asked(
     }
 
 
-def test_add_vcs_compliance_projects(subtests, vcs_projects):
-    original_len = len(vcs_projects)
-    df = add_vcs_compliance_projects(vcs_projects)
+def test_add_vcs_compliance_projects(subtests, raw_vcs_projects):
+    original_len = len(raw_vcs_projects)
+    df = add_vcs_compliance_projects(raw_vcs_projects)
 
     with subtests.test('two_rows_added'):
         assert len(df) == original_len + 2
@@ -192,35 +108,24 @@ def test_add_vcs_compliance_projects(subtests, vcs_projects):
         assert {'VCSOPR2', 'VCSOPR10'}.issubset(df['project_id'].values)
 
 
-def test_process_vcs_projects(subtests, vcs_projects, vcs_credits):
-    df = process_vcs_projects(vcs_projects, credits=vcs_credits, registry_name='verra')
+def test_process_vcs_projects(subtests, raw_vcs_projects, vcs_credits):
+    df = process_vcs_projects(raw_vcs_projects, credits=vcs_credits, registry_name='verra')
+    ids = raw_vcs_projects['vcsProjectId'].astype(str).tolist()
+    from_report = df.iloc[: len(raw_vcs_projects)]
 
     with subtests.test('listed_at_column'):
         assert 'listed_at' in df.columns
-    with subtests.test('project_urls'):
-        assert df['project_url'].tolist() == [
-            'https://registry.verra.org/app/projectDetail/VCS/75',
-            'https://registry.verra.org/app/projectDetail/VCS/2498',
-            'https://registry.verra.org/app/projectDetail/VCS/101',
-            'https://registry.verra.org/app/projectDetail/VCS/3408',
-            'https://registry.verra.org/app/projectDetail/VCS/1223',
-            'https://registry.verra.org/app/projectDetail/VCS/2265',
-            'https://registry.verra.org/app/projectDetail/VCS/2271',
-        ]
     with subtests.test('project_ids'):
-        assert df['project_id'].tolist() == [
-            'VCS75',
-            'VCS2498',
-            'VCS101',
-            'VCS3408',
-            'VCS1223',
-            'VCSOPR2',
-            'VCSOPR10',
-        ]
+        assert df['project_id'].tolist() == [f'VCS{id_}' for id_ in ids] + ['VCSOPR2', 'VCSOPR10']
+    with subtests.test('project_urls'):
+        base = 'https://registry.verra.org/app/projectDetail/VCS/'
+        assert df['project_url'].tolist() == [base + id_ for id_ in ids + ['2265', '2271']]
+    with subtests.test('names_from_report'):
+        assert from_report['name'].tolist() == raw_vcs_projects['projectName'].tolist()
 
 
-def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_credits):
-    df = process_vcs_projects(vcs_projects, credits=vcs_credits, registry_name='verra')
+def test_process_vcs_projects_totals(subtests, raw_vcs_projects, vcs_credits):
+    df = process_vcs_projects(raw_vcs_projects, credits=vcs_credits, registry_name='verra')
     row = df[df['project_id'] == 'VCS2498'].iloc[0]
 
     with subtests.test('total_issued'):
@@ -237,8 +142,8 @@ def test_process_vcs_projects_totals(subtests, vcs_projects, vcs_credits):
 
 
 def test_add_vcs_project_id(subtests, raw_vcs_projects):
-    # Mirror the pipeline: rename 'ID' -> 'project_id' before calling add_vcs_project_id
-    df = raw_vcs_projects.rename(columns={'ID': 'project_id'}).copy()
+    # Mirror the pipeline: rename 'vcsProjectId' -> 'project_id' before calling add_vcs_project_id
+    df = raw_vcs_projects.rename(columns={'vcsProjectId': 'project_id'}).copy()
     result = add_vcs_project_id(df)
 
     with subtests.test('prefix_added'):
@@ -246,13 +151,13 @@ def test_add_vcs_project_id(subtests, raw_vcs_projects):
     with subtests.test('numeric_suffix'):
         assert result['project_id'].str[3:].str.isnumeric().all()
     with subtests.test('original_ids_preserved'):
-        original = raw_vcs_projects['ID'].astype(str)
+        original = raw_vcs_projects['vcsProjectId'].astype(str)
         assert (result['project_id'].str[3:] == original).all()
 
 
 def test_add_vcs_project_url(subtests, raw_vcs_projects):
     # Mirror the pipeline: rename then prefix, then build URL
-    df = raw_vcs_projects.rename(columns={'ID': 'project_id'}).copy()
+    df = raw_vcs_projects.rename(columns={'vcsProjectId': 'project_id'}).copy()
     df = add_vcs_project_id(df)
     result = add_vcs_project_url(df)
 
