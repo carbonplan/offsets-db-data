@@ -3,11 +3,15 @@ from unittest.mock import patch
 import pandas as pd
 import pytest
 
+from offsets_db_data.common import load_inverted_protocol_mapping
 from offsets_db_data.models import credit_without_id_schema
 from offsets_db_data.vcs import (
     add_vcs_compliance_projects,
     add_vcs_project_id,
     add_vcs_project_url,
+    clean_vcs_proponents,
+    harmonize_vcs_status,
+    map_vcs_protocol,
     process_vcs_credits,
     process_vcs_projects,
     set_vcs_vintage_year,
@@ -123,6 +127,17 @@ def test_process_vcs_projects(subtests, raw_vcs_projects, vcs_credits):
     with subtests.test('names_from_report'):
         assert from_report['name'].tolist() == raw_vcs_projects['projectName'].tolist()
 
+    by_id = df.set_index('project_id')
+    with subtests.test('status_from_state_code'):
+        statuses = by_id.loc[['VCS1223', 'VCS2498', 'VCS3408'], 'status'].tolist()
+        assert statuses == ['listed', 'registered', 'completed']
+    with subtests.test('proponents_cleaned'):
+        assert (
+            by_id.loc['VCS3057', 'proponent'] == 'Blue Carbon Projects, LLC; BlueMX Mangrove A.C.'
+        )
+    with subtests.test('protocol_matched_per_code'):
+        assert by_id.loc['VCS1223', 'protocol'] == ['ams-i-c', 'ams-iii-r']
+
 
 def test_process_vcs_projects_totals(subtests, raw_vcs_projects, vcs_credits):
     df = process_vcs_projects(raw_vcs_projects, credits=vcs_credits, registry_name='verra')
@@ -136,6 +151,62 @@ def test_process_vcs_projects_totals(subtests, raw_vcs_projects, vcs_credits):
         assert isinstance(row['first_issuance_at'], pd.Timestamp)
     with subtests.test('first_retirement_at_type'):
         assert isinstance(row['first_retirement_at'], pd.Timestamp)
+
+
+@pytest.fixture(scope='module')
+def known_strings() -> dict:
+    return load_inverted_protocol_mapping()
+
+
+def test_harmonize_vcs_status_prints_codes_it_cannot_map(capsys):
+    codes = ['REGISTERED', 'UNDER_VAL_COMMENT_CLOSED', 'INACTIVE', 'LATE_TO_VERIFY', 'NEW_CODE']
+    df = harmonize_vcs_status(pd.DataFrame({'status': codes}))
+    assert df['status'].tolist() == ['registered', 'listed', 'completed', 'unknown', 'unknown']
+    assert "['NEW_CODE']" in capsys.readouterr().out
+
+
+def test_clean_vcs_proponents(subtests):
+    for case, proponent, expected in [
+        ('one', 'Face the Future (PP)', 'Face the Future'),
+        ('several', 'A Ltd (PP),B GmbH (PP)', 'A Ltd; B GmbH'),
+        (
+            'comma_in_name',
+            'Blue Carbon Projects, LLC (PP) ,BlueMX (PP)',
+            'Blue Carbon Projects, LLC; BlueMX',
+        ),
+        ('no_role', 'Multiple Project Proponents', 'Multiple Project Proponents'),
+    ]:
+        with subtests.test(case=case):
+            df = clean_vcs_proponents(pd.DataFrame({'proponent': [proponent]}))
+            assert df['proponent'].tolist() == [expected]
+
+
+def test_map_vcs_protocol_matches_each_code(subtests, known_strings):
+    for case, methodologies, protocol, unassigned in [
+        ('one_code', 'VM0007 (Version 1.6)', ['vm0007'], None),
+        (
+            'several_codes',
+            'AMS-I.C. (Version NA), AMS-III.R. (Version NA)',
+            ['ams-i-c', 'ams-iii-r'],
+            None,
+        ),
+        ('trailing_dot', 'AMS-III.AU. (Version NA)', ['ams-iii-au'], None),
+        ('some_unknown', 'VM0042 (Version 2.0), VMR0017 (Version 1.0)', ['vm0042'], ['VMR0017']),
+        (
+            'known_as_unknown',
+            'Methodology Under Development',
+            None,
+            ['Methodology Under Development'],
+        ),
+        ('missing', None, None, None),
+    ]:
+        with subtests.test(case=case):
+            df = map_vcs_protocol(
+                pd.DataFrame({'original_protocol': [methodologies]}),
+                inverted_protocol_mapping=known_strings,
+            )
+            assert df['protocol'].tolist() == [protocol]
+            assert df['protocol_unassigned'].tolist() == [unassigned]
 
 
 # ── add_vcs_project_id / add_vcs_project_url (real sample data) ───────────────

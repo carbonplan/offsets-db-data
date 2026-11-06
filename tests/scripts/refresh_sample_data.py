@@ -104,7 +104,7 @@ def main(date: str) -> None:
 
 
 # Projects the Verra tests in tests/test_vcs.py look up by ID
-VERRA_SAMPLE_PROJECTS = [75, 101, 1223, 2498, 3408]
+VERRA_SAMPLE_PROJECTS = [75, 101, 1223, 2498, 3057, 3408]
 VERRA_DATE_COLUMNS = {
     'issuances': 'issueDate',
     'retirements': 'retiredDate',

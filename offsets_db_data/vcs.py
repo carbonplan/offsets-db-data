@@ -1,3 +1,5 @@
+import re
+
 import numpy as np  # noqa: F401
 import pandas as pd
 import pandas_flavor as pf
@@ -232,6 +234,147 @@ def add_vcs_project_id(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+# TODO(Grayson): fill in the placeholders and confirm the mapping
+VERRA_STATE_CODES = {
+    # old table
+    'REGISTERED': 'registered',
+    'REGISTRATION_REQUESTED': 'listed',
+    'REGISTRATION_VERIFICATION_APPROVAL_REQ': 'listed',
+    'CREDIT_PERIOD_RENEWAL_REQUESTED': 'registered',
+    'CREDIT_PERIOD_RENEWAL_VERIFICATION_REQUESTED': 'registered',
+    'CREDIT_PERIOD_RENEWAL_VERIFICATION_APP_REQUESTED': 'registered',
+    'INACTIVE': 'completed',
+    'REJECTED': 'completed',
+    'WITHDRAWN': 'completed',
+    'UNITS_TRANSFER_APPROVE_GHG_PROG': 'unknown',
+    'UNDER_VAL_COMMENT_CLOSED': 'listed',
+    'UNDER_VAL_COMMENT_PERIOD_ON': 'listed',
+    'PIPELINE_LISTING_UNDER_DEVELOPMENT_APPROVED': 'listed',
+    'PIPELINE_LISTING_UNDER_VALIDATION': 'listed',
+    'REQUANTIFICATION_REQUESTED': 'registered',
+    'LATE_TO_VERIFY': 'unknown',
+    'VERIFICATION_APPROVAL_REQUESTED': 'unknown',
+    'ON_HOLD': 'unknown',
+    'PIPELINE_LISTING_UNDER_DEVELOPMENT': 'unknown',
+    'REGISTRATION_REQ_DENIED': 'unknown',
+    'VERIFICATION_APPROVAL_REQUEST_DENIED': 'unknown',
+    'REGISTRATION_VERIFICATION_REQ_DENIED': 'unknown',
+}
+
+
+@pf.register_dataframe_method
+def harmonize_vcs_status(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Map Verra state codes to OffsetsDB project statuses with ``VERRA_STATE_CODES``.
+
+    A state code missing from ``VERRA_STATE_CODES`` becomes 'unknown' and is printed, so it can be
+    added.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with Verra state codes in a 'status' column.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with OffsetsDB statuses in the 'status' column.
+    """
+
+    if unmapped := set(df['status'].dropna()) - set(VERRA_STATE_CODES):
+        print(f'Verra state codes with no status, set to unknown: {sorted(unmapped)}')
+    df['status'] = df['status'].map(VERRA_STATE_CODES).fillna('unknown')
+    return df
+
+
+@pf.register_dataframe_method
+def clean_vcs_proponents(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Remove Verra's '(PP)' role from proponent names, and join several proponents with '; '.
+
+    Verra lists proponents as 'A (PP),B (PP)'. Names are split only after '(PP)', because names
+    like 'Blue Carbon Projects, LLC' have commas of their own.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with a 'proponent' column.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with cleaned 'proponent' values.
+    """
+
+    df['proponent'] = (
+        df['proponent']
+        .str.replace(r'\s*\(PP\)\s*,\s*', '; ', regex=True)
+        .str.replace(r'\s*\(PP\)\s*$', '', regex=True)
+        .str.strip()
+    )
+    return df
+
+
+def _split_vcs_methodologies(value) -> list[str]:
+    """'VM0050 (Version 1), VMR0006 (Version 1.1)' -> ['VM0050', 'VMR0006']"""
+    if pd.isna(value):
+        return []
+    without_versions = re.sub(r'\s*\(Version[^)]*\)', '', str(value))
+    return [code for code in re.split(r'\s*,\s*', without_versions.strip()) if code]
+
+
+def _find_vcs_methodology(code: str, inverted_protocol_mapping: dict) -> list[str] | None:
+    # The known strings have 'AMS-III.AU' where Verra writes 'AMS-III.AU.', and the other way round
+    for candidate in (code, code.rstrip('.'), code + '.'):
+        if inverted_protocol_mapping.get(candidate, ['unknown']) != ['unknown']:
+            return inverted_protocol_mapping[candidate]
+    return None
+
+
+# TODO(Grayson): Verra lists some afforestation methodologies without their 'AR-' prefix, such as
+# 'ACM0003' for 'AR-ACM0003' ('ACM0003' is fuel switching in cement), so these projects get the
+# wrong protocol and category. Projects with land use as their only scope, November 2026:
+#   'ACM0003': VCS1332, VCS1361, VCS1930, VCS3318, VCS3896, VCS3976, VCS4632, VCS4801, VCS4935
+#   'AM0014' (perhaps 'AR-AM0014', mangrove planting): VCS2395
+# Decide how to remap them.
+@pf.register_dataframe_method
+def map_vcs_protocol(df: pd.DataFrame, *, inverted_protocol_mapping: dict) -> pd.DataFrame:
+    """
+    Map each methodology code of a Verra project to OffsetsDB protocols.
+
+    Verra lists several methodologies as one string, such as
+    'VM0042 (Version 2.0), VMR0017 (Version 1.0)'. Each code is matched on its own against the
+    known strings, so known strings need one entry per code, not one per combination.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Input DataFrame with the raw methodologies in an 'original_protocol' column.
+    inverted_protocol_mapping : dict
+        Known protocol strings, from ``load_inverted_protocol_mapping``.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with 'protocol', the matched protocols, and 'protocol_unassigned', the codes
+        that matched none. Each is None when empty.
+    """
+
+    protocols, unassigned = [], []
+    for value in df['original_protocol']:
+        matched, unmatched = [], []
+        for code in _split_vcs_methodologies(value):
+            if found := _find_vcs_methodology(code, inverted_protocol_mapping):
+                matched += [protocol for protocol in found if protocol not in matched]
+            else:
+                unmatched.append(code)
+        protocols.append(matched or None)
+        unassigned.append(unmatched or None)
+    df['protocol'] = protocols
+    df['protocol_unassigned'] = unassigned
+    return df
+
+
 @pf.register_dataframe_method
 def process_vcs_projects(
     df: pd.DataFrame,
@@ -250,8 +393,6 @@ def process_vcs_projects(
         DataFrame containing credits data for merging.
     registry_name : str, optional
         Name of the registry (default is 'verra').
-    download_type : str, optional
-        Type of download operation performed (default is 'projects').
 
     Returns
     -------
@@ -277,9 +418,10 @@ def process_vcs_projects(
         .set_registry(registry_name=registry_name)
         .add_vcs_project_id()
         .add_vcs_project_url()
+        .clean_vcs_proponents()
         .harmonize_country_names()
-        .harmonize_status_codes()
-        .map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
+        .harmonize_vcs_status()
+        .map_vcs_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
         .infer_project_type()
         .override_project_types(
             override_data_path=BERKELEY_PROJECT_TYPE_UPATH, source_str='berkeley'
