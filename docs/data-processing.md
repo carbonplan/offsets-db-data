@@ -69,7 +69,7 @@ That means that after importing a registry module from `offsets_db_data`, the tr
 The initial and perhaps must mundane transformation of OffsetsDB involves mapping properties in the raw data to a common schema.
 This step requires constructing a map between the names of properties as they appear in the raw data to the property in OffsetsDB.
 For example, the Climate Action Reserve data refers to the property, `project_id`, as `Project ID`.
-The ART registry, however, refers to the same property as `Program ID`.
+Verra, however, refers to the same property as `ID`.
 
 These column mapping files are stored in [`offsets_db_data/configs`](https://github.com/carbonplan/offsets-db-data/tree/main/offsets_db_data/configs).
 There is a separate mapping file for `projects` data and `credits` data.
@@ -143,6 +143,7 @@ The harmonization process attempts to identify specific "retirement users" from 
 We try to standardize retirement user information across registries using the following steps:
 
 1. **Data merging**: we combine information from four sources into a single _temporary_ field:
+
    - `retirement_beneficiary`: note specifically designating the entity claiming a credit’s environmental benefits
    - `retirement_account`: name on account from which credits were retired
    - `retirement_note`: short-form text accompanying credit retirement
@@ -196,11 +197,15 @@ This section highlights special cases.
 For additional context, consult specific function docstrings in the [API reference](api.md) or [reach out on GitHub](https://github.com/carbonplan/offsets-db-data/issues) if something doesn't make sense.
 ```
 
-### American Carbon Registry
+### American Carbon Registry and ART TREES
 
-Project status: When processing ACR projects, we combine two status properties present in the raw data: `Compliance Program Status (ARB or Ecology)` and `Voluntary Status`.
-For compliance projects, we report compliance program status.
-For voluntary projects, we report voluntary status.
+ACR and ART moved from APX to Greentrace, which exports the same four reports with one schema for both registries.
+The transform still uses the APX functions (`process_apx_credits` and `process_apx_projects`), with these differences:
+
+- Project IDs: Greentrace pads project numbers (`ACR0731`). We remove the padding (`ACR731`), so the IDs match earlier releases, the ARB data and the project types.
+- Repeated rows: a row repeated in a report with serial numbers names the same credits twice, so we count it once.
+- Project status: we combine `Project Status` and `Project Listing Status` through the table `GREENTRACE_STATUS`. A pair that isn't in the table is `unknown`.
+- Issuances: for ACR we count `Total Credits Issued`, which includes the buffer pool. For ART we count `Total Credits Issued to Project Developer`, which doesn't. This matches what we counted from APX.
 
 ### Cercarbono
 
@@ -514,14 +519,14 @@ Table 1 provides the mapping from the raw column names found in downloaded regis
 
 |                  | **verra**                      | **climate-action-reserve**     | **american-carbon-registry**           | **gold-standard**              | **art-trees**                  |
 | ---------------- | ------------------------------ | ------------------------------ | -------------------------------------- | ------------------------------ | ------------------------------ |
-| **project_id**   | ID                             | Project ID                     | Project ID                             | id                             | Program ID                     |
-| **name**         | Name                           | Project Name                   | Project Name                           | name                           | Program Name                   |
+| **project_id**   | ID                             | Project ID                     | Project Id                             | id                             | Project Id                     |
+| **name**         | Name                           | Project Name                   | Project Name                           | name                           | Project Name                   |
 | **protocol**     | Methodology                    | Project Type                   | Project Methodology/Protocol           | methodology                    | \-                             |
 | **category**     | inferred from protocol or type | inferred from protocol or type | inferred from protocol                 | inferred from protocol or type | inferred from protocol or type |
 | **proejct_type** | manually assigned              | manually assigned              | manually assigned                      | manually assigned              | manually assigned              |
-| **proponent**    | Proponent                      | Project Owner                  | Project Developer                      | project_developer              | Sovereign Program Developer    |
-| **country**      | Country/Area                   | Project Site Country           | Project Site Country                   | country                        | Program Country                |
-| **status**       | Status                         | Status                         | Derived: voluntary + compliance status | status                         | Status                         |
+| **proponent**    | Proponent                      | Project Owner                  | Project Developer                      | project_developer              | Project Developer              |
+| **country**      | Country/Area                   | Project Site Country           | Project Site Country                   | country                        | Project Site Country           |
+| **status**       | Status                         | Status                         | Derived: two Greentrace status columns | status                         | Derived: same as ACR           |
 | **listed_at**    | Project Listed Date            | \-                             | \-                                     | \-                             | \-                             |
 
 ### Credits
@@ -670,5 +675,5 @@ Credit data conform to the following schema:
 
 The majority of credit attributes are taken directly taken from the credit data downloaded from each registry.
 The raw attribute names of crediting data tends to vary depending on the transaction type.
-For example, ART TREES refers to retirement dates as `Status Effective`, while it reports issuances as `Date Approved`.
+For example, ACR and ART refer to retirement dates as `Status Effective (GMT)`, while they report issuances as `Date Issued (GMT)`.
 Rather than produce a table of each of these mappings here, please refer to [credits-raw-columns-mappings.json](https://github.com/carbonplan/offsets-db/blob/main/data/credits-raw-columns-mappings.json).

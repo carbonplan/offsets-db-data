@@ -56,6 +56,10 @@ def strip_project_id_padding(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+# TODO(Grayson): two questions about ACR and ART credits from Greentrace:
+#   ACR issuances count the buffer pool and ART's don't, as the APX pipeline did. Keep that?
+#   ACR cancellations add 57 REMOVAL_FROM_REGISTRY rows from May 1, 2012 (3,090,744 credits)
+#     that APX left out. Count them as cancellations?
 @pf.register_dataframe_method
 def process_apx_credits(
     df: pd.DataFrame,
@@ -199,6 +203,7 @@ def add_project_url(df: pd.DataFrame, *, registry_name: str) -> pd.DataFrame:
         DataFrame with a new 'project_url' column, containing URLs for each project.
     """
 
+    # TODO(Grayson): ACR and ART project pages moved to Greentrace; replace these APX URLs.
     if registry_name == 'american-carbon-registry':
         base = 'https://acr2.apx.com/mymodule/reg/prjView.asp?id1='
     elif registry_name == 'climate-action-reserve':
