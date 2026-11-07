@@ -135,41 +135,52 @@ def process_apx_credits(
     return data
 
 
-def harmonize_acr_status(row: pd.Series) -> str:
-    """Derive single project status for CAR and ACR projects
+GREENTRACE_REGISTRIES = {'american-carbon-registry', 'art-trees'}
 
-    Raw CAR and ACR data has two status columns -- one for compliance status, one for voluntary.
-    Handle and harmonize.
+# Status for each (Project Status, Project Listing Status) pair in ACR and ART's Greentrace
+# exports. Most pairs carry a label of the APX status table these replace; None is an empty
+# listing status.
+# TODO(Grayson): confirm 'Inactive' as completed, and fill in the placeholders.
+GREENTRACE_STATUS = {
+    # labels of the APX table
+    ('Active', 'Listed'): 'listed',
+    ('Active', 'Registered'): 'registered',
+    ('Active', 'Listed - Active ARB Project'): 'active',
+    ('Active', 'Listed - Proposed Project'): 'listed',
+    ('Active', 'Listed - Active Registry Project'): 'listed',
+    ('Transferred', 'Transferred ARB Project'): 'active',
+    ('Completed', None): 'completed',
+    ('Canceled', None): 'canceled',
+    ('Terminated', None): 'completed',
+    # the status most of these projects had in the June 2026 release
+    ('Inactive', None): 'completed',
+    # placeholders
+    ('Active', 'Listed - Active ECY Project'): 'unknown',
+    ('Active', 'Listed - Active Registry Renewal'): 'unknown',
+    ('Canceled', 'Registered'): 'unknown',
+    ('Completed', 'Registered'): 'unknown',
+}
 
-    Parameters
-    ----------
-    row : pd.Series
-        A row from a pandas DataFrame
 
-    Returns
-    -------
-    value : str
-        The status of the project
+@pf.register_dataframe_method
+def harmonize_greentrace_status(df: pd.DataFrame) -> pd.DataFrame:
     """
-    if row['Compliance Program Status (ARB or Ecology)'] == 'Not ARB or Ecology Eligible':
-        return row['Voluntary Status'].lower()
-    ACR_COMPLIANCE_STATE_MAP = {
-        'Listed - Active ARB Project': 'active',
-        'ARB Completed': 'completed',
-        'ARB Inactive': 'completed',
-        'Listed - Proposed Project': 'listed',
-        'Listed - Active Registry Project': 'listed',
-        'ARB Terminated': 'completed',
-        'Submitted': 'listed',
-        'Transferred ARB or Ecology Project': 'active',
-        'Listed – Active ARB Project': 'active',
-    }
-
-    return ACR_COMPLIANCE_STATE_MAP.get(
-        row['Compliance Program Status (ARB or Ecology)'], 'unknown'
+    Set 'status' from Greentrace's 'Project Status' and 'Project Listing Status' columns through
+    GREENTRACE_STATUS. A pair that isn't in the table is 'unknown'.
+    """
+    listings = (
+        df['Project Listing Status']
+        .astype(object)
+        .where(df['Project Listing Status'].notna(), None)
     )
+    df['status'] = [
+        GREENTRACE_STATUS.get((status, listing), 'unknown')
+        for status, listing in zip(df['Project Status'], listings)
+    ]
+    return df
 
 
+# TODO: update project url
 @pf.register_dataframe_method
 def add_project_url(df: pd.DataFrame, *, registry_name: str) -> pd.DataFrame:
     """
@@ -241,8 +252,8 @@ def process_apx_projects(
     else:
         data = data.map_protocol(inverted_protocol_mapping=inverted_protocol_mapping)
 
-    if registry_name == 'american-carbon-registry':
-        data['status'] = data.apply(harmonize_acr_status, axis=1)
+    if registry_name in GREENTRACE_REGISTRIES:
+        data = data.harmonize_greentrace_status()
     else:
         data = data.harmonize_status_codes()
 

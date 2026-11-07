@@ -44,20 +44,8 @@ def main(date: str) -> None:
         f'  {out.relative_to(OUT_DIR.parent)}  ({len(has_ret)} retirements + {len(no_ret)} issuances)'
     )
 
-    # ── American Carbon Registry ───────────────────────────────────────────────
-    # The credit samples are in Greentrace's layout and made by hand; see tests/conftest.py
-    for key in ('projects',):
-        _csv(
-            f'{base}/american-carbon-registry/{key}.csv.gz',
-            OUT_DIR / 'american-carbon-registry' / f'{key}.csv',
-        )
-
-    # ── ART-Trees ─────────────────────────────────────────────────────────────
-    for key in ('projects',):
-        _csv(
-            f'{base}/art-trees/{key}.csv.gz',
-            OUT_DIR / 'art-trees' / f'{key}.csv',
-        )
+    # American Carbon Registry and ART-Trees: the samples are in Greentrace's layout and made by
+    # hand; see tests/conftest.py
 
     # ── Climate Action Reserve ─────────────────────────────────────────────────
     for key in ('projects', 'issuances', 'retirements', 'cancellations'):

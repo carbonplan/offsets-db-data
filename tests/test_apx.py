@@ -7,13 +7,14 @@ All tests use real sample data loaded from tests/data/ via conftest fixtures.
 
 from unittest.mock import patch
 
+import numpy as np
 import pandas as pd
 import pytest
 
 from offsets_db_data.apx import (
     add_project_url,
     determine_transaction_type,
-    harmonize_acr_status,
+    harmonize_greentrace_status,
     process_apx_credits,
     process_apx_projects,
     strip_project_id_padding,
@@ -44,47 +45,56 @@ def test_determine_transaction_type(
             assert (result['transaction_type'] == DOWNLOAD_TYPE_MAP[download_type]).all()
 
 
-# ── harmonize_acr_status ───────────────────────────────────────────────────────
-
-# All ACR compliance-program-status values and their expected mapped output.
-ACR_STATUS_CASES = [
-    # Not ARB eligible → lowercase voluntary status
-    ('Not ARB or Ecology Eligible', 'Active', 'active'),
-    ('Not ARB or Ecology Eligible', 'Completed', 'completed'),
-    # ARB-eligible mapped values
-    ('Listed - Active ARB Project', 'Active', 'active'),
-    ('Listed – Active ARB Project', 'Active', 'active'),  # en-dash variant
-    ('Transferred ARB or Ecology Project', 'Active', 'active'),
-    ('ARB Completed', 'Active', 'completed'),
-    ('ARB Inactive', 'Active', 'completed'),
-    ('ARB Terminated', 'Active', 'completed'),
-    ('Listed - Proposed Project', 'Active', 'listed'),
-    ('Listed - Active Registry Project', 'Active', 'listed'),
-    ('Submitted', 'Active', 'listed'),
-    # Unrecognised value falls back to 'unknown'
-    ('Some Unknown Status', 'Active', 'unknown'),
-]
+# ── harmonize_greentrace_status ────────────────────────────────────────────────
 
 
-def test_harmonize_acr_status_logic(subtests):
-    for compliance_status, voluntary_status, expected in ACR_STATUS_CASES:
-        row = pd.Series(
-            {
-                'Compliance Program Status (ARB or Ecology)': compliance_status,
-                'Voluntary Status': voluntary_status,
-            }
-        )
-        with subtests.test(compliance_status=compliance_status):
-            assert harmonize_acr_status(row) == expected
+def test_greentrace_status_comes_from_both_status_columns(subtests):
+    cases = {
+        'voluntary_listing': ('Active', 'Listed', 'listed'),
+        'compliance_listing': ('Active', 'Listed - Active ARB Project', 'active'),
+        'end_state_with_empty_listing': ('Completed', np.nan, 'completed'),
+        'placeholder': ('Active', 'Listed - Active ECY Project', 'unknown'),
+        'pair_not_in_the_table': ('Suspended', np.nan, 'unknown'),
+    }
+    raw = pd.DataFrame(
+        [(status, listing) for status, listing, _ in cases.values()],
+        columns=['Project Status', 'Project Listing Status'],
+    )
+    result = harmonize_greentrace_status(raw)
+    for (case, (*_, expected)), actual in zip(cases.items(), result['status']):
+        with subtests.test(case=case):
+            assert actual == expected
 
 
-def test_harmonize_acr_status_real_data(subtests, raw_acr_projects):
-    results = raw_acr_projects.apply(harmonize_acr_status, axis=1)
-
-    with subtests.test('returns_strings'):
-        assert results.apply(lambda x: isinstance(x, str)).all()
-    with subtests.test('no_nulls'):
-        assert results.notna().all()
+def test_greentrace_project_files_get_a_status_for_each_registry(
+    subtests,
+    raw_acr_projects,
+    raw_acr_issuances,
+    raw_acr_retirements,
+    raw_art_projects,
+    raw_art_issuances,
+    raw_art_retirements,
+):
+    cases = {
+        'american-carbon-registry': (
+            raw_acr_projects,
+            {'issuances': raw_acr_issuances, 'retirements': raw_acr_retirements},
+            {'completed': 45, 'listed': 2, 'registered': 1, 'unknown': 2},
+        ),
+        'art-trees': (
+            raw_art_projects,
+            {'issuances': raw_art_issuances, 'retirements': raw_art_retirements},
+            {'listed': 25, 'registered': 3},
+        ),
+    }
+    for registry, (raw, reports, expected) in cases.items():
+        with subtests.test(registry=registry):
+            credits = pd.concat(
+                process_apx_credits(report, download_type=download_type, registry_name=registry)
+                for download_type, report in reports.items()
+            )
+            result = process_apx_projects(raw, credits=credits, registry_name=registry)
+            assert result['status'].value_counts().to_dict() == expected
 
 
 # ── add_project_url ────────────────────────────────────────────────────────────
@@ -94,12 +104,12 @@ def test_add_project_url(subtests, raw_acr_projects, raw_art_projects, raw_car_p
     cases = [
         (
             'american-carbon-registry',
-            raw_acr_projects.rename(columns={'Project ID': 'project_id'}),
+            raw_acr_projects.rename(columns={'Project Id': 'project_id'}),
             'https://acr2.apx.com/mymodule/reg/prjView.asp?id1=',
         ),
         (
             'art-trees',
-            raw_art_projects.rename(columns={'Program ID': 'project_id'}),
+            raw_art_projects.rename(columns={'Project Id': 'project_id'}),
             'https://art.apx.com/mymodule/reg/prjView.asp?id1=',
         ),
         (
@@ -119,7 +129,7 @@ def test_add_project_url(subtests, raw_acr_projects, raw_art_projects, raw_car_p
 
 
 def test_add_project_url_invalid_registry(raw_acr_projects):
-    df = raw_acr_projects.rename(columns={'Project ID': 'project_id'})
+    df = raw_acr_projects.rename(columns={'Project Id': 'project_id'})
     with pytest.raises(ValueError, match='Unknown registry name'):
         add_project_url(df, registry_name='unknown-registry')
 
@@ -270,10 +280,9 @@ def test_a_repeated_row_counts_once_only_when_it_has_serial_numbers(
             assert result['quantity'].sum() == expected
 
 
-def test_greentrace_art_files_give_the_apx_project_ids(
+def test_greentrace_art_files_give_unpadded_project_ids_that_join(
     raw_art_projects, raw_art_issuances, raw_art_retirements, raw_art_cancellations
 ):
-    apx_ids = set(raw_art_projects['Program ID'])
     credits = pd.concat(
         process_apx_credits(raw, download_type=download_type, registry_name='art-trees')
         for raw, download_type in [
@@ -282,13 +291,10 @@ def test_greentrace_art_files_give_the_apx_project_ids(
             (raw_art_cancellations, 'cancellations'),
         ]
     )
-    padded_projects = raw_art_projects.assign(
-        **{'Program ID': raw_art_projects['Program ID'].str.replace('ART', 'ART0')}
-    )
-    projects = process_apx_projects(padded_projects, credits=credits, registry_name='art-trees')
+    projects = process_apx_projects(raw_art_projects, credits=credits, registry_name='art-trees')
 
-    assert set(credits['project_id']) <= apx_ids
-    assert set(projects['project_id']) == apx_ids
+    assert not projects['project_id'].str.match(r'[A-Z]+0').any()
+    assert set(credits['project_id']) <= set(projects['project_id'])
     assert not projects['project_url'].str.contains('id1=0').any()
 
 

@@ -4,9 +4,10 @@ Sample data in tests/data/ was extracted from:
   s3://carbonplan-offsets-db/raw/2026-04-14/      (verra, acr, art, car, gld, arb)
   s3://carbonplan-scratch/offsets-db-test/raw/2026-04-28/  (cercarbono, isometric)
 
-The ACR and ART credit samples are those APX rows rewritten in Greentrace's layout: Greentrace
-column names, zero-padded project IDs and ISO timestamps. Greentrace exports need a login, so the
-refresh script leaves them alone.
+The ACR and ART samples are those APX rows rewritten in Greentrace's layout: Greentrace column
+names, zero-padded project IDs, ISO timestamps and country codes, and each APX status as the
+Greentrace status pair that holds the same label. Greentrace exports need a login, so the refresh
+script leaves them alone.
 
 To refresh samples, run:
   python tests/scripts/refresh_sample_data.py
