@@ -45,14 +45,15 @@ def main(date: str) -> None:
     )
 
     # ── American Carbon Registry ───────────────────────────────────────────────
-    for key in ('projects', 'issuances', 'retirements', 'cancellations'):
+    # The credit samples are in Greentrace's layout and made by hand; see tests/conftest.py
+    for key in ('projects',):
         _csv(
             f'{base}/american-carbon-registry/{key}.csv.gz',
             OUT_DIR / 'american-carbon-registry' / f'{key}.csv',
         )
 
     # ── ART-Trees ─────────────────────────────────────────────────────────────
-    for key in ('projects', 'issuances', 'retirements', 'cancellations'):
+    for key in ('projects',):
         _csv(
             f'{base}/art-trees/{key}.csv.gz',
             OUT_DIR / 'art-trees' / f'{key}.csv',

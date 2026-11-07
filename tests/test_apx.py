@@ -164,6 +164,47 @@ def test_process_apx_credits(
             assert pd.api.types.is_datetime64_any_dtype(result['transaction_date'])
 
 
+GREENTRACE_RETIREMENT_COLUMNS = {
+    'retirement_account': 'Credit Holder',
+    'retirement_beneficiary': 'Retired On Behalf Of',
+    'retirement_note': 'Purpose of Retirement',
+    'retirement_reason': 'Retirement Reason',
+}
+
+
+def test_greentrace_retirement_columns_fill_offsetsdb_columns(
+    subtests, raw_acr_retirements, raw_art_retirements
+):
+    for registry, raw in [
+        ('american-carbon-registry', raw_acr_retirements),
+        ('art-trees', raw_art_retirements),
+    ]:
+        with subtests.test(registry=registry):
+            result = process_apx_credits(raw, download_type='retirements', registry_name=registry)
+            expected = raw[list(GREENTRACE_RETIREMENT_COLUMNS.values())].set_axis(
+                list(GREENTRACE_RETIREMENT_COLUMNS), axis=1
+            )
+            pd.testing.assert_frame_equal(
+                result[list(GREENTRACE_RETIREMENT_COLUMNS)].reset_index(drop=True),
+                expected.reset_index(drop=True),
+                check_dtype=False,
+            )
+
+
+def test_greentrace_issuances_count_the_buffer_pool_as_the_apx_pipeline_did(
+    subtests, raw_acr_issuances, raw_art_issuances
+):
+    for registry, raw, quantity in [
+        ('american-carbon-registry', raw_acr_issuances, 'Total Credits Issued'),
+        ('art-trees', raw_art_issuances, 'Total Credits Issued to Project Developer'),
+    ]:
+        with subtests.test(registry=registry):
+            result = process_apx_credits(raw, download_type='issuances', registry_name=registry)
+            assert result['quantity'].sum() == raw[quantity].sum(), (
+                f'{registry} issuances should be counted from {quantity!r}'
+            )
+
+
 # ── process_apx_projects ───────────────────────────────────────────────────────
 
 

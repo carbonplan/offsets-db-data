@@ -44,8 +44,22 @@ def test_verra(subtests, date, bucket, arb, harmonize_beneficiary_info):
 @pytest.mark.parametrize(
     'registry, download_types, prefix',
     [
-        ('art-trees', ['issuances', 'retirements', 'cancellations'], 'ART'),
-        ('american-carbon-registry', ['issuances', 'retirements', 'cancellations'], 'ACR'),
+        pytest.param(
+            'art-trees',
+            ['issuances', 'retirements', 'cancellations'],
+            'ART',
+            marks=pytest.mark.skip(
+                reason='the raw ART files in S3 are APX exports, not Greentrace'
+            ),
+        ),
+        pytest.param(
+            'american-carbon-registry',
+            ['issuances', 'retirements', 'cancellations'],
+            'ACR',
+            marks=pytest.mark.skip(
+                reason='the raw ACR files in S3 are APX exports, not Greentrace'
+            ),
+        ),
         ('climate-action-reserve', ['issuances', 'retirements', 'cancellations'], 'CAR'),
     ],
 )

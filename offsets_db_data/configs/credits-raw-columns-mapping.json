@@ -1,18 +1,18 @@
 {
   "american-carbon-registry": {
     "cancellations": {
-      "project_id": "Project ID",
+      "project_id": "Project Id",
       "quantity": "Quantity of Credits",
       "retirement_account": null,
       "retirement_beneficiary": null,
       "retirement_note": null,
       "retirement_reason": null,
-      "transaction_date": "Status Effective  (GMT)",
+      "transaction_date": "Status Effective (GMT)",
       "transaction_url": null,
       "vintage": "Vintage"
     },
     "issuances": {
-      "project_id": "Project ID",
+      "project_id": "Project Id",
       "quantity": "Total Credits Issued",
       "retirement_account": null,
       "retirement_beneficiary": null,
@@ -23,10 +23,10 @@
       "vintage": "Vintage"
     },
     "retirements": {
-      "project_id": "Project ID",
+      "project_id": "Project Id",
       "quantity": "Quantity of Credits",
-      "retirement_account": "Account Holder",
-      "retirement_beneficiary": null,
+      "retirement_account": "Credit Holder",
+      "retirement_beneficiary": "Retired On Behalf Of",
       "retirement_note": "Purpose of Retirement",
       "retirement_reason": "Retirement Reason",
       "transaction_date": "Status Effective (GMT)",
@@ -36,35 +36,35 @@
   },
   "art-trees": {
     "cancellations": {
-      "project_id": "Program ID",
+      "project_id": "Project Id",
       "quantity": "Quantity of Credits",
       "retirement_account": null,
       "retirement_beneficiary": null,
       "retirement_note": null,
       "retirement_reason": null,
-      "transaction_date": "Status Effective",
+      "transaction_date": "Status Effective (GMT)",
       "transaction_url": null,
       "vintage": "Vintage"
     },
     "issuances": {
-      "project_id": "Program ID",
-      "quantity": "Credits Verified",
+      "project_id": "Project Id",
+      "quantity": "Total Credits Issued to Project Developer",
       "retirement_account": null,
       "retirement_beneficiary": null,
       "retirement_note": null,
       "retirement_reason": null,
-      "transaction_date": "Date Approved",
+      "transaction_date": "Date Issued (GMT)",
       "transaction_url": null,
       "vintage": "Vintage"
     },
     "retirements": {
-      "project_id": "Program ID",
+      "project_id": "Project Id",
       "quantity": "Quantity of Credits",
-      "retirement_account": "Account Holder",
-      "retirement_beneficiary": null,
-      "retirement_note": "Retirement Reason Details",
+      "retirement_account": "Credit Holder",
+      "retirement_beneficiary": "Retired On Behalf Of",
+      "retirement_note": "Purpose of Retirement",
       "retirement_reason": "Retirement Reason",
-      "transaction_date": "Status Effective",
+      "transaction_date": "Status Effective (GMT)",
       "transaction_url": null,
       "vintage": "Vintage"
     }
