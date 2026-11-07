@@ -88,6 +88,12 @@ def process_apx_credits(
 
     df = df.copy()
 
+    # Greentrace exports can repeat a row. A serial number names one block of credits, so a
+    # repeated row with serial numbers is the same credits twice. APX issuances have no serial
+    # numbers, and two identical rows there can be two issuances, so those are kept.
+    if 'Credit Serial Numbers' in df:
+        df = df[~(df.duplicated() & df['Credit Serial Numbers'].notna())]
+
     column_mapping = load_column_mapping(
         registry_name=registry_name, download_type=download_type, mapping_path=CREDIT_SCHEMA_UPATH
     )

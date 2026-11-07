@@ -241,6 +241,35 @@ def test_greentrace_timestamps_keep_their_utc_day(subtests, raw_acr_retirements)
             assert actual == expected
 
 
+def test_a_repeated_row_counts_once_only_when_it_has_serial_numbers(
+    subtests, raw_acr_cancellations, raw_car_issuances
+):
+    cases = {
+        'greentrace_cancellation': (
+            'american-carbon-registry',
+            'cancellations',
+            raw_acr_cancellations,
+            'Quantity of Credits',
+            1,
+        ),
+        'apx_issuance_without_serial_numbers': (
+            'climate-action-reserve',
+            'issuances',
+            raw_car_issuances,
+            'Total Offset Credits Issued',
+            2,
+        ),
+    }
+    for case, (registry, download_type, raw, quantity, times_counted) in cases.items():
+        with subtests.test(case=case):
+            repeated = pd.concat([raw, raw.head(1)], ignore_index=True)
+            result = process_apx_credits(
+                repeated, download_type=download_type, registry_name=registry
+            )
+            expected = raw[quantity].sum() + (times_counted - 1) * raw[quantity].iloc[0]
+            assert result['quantity'].sum() == expected
+
+
 def test_greentrace_art_files_give_the_apx_project_ids(
     raw_art_projects, raw_art_issuances, raw_art_retirements, raw_art_cancellations
 ):
