@@ -16,6 +16,7 @@ from offsets_db_data.apx import (
     harmonize_acr_status,
     process_apx_credits,
     process_apx_projects,
+    strip_project_id_padding,
 )
 from offsets_db_data.models import credit_without_id_schema, project_schema
 
@@ -203,6 +204,44 @@ def test_greentrace_issuances_count_the_buffer_pool_as_the_apx_pipeline_did(
             assert result['quantity'].sum() == raw[quantity].sum(), (
                 f'{registry} issuances should be counted from {quantity!r}'
             )
+
+
+def test_strip_project_id_padding_removes_only_leading_zeros(subtests):
+    cases = {
+        'three_digits': ('ACR0731', 'ACR731'),
+        'two_digits': ('ACR0049', 'ACR49'),
+        'art': ('ART0102', 'ART102'),
+        'four_digits_unpadded': ('ACR1129', 'ACR1129'),
+        'zeros_inside_the_number': ('ACR1001', 'ACR1001'),
+        'car_unpadded': ('CAR1234', 'CAR1234'),
+    }
+    raw_ids = [raw for raw, _ in cases.values()]
+    result = strip_project_id_padding(pd.DataFrame({'project_id': raw_ids}))
+    for (case, (_, expected)), actual in zip(cases.items(), result['project_id']):
+        with subtests.test(case=case):
+            assert actual == expected
+
+
+def test_greentrace_art_files_give_the_apx_project_ids(
+    raw_art_projects, raw_art_issuances, raw_art_retirements, raw_art_cancellations
+):
+    apx_ids = set(raw_art_projects['Program ID'])
+    credits = pd.concat(
+        process_apx_credits(raw, download_type=download_type, registry_name='art-trees')
+        for raw, download_type in [
+            (raw_art_issuances, 'issuances'),
+            (raw_art_retirements, 'retirements'),
+            (raw_art_cancellations, 'cancellations'),
+        ]
+    )
+    padded_projects = raw_art_projects.assign(
+        **{'Program ID': raw_art_projects['Program ID'].str.replace('ART', 'ART0')}
+    )
+    projects = process_apx_projects(padded_projects, credits=credits, registry_name='art-trees')
+
+    assert set(credits['project_id']) <= apx_ids
+    assert set(projects['project_id']) == apx_ids
+    assert not projects['project_url'].str.contains('id1=0').any()
 
 
 # ── process_apx_projects ───────────────────────────────────────────────────────

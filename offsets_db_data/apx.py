@@ -46,6 +46,17 @@ def determine_transaction_type(df: pd.DataFrame, *, download_type: str) -> pd.Da
 
 
 @pf.register_dataframe_method
+def strip_project_id_padding(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Remove the zeros Greentrace puts in front of project numbers: 'ACR0731' becomes 'ACR731'.
+
+    APX, the ARB data, the Berkeley project types and OffsetsDB all use the unpadded IDs.
+    """
+    df['project_id'] = df['project_id'].str.replace(r'^([A-Z]+)0+(?=\d)', r'\1', regex=True)
+    return df
+
+
+@pf.register_dataframe_method
 def process_apx_credits(
     df: pd.DataFrame,
     *,
@@ -87,6 +98,7 @@ def process_apx_credits(
         df.set_registry(registry_name=registry_name)
         .determine_transaction_type(download_type=download_type)
         .rename(columns=columns)
+        .strip_project_id_padding()
     )
 
     # split the date and time and keeping only the date. this helps with the inconsistency in the date format
@@ -215,7 +227,7 @@ def process_apx_projects(
     inverted_protocol_mapping = load_inverted_protocol_mapping()
     protocol_mapping = load_protocol_mapping()
     type_category_mapping = load_type_category_mapping()
-    data = df.rename(columns=inverted_column_mapping)
+    data = df.rename(columns=inverted_column_mapping).strip_project_id_padding()
     if registry_name == 'art-trees':
         data['protocol'] = [['art-trees']] * len(data)
 
