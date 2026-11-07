@@ -222,6 +222,25 @@ def test_strip_project_id_padding_removes_only_leading_zeros(subtests):
             assert actual == expected
 
 
+def test_greentrace_timestamps_keep_their_utc_day(subtests, raw_acr_retirements):
+    cases = {
+        'midnight': ('2026-04-08T00:00:00Z', '2026-04-08'),
+        'early_morning_utc': ('2026-04-08T02:00:00Z', '2026-04-08'),
+        'late_evening_utc': ('2026-04-13T23:59:59Z', '2026-04-13'),
+        'new_years_eve': ('2025-12-31T23:30:00Z', '2025-12-31'),
+    }
+    raw = raw_acr_retirements.head(len(cases)).assign(
+        **{'Status Effective (GMT)': [timestamp for timestamp, _ in cases.values()]}
+    )
+    result = process_apx_credits(
+        raw, download_type='retirements', registry_name='american-carbon-registry'
+    )
+    days = result['transaction_date'].dt.strftime('%Y-%m-%d')
+    for (case, (_, expected)), actual in zip(cases.items(), days):
+        with subtests.test(case=case):
+            assert actual == expected
+
+
 def test_greentrace_art_files_give_the_apx_project_ids(
     raw_art_projects, raw_art_issuances, raw_art_retirements, raw_art_cancellations
 ):

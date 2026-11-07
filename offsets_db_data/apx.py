@@ -101,7 +101,8 @@ def process_apx_credits(
         .strip_project_id_padding()
     )
 
-    # split the date and time and keeping only the date. this helps with the inconsistency in the date format
+    # APX dates mix formats ('5/27/2026 8:50:10 PM', '11/16/2011'), so keep the part before the
+    # time. Greentrace's ISO timestamps ('2026-05-27T20:50:10Z') have no space and pass unchanged.
     data['transaction_date'] = data['transaction_date'].str.split().str[0]
 
     data = data.convert_to_datetime(columns=['transaction_date'])
